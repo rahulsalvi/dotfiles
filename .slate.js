@@ -9,7 +9,7 @@ slate.configAll({
   "windowHintsSpread" : true,
   "windowHintsIgnoreHiddenWindows" : true
 });
- 
+
 // grid setting
 var grid = slate.operation("grid", {
   "grids" : {
@@ -20,12 +20,12 @@ var grid = slate.operation("grid", {
   },
   "padding" : 1
 });
- 
+
 // hints
 var hint = slate.operation("hint", {
   "characters" : "ASDFGHJKL"
 });
- 
+
 // 1/2 corners
 var cornerTL = slate.operation("corner", {
   "direction" : "top-left",
@@ -48,7 +48,7 @@ var corner3TR = corner3TL.dup({"x" : "screenOriginX+2*screenSizeX/3"});
 var corner3BL = corner3TL.dup({"y" : "screenOriginY+screenSizeY/2"});
 var corner3BM = corner3TM.dup({"y" : "screenOriginY+screenSizeY/2"});
 var corner3BR = corner3TR.dup({"y" : "screenOriginY+screenSizeY/2"});
- 
+
 // 1/2 and full screen filling
 var simpleFull = S.op("move", {
   "x" : "screenOriginX",
@@ -79,37 +79,37 @@ slate.bindAll({
   "l:alt,shift" : simple3R,
   "k:alt,shift" : simple3M,
   "j:alt,shift" : simple3L,
-              
+
   "p:alt,shift" : simpleR,
   "o:alt,shift" : simpleL,
-              
+
   "i:alt,shift" : simpleFull,
-              
+
   // full keyboard window placements
   "pad6:shift" : simpleR,
   "pad4:shift" : simpleL,
   "pad8:shift" : simpleT,
   "pad2:shift" : simpleB,
-  
+
   "pad0:shift" : simpleFull,
   "pad5:shift" : simpleSemiFull,
-  
+
   "pad7:shift" : cornerTL,
   "pad9:shift" : cornerTR,
   "pad1:shift" : cornerBL,
   "pad3:shift" : cornerBR,
-  
+
   "pad7:alt" : simple3L,
   "pad8:alt" : simple3M,
   "pad9:alt" : simple3R,
-  
+
   "pad4:alt" : corner3TL,
   "pad5:alt" : corner3TM,
   "pad6:alt" : corner3TR,
   "pad1:alt" : corner3BL,
   "pad2:alt" : corner3BM,
   "pad3:alt" : corner3BR,
-  
+
   // grid,hints
   "n:alt,shift" : grid,
   "m:alt,shift" : hint
