@@ -7,8 +7,9 @@ set number
 set nowrap
 set splitbelow
 set splitright
-autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 set cursorline
+
+autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 
 function! YCMInstall(info)
 	if a:info.status == 'installed'
