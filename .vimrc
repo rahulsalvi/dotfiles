@@ -8,7 +8,11 @@ set nowrap
 set splitbelow
 set splitright
 set cursorline
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
+filetype plugin indent on
 autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 
 function! YCMInstall(info)
