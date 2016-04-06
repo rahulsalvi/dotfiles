@@ -1,4 +1,3 @@
-syntax on
 set backspace=indent,eol,start
 set nobackup
 set nowritebackup
@@ -13,16 +12,11 @@ set shiftwidth=4
 set expandtab
 set mouse=a
 
-filetype plugin indent on
-
-function! Semi()
-	while getline('.')[col('.')-1] == ' '
-		normal x
-	endwhile
-	normal A;
-endfunction
-
-command Semi :call Semi()
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    "autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
 
@@ -47,16 +41,16 @@ Plug 'https://github.com/wellle/targets.vim.git'
 
 call plug#end()
 
-" Individual plugin configurations
+" Plugin configurations
 
 " Ag
 if executable('ag')
-	set grepprg=ag\ --nogroup\ --nocolor
-	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts =
-		  	  \ '-i --vimgrep --hidden --ignore ' .
-		  	  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-	let g:unite_source_grep_recursive_opt = ''
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+                \ '-i --vimgrep --hidden --ignore ' .
+                \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
 endif
 
 " Colorscheme
@@ -65,7 +59,7 @@ set background=dark
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 try
-	colorscheme solarized
+    colorscheme solarized
 catch
 endtry
 
@@ -82,9 +76,12 @@ call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_rela
 
 " Airline
 let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
-"let g:airline_solarized_bg='light'
 let g:airline_powerline_fonts=1
+if &background == 'dark'
+    let g:airline_solarized_bg='dark'
+else
+    let g:airline_solarized_bg='light'
+endif
 set ttimeoutlen=50
 set laststatus=2
 
