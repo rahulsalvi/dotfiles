@@ -11,15 +11,9 @@ set cursorline
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set notagrelative
 
 filetype plugin indent on
-autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
-
-function! YCMInstall(info)
-	if a:info.status == 'installed'
-		!./install.py --clang-completer
-	endif
-endfunction
 
 function! Semi()
 	while getline('.')[col('.')-1] == ' '
@@ -42,13 +36,14 @@ Plug 'https://github.com/Shougo/vimproc.vim.git', { 'do': 'make' }
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
-Plug 'https://github.com/Valloric/YouCompleteMe.git', { 'do': function('YCMInstall') }
+Plug 'https://github.com/Valloric/YouCompleteMe.git', { 'do': './install.py --clang-completer' }
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/tpope/vim-dispatch.git'
 Plug 'https://github.com/tpope/vim-obsession.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
+Plug 'https://github.com/wellle/targets.vim.git'
 
 call plug#end()
 
@@ -85,7 +80,6 @@ call unite#custom#source('file,file/async', 'matchers', ['converter_relative_abb
 call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_default'])
 call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_default'])
 
-
 " Airline
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
@@ -96,7 +90,8 @@ set laststatus=2
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-autocmd CompleteDone * pclose
-if exists('g:loaded_youcompleteme')
-	call youcompleteme#Enable()
-endif
+let g:ycm_error_symbol='E>'
+let g:ycm_warning_symbol='W>'
+let g:ycm_always_populate_location_list=1
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion=1
