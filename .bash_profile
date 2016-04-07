@@ -40,6 +40,7 @@ export CC=clang
 export CXX=clang++
 export PS1="\u@\h \W\[\033[32m\]\$(ParseGitBranch)\[\033[00m\] $ "
 export EDITOR=/opt/local/bin/vim
+export BACKGROUND=dark
 
 alias ls='ls -Fh'
 alias cp='cp -iv'

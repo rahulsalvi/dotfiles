@@ -41,7 +41,7 @@ Plug 'https://github.com/wellle/targets.vim.git'
 
 call plug#end()
 
-" Plugin configurations
+" Plugin Configurations
 
 " Ag
 if executable('ag')
@@ -54,8 +54,11 @@ if executable('ag')
 endif
 
 " Colorscheme
-set background=dark
-"set background=light
+if $BACKGROUND == "light"
+    set background=light
+else
+    set background=dark
+endif
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 try
