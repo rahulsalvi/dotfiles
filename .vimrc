@@ -39,6 +39,7 @@ Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/wellle/targets.vim.git'
 Plug 'https://github.com/vim-scripts/YankRing.vim.git'
+Plug 'https://github.com/Valloric/ListToggle.git'
 
 call plug#end()
 
@@ -72,7 +73,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Unite
-nnoremap <C-m> :Unite file/async <Enter>
+nnoremap gu :Unite file/async <Enter>
 call unite#custom#source('file,file/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_default'])
 call unite#custom#source('file,file/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_default'])
 call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_default'])
@@ -99,3 +100,8 @@ let g:ycm_warning_symbol='W>'
 let g:ycm_always_populate_location_list=1
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_max_diagnostics_to_display=1000
+
+" ListToggle
+let g:lt_location_list_toggle_map = 'gl'
+let g:lt_quickfix_list_toggle_map = 'gk'
