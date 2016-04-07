@@ -40,6 +40,8 @@ Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/wellle/targets.vim.git'
 Plug 'https://github.com/vim-scripts/YankRing.vim.git'
 Plug 'https://github.com/Valloric/ListToggle.git'
+Plug 'https://github.com/tpope/vim-unimpaired.git'
+Plug 'https://github.com/tpope/vim-repeat.git'
 
 call plug#end()
 
