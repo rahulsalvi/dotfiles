@@ -80,6 +80,9 @@ call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_rela
 " Airline
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
+let g:airline#extensions#ycm#enabled=1
+let g:airline#extensions#ycm#error_symbol='E:'
+let g:airline#extensions#ycm#warning_symbol='W:'
 if &background == 'dark'
     let g:airline_solarized_bg='dark'
 else
