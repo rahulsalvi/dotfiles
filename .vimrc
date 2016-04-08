@@ -104,6 +104,9 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_max_diagnostics_to_display=1000
 
+" YankRing
+let g:yankring_history_dir='~/.vim'
+
 " ListToggle
 let g:lt_location_list_toggle_map = 'gl'
 let g:lt_quickfix_list_toggle_map = 'gk'
