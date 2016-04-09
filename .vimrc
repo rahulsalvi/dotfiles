@@ -96,7 +96,7 @@ set ttimeoutlen=50
 set laststatus=2
 
 " YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
 let g:ycm_error_symbol='E>'
 let g:ycm_warning_symbol='W>'
 let g:ycm_always_populate_location_list=1

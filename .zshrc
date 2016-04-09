@@ -70,6 +70,7 @@ export CXX=clang++
 export EDITOR=/opt/local/bin/vim
 
 alias ls='ls -Fh'
+alias sl='ls'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
