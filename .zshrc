@@ -47,17 +47,27 @@ alias xcode='OpenInXcode'
 alias zipf='ZipF'
 alias extract='Extract'
 
-PROMPT='%n@%M %{$fg[green]%}%1~%{$reset_color%} $ '
-RPROMPT='$(git_prompt_info)'
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}("
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[cyan]%})%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
+if [[ $BACKGROUND == "light" ]] ; then
+    DIRCOLOR=blue
+    GITCOLOR=cyan
+    GITCHANGECOLOR=red
+else
+    export BACKGROUND=dark
+    DIRCOLOR=green
+    GITCOLOR=cyan
+    GITCHANGECOLOR=red
+fi
+
+PROMPT='%n@%M %{$fg[$DIRCOLOR]%}%1~%{$reset_color%} $(git_prompt_info)$ '
+#RPROMPT='$(git_prompt_info)'
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[$GITCOLOR]%}("
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[$GITCOLOR]%})%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[$GITCHANGECOLOR]%}!"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 export CC=clang
 export CXX=clang++
 export EDITOR=/opt/local/bin/vim
-export BACKGROUND=dark
 
 alias ls='ls -Fh'
 alias cp='cp -iv'
