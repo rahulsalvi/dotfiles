@@ -14,8 +14,5 @@ for file in $files; do
     ln -s $dotfilesdir/.$file $HOME/.$file
 done
 
-echo "Sourcing $HOME/.bash_profile"
-source $HOME/.bash_profile
-
 echo "Adding $HOME/.git_template to global git config as init.templatedir"
 git config --global init.templatedir '$HOME/.git_template'
