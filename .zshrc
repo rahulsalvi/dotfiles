@@ -42,7 +42,9 @@ alias xcode='OpenInXcode'
 alias zipf='ZipF'
 alias extract='Extract'
 
-PROMPT='%n@%M $1~ $ '
+PROMPT='%n@%M %{$fg[blue]%}%1~%{$reset_color%} $(git_prompt_info)$ '
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%} "
 
 export CC=clang
 export CXX=clang++
