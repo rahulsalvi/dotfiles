@@ -8,6 +8,10 @@ plugins=(git macports osx python)
 # User configuration
 source $ZSH/oh-my-zsh.sh
 
+CollapsePWD() {
+    echo $(pwd | sed -e "s,^$HOME,~,")
+}
+
 OpenInXcode() {
     touch "$@";
     open -a Xcode "$@"
@@ -38,13 +42,17 @@ Extract () {
     fi
 }
 
+alias cpwd='CollapsePWD'
 alias xcode='OpenInXcode'
 alias zipf='ZipF'
 alias extract='Extract'
 
-PROMPT='%n@%M %{$fg[blue]%}%1~%{$reset_color%} $(git_prompt_info)$ '
+PROMPT='%n@%M %{$fg[green]%}%1~%{$reset_color%} $ '
+RPROMPT='$(git_prompt_info)'
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[cyan]%})%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 export CC=clang
 export CXX=clang++
