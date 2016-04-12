@@ -48,11 +48,13 @@ alias zipf='ZipF'
 alias extract='Extract'
 
 if [[ $BACKGROUND == "light" ]] ; then
+    LS_COLORS=$LS_COLORS:'di=34:ln=35:ex=31'
     DIRCOLOR=blue
     GITCOLOR=cyan
     GITCHANGECOLOR=red
 else
     export BACKGROUND=dark
+    LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
     DIRCOLOR=green
     GITCOLOR=cyan
     GITCHANGECOLOR=red
@@ -65,11 +67,12 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[$GITCOLOR]%})%{$reset_color%}
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[$GITCHANGECOLOR]%}!"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
+export LS_COLORS
 export CC=clang
 export CXX=clang++
 export EDITOR=/opt/local/bin/vim
 
-alias ls='ls -Fh'
+alias ls='ls -Fh --color=auto'
 alias sl='ls'
 alias cp='cp -iv'
 alias mv='mv -iv'
@@ -82,3 +85,4 @@ alias .4='cd ../../../../'
 alias .5='cd ../../../../../'
 alias .6='cd ../../../../../../'
 alias ~='cd ~'
+alias updatevim="vim -c ':PlugUpgrade | :PlugUpdate | :q! | :q!'"
