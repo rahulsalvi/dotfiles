@@ -1,11 +1,5 @@
-# Path to your oh-my-zsh installation.
 export ZSH=/Users/rahulsalvi/.oh-my-zsh
-
-#ZSH_THEME="agnoster"
-
 plugins=(git macports osx python)
-
-# User configuration
 source $ZSH/oh-my-zsh.sh
 
 CollapsePWD() {
@@ -66,6 +60,9 @@ ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[$GITCOLOR]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[$GITCOLOR]%})%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[$GITCHANGECOLOR]%}!"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+DISABLE_AUTO_TITLE="true"
+echo -en "\033];Velocity\007"
 
 export LS_COLORS
 export CC=clang
