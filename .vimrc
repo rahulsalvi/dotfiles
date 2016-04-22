@@ -17,7 +17,9 @@ aug CursorLine
     autocmd VimEnter * setl cursorline
     autocmd WinEnter * setl cursorline
     autocmd BufWinEnter * setl cursorline
+    autocmd InsertLeave * setl cursorline
     autocmd WinLeave * setl nocursorline
+    autocmd InsertEnter * setl nocursorline
 aug END
 
 if empty(glob('~/.vim/autoload/plug.vim'))
