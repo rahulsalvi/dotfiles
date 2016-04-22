@@ -12,6 +12,14 @@ set shiftwidth=4
 set expandtab
 set mouse=a
 
+aug CursorLine
+    autocmd!
+    autocmd VimEnter * setl cursorline
+    autocmd WinEnter * setl cursorline
+    autocmd BufWinEnter * setl cursorline
+    autocmd WinLeave * setl nocursorline
+aug END
+
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

@@ -67,6 +67,9 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[$GITCOLOR]%})%{$reset_color%}
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[$GITCHANGECOLOR]%}!"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
+DISABLE_AUTO_TITLE="true"
+echo -en "\033];Velocity\007"
+
 export LS_COLORS
 export CC=clang
 export CXX=clang++
