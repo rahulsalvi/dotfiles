@@ -1,15 +1,29 @@
-zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:module:syntax-highlighting' color 'yes'
 zstyle ':prezto:load' pmodule \
     'environment' \
     'utility' \
+    'directory' \
+    'history' \
     'completion' \
     'git' \
     'macports' \
-    'osx'
+    'osx' \
+    'archive' \
+    'syntax-highlighting' \
+    'history-substring-search'
+
+zstyle ':prezto:module:syntax-highlighting' styles \
+    'path' 'fg=green' \
+    'path-prefix' 'fg=yellow' \
+    'builtin' 'fg=blue' \
+    'command' 'fg=blue' \
+    'function' 'fg=blue' \
+    'alias' 'fg=blue' \
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+
 
 CollapsePWD() {
     echo $(pwd | sed -e "s,^$HOME,~,")
@@ -24,54 +38,20 @@ ZipF () {
     zip -r "$1".zip "$1" ;
 }
 
-Extract () {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar e $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xf $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *)     echo "'$1' cannot be extracted via extract()" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
-
 alias cpwd='CollapsePWD'
 alias xcode='OpenInXcode'
 alias zipf='ZipF'
-alias extract='Extract'
+alias extract='unarchive'
 
 if [[ $BACKGROUND == "light" ]] ; then
     LS_COLORS=$LS_COLORS:'di=34:ln=35:ex=31'
-    DIRCOLOR=blue
-    GITCOLOR=cyan
-    GITCHANGECOLOR=red
 else
     export BACKGROUND=dark
     LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
-    DIRCOLOR=green
-    GITCOLOR=cyan
-    GITCHANGECOLOR=red
 fi
 
-# PROMPT='%n@%M %{$fg[$DIRCOLOR]%}%1~%{$reset_color%} $(git_prompt_info)$ '
-# RPROMPT='$(git_prompt_info)'
-# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[$GITCOLOR]%}("
-# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[$GITCOLOR]%})%{$reset_color%} "
-# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[$GITCHANGECOLOR]%}!"
-# ZSH_THEME_GIT_PROMPT_CLEAN=""
-
 setopt PROMPT_SUBST
-PROMPT=$'$(python3 ~/Desktop/velocity/velocity.py)'
+PROMPT=$(python3 ~/Desktop/velocity/velocity.py)
 RPROMPT=''
 
 DISABLE_AUTO_TITLE="true"
@@ -83,6 +63,7 @@ export CXX=clang++
 export EDITOR=/opt/local/bin/vim
 
 alias ls='ls -Fh --color=auto'
+alias la='ls -A'
 alias sl='ls'
 alias cp='cp -iv'
 alias mv='mv -iv'
