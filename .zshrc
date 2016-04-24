@@ -1,6 +1,15 @@
-export ZSH=/Users/rahulsalvi/.oh-my-zsh
-plugins=(git macports osx python)
-source $ZSH/oh-my-zsh.sh
+zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:load' pmodule \
+    'environment' \
+    'utility' \
+    'completion' \
+    'git' \
+    'macports' \
+    'osx'
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
 CollapsePWD() {
     echo $(pwd | sed -e "s,^$HOME,~,")
@@ -54,12 +63,16 @@ else
     GITCHANGECOLOR=red
 fi
 
-PROMPT='%n@%M %{$fg[$DIRCOLOR]%}%1~%{$reset_color%} $(git_prompt_info)$ '
-#RPROMPT='$(git_prompt_info)'
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[$GITCOLOR]%}("
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[$GITCOLOR]%})%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[$GITCHANGECOLOR]%}!"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+# PROMPT='%n@%M %{$fg[$DIRCOLOR]%}%1~%{$reset_color%} $(git_prompt_info)$ '
+# RPROMPT='$(git_prompt_info)'
+# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[$GITCOLOR]%}("
+# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[$GITCOLOR]%})%{$reset_color%} "
+# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[$GITCHANGECOLOR]%}!"
+# ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+setopt PROMPT_SUBST
+PROMPT=$'$(python3 ~/Desktop/velocity/velocity.py)'
+RPROMPT=''
 
 DISABLE_AUTO_TITLE="true"
 echo -en "\033];Velocity\007"
