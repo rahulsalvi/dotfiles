@@ -24,7 +24,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-
 CollapsePWD() {
     echo $(pwd | sed -e "s,^$HOME,~,")
 }
@@ -51,7 +50,7 @@ else
 fi
 
 setopt PROMPT_SUBST
-PROMPT=$(python3 ~/Desktop/velocity/velocity.py)
+PROMPT=$(python3 ~/.velocity.py)
 RPROMPT=''
 
 DISABLE_AUTO_TITLE="true"
