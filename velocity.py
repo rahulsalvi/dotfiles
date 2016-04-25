@@ -35,9 +35,9 @@ class Segment:
                 bg = "107"
             else:
                 bg = "100"
-            return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+bg+"m"+'\ue0b0'+"%}"
+            return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b0'
         else:
-            return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m"+'\ue0b0'+"%}"
+            return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m%}"+'\ue0b0'
 
 def resolve(segments):
     string = ""
