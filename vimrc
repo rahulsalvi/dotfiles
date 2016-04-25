@@ -97,11 +97,7 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#ycm#enabled=1
 let g:airline#extensions#ycm#error_symbol='E:'
 let g:airline#extensions#ycm#warning_symbol='W:'
-if &background == 'dark'
-    let g:airline_solarized_bg='dark'
-else
-    let g:airline_solarized_bg='light'
-endif
+let g:airline_solarized_bg=&background
 set ttimeoutlen=50
 set laststatus=2
 

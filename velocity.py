@@ -47,7 +47,11 @@ def resolve(segments):
     return string + " "
 
 segments = []
-segments.append(Segment("%n@%m", Format('black', 'blue', False, True)))
-segments.append(Segment("%2~", Format('black', 'blue', False, False)))
+if os.getenv('BACKGROUND') == 'light':
+    segments.append(Segment("%n@%m", Format('black', 'cyan', False, True)))
+    segments.append(Segment("%2~", Format('black', 'cyan', False, False)))
+else:
+    segments.append(Segment("%n@%m", Format('black', 'blue', False, True)))
+    segments.append(Segment("%2~", Format('black', 'blue', False, False)))
 
 sys.stdout.write(resolve(segments))

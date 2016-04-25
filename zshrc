@@ -59,10 +59,16 @@ alias xcode='OpenInXcode'
 alias zipf='ZipF'
 alias extract='unarchive'
 
+local termname=$(osascript -e "tell first window of application \"Terminal\" to do shell script \"echo \" & (name of current settings as text)")
+if [[ $termname == "Solarized Light" ]] ; then
+    export BACKGROUND=light
+else
+    export BACKGROUND=dark
+fi
+
 if [[ $BACKGROUND == "light" ]] ; then
     LS_COLORS=$LS_COLORS:'di=34:ln=35:ex=31'
 else
-    export BACKGROUND=dark
     LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
 fi
 
