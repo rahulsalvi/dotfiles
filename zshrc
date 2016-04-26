@@ -38,7 +38,7 @@ zstyle ':prezto:module:syntax-highlighting' styles \
     'default' 'none'
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 CollapsePWD() {
@@ -74,6 +74,11 @@ fi
 
 setopt PROMPT_SUBST
 precmd() {
+    PROMPT=$(python3 ~/.velocity.py)
+    RPROMPT=''
+}
+
+TRAPWINCH() {
     PROMPT=$(python3 ~/.velocity.py)
     RPROMPT=''
 }

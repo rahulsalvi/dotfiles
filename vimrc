@@ -86,10 +86,21 @@ nmap ga <Plug>(EasyAlign)
 
 " Unite
 nnoremap gu :Unite file/async <Enter>
+call unite#custom#profile('default', 'context', {'vertical': 1, 'winwidth': 35})
 call unite#custom#source('file,file/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_default'])
 call unite#custom#source('file,file/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_default'])
 call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_default'])
 call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_default'])
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+    nnoremap <ESC> :UniteClose <Enter>
+
+    nmap <silent><buffer><expr> h unite#do_action('splitswitch')
+    nmap <silent><buffer><expr> v unite#do_action('vsplitswitch')
+
+    imap <silent><buffer><expr> <C-h> unite#do_action('splitswitch')
+    imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
+endfunction
 
 " Airline
 let g:airline_theme='solarized'
