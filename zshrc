@@ -67,7 +67,7 @@ else
 fi
 
 if [[ $BACKGROUND == "light" ]] ; then
-    LS_COLORS=$LS_COLORS:'di=34:ln=35:ex=31'
+    LS_COLORS=$LS_COLORS:'di=36:ln=35:ex=31'
 else
     LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
 fi
