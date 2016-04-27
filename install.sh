@@ -15,4 +15,4 @@ for file in $files; do
 done
 
 echo "Adding $HOME/.git_template to global git config as init.templatedir"
-git config --global init.templatedir '$HOME/.git_template'
+git config --global init.templatedir "$HOME/.git_template"
