@@ -3,6 +3,8 @@ import os
 import subprocess
 from enum import Enum
 
+encoding = sys.getdefaultencoding()
+
 class Format:
     class Code(Enum):
         black   = 0
@@ -61,26 +63,56 @@ def getHostSegmentText():
 def getDirectoryText():
     return os.getcwd().replace("/Users/rahulsalvi", "~", 1)
 
+def getGitInfo():
+    cmd = subprocess.Popen(['git', 'symbolic-ref', '-q', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = cmd.communicate()
+    if 'fatal: Not' in err.decode(encoding):
+        return "", -1
+    elif not out:
+        sha = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'])
+        return '\u27a6'+" "+sha.decode(encoding).rstrip(), 2
+    else:
+        changes = subprocess.check_output(['git', 'status', '--porcelain'])
+        if not changes:
+            return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip(), 0
+        else:
+            if "??" in changes.decode(encoding):
+                return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip()+" \u00b1", 1
+            else:
+                return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip(), 1
+
 def main():
     segments = []
 
     if os.getenv('BACKGROUND') == 'light':
         hostFormat = Format('black', 'cyan', False, True)
         dirFormat = Format('black', 'cyan', False, False)
+        gitCleanFormat = Format('black', 'green', False, False)
+        gitDirtyFormat = Format('black', 'yellow', False, False)
+        gitDetachedFormat = Format('black', 'red', False, False)
     else:
         hostFormat = Format('black', 'blue', False, True)
         dirFormat = Format('black', 'blue', False, False)
+        gitCleanFormat = Format('black', 'green', False, False)
+        gitDirtyFormat = Format('black', 'yellow', False, False)
+        gitDetachedFormat = Format('black', 'red', False, False)
 
     hostText = getHostSegmentText()
     dirText = getDirectoryText()
+    gitText, gitStatus = getGitInfo()
     maxPromptSize = int(subprocess.check_output(['stty', 'size']).split()[1])/3
-    if len(hostText+dirText) < maxPromptSize:
+    if len(hostText+dirText+gitText) < maxPromptSize:
         segments.append(Segment(hostText, hostFormat))
-    while (len(dirText) > maxPromptSize) and (dirText.count('/') > 1):
+    while (len(dirText+gitText) > maxPromptSize) and (dirText.count('/') > 1):
         dirs = dirText.split('/')
         dirText = "../" + '/'.join(dirs[2:])
-
     segments.append(Segment(dirText, dirFormat))
+    if gitStatus == 0:
+        segments.append(Segment(gitText, gitCleanFormat))
+    elif gitStatus == 1:
+        segments.append(Segment(gitText, gitDirtyFormat))
+    elif gitStatus == 2:
+        segments.append(Segment(gitText, gitDetachedFormat))
 
     sys.stdout.write(resolve(segments))
 
