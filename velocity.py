@@ -100,13 +100,22 @@ def main():
     hostText = getHostSegmentText()
     dirText = getDirectoryText()
     gitText, gitStatus = getGitInfo()
-    maxPromptSize = int(subprocess.check_output(['stty', 'size']).split()[1])/3
+
+    maxPromptPercent = os.getenv("MAXPROMPTSIZE")
+    if not maxPromptPercent:
+        maxPromptPercent = 0.33
+    else:
+        maxPromptPercent = int(maxPromptPercent)/100
+    maxPromptSize = int(subprocess.check_output(['stty', 'size']).split()[1]) * maxPromptPercent
+
     if len(hostText+dirText+gitText) < maxPromptSize:
         segments.append(Segment(hostText, hostFormat))
+
     while (len(dirText+gitText) > maxPromptSize) and (dirText.count('/') > 1):
         dirs = dirText.split('/')
         dirText = "../" + '/'.join(dirs[2:])
     segments.append(Segment(dirText, dirFormat))
+
     if gitStatus == 0:
         segments.append(Segment(gitText, gitCleanFormat))
     elif gitStatus == 1:
