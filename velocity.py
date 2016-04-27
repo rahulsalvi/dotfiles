@@ -3,6 +3,10 @@ import os
 import subprocess
 from enum import Enum
 
+promptTime = os.getenv("PROMPTTIME", False)
+if promptTime:
+    import time
+
 encoding = sys.getdefaultencoding()
 
 class Format:
@@ -82,6 +86,8 @@ def getGitInfo():
                 return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip(), 1
 
 def main():
+    if promptTime:
+        startTime = time.time()
     segments = []
 
     if os.getenv('BACKGROUND') == 'light':
@@ -101,11 +107,8 @@ def main():
     dirText = getDirectoryText()
     gitText, gitStatus = getGitInfo()
 
-    maxPromptPercent = os.getenv("MAXPROMPTSIZE")
-    if not maxPromptPercent:
-        maxPromptPercent = 0.33
-    else:
-        maxPromptPercent = int(maxPromptPercent)/100
+    maxPromptPercent = os.getenv("MAXPROMPTSIZE", 33)
+    maxPromptPercent = int(maxPromptPercent)/100
     maxPromptSize = int(subprocess.check_output(['stty', 'size']).split()[1]) * maxPromptPercent
 
     if len(hostText+dirText+gitText) < maxPromptSize:
@@ -122,6 +125,9 @@ def main():
         segments.append(Segment(gitText, gitDirtyFormat))
     elif gitStatus == 2:
         segments.append(Segment(gitText, gitDetachedFormat))
+
+    if promptTime:
+        segments.append(Segment(str(time.time()-startTime), Format('black', 'white', False, False)))
 
     sys.stdout.write(resolve(segments))
 
