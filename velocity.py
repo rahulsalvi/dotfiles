@@ -67,7 +67,7 @@ def getHostSegmentText():
 def getDirectoryText():
     return os.getcwd().replace("/Users/rahulsalvi", "~", 1)
 
-def getGitInfo():
+def getGitInfo(isInDotGitFolder):
     cmd = subprocess.Popen(['git', 'symbolic-ref', '-q', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = cmd.communicate()
     if 'fatal: Not' in err.decode(encoding):
@@ -76,6 +76,8 @@ def getGitInfo():
         sha = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'])
         return '\u27a6'+" "+sha.decode(encoding).rstrip(), 2
     else:
+        if isInDotGitFolder:
+            return ".git", 0
         changes = subprocess.check_output(['git', 'status', '--porcelain'])
         if not changes:
             return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip(), 0
@@ -105,7 +107,7 @@ def main():
 
     hostText = getHostSegmentText()
     dirText = getDirectoryText()
-    gitText, gitStatus = getGitInfo()
+    gitText, gitStatus = getGitInfo(".git" in dirText)
 
     maxPromptPercent = os.getenv("MAXPROMPTSIZE", 33)
     maxPromptPercent = int(maxPromptPercent)/100
