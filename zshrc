@@ -73,14 +73,13 @@ else
 fi
 
 setopt PROMPT_SUBST
+RPROMPT=''
 precmd() {
     PROMPT=$(python3 ~/.velocity.py)
-    RPROMPT=''
 }
 
 TRAPWINCH() {
     PROMPT=$(python3 ~/.velocity.py)
-    RPROMPT=''
 }
 
 DISABLE_AUTO_TITLE="true"

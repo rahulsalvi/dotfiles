@@ -1,4 +1,5 @@
 set backspace=indent,eol,start
+set noshowmode
 set nobackup
 set nowritebackup
 set noswapfile
@@ -21,6 +22,9 @@ aug CursorLine
     autocmd WinLeave * setl nocursorline
     autocmd InsertEnter * setl nocursorline
 aug END
+
+imap jj <ESC>
+imap jk <ESC>
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
