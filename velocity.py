@@ -1,6 +1,8 @@
 import sys
 import os
 import subprocess
+import shlex
+import datetime
 from enum import Enum
 
 promptTime = os.getenv("PROMPTTIME", False)
@@ -20,44 +22,116 @@ class Format:
         cyan    = 6
         white   = 7
         default = 9
-    def __init__(self, fg, bg, fgbold=False, bgbold=False):
-        self.fgval = self.Code[fg].value + 30
-        self.bgval = self.Code[bg].value + 40
-        if fgbold:
+    def __init__(self, fg, bg):
+        self.fg = fg
+        self.bg = bg
+        self.fgval = self.Code[fg.replace("bright", "")].value + 30
+        self.bgval = self.Code[bg.replace("bright", "")].value + 40
+        if "bright" in self.fg:
             self.fgval += 60
-        if bgbold:
+        if "bright" in self.bg:
             self.bgval += 60
     def getEscapeSequence(self):
         return "%{\033["+str(self.fgval)+";"+str(self.bgval)+"m%}"
-
+    def getTmuxSequence(self):
+        return "#[fg="+self.fg+"]#[bg="+self.bg+"]"
 
 class Segment:
     def __init__(self, text, fmt):
         self.text = " " + text + " "
         self.fmt = fmt
-    def getString(self, nextfmt):
-        if nextfmt == None:
-            if os.getenv('BACKGROUND') == 'light':
-                bg = "107"
-            else:
-                bg = "100"
-            return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b0'+"%{\033[0m%}"
-        else:
-            if self.fmt.bgval == nextfmt.bgval:
+    def getString(self, nextfmt, backwards):
+        if not backwards:
+            if nextfmt == None:
                 if os.getenv('BACKGROUND') == 'light':
-                    fg = "97"
+                    bg = "107"
                 else:
-                    fg = "90"
-                return self.fmt.getEscapeSequence()+self.text+"%{\033["+fg+";"+str(nextfmt.bgval)+"m%}"+'\ue0b1'
+                    bg = "100"
+                return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b0'+"%{\033[0m%}"
             else:
-                return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m%}"+'\ue0b0'
+                if self.fmt.bgval == nextfmt.bgval:
+                    if os.getenv('BACKGROUND') == 'light':
+                        fg = "97"
+                    else:
+                        fg = "90"
+                    return self.fmt.getEscapeSequence()+self.text+"%{\033["+fg+";"+str(nextfmt.bgval)+"m%}"+'\ue0b1'
+                else:
+                    return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m%}"+'\ue0b0'
+        else:
+            if nextfmt == None:
+                if os.getenv('BACKGROUND') == 'light':
+                    bg = "107"
+                else:
+                    bg = "100"
+                return "%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b2'+self.fmt.getEscapeSequence()+self.text
+            else:
+                if self.fmt.bgval == nextfmt.bgval:
+                    if os.getenv('BACKGROUND') == 'light':
+                        fg = "97"
+                    else:
+                        fg = "90"
+                    return "%{\033["+fg+";"+str(nextfmt.bgval)+"m%}"+'\ue0b3'+self.fmt.getEscapeSequence()+self.text
+                else:
+                    return "%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m%}"+'\ue0b2'+self.fmt.getEscapeSequence()+self.text
+    def getTmux(self, nextfmt, backwards):
+        if not backwards:
+            if nextfmt == None:
+                if os.getenv('BACKGROUND') == 'light':
+                    bg = "white"
+                else:
+                    bg = "black"
+                return self.fmt.getTmuxSequence+self.text+"#[fg="+self.fmt.bg+"]#[bg="+bg+"]"+'\ue0b0'+"#[default]"
+            else:
+                if self.fmt.bgval == nextfmt.bgval:
+                    if os.getenv('BACKGROUND') == 'light':
+                        fg = "white"
+                    else:
+                        fg = "black"
+                    return self.fmt.getTmuxSequence()+self.text+"#[fg="+fg+"]#[bg="+nextfmt.bg+"]"+'\ue0b1'
+                else:
+                    return self.fmt.getTmuxSequence()+self.text+"#[fg="+self.fmt.bg+"]#[bg="+nextfmt.bg+"]"+'\ue0b0'
+        else:
+            if nextfmt == None:
+                if os.getenv('BACKGROUND') == 'light':
+                    bg = "white"
+                else:
+                    bg = "black"
+                return "#[fg="+self.fmt.bg+"]"+'\ue0b2'+self.fmt.getTmuxSequence()+self.text
+            else:
+                if self.fmt.bgval == nextfmt.bgval:
+                    if os.getenv('BACKGROUND') == 'light':
+                        fg = "white"
+                    else:
+                        fg = "black"
+                    return "#[fg="+fg+"]"+'\ue0b3'+self.fmt.getTmuxSequence()+self.text
+                else:
+                    return "#[fg="+self.fmt.bg+"]"+'\ue0b2'+self.fmt.getTmuxSequence()+self.text
 
-def resolve(segments):
+def resolve(segments, backwards):
     string = ""
-    for i in range(len(segments)-1):
-        string += segments[i].getString(segments[i+1].fmt)
-    string += segments[-1].getString(None)
-    return string + " "
+    if backwards:
+        string += segments[0].getString(None, backwards)
+        for i in range(1, len(segments)):
+            string += segments[i].getString(segments[i-1].fmt, backwards)
+        return string
+    else:
+        for i in range(len(segments)-1):
+            string += segments[i].getString(segments[i+1].fmt, backwards)
+        string += segments[-1].getString(None, backwards)
+        return string + " "
+
+def resolveTmux(segments, backwards):
+    string = ""
+    if backwards:
+        string += segments[0].getTmux(None, backwards)
+        for i in range(1, len(segments)):
+            string += segments[i].getTmux(segments[i-1].fmt, backwards)
+        return string
+    else:
+        for i in range(len(segments)-1):
+            string += segments[i].getTmux(segments[i+1].fmt, backwards)
+        string += segments[-1].getTmux(None, backwards)
+        return string + " "
 
 def getHostSegmentText():
     username = os.getlogin()
@@ -87,23 +161,34 @@ def getGitInfo(isInDotGitFolder):
             else:
                 return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip(), 1
 
-def main():
+def getBatteryText():
+    command = "pmset -g batt"
+    line = subprocess.check_output(shlex.split(command)).decode(encoding)
+    line = line.split("\t")[1]
+    line = line.split(";")[0]
+    return line
+
+def getDateText():
+    now = datetime.datetime.now()
+    return now.strftime("%a %m/%d/%Y %I:%M %p")
+
+def promptMain():
     if promptTime:
         startTime = time.time()
     segments = []
 
     if os.getenv('BACKGROUND') == 'light':
-        hostFormat = Format('black', 'cyan', False, True)
-        dirFormat = Format('black', 'cyan', False, False)
-        gitCleanFormat = Format('black', 'green', False, False)
-        gitDirtyFormat = Format('black', 'yellow', False, False)
-        gitDetachedFormat = Format('black', 'red', False, False)
+        hostFormat = Format('black', 'brightcyan')
+        dirFormat = Format('black', 'cyan')
+        gitCleanFormat = Format('black', 'green')
+        gitDirtyFormat = Format('black', 'yellow')
+        gitDetachedFormat = Format('black', 'red')
     else:
-        hostFormat = Format('black', 'blue', False, True)
-        dirFormat = Format('black', 'blue', False, False)
-        gitCleanFormat = Format('black', 'green', False, False)
-        gitDirtyFormat = Format('black', 'yellow', False, False)
-        gitDetachedFormat = Format('black', 'red', False, False)
+        hostFormat = Format('black', 'brightblue')
+        dirFormat = Format('black', 'blue')
+        gitCleanFormat = Format('black', 'green')
+        gitDirtyFormat = Format('black', 'yellow')
+        gitDetachedFormat = Format('black', 'red')
 
     hostText = getHostSegmentText()
     dirText = getDirectoryText()
@@ -129,9 +214,22 @@ def main():
         segments.append(Segment(gitText, gitDetachedFormat))
 
     if promptTime:
-        segments.append(Segment(str(time.time()-startTime), Format('black', 'white', False, False)))
+        segments.append(Segment(str(time.time()-startTime), Format('black', 'white')))
 
-    sys.stdout.write(resolve(segments))
+    sys.stdout.write(resolve(segments, False))
+
+def tmuxStatusRightMain():
+    segments = []
+    segments.append(Segment("PREFIX,}", Format('white', 'red')))
+    segments.append(Segment(getBatteryText(), Format('black', 'blue')))
+    segments.append(Segment(getDateText(), Format('black', 'brightblue')))
+    sys.stdout.write("#{?client_prefix,"+resolveTmux(segments, True))
 
 if __name__ == "__main__":
-    main()
+    option = sys.argv[1]
+    if option == "PROMPT":
+        promptMain()
+    elif option == "TMUXSTATUSRIGHT":
+        tmuxStatusRightMain()
+    else:
+        sys.stdout.write("UNKNOWN")

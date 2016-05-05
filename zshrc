@@ -75,11 +75,11 @@ fi
 setopt PROMPT_SUBST
 RPROMPT=''
 precmd() {
-    PROMPT=$(python3 ~/.velocity.py)
+    PROMPT=$(python3 ~/.velocity.py PROMPT)
 }
 
 TRAPWINCH() {
-    PROMPT=$(python3 ~/.velocity.py)
+    PROMPT=$(python3 ~/.velocity.py PROMPT)
 }
 
 DISABLE_AUTO_TITLE="true"
@@ -105,3 +105,15 @@ alias .5='cd ../../../../../'
 alias .6='cd ../../../../../../'
 alias ~='cd ~'
 alias updatevim="vim -c ':PlugUpgrade | :PlugUpdate | :q! | :q!'"
+
+# if [[ -z "$TMUX" ]] ; then
+#     tmux new-session -A -s 0
+# fi
+
+function exit {
+    if [[ -z "$TMUX" ]] ; then
+        builtin exit
+    else
+        tmux detach
+    fi
+}
