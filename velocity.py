@@ -162,8 +162,7 @@ def getGitInfo(isInDotGitFolder):
                 return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip(), 1
 
 def getBatteryText():
-    command = "pmset -g batt"
-    out = subprocess.check_output(shlex.split(command)).decode(encoding)
+    out = subprocess.check_output(shlex.split("pmset -g batt")).decode(encoding)
     line = out.split("\t")[1]
     line = line.split(";")[0]
     if "AC" in out:
@@ -173,6 +172,17 @@ def getBatteryText():
 def getDateText():
     now = datetime.datetime.now()
     return now.strftime("%a %m/%d/%Y %I:%M %p")
+
+def getSpotifyInfo():
+    state = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return player state as string'"))
+    name = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return name of current track as string'"))
+    artist = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return artist of current track as string'"))
+    state = state.decode(encoding).rstrip()
+    name = name.decode(encoding).rstrip()
+    artist = artist.decode(encoding).rstrip()
+    name = name[:18]+".." if len(name) > 20 else name
+    artist = artist[:18]+".." if len(artist) > 20 else artist
+    return name + " - " + artist, state
 
 def promptMain():
     if promptTime:
@@ -224,6 +234,7 @@ def tmuxStatusRightMain():
     segments = []
     segments.append(Segment("PREFIX,}", Format('white', 'red')))
     segments.append(Segment("#{pane_current_command}", Format('black', 'brightmagenta')))
+
     batteryLine = getBatteryText()
     batteryAmt = int(batteryLine.split(' ')[1].replace("%", ""))
     if batteryAmt < 20:
@@ -232,7 +243,12 @@ def tmuxStatusRightMain():
         segments.append(Segment(batteryLine, Format('black', 'yellow')))
     else:
         segments.append(Segment(batteryLine, Format('black', 'green')))
-    segments.append(Segment(getDateText(), Format('black', 'brightblue')))
+
+    spotifyInfo = getSpotifyInfo()
+    if spotifyInfo[1] == "playing":
+        segments.append(Segment(spotifyInfo[0], Format('black', 'brightgreen')))
+
+    segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
     sys.stdout.write("#{?client_prefix,"+resolveTmux(segments, True))
 
 if __name__ == "__main__":

@@ -59,7 +59,7 @@ alias xcode='OpenInXcode'
 alias zipf='ZipF'
 alias extract='unarchive'
 
-local termname=$(osascript -e "tell first window of application \"Terminal\" to do shell script \"echo \" & (name of current settings as text)")
+local termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
 if [[ $termname == "Solarized Light" ]] ; then
     export BACKGROUND=light
 else
