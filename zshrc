@@ -106,9 +106,9 @@ alias .6='cd ../../../../../../'
 alias ~='cd ~'
 alias updatevim="vim -c ':PlugUpgrade | :PlugUpdate | :q! | :q!'"
 
-# if [[ -z "$TMUX" ]] ; then
-#     tmux new-session -A -s 0
-# fi
+if [[ -z "$TMUX" ]] ; then
+    tmux new-session -A -s 0
+fi
 
 function exit {
     if [[ -z "$TMUX" ]] ; then

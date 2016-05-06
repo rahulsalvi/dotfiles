@@ -80,7 +80,7 @@ class Segment:
                     bg = "white"
                 else:
                     bg = "black"
-                return self.fmt.getTmuxSequence+self.text+"#[fg="+self.fmt.bg+"]#[bg="+bg+"]"+'\ue0b0'+"#[default]"
+                return self.fmt.getTmuxSequence()+self.text+"#[fg="+self.fmt.bg+"]#[bg="+bg+"]"+'\ue0b0'+"#[default]"
             else:
                 if self.fmt.bgval == nextfmt.bgval:
                     if os.getenv('BACKGROUND') == 'light':
@@ -251,11 +251,24 @@ def tmuxStatusRightMain():
     segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
     sys.stdout.write("#{?client_prefix,"+resolveTmux(segments, True))
 
+def tmuxStatusLeftMain():
+    segments = []
+    if os.getenv('BACKGROUND') == "light":
+        sessionFormat = Format('black', 'cyan')
+    else:
+        sessionFormat = Format('black', 'blue')
+
+    segments.append(Segment(getHostSegmentText(), Format('black', 'brightblue')))
+    segments.append(Segment("#{client_session}", sessionFormat))
+    sys.stdout.write(resolveTmux(segments, False))
+
 if __name__ == "__main__":
     option = sys.argv[1]
     if option == "PROMPT":
         promptMain()
     elif option == "TMUXSTATUSRIGHT":
         tmuxStatusRightMain()
+    elif option == "TMUXSTATUSLEFT":
+        tmuxStatusLeftMain()
     else:
         sys.stdout.write("UNKNOWN")
