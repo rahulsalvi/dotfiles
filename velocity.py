@@ -133,7 +133,7 @@ def resolveTmux(segments, backwards):
         string += segments[-1].getTmux(None, backwards)
         return string + " "
 
-def getHostSegmentText():
+def getHostText():
     username = os.getlogin()
     hostname = os.uname()[1]
     return username + "@" + hostname
@@ -202,7 +202,7 @@ def promptMain():
         gitDirtyFormat = Format('black', 'yellow')
         gitDetachedFormat = Format('black', 'red')
 
-    hostText = getHostSegmentText()
+    hostText = getHostText()
     dirText = getDirectoryText()
     gitText, gitStatus = getGitInfo(".git" in dirText)
 
@@ -232,6 +232,7 @@ def promptMain():
 
 def tmuxStatusRightMain():
     segments = []
+
     segments.append(Segment("PREFIX,}", Format('white', 'red')))
     segments.append(Segment("#{pane_current_command}", Format('black', 'brightmagenta')))
 
@@ -249,16 +250,18 @@ def tmuxStatusRightMain():
         segments.append(Segment(spotifyInfo[0], Format('black', 'brightgreen')))
 
     segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
+
     sys.stdout.write("#{?client_prefix,"+resolveTmux(segments, True))
 
 def tmuxStatusLeftMain():
     segments = []
+
     if os.getenv('BACKGROUND') == "light":
         sessionFormat = Format('black', 'cyan')
     else:
         sessionFormat = Format('black', 'blue')
 
-    segments.append(Segment(getHostSegmentText(), Format('black', 'brightblue')))
+    segments.append(Segment(getHostText(), Format('black', 'brightblue')))
     segments.append(Segment("#{client_session}", sessionFormat))
     sys.stdout.write(resolveTmux(segments, False))
 
