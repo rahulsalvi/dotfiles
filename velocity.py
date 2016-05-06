@@ -163,10 +163,12 @@ def getGitInfo(isInDotGitFolder):
 
 def getBatteryText():
     command = "pmset -g batt"
-    line = subprocess.check_output(shlex.split(command)).decode(encoding)
-    line = line.split("\t")[1]
+    out = subprocess.check_output(shlex.split(command)).decode(encoding)
+    line = out.split("\t")[1]
     line = line.split(";")[0]
-    return line
+    if "AC" in out:
+        return "Charging: " + line
+    return "Battery: " + line
 
 def getDateText():
     now = datetime.datetime.now()
@@ -198,7 +200,7 @@ def promptMain():
     maxPromptPercent = int(maxPromptPercent)/100
     maxPromptSize = int(subprocess.check_output(['stty', 'size']).split()[1]) * maxPromptPercent
 
-    if len(hostText+dirText+gitText) < maxPromptSize:
+    if (len(hostText+dirText+gitText) < maxPromptSize) and (os.getenv("TMUX", "") == ""):
         segments.append(Segment(hostText, hostFormat))
 
     while (len(dirText+gitText) > maxPromptSize) and (dirText.count('/') > 1):
@@ -221,7 +223,15 @@ def promptMain():
 def tmuxStatusRightMain():
     segments = []
     segments.append(Segment("PREFIX,}", Format('white', 'red')))
-    segments.append(Segment(getBatteryText(), Format('black', 'blue')))
+    segments.append(Segment("#{pane_current_command}", Format('black', 'brightmagenta')))
+    batteryLine = getBatteryText()
+    batteryAmt = int(batteryLine.split(' ')[1].replace("%", ""))
+    if batteryAmt < 20:
+        segments.append(Segment(batteryLine, Format('black', 'red')))
+    elif batteryAmt < 100:
+        segments.append(Segment(batteryLine, Format('black', 'yellow')))
+    else:
+        segments.append(Segment(batteryLine, Format('black', 'green')))
     segments.append(Segment(getDateText(), Format('black', 'brightblue')))
     sys.stdout.write("#{?client_prefix,"+resolveTmux(segments, True))
 
