@@ -1,3 +1,11 @@
+termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
+if [[ $termname == "Solarized Light" ]] ; then
+    export BACKGROUND=light
+else
+    export BACKGROUND=dark
+fi
+unset termname
+
 zstyle ':prezto:module:syntax-highlighting' color 'yes'
 zstyle ':prezto:load' pmodule \
     'environment' \
@@ -11,31 +19,59 @@ zstyle ':prezto:load' pmodule \
     'syntax-highlighting' \
     'history-substring-search'
 
-zstyle ':prezto:module:syntax-highlighting' styles \
-    'unknown-token' 'fg=red' \
-    'reserved-word' 'fg=red,bold' \
-    'alias' 'fg=green' \
-    'builtin' 'fg=green' \
-    'function' 'fg=green' \
-    'command' 'fg=green' \
-    'precommand' 'fg=yellow' \
-    'commandseparator' 'fg=magenta,bold' \
-    'hashed-command' 'fg=red' \
-    'path' 'fg=blue' \
-    'path-prefix' 'fg=blue' \
-    'globbing' 'fg=magenta' \
-    'history-expansion' 'none' \
-    'single-hyphen-option' 'none' \
-    'double-hyphen-option' 'none' \
-    'back-quoted-argument' 'none' \
-    'single-quoted-argument' 'fg=cyan' \
-    'double-quoted-argument' 'fg=cyan' \
-    'dollar-quoted-argument' 'fg=cyan' \
-    'back-double-quoted-argument' 'fg=cyan' \
-    'back-dollar-quoted-argument' 'fg=cyan' \
-    'assign' 'none' \
-    'redirection' 'fg=magenta,bold' \
-    'default' 'none'
+if [[ $BACKGROUND == "light" ]] ; then
+    zstyle ':prezto:module:syntax-highlighting' styles \
+        'unknown-token' 'fg=red' \
+        'reserved-word' 'fg=red,bold' \
+        'alias' 'fg=green' \
+        'builtin' 'fg=green' \
+        'function' 'fg=green' \
+        'command' 'fg=green' \
+        'precommand' 'fg=magenta' \
+        'commandseparator' 'fg=magenta,bold' \
+        'hashed-command' 'fg=red' \
+        'path' 'fg=cyan' \
+        'path-prefix' 'fg=cyan' \
+        'globbing' 'fg=magenta' \
+        'history-expansion' 'none' \
+        'single-hyphen-option' 'none' \
+        'double-hyphen-option' 'none' \
+        'back-quoted-argument' 'none' \
+        'single-quoted-argument' 'fg=cyan' \
+        'double-quoted-argument' 'fg=cyan' \
+        'dollar-quoted-argument' 'fg=cyan' \
+        'back-double-quoted-argument' 'fg=cyan' \
+        'back-dollar-quoted-argument' 'fg=cyan' \
+        'assign' 'none' \
+        'redirection' 'fg=magenta,bold' \
+        'default' 'none'
+else
+    zstyle ':prezto:module:syntax-highlighting' styles \
+        'unknown-token' 'fg=red' \
+        'reserved-word' 'fg=red,bold' \
+        'alias' 'fg=green' \
+        'builtin' 'fg=green' \
+        'function' 'fg=green' \
+        'command' 'fg=green' \
+        'precommand' 'fg=yellow' \
+        'commandseparator' 'fg=magenta,bold' \
+        'hashed-command' 'fg=red' \
+        'path' 'fg=blue' \
+        'path-prefix' 'fg=blue' \
+        'globbing' 'fg=magenta' \
+        'history-expansion' 'none' \
+        'single-hyphen-option' 'none' \
+        'double-hyphen-option' 'none' \
+        'back-quoted-argument' 'none' \
+        'single-quoted-argument' 'fg=cyan' \
+        'double-quoted-argument' 'fg=cyan' \
+        'dollar-quoted-argument' 'fg=cyan' \
+        'back-double-quoted-argument' 'fg=cyan' \
+        'back-dollar-quoted-argument' 'fg=cyan' \
+        'assign' 'none' \
+        'redirection' 'fg=magenta,bold' \
+        'default' 'none'
+fi
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
     source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -58,13 +94,6 @@ alias cpwd='CollapsePWD'
 alias xcode='OpenInXcode'
 alias zipf='ZipF'
 alias extract='unarchive'
-
-local termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
-if [[ $termname == "Solarized Light" ]] ; then
-    export BACKGROUND=light
-else
-    export BACKGROUND=dark
-fi
 
 if [[ $BACKGROUND == "light" ]] ; then
     LS_COLORS=$LS_COLORS:'di=36:ln=35:ex=31'
