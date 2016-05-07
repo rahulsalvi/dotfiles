@@ -33,7 +33,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     "autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugins')
 
 Plug 'https://github.com/rking/ag.vim.git'
 Plug 'https://github.com/bronson/vim-trailing-whitespace.git'
