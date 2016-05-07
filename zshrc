@@ -88,7 +88,7 @@ echo -en "\033];Velocity\007"
 export LS_COLORS
 export CC=clang
 export CXX=clang++
-export EDITOR=/opt/local/bin/vim
+export EDITOR=vim
 
 alias ls='ls -Fh --color=auto'
 alias la='ls -A'

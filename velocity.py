@@ -5,6 +5,8 @@ import shlex
 import datetime
 from enum import Enum
 
+theme = os.getenv("BACKGROUND")
+
 promptTime = os.getenv("PROMPTTIME", False)
 if promptTime:
     import time
@@ -43,14 +45,14 @@ class Segment:
     def getString(self, nextfmt, backwards):
         if not backwards:
             if nextfmt == None:
-                if os.getenv('BACKGROUND') == 'light':
+                if theme == 'light':
                     bg = "107"
                 else:
                     bg = "100"
                 return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b0'+"%{\033[0m%}"
             else:
                 if self.fmt.bgval == nextfmt.bgval:
-                    if os.getenv('BACKGROUND') == 'light':
+                    if theme == 'light':
                         fg = "97"
                     else:
                         fg = "90"
@@ -59,14 +61,14 @@ class Segment:
                     return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m%}"+'\ue0b0'
         else:
             if nextfmt == None:
-                if os.getenv('BACKGROUND') == 'light':
+                if theme == 'light':
                     bg = "107"
                 else:
                     bg = "100"
                 return "%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b2'+self.fmt.getEscapeSequence()+self.text
             else:
                 if self.fmt.bgval == nextfmt.bgval:
-                    if os.getenv('BACKGROUND') == 'light':
+                    if theme == 'light':
                         fg = "97"
                     else:
                         fg = "90"
@@ -76,14 +78,14 @@ class Segment:
     def getTmux(self, nextfmt, backwards):
         if not backwards:
             if nextfmt == None:
-                if os.getenv('BACKGROUND') == 'light':
+                if theme == 'light':
                     bg = "white"
                 else:
                     bg = "black"
                 return self.fmt.getTmuxSequence()+self.text+"#[fg="+self.fmt.bg+"]#[bg="+bg+"]"+'\ue0b0'+"#[default]"
             else:
                 if self.fmt.bgval == nextfmt.bgval:
-                    if os.getenv('BACKGROUND') == 'light':
+                    if theme == 'light':
                         fg = "white"
                     else:
                         fg = "black"
@@ -92,20 +94,27 @@ class Segment:
                     return self.fmt.getTmuxSequence()+self.text+"#[fg="+self.fmt.bg+"]#[bg="+nextfmt.bg+"]"+'\ue0b0'
         else:
             if nextfmt == None:
-                if os.getenv('BACKGROUND') == 'light':
+                if theme == 'light':
                     bg = "white"
                 else:
                     bg = "black"
                 return "#[fg="+self.fmt.bg+"]"+'\ue0b2'+self.fmt.getTmuxSequence()+self.text
             else:
                 if self.fmt.bgval == nextfmt.bgval:
-                    if os.getenv('BACKGROUND') == 'light':
+                    if theme == 'light':
                         fg = "white"
                     else:
                         fg = "black"
                     return "#[fg="+fg+"]"+'\ue0b3'+self.fmt.getTmuxSequence()+self.text
                 else:
                     return "#[fg="+self.fmt.bg+"]"+'\ue0b2'+self.fmt.getTmuxSequence()+self.text
+
+def getTmuxOption(option, default):
+    value = subprocess.check_output(shlex.split("tmux show-options -gqv @"+option)).decode(encoding).rstrip()
+    if not value:
+        return default
+    else:
+        return value
 
 def resolve(segments, backwards):
     string = ""
@@ -171,7 +180,10 @@ def getBatteryText():
 
 def getDateText():
     now = datetime.datetime.now()
-    return now.strftime("%a %m/%d/%Y %I:%M %p")
+    if getTmuxOption("SHORTDATE", "") == "true":
+        return now.strftime("%I:%M %p")
+    else:
+        return now.strftime("%a %m/%d/%Y %I:%M %p")
 
 def getSpotifyInfo():
     state = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return player state as string'"))
@@ -189,7 +201,7 @@ def promptMain():
         startTime = time.time()
     segments = []
 
-    if os.getenv('BACKGROUND') == 'light':
+    if theme == 'light':
         hostFormat = Format('black', 'brightcyan')
         dirFormat = Format('black', 'cyan')
         gitCleanFormat = Format('black', 'green')
@@ -236,18 +248,20 @@ def tmuxStatusRightMain():
     segments.append(Segment("PREFIX,}", Format('white', 'red')))
     segments.append(Segment("#{pane_current_command}", Format('black', 'brightmagenta')))
 
-    batteryLine = getBatteryText()
-    batteryAmt = int(batteryLine.split(' ')[1].replace("%", ""))
-    if batteryAmt < 20:
-        segments.append(Segment(batteryLine, Format('black', 'red')))
-    elif batteryAmt < 100:
-        segments.append(Segment(batteryLine, Format('black', 'yellow')))
-    else:
-        segments.append(Segment(batteryLine, Format('black', 'green')))
+    if not getTmuxOption("NOBATTERY", "") == "true":
+        batteryLine = getBatteryText()
+        batteryAmt = int(batteryLine.split(' ')[1].replace("%", ""))
+        if batteryAmt < 20:
+            segments.append(Segment(batteryLine, Format('black', 'red')))
+        elif batteryAmt < 100:
+            segments.append(Segment(batteryLine, Format('black', 'yellow')))
+        else:
+            segments.append(Segment(batteryLine, Format('black', 'green')))
 
-    spotifyInfo = getSpotifyInfo()
-    if spotifyInfo[1] == "playing":
-        segments.append(Segment(spotifyInfo[0], Format('black', 'brightgreen')))
+    if not getTmuxOption("NOSPOTIFY", "") == "true":
+        spotifyInfo = getSpotifyInfo()
+        if spotifyInfo[1] == "playing":
+            segments.append(Segment(spotifyInfo[0], Format('black', 'brightgreen')))
 
     segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
 
@@ -256,7 +270,7 @@ def tmuxStatusRightMain():
 def tmuxStatusLeftMain():
     segments = []
 
-    if os.getenv('BACKGROUND') == "light":
+    if theme == 'light':
         sessionFormat = Format('black', 'cyan')
     else:
         sessionFormat = Format('black', 'blue')
