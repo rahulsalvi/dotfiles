@@ -76,6 +76,7 @@ fi
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
     source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+source /opt/local/lib/ruby2.3/gems/2.3.0/gems/tmuxinator-0.8.1/completion/tmuxinator.zsh
 
 CollapsePWD() {
     echo $(pwd | sed -e "s,^$HOME,~,")
@@ -133,6 +134,7 @@ alias .4='cd ../../../../'
 alias .5='cd ../../../../../'
 alias .6='cd ../../../../../../'
 alias ~='cd ~'
+alias mux='tmuxinator'
 alias updatevim="vim -c ':PlugUpgrade | :PlugUpdate | :q! | :q!'"
 
 if [[ -z "$TMUX" ]] ; then
