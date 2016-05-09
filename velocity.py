@@ -196,6 +196,17 @@ def getSpotifyInfo():
     artist = artist[:18]+".." if len(artist) > 20 else artist
     return name + " - " + artist, state
 
+def getSongTickText():
+    tick = int(subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return player position / ((duration of current track) / 1000) * 10 as integer'")))
+    string = "["
+    for i in range(tick):
+        string += "-"
+    string += "|"
+    for i in range(10 - tick):
+        string += "-"
+    string += "]"
+    return string
+
 def promptMain():
     if promptTime:
         startTime = time.time()
@@ -262,6 +273,9 @@ def tmuxStatusRightMain():
         spotifyInfo = getSpotifyInfo()
         if spotifyInfo[1] == "playing":
             segments.append(Segment(spotifyInfo[0], Format('black', 'brightgreen')))
+            if not getTmuxOption("NOSONGTICK", "") == "true":
+                segments.append(Segment(getSongTickText(), Format('black', 'brightgreen')))
+
 
     segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
 
