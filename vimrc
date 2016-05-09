@@ -57,6 +57,7 @@ Plug 'https://github.com/vim-scripts/YankRing.vim.git'
 Plug 'https://github.com/Valloric/ListToggle.git'
 Plug 'https://github.com/tpope/vim-unimpaired.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
+Plug 'https://github.com/justinmk/vim-sneak.git'
 
 call plug#end()
 
@@ -130,5 +131,8 @@ let g:ycm_max_diagnostics_to_display=1000
 let g:yankring_history_dir='~/.vim'
 
 " ListToggle
-let g:lt_location_list_toggle_map = 'gl'
-let g:lt_quickfix_list_toggle_map = 'gk'
+let g:lt_location_list_toggle_map='gl'
+let g:lt_quickfix_list_toggle_map='gk'
+
+" Sneak
+let g:sneak#s_next=1
