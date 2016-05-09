@@ -239,7 +239,12 @@ def promptMain():
     while (len(dirText+gitText) > maxPromptSize) and (dirText.count('/') > 1):
         dirs = dirText.split('/')
         dirText = "../" + '/'.join(dirs[2:])
-    segments.append(Segment(dirText, dirFormat))
+
+    if os.getenv("NOSPLITDIRTEXT", False):
+        segments.append(Segment(dirText, dirFormat))
+    else:
+        for line in dirText.split('/'):
+            segments.append(Segment(line, dirFormat))
 
     if gitStatus == 0:
         segments.append(Segment(gitText, gitCleanFormat))
