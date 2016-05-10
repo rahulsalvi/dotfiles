@@ -109,12 +109,15 @@ class Segment:
                 else:
                     return "#[fg="+self.fmt.bg+"]"+'\ue0b2'+self.fmt.getTmuxSequence()+self.text
 
-def getTmuxOption(option, default):
-    value = subprocess.check_output(shlex.split("tmux show-options -gqv @"+option)).decode(encoding).rstrip()
+def getTmuxOption(option, scope, default):
+    value = subprocess.check_output(shlex.split("tmux show-options -qv"+scope+" "+option)).decode(encoding).rstrip()
     if not value:
         return default
     else:
         return value
+
+def setTmuxOption(option, scope, value):
+    subprocess.Popen(shlex.split("tmux set -"+scope+" "+option+" "+value))
 
 def resolve(segments, backwards):
     string = ""
@@ -180,7 +183,7 @@ def getBatteryText():
 
 def getDateText():
     now = datetime.datetime.now()
-    if getTmuxOption("SHORTDATE", "") == "true":
+    if getTmuxOption("@SHORTDATE", "g", "") == "true":
         return now.strftime("%I:%M %p")
     else:
         return now.strftime("%a %m/%d/%Y %I:%M %p")
@@ -271,10 +274,30 @@ def promptMain():
 def tmuxStatusRightMain():
     segments = []
 
+    # TODO: Make this smarter by counting number open windows and length of name of session
+    if getTmuxOption("@STATUSRIGHTAUTOSCALE", "g", "false") == "true":
+        width = int(subprocess.check_output(shlex.split("tmux display-message -p \"#{window_width}\"")).decode(encoding).rstrip())
+        if width < 150:
+            setTmuxOption("@NOSONGTICK", "g", "true")
+        else:
+            setTmuxOption("@NOSONGTICK", "g", "false")
+        if width < 135:
+            setTmuxOption("@SHORTDATE", "g", "true")
+        else:
+            setTmuxOption("@SHORTDATE", "g", "false")
+        if width < 120:
+            setTmuxOption("@NOSPOTIFY", "g", "true")
+        else:
+            setTmuxOption("@NOSPOTIFY", "g", "false")
+        if width < 75:
+            setTmuxOption("@NOBATTERY", "g", "true")
+        else:
+            setTmuxOption("@NOBATTERY", "g", "false")
+
     segments.append(Segment("PREFIX,}", Format('white', 'red')))
     segments.append(Segment("#{pane_current_command}", Format('black', 'brightmagenta')))
 
-    if not getTmuxOption("NOBATTERY", "") == "true":
+    if not getTmuxOption("@NOBATTERY", "g", "") == "true":
         batteryLine = getBatteryText()
         batteryAmt = int(batteryLine.split(' ')[1].replace("%", ""))
         if batteryAmt < 20:
@@ -284,11 +307,11 @@ def tmuxStatusRightMain():
         else:
             segments.append(Segment(batteryLine, Format('black', 'green')))
 
-    if not getTmuxOption("NOSPOTIFY", "") == "true":
+    if not getTmuxOption("@NOSPOTIFY", "g", "") == "true":
         spotifyInfo = getSpotifyInfo()
         if spotifyInfo[1] == "playing":
             segments.append(Segment(spotifyInfo[0], Format('black', 'brightgreen')))
-            if not getTmuxOption("NOSONGTICK", "") == "true":
+            if not getTmuxOption("@NOSONGTICK", "g", "") == "true":
                 segments.append(Segment(getSongTickText(), Format('black', 'brightgreen')))
 
     segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
