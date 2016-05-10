@@ -274,22 +274,22 @@ def promptMain():
 def tmuxStatusRightMain():
     segments = []
 
-    # TODO: Make this smarter by counting number open windows and length of name of session
     if getTmuxOption("@STATUSRIGHTAUTOSCALE", "g", "false") == "true":
         width = int(subprocess.check_output(shlex.split("tmux display-message -p \"#{window_width}\"")).decode(encoding).rstrip())
-        if width < 150:
+        baseCutoff = int(getTmuxOption("@AUTOSCALECUTOFF", "g", "150"))
+        if width < baseCutoff:
             setTmuxOption("@NOSONGTICK", "g", "true")
         else:
             setTmuxOption("@NOSONGTICK", "g", "false")
-        if width < 135:
+        if width < (baseCutoff-15):
             setTmuxOption("@SHORTDATE", "g", "true")
         else:
             setTmuxOption("@SHORTDATE", "g", "false")
-        if width < 120:
+        if width < (baseCutoff-30):
             setTmuxOption("@NOSPOTIFY", "g", "true")
         else:
             setTmuxOption("@NOSPOTIFY", "g", "false")
-        if width < 75:
+        if width < (baseCutoff-75):
             setTmuxOption("@NOBATTERY", "g", "true")
         else:
             setTmuxOption("@NOBATTERY", "g", "false")
