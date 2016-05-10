@@ -207,6 +207,16 @@ def getSongTickText():
     string += "]"
     return string
 
+def getProgressBarText(progress):
+    progressScaled = int(progress / 10)
+    string = "["
+    for i in range(progressScaled):
+        string += "##"
+    for i in range(10-progressScaled):
+        string += " "
+    string += "]"
+    return string
+
 def promptMain():
     if promptTime:
         startTime = time.time()
@@ -243,8 +253,8 @@ def promptMain():
     if os.getenv("NOSPLITDIRTEXT", False):
         segments.append(Segment(dirText, dirFormat))
     else:
-        for line in dirText.split('/'):
-            segments.append(Segment(line, dirFormat))
+        for directory in dirText.split('/'):
+            segments.append(Segment(directory, dirFormat))
 
     if gitStatus == 0:
         segments.append(Segment(gitText, gitCleanFormat))
@@ -280,7 +290,6 @@ def tmuxStatusRightMain():
             segments.append(Segment(spotifyInfo[0], Format('black', 'brightgreen')))
             if not getTmuxOption("NOSONGTICK", "") == "true":
                 segments.append(Segment(getSongTickText(), Format('black', 'brightgreen')))
-
 
     segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
 
