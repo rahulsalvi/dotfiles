@@ -7,10 +7,6 @@ from enum import Enum
 
 theme = os.getenv("BACKGROUND")
 
-promptTime = os.getenv("PROMPTTIME", False)
-if promptTime:
-    import time
-
 encoding = sys.getdefaultencoding()
 
 class Format:
@@ -195,8 +191,9 @@ def getSpotifyInfo():
     state = state.decode(encoding).rstrip()
     name = name.decode(encoding).rstrip()
     artist = artist.decode(encoding).rstrip()
-    name = name[:18]+".." if len(name) > 20 else name
-    artist = artist[:18]+".." if len(artist) > 20 else artist
+    fieldLength = int(getTmuxOption("@SPOTIFYFIELDLENGTH", "g", "20"))
+    name = name[:fieldLength-2]+".." if len(name) > fieldLength else name
+    artist = artist[:fieldLength-2]+".." if len(artist) > fieldLength else artist
     return name + " - " + artist, state
 
 def getSongTickText():
@@ -210,19 +207,27 @@ def getSongTickText():
     string += "]"
     return string
 
-def getProgressBarText(progress):
+def getProgressBarText(progress, tmux, filledFormat, emptyFormat, finalFormat):
     progressScaled = int(progress / 10)
-    string = "["
+    if tmux:
+        string = filledFormat.getTmuxSequence()
+    else:
+        string = filledFormat.getEscapeSequence()
     for i in range(progressScaled):
-        string += "##"
+        string += " "
+    if tmux:
+        string += emptyFormat.getTmuxSequence()
+    else:
+        string += emptyFormat.getEscapeSequence()
     for i in range(10-progressScaled):
         string += " "
-    string += "]"
+    if tmux:
+        string += finalFormat.getTmuxSequence()
+    else:
+        string += finalFormat.getEscapeSequence()
     return string
 
 def promptMain():
-    if promptTime:
-        startTime = time.time()
     segments = []
 
     if theme == 'light':
@@ -265,9 +270,6 @@ def promptMain():
         segments.append(Segment(gitText, gitDirtyFormat))
     elif gitStatus == 2:
         segments.append(Segment(gitText, gitDetachedFormat))
-
-    if promptTime:
-        segments.append(Segment(str(time.time()-startTime), Format('black', 'white')))
 
     sys.stdout.write(resolve(segments, False))
 
