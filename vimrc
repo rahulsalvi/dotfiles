@@ -27,6 +27,8 @@ aug END
 imap jj <ESC>
 imap jk <ESC>
 
+map <SPACE> <leader>
+
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -91,7 +93,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Unite
-nnoremap gu :Unite file/async <Enter>
+nnoremap <leader>u :Unite file/async <Enter>
 call unite#custom#profile('default', 'context', {'vertical': 1, 'winwidth': 35})
 call unite#custom#source('file,file/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_default'])
 call unite#custom#source('file,file/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_default'])
@@ -131,8 +133,8 @@ let g:ycm_max_diagnostics_to_display=1000
 let g:yankring_history_dir='~/.vim'
 
 " ListToggle
-let g:lt_location_list_toggle_map='gl'
-let g:lt_quickfix_list_toggle_map='gk'
+let g:lt_location_list_toggle_map='<leader>l'
+let g:lt_quickfix_list_toggle_map='<leader>k'
 
 " Sneak
 let g:sneak#s_next=1
