@@ -58,6 +58,11 @@
         <url type="file">/Applications/Google Chrome.app</url>
     </vkopenurldef>
 
+    <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_DISCORD</name>
+        <url type="file">/Applications/Discord.app</url>
+    </vkopenurldef>
+
     <replacementdef>
         <replacementname>LAUNCHER_MODE_V2_EXTRA</replacementname>
         <replacementvalue>
@@ -65,7 +70,12 @@
                 <autogen>
                     __KeyDownUpToKey__
                     KeyCode::C,
-                    KeyCode::VK_OPEN_URL_APP_CHROME,
+                    KeyCode::VK_OPEN_URL_APP_CHROME
+                </autogen>
+                <autogen>
+                    __KeyDownUpToKey__
+                    KeyCode::S,
+                    KeyCode::VK_OPEN_URL_APP_DISCORD
                 </autogen>
             ]]>
         </replacementvalue>
