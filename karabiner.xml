@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<root>
+    <appdef>
+        <appname>SKIM</appname>
+        <equal>net.sourceforge.skim-app.skim</equal>
+    </appdef>
+
+    <item>
+        <name>Change PC Application Key to ESCAPE (Terminal)</name>
+        <identifier>remap.terminal_application2escape</identifier>
+        <only>TERMINAL</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::PC_APPLICATION,
+            KeyCode::ESCAPE
+        </autogen>
+    </item>
+
+    <item>
+        <name>Change PC Application Key to CAPSLOCK</name>
+        <identifier>remap.application2capslock</identifier>
+        <autogen>
+            __KeyToKey__
+            KeyCode::PC_APPLICATION,
+            KeyCode::CAPSLOCK
+        </autogen>
+    </item>
+
+    <item>
+        <name>Change j to CURSOR_DOWN (Skim)</name>
+        <identifier>remap.skim_j2down</identifier>
+        <only>SKIM</only>
+        <uielementrole_not>AXTextArea, AXTextField</uielementrole_not>
+        <autogen>
+            __KeyToKey__
+            KeyCode::J, ModifierFlag::NONE,
+            KeyCode::CURSOR_DOWN
+        </autogen>
+    </item>
+
+    <item>
+        <name>Change k to CURSOR_UP (Skim)</name>
+        <identifier>remap.skim_k2up</identifier>
+        <only>SKIM</only>
+        <uielementrole_not>AXTextArea, AXTextField</uielementrole_not>
+        <autogen>
+            __KeyToKey__
+            KeyCode::K, ModifierFlag::NONE,
+            KeyCode::CURSOR_UP
+        </autogen>
+    </item>
+</root>
