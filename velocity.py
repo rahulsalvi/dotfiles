@@ -142,7 +142,7 @@ def getGitInfo(isInDotGitFolder):
                 return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip(), 1
 
 def getBatteryInfo():
-    out = subprocess.check_output(shlex.split("pmset -g batt")).decode(encoding)
+    out  = subprocess.check_output(shlex.split("pmset -g batt")).decode(encoding)
     line = out.split("\t")[1]
     line = line.split("%")[0]
     if "AC" in out:
@@ -158,15 +158,17 @@ def getShortDateText():
     return now.strftime("%I:%M %p")
 
 def getSpotifyInfo():
-    state = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return player state as string'"))
-    name = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return name of current track as string'"))
-    artist = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return artist of current track as string'"))
-    state = state.decode(encoding).rstrip()
-    name = name.decode(encoding).rstrip()
-    artist = artist.decode(encoding).rstrip()
+    state       = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return player state as string'"))
+    name        = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return name of current track as string'"))
+    artist      = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return artist of current track as string'"))
+
+    state       = state.decode(encoding).rstrip()
+    name        = name.decode(encoding).rstrip()
+    artist      = artist.decode(encoding).rstrip()
+
     fieldLength = int(getTmuxOption("@SPOTIFYFIELDLENGTH", "g", "20"))
-    name = name[:fieldLength-2]+".." if len(name) > fieldLength else name
-    artist = artist[:fieldLength-2]+".." if len(artist) > fieldLength else artist
+    name        = name[:fieldLength-2]+".." if len(name) > fieldLength else name
+    artist      = artist[:fieldLength-2]+".." if len(artist) > fieldLength else artist
     return name + " - " + artist, state
 
 def getSongTickText():
@@ -204,25 +206,25 @@ def promptMain():
     segments = []
 
     if theme == 'light':
-        hostFormat = Format('black', 'brightcyan')
-        dirFormat = Format('black', 'cyan')
-        gitCleanFormat = Format('black', 'green')
-        gitDirtyFormat = Format('black', 'yellow')
+        hostFormat        = Format('black', 'brightcyan')
+        dirFormat         = Format('black', 'cyan')
+        gitCleanFormat    = Format('black', 'green')
+        gitDirtyFormat    = Format('black', 'yellow')
         gitDetachedFormat = Format('black', 'red')
     else:
-        hostFormat = Format('black', 'brightblue')
-        dirFormat = Format('black', 'blue')
-        gitCleanFormat = Format('black', 'green')
-        gitDirtyFormat = Format('black', 'yellow')
+        hostFormat        = Format('black', 'brightblue')
+        dirFormat         = Format('black', 'blue')
+        gitCleanFormat    = Format('black', 'green')
+        gitDirtyFormat    = Format('black', 'yellow')
         gitDetachedFormat = Format('black', 'red')
 
-    hostText = getHostText()
-    dirText = getDirectoryText()
+    hostText           = getHostText()
+    dirText            = getDirectoryText()
     gitText, gitStatus = getGitInfo(".git" in dirText)
 
     maxPromptPercent = os.getenv("MAXPROMPTSIZE", 33)
     maxPromptPercent = int(maxPromptPercent)/100
-    maxPromptSize = int(subprocess.check_output(['stty', 'size']).split()[1]) * maxPromptPercent
+    maxPromptSize    = int(subprocess.check_output(['stty', 'size']).split()[1]) * maxPromptPercent
 
     if (len(hostText+dirText+gitText) < maxPromptSize) and (os.getenv("TMUX", "") == ""):
         segments.append(Segment(hostText, hostFormat))
@@ -250,7 +252,7 @@ def tmuxStatusRightMain():
     segments = []
 
     if getTmuxOption("@STATUSRIGHTAUTOSCALE", "g", "false") == "true":
-        width = int(subprocess.check_output(shlex.split("tmux display-message -p \"#{window_width}\"")).decode(encoding).rstrip())
+        width      = int(subprocess.check_output(shlex.split("tmux display-message -p \"#{window_width}\"")).decode(encoding).rstrip())
         baseCutoff = int(getTmuxOption("@AUTOSCALECUTOFF", "g", "150"))
         segmentFlags = ["false" for i in range(4)]
         if width < baseCutoff:
@@ -271,13 +273,13 @@ def tmuxStatusRightMain():
 
     if not getTmuxOption("@NOBATTERY", "g", "") == "true":
         batteryInfo = getBatteryInfo()
-        batteryAmt = int(batteryInfo[1])
+        batteryAmt  = int(batteryInfo[1])
         if batteryAmt < 20:
             segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'red')))
         elif batteryAmt < 100:
             segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'yellow')))
         else:
-            segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'green')))
+            segments.append(Segment((batteryInfo[0] if batteryInfo[0] == "Battery: " else "Charged: ")+batteryInfo[1]+"%", Format('black', 'green')))
 
     if not getTmuxOption("@NOSPOTIFY", "g", "") == "true":
         spotifyInfo = getSpotifyInfo()
