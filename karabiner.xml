@@ -27,8 +27,8 @@
     </item>
 
     <item>
-        <name>Change j to CURSOR_DOWN (Skim)</name>
-        <identifier>remap.skim_j2down</identifier>
+        <name>Add vi bindings to Skim</name>
+        <identifier>remap.skim_vibindings</identifier>
         <only>SKIM</only>
         <uielementrole_not>AXTextArea, AXTextField</uielementrole_not>
         <autogen>
@@ -36,17 +36,38 @@
             KeyCode::J, ModifierFlag::NONE,
             KeyCode::CURSOR_DOWN
         </autogen>
-    </item>
-
-    <item>
-        <name>Change k to CURSOR_UP (Skim)</name>
-        <identifier>remap.skim_k2up</identifier>
-        <only>SKIM</only>
-        <uielementrole_not>AXTextArea, AXTextField</uielementrole_not>
         <autogen>
             __KeyToKey__
             KeyCode::K, ModifierFlag::NONE,
             KeyCode::CURSOR_UP
         </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::J, ModifierFlag::SHIFT_L,
+            KeyCode::PAGEDOWN
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::K, ModifierFlag::SHIFT_L,
+            KeyCode::PAGEUP
+        </autogen>
     </item>
+
+    <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_APP_CHROME</name>
+        <url type="file">/Applications/Google Chrome.app</url>
+    </vkopenurldef>
+
+    <replacementdef>
+        <replacementname>LAUNCHER_MODE_V2_EXTRA</replacementname>
+        <replacementvalue>
+            <![CDATA[
+                <autogen>
+                    __KeyDownUpToKey__
+                    KeyCode::C,
+                    KeyCode::VK_OPEN_URL_APP_CHROME,
+                </autogen>
+            ]]>
+        </replacementvalue>
+    </replacementdef>
 </root>
