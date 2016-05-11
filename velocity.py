@@ -6,7 +6,6 @@ import datetime
 from enum import Enum
 
 theme = os.getenv("BACKGROUND")
-
 encoding = sys.getdefaultencoding()
 
 class Format:
@@ -23,11 +22,11 @@ class Format:
     def __init__(self, fg, bg):
         self.fg = fg
         self.bg = bg
-        self.fgval = self.Code[fg.replace("bright", "")].value + 30
-        self.bgval = self.Code[bg.replace("bright", "")].value + 40
-        if "bright" in self.fg:
+        self.fgval = self.Code[self.fg.replace("bright", "")].value + 30
+        self.bgval = self.Code[self.bg.replace("bright", "")].value + 40
+        if self.fg[:6] == "bright":
             self.fgval += 60
-        if "bright" in self.bg:
+        if self.bg[:6] == "bright":
             self.bgval += 60
     def getEscapeSequence(self):
         return "%{\033["+str(self.fgval)+";"+str(self.bgval)+"m%}"
@@ -39,78 +38,51 @@ class Segment:
         self.text = " " + text + " "
         self.fmt = fmt
     def getString(self, nextfmt, backwards):
-        if not backwards:
+        if backwards:
             if nextfmt == None:
-                if theme == 'light':
-                    bg = "107"
-                else:
-                    bg = "100"
-                return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b0'+"%{\033[0m%}"
-            else:
-                if self.fmt.bgval == nextfmt.bgval:
-                    if theme == 'light':
-                        fg = "97"
-                    else:
-                        fg = "90"
-                    return self.fmt.getEscapeSequence()+self.text+"%{\033["+fg+";"+str(nextfmt.bgval)+"m%}"+'\ue0b1'
-                else:
-                    return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m%}"+'\ue0b0'
-        else:
-            if nextfmt == None:
-                if theme == 'light':
-                    bg = "107"
-                else:
-                    bg = "100"
+                bg = "107" if theme == "light" else "100"
                 return "%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b2'+self.fmt.getEscapeSequence()+self.text
             else:
                 if self.fmt.bgval == nextfmt.bgval:
-                    if theme == 'light':
-                        fg = "97"
-                    else:
-                        fg = "90"
+                    fg = "97" if theme == "light" else "90"
                     return "%{\033["+fg+";"+str(nextfmt.bgval)+"m%}"+'\ue0b3'+self.fmt.getEscapeSequence()+self.text
                 else:
                     return "%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m%}"+'\ue0b2'+self.fmt.getEscapeSequence()+self.text
-    def getTmux(self, nextfmt, backwards):
-        if not backwards:
-            if nextfmt == None:
-                if theme == 'light':
-                    bg = "white"
-                else:
-                    bg = "black"
-                return self.fmt.getTmuxSequence()+self.text+"#[fg="+self.fmt.bg+"]#[bg="+bg+"]"+'\ue0b0'+"#[default]"
-            else:
-                if self.fmt.bgval == nextfmt.bgval:
-                    if theme == 'light':
-                        fg = "white"
-                    else:
-                        fg = "black"
-                    return self.fmt.getTmuxSequence()+self.text+"#[fg="+fg+"]#[bg="+nextfmt.bg+"]"+'\ue0b1'
-                else:
-                    return self.fmt.getTmuxSequence()+self.text+"#[fg="+self.fmt.bg+"]#[bg="+nextfmt.bg+"]"+'\ue0b0'
         else:
             if nextfmt == None:
-                if theme == 'light':
-                    bg = "white"
+                bg = "107" if theme == "light" else "100"
+                return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+bg+"m%}"+'\ue0b0'+"%{\033[0m%}"
+            else:
+                if self.fmt.bgval == nextfmt.bgval:
+                    fg = "97" if theme == "light" else "90"
+                    return self.fmt.getEscapeSequence()+self.text+"%{\033["+fg+";"+str(nextfmt.bgval)+"m%}"+'\ue0b1'
                 else:
-                    bg = "black"
+                    return self.fmt.getEscapeSequence()+self.text+"%{\033["+str(self.fmt.bgval-10)+";"+str(nextfmt.bgval)+"m%}"+'\ue0b0'
+    def getTmux(self, nextfmt, backwards):
+        if backwards:
+            if nextfmt == None:
+                bg = "white" if theme == "light" else "black"
                 return "#[fg="+self.fmt.bg+"]"+'\ue0b2'+self.fmt.getTmuxSequence()+self.text
             else:
                 if self.fmt.bgval == nextfmt.bgval:
-                    if theme == 'light':
-                        fg = "white"
-                    else:
-                        fg = "black"
+                    fg = "white" if theme == "light" else "black"
                     return "#[fg="+fg+"]"+'\ue0b3'+self.fmt.getTmuxSequence()+self.text
                 else:
                     return "#[fg="+self.fmt.bg+"]"+'\ue0b2'+self.fmt.getTmuxSequence()+self.text
+        else:
+            if nextfmt == None:
+                bg = "white" if theme == "light" else "black"
+                return self.fmt.getTmuxSequence()+self.text+"#[fg="+self.fmt.bg+"]#[bg="+bg+"]"+'\ue0b0'+"#[default]"
+            else:
+                if self.fmt.bgval == nextfmt.bgval:
+                    fg = "white" if theme == "light" else "black"
+                    return self.fmt.getTmuxSequence()+self.text+"#[fg="+fg+"]#[bg="+nextfmt.bg+"]"+'\ue0b1'
+                else:
+                    return self.fmt.getTmuxSequence()+self.text+"#[fg="+self.fmt.bg+"]#[bg="+nextfmt.bg+"]"+'\ue0b0'
 
 def getTmuxOption(option, scope, default):
     value = subprocess.check_output(shlex.split("tmux show-options -qv"+scope+" "+option)).decode(encoding).rstrip()
-    if not value:
-        return default
-    else:
-        return value
+    return default if not value else value
 
 def setTmuxOption(option, scope, value):
     subprocess.Popen(shlex.split("tmux set -"+scope+" "+option+" "+value))
@@ -169,20 +141,21 @@ def getGitInfo(isInDotGitFolder):
             else:
                 return '\ue0a0'+" "+out.decode(encoding).replace("refs/heads/", "", 1).rstrip(), 1
 
-def getBatteryText():
+def getBatteryInfo():
     out = subprocess.check_output(shlex.split("pmset -g batt")).decode(encoding)
     line = out.split("\t")[1]
-    line = line.split(";")[0]
+    line = line.split("%")[0]
     if "AC" in out:
-        return "Charging: " + line
-    return "Battery: " + line
+        return "Charging: ", line
+    return "Battery: ", line
 
 def getDateText():
     now = datetime.datetime.now()
-    if getTmuxOption("@SHORTDATE", "g", "") == "true":
-        return now.strftime("%I:%M %p")
-    else:
-        return now.strftime("%a %m/%d/%Y %I:%M %p")
+    return now.strftime("%a %m/%d/%Y %I:%M %p")
+
+def getShortDateText():
+    now = datetime.datetime.now()
+    return now.strftime("%I:%M %p")
 
 def getSpotifyInfo():
     state = subprocess.check_output(shlex.split("osascript -e 'tell application \"Spotify\" to return player state as string'"))
@@ -279,35 +252,32 @@ def tmuxStatusRightMain():
     if getTmuxOption("@STATUSRIGHTAUTOSCALE", "g", "false") == "true":
         width = int(subprocess.check_output(shlex.split("tmux display-message -p \"#{window_width}\"")).decode(encoding).rstrip())
         baseCutoff = int(getTmuxOption("@AUTOSCALECUTOFF", "g", "150"))
+        segmentFlags = ["false" for i in range(4)]
         if width < baseCutoff:
-            setTmuxOption("@NOSONGTICK", "g", "true")
-        else:
-            setTmuxOption("@NOSONGTICK", "g", "false")
-        if width < (baseCutoff-15):
-            setTmuxOption("@SHORTDATE", "g", "true")
-        else:
-            setTmuxOption("@SHORTDATE", "g", "false")
-        if width < (baseCutoff-30):
-            setTmuxOption("@NOSPOTIFY", "g", "true")
-        else:
-            setTmuxOption("@NOSPOTIFY", "g", "false")
-        if width < (baseCutoff-75):
-            setTmuxOption("@NOBATTERY", "g", "true")
-        else:
-            setTmuxOption("@NOBATTERY", "g", "false")
+            segmentFlags[0] = "true"
+            if width < (baseCutoff-15):
+                segmentFlags[1] = "true"
+                if width < (baseCutoff-30):
+                    segmentFlags[2] = "true"
+                    if width < (baseCutoff-75):
+                        segmentFlags[3] = "true"
+        setTmuxOption("@NOSONGTICK", "g", segmentFlags[0])
+        setTmuxOption("@SHORTDATE", "g", segmentFlags[1])
+        setTmuxOption("@NOSPOTIFY", "g", segmentFlags[2])
+        setTmuxOption("@NOBATTERY", "g", segmentFlags[3])
 
     segments.append(Segment("PREFIX,}", Format('white', 'red')))
     segments.append(Segment("#{pane_current_command}", Format('black', 'brightmagenta')))
 
     if not getTmuxOption("@NOBATTERY", "g", "") == "true":
-        batteryLine = getBatteryText()
-        batteryAmt = int(batteryLine.split(' ')[1].replace("%", ""))
+        batteryInfo = getBatteryInfo()
+        batteryAmt = int(batteryInfo[1])
         if batteryAmt < 20:
-            segments.append(Segment(batteryLine, Format('black', 'red')))
+            segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'red')))
         elif batteryAmt < 100:
-            segments.append(Segment(batteryLine, Format('black', 'yellow')))
+            segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'yellow')))
         else:
-            segments.append(Segment(batteryLine, Format('black', 'green')))
+            segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'green')))
 
     if not getTmuxOption("@NOSPOTIFY", "g", "") == "true":
         spotifyInfo = getSpotifyInfo()
@@ -316,7 +286,10 @@ def tmuxStatusRightMain():
             if not getTmuxOption("@NOSONGTICK", "g", "") == "true":
                 segments.append(Segment(getSongTickText(), Format('black', 'brightgreen')))
 
-    segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
+    if getTmuxOption("@SHORTDATE", "g", "") == "true":
+        segments.append(Segment(getShortDateText(), Format('black', 'brightyellow')))
+    else:
+        segments.append(Segment(getDateText(), Format('black', 'brightyellow')))
 
     sys.stdout.write("#{?client_prefix,"+resolveTmux(segments, True))
 
