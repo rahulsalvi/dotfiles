@@ -6,23 +6,37 @@
     </appdef>
 
     <item>
-        <name>Change PC Application Key to ESCAPE (Terminal)</name>
+        <name>Change PC Application Key to ESCAPE/HYPER (Terminal)</name>
         <identifier>remap.terminal_application2escape</identifier>
         <only>TERMINAL</only>
         <autogen>
-            __KeyToKey__
+            __HoldingKeyToKey__
             KeyCode::PC_APPLICATION,
-            KeyCode::ESCAPE
+
+            @begin
+            KeyCode::ESCAPE,
+            @end
+
+            @begin
+            KeyCode::CONTROL_L, ModifierFlag::SHIFT_L | ModifierFlag::OPTION_L,
+            @end
         </autogen>
     </item>
 
     <item>
-        <name>Change PC Application Key to CAPSLOCK</name>
+        <name>Change PC Application Key to CAPSLOCK/HYPER</name>
         <identifier>remap.application2capslock</identifier>
         <autogen>
-            __KeyToKey__
+            __HoldingKeyToKey__
             KeyCode::PC_APPLICATION,
-            KeyCode::CAPSLOCK
+
+            @begin
+            KeyCode::CAPSLOCK,
+            @end
+
+            @begin
+            KeyCode::CONTROL_L, ModifierFlag::SHIFT_L | ModifierFlag::OPTION_L,
+            @end
         </autogen>
     </item>
 
