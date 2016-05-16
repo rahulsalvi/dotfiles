@@ -29,6 +29,7 @@ imap jj <ESC>
 imap jk <ESC>
 
 map <SPACE> <leader>
+map <leader><Space> :
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
