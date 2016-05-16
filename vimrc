@@ -11,6 +11,7 @@ set cursorline
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set ttymouse=xterm2
 set mouse=a
 set sidescroll=1
 set showcmd
