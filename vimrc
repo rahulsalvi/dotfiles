@@ -4,6 +4,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set number
+set relativenumber
 set nowrap
 set splitbelow
 set splitright
@@ -26,11 +27,16 @@ aug CursorLine
     autocmd InsertEnter * setl nocursorline
 aug END
 
+map <SPACE> <leader>
+map <leader><SPACE> :
+
 imap jj <ESC>
 imap jk <ESC>
 
-map <SPACE> <leader>
-map <leader><Space> :
+nnoremap Y y$
+
+vnoremap < <gv
+vnoremap > >gv
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
