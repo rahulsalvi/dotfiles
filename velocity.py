@@ -3,6 +3,7 @@ import os
 import subprocess
 import shlex
 import datetime
+import argparse
 from enum import Enum
 
 theme = os.getenv("BACKGROUND")
@@ -308,12 +309,14 @@ def tmuxStatusLeftMain():
     sys.stdout.write(resolveTmux(segments, False))
 
 if __name__ == "__main__":
-    option = sys.argv[1]
-    if option == "PROMPT":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("what", help="which prompt to show")
+    args = parser.parse_args()
+    if args.what == "PROMPT":
         promptMain()
-    elif option == "TMUXSTATUSRIGHT":
+    elif args.what == "TMUXSTATUSRIGHT":
         tmuxStatusRightMain()
-    elif option == "TMUXSTATUSLEFT":
+    elif args.what == "TMUXSTATUSLEFT":
         tmuxStatusLeftMain()
     else:
         sys.stdout.write("UNKNOWN")
