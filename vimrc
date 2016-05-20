@@ -34,6 +34,8 @@ imap jj <ESC>
 imap jk <ESC>
 
 nnoremap Y y$
+nnoremap <TAB> gt
+nnoremap <S-TAB> gT
 
 vnoremap < <gv
 vnoremap > >gv
