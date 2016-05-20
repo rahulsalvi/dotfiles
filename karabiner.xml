@@ -5,6 +5,18 @@
         <equal>net.sourceforge.skim-app.skim</equal>
     </appdef>
 
+    <appdef>
+        <appname>LEAGUEOFLEGENDS</appname>
+        <equal>com.riotgames.LeagueofLegends.GameClient</equal>
+    </appdef>
+
+    <item>
+        <name>Disable all settings (League of Legends)</name>
+        <identifier>remap.leagueoflegends_disable</identifier>
+        <only>LEAGUEOFLEGENDS</only>
+        <autogen>__PassThrough__</autogen>
+    </item>
+
     <item>
         <name>Change PC Application Key to ESCAPE/HYPER (Terminal)</name>
         <identifier>remap.terminal_application2escape</identifier>
