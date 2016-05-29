@@ -30,12 +30,9 @@ aug END
 map <SPACE> <leader>
 map <leader><SPACE> :
 
-imap jj <ESC>
-imap jk <ESC>
-
 nnoremap Y y$
 nnoremap <TAB> gt
-nnoremap <leader><TAB> gT
+nnoremap <S-TAB> gT
 
 vnoremap < <gv
 vnoremap > >gv
@@ -105,12 +102,12 @@ nmap ga <Plug>(EasyAlign)
 
 " Unite
 nnoremap <leader>u :Unite file/async <Enter>
-nnoremap <leader>p :Unite file_rec/async <Enter>
+nnoremap <leader>p :Unite file_rec/async -start-insert <Enter>
 call unite#custom#profile('default', 'context', {'vertical': 1, 'winwidth': 35})
-call unite#custom#source('file,file/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_default'])
-call unite#custom#source('file,file/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_default'])
-call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_default'])
-call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_default'])
+call unite#custom#source('file,file/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_fuzzy'])
+call unite#custom#source('file,file/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_fuzzy'])
+call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_fuzzy'])
+call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_fuzzy'])
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
     nnoremap <buffer> <ESC> :UniteClose <Enter>
