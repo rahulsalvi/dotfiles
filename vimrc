@@ -104,10 +104,8 @@ nmap ga <Plug>(EasyAlign)
 nnoremap <leader>u :Unite file/async <Enter>
 nnoremap <leader>p :Unite file_rec/async -start-insert <Enter>
 call unite#custom#profile('default', 'context', {'vertical': 1, 'winwidth': 35})
-call unite#custom#source('file,file/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_fuzzy'])
-call unite#custom#source('file,file/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_fuzzy'])
-call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'matcher_project_ignore_files', 'matcher_fuzzy'])
-call unite#custom#source('file_rec,file_rec/async', 'matchers', ['converter_relative_abbr', 'matcher_project_ignore_files', 'matcher_fuzzy'])
+call unite#custom#source('file,file/async,file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'converter_relative_abbr', 'matcher_fuzzy'])
+call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'build/')
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
     nnoremap <buffer> <ESC> :UniteClose <Enter>
