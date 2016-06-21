@@ -144,7 +144,10 @@ def getGitInfo(isInDotGitFolder):
 
 def getBatteryInfo():
     out  = subprocess.check_output(shlex.split("pmset -g batt")).decode(encoding)
-    line = out.split("\t")[1]
+    try:
+        line = out.split("\t")[1]
+    except:
+        return ""
     line = line.split("%")[0]
     if "AC" in out:
         return "Charging: ", line
@@ -274,13 +277,14 @@ def tmuxStatusRightMain():
 
     if not getTmuxOption("@NOBATTERY", "g", "") == "true":
         batteryInfo = getBatteryInfo()
-        batteryAmt  = int(batteryInfo[1])
-        if batteryAmt < 20:
-            segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'red')))
-        elif batteryAmt < 100:
-            segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'yellow')))
-        else:
-            segments.append(Segment((batteryInfo[0] if batteryInfo[0] == "Battery: " else "Charged: ")+batteryInfo[1]+"%", Format('black', 'green')))
+        if not batteryInfo == "":
+            batteryAmt  = int(batteryInfo[1])
+            if batteryAmt < 20:
+                segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'red')))
+            elif batteryAmt < 100:
+                segments.append(Segment(batteryInfo[0]+batteryInfo[1]+"%", Format('black', 'yellow')))
+            else:
+                segments.append(Segment((batteryInfo[0] if batteryInfo[0] == "Battery: " else "Charged: ")+batteryInfo[1]+"%", Format('black', 'green')))
 
     if not getTmuxOption("@NOSPOTIFY", "g", "") == "true":
         spotifyInfo = getSpotifyInfo()
