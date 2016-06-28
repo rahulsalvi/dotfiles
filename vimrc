@@ -101,8 +101,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Unite
-nnoremap <leader>u :Unite file/async <Enter>
-nnoremap <leader>p :Unite file_rec/async -start-insert <Enter>
+nnoremap <leader>u :Unite file/async -ignorecase <Enter>
+nnoremap <leader>p :Unite file_rec/async -start-insert -ignorecase <Enter>
 call unite#custom#profile('default', 'context', {'vertical': 1, 'winwidth': 35})
 call unite#custom#source('file,file/async,file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'converter_relative_abbr', 'matcher_fuzzy'])
 call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'build/')
