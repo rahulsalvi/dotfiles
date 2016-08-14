@@ -136,13 +136,6 @@ alias ~='cd ~'
 alias mux='tmuxinator'
 alias updatevim="vim -c ':PlugUpgrade | :PlugUpdate | :q! | :q!'"
 
-# Display a message if system hasn't been updated within a week
-# To reset the counter, run
-# touch ~/.lastupdate
-if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
-    echo -e "\033[31mWARNING: No updates within a week"
-fi
-
 if [[ -z "$TMUX" ]] ; then
     tmux new-session -A -s 0
 fi
@@ -154,3 +147,11 @@ function exit {
         tmux detach
     fi
 }
+
+# Display a message if system hasn't been updated within a week
+# To reset the counter, run
+# touch ~/.lastupdate
+# if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
+if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 10 ]] ; then
+    echo -e "\033[31mWARNING: No updates within a week"
+fi
