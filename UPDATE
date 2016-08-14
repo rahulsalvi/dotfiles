@@ -1,0 +1,35 @@
+$ denotes a shell command to be run as a normal user
+# denotes a shell command to be run with elevated privileges
+
+gem
+    # gem update `gem list | cut -d ' ' -f 1`
+
+MacPorts
+    # port selfupdate
+    # port upgrade outdated
+    # port uninstall inactive
+    # port uninstall leaves     //may need to be run multiple times
+
+pip
+    upgrade.py:
+        import pip
+        from subprocess import call
+
+        for dist in pip.get_installed_distributions():
+            call("pip install --upgrade " + dist.project_name, shell=True)
+    $ sudo -H python3 upgrade.py
+
+Prezto
+    $ cd ~/.zprezto
+    $ git pull && git submodule update --init --recursive
+
+tpm
+    <C-Space><U> all <Enter>
+
+vim
+    # vim
+    :PlugUpgrade
+    :PlugUpdate
+
+After updating, run
+    $ touch ~/.lastupdate
