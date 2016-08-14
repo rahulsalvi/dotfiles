@@ -151,7 +151,6 @@ function exit {
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run
 # touch ~/.lastupdate
-# if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
-if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 10 ]] ; then
+if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
     echo -e "\033[31mWARNING: No updates within a week"
 fi
