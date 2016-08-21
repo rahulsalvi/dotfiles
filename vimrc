@@ -28,7 +28,6 @@ aug CursorLine
 aug END
 
 map <SPACE> <leader>
-map <leader><SPACE> :
 
 nnoremap Y y$
 nnoremap <TAB> gt
@@ -135,9 +134,10 @@ let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
 let g:ycm_error_symbol='E>'
 let g:ycm_warning_symbol='W>'
 let g:ycm_always_populate_location_list=1
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_max_diagnostics_to_display=1000
+let g:ycm_python_binary_path='python3'
+map <leader><SPACE> :YcmCompleter<SPACE>
+set completeopt-=preview
 
 " YankRing
 let g:yankring_history_dir='~/.vim'
