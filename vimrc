@@ -39,11 +39,7 @@ nnoremap <S-TAB> gT
 vnoremap < <gv
 vnoremap > >gv
 
-if has("nvim")
-    call plug#begin('~/.config/nvim/plugins')
-else
-    call plug#begin('~/.vim/plugins')
-endif
+call plug#begin('~/.vim/plugins')
 
 Plug 'https://github.com/rking/ag.vim.git'
 Plug 'https://github.com/bronson/vim-trailing-whitespace.git'
