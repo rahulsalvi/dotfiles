@@ -14,5 +14,11 @@ for file in $files; do
     ln -s $dotfilesdir/$file $HOME/.$file
 done
 
+# neovim config goes in ~/.config/nvim/
+echo "Moving $HOME/.config/nvim/init.vim to $olddotfilesdir/init.vim"
+mv $HOME/.config/nvim/init.vim $olddotfilesdir/init.vim
+echo "Creating symlink to $dotfilesdir/vimrc in $HOME/.config/nvim/init.vim"
+ln -s $dotfilesdir/vimrc $HOME/.config/nvim/init.vim
+
 echo "Adding $HOME/.git_template to global git config as init.templatedir"
 git config --global init.templatedir "$HOME/.git_template"

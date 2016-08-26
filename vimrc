@@ -12,10 +12,13 @@ set cursorline
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set ttymouse=xterm2
 set mouse=a
 set sidescroll=1
 set showcmd
+
+if !has("nvim")
+    set ttymouse=xterm2
+endif
 
 aug CursorLine
     autocmd!
@@ -36,7 +39,11 @@ nnoremap <S-TAB> gT
 vnoremap < <gv
 vnoremap > >gv
 
-call plug#begin('~/.vim/plugins')
+if has("nvim")
+    call plug#begin('~/.config/nvim/plugins')
+else
+    call plug#begin('~/.vim/plugins')
+endif
 
 Plug 'https://github.com/rking/ag.vim.git'
 Plug 'https://github.com/bronson/vim-trailing-whitespace.git'
@@ -56,7 +63,6 @@ Plug 'https://github.com/tpope/vim-obsession.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/wellle/targets.vim.git'
-Plug 'https://github.com/vim-scripts/YankRing.vim.git'
 Plug 'https://github.com/Valloric/ListToggle.git'
 Plug 'https://github.com/tpope/vim-unimpaired.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
@@ -132,9 +138,6 @@ let g:ycm_max_diagnostics_to_display=1000
 let g:ycm_python_binary_path='python3'
 map <leader><SPACE> :YcmCompleter<SPACE>
 set completeopt-=preview
-
-" YankRing
-let g:yankring_history_dir='~/.vim'
 
 " ListToggle
 let g:lt_location_list_toggle_map='<leader>l'
