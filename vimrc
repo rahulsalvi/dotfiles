@@ -24,7 +24,7 @@ if !has('nvim')
     set ttymouse=xterm2
 endif
 
-if $BACKGROUND=='light'
+if $BACKGROUND == 'light'
     set background=light
 else
     set background=dark
@@ -125,7 +125,7 @@ let g:sneak#s_next=1
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir='~/Dropbox/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/UltiSnips']
-let g:UltiSnipsExpandTrigger='<Enter>'
+let g:UltiSnipsExpandTrigger='<C-l>'
 let g:UltiSnipsJumpForwardTrigger='<C-j>'
 let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
