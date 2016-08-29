@@ -128,8 +128,8 @@ let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir='~/Dropbox/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/UltiSnips']
 let g:UltiSnipsExpandTrigger='<C-l>'
-let g:UltiSnipsJumpForwardTrigger='<C-j>'
-let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+let g:UltiSnipsJumpForwardTrigger='<TAB>'
+let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
 
 " Unite
 nnoremap <leader>u :Unite file/async -ignorecase <Enter>
