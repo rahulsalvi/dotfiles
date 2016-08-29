@@ -153,5 +153,6 @@ let g:ycm_warning_symbol='W>'
 let g:ycm_always_populate_location_list=1
 let g:ycm_max_diagnostics_to_display=1000
 let g:ycm_python_binary_path='python3'
+let g:ycm_filetype_blacklist={}
 map <leader><SPACE> :YcmCompleter<SPACE>
 set completeopt-=preview
