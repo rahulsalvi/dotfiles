@@ -20,6 +20,8 @@ set noswapfile
 set nowrap
 set nowritebackup
 
+autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+
 if !has('nvim')
     set ttymouse=xterm2
 endif
