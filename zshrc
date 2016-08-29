@@ -118,6 +118,7 @@ export LS_COLORS
 export CC=clang
 export CXX=clang++
 export EDITOR=vim
+export LANG=en_US.UTF-8
 
 alias ls='ls -Fh --color=auto'
 alias la='ls -A'
@@ -136,7 +137,7 @@ alias ~='cd ~'
 alias mux='tmuxinator'
 alias updatevim="vim -c ':PlugUpgrade | :PlugUpdate | :q! | :q!'"
 
-if [[ -z "$TMUX" ]] ; then
+if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
     tmux new-session -A -s 0
 fi
 
