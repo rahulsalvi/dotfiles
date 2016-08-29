@@ -1,5 +1,5 @@
-termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
-if [[ $termname == "Solarized Light" ]] ; then
+termname=$(osascript -e 'tell first window of application \"Terminal\" to return name of current settings as string')
+if [[ $termname == 'Solarized Light' ]] ; then
     export BACKGROUND=light
 else
     export BACKGROUND=dark
@@ -19,7 +19,7 @@ zstyle ':prezto:load' pmodule \
     'syntax-highlighting' \
     'history-substring-search'
 
-if [[ $BACKGROUND == "light" ]] ; then
+if [[ $BACKGROUND == 'light' ]] ; then
     zstyle ':prezto:module:syntax-highlighting' styles \
         'unknown-token' 'fg=red' \
         'reserved-word' 'fg=red,bold' \
@@ -95,7 +95,7 @@ alias xcode='OpenInXcode'
 alias zipf='ZipF'
 alias extract='unarchive'
 
-if [[ $BACKGROUND == "light" ]] ; then
+if [[ $BACKGROUND == 'light' ]] ; then
     LS_COLORS=$LS_COLORS:'di=36:ln=35:ex=31'
 else
     LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
@@ -111,13 +111,13 @@ TRAPWINCH() {
     PROMPT=$(python3 ~/.velocity.py PROMPT)
 }
 
-DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE='true'
 echo -en "\033];Velocity\007"
 
 export LS_COLORS
 export CC=clang
 export CXX=clang++
-export EDITOR=vim
+export EDITOR=nvim
 export LANG=en_US.UTF-8
 
 alias ls='ls -Fh --color=auto'
@@ -135,7 +135,6 @@ alias .5='cd ../../../../../'
 alias .6='cd ../../../../../../'
 alias ~='cd ~'
 alias mux='tmuxinator'
-alias updatevim="vim -c ':PlugUpgrade | :PlugUpdate | :q! | :q!'"
 
 if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
     tmux new-session -A -s 0

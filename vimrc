@@ -123,8 +123,9 @@ let g:sneak#s_next=1
 
 " UltiSnips
 let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetsDir='~/.vim/ultisnips'
-let g:UltiSnipsExpandTrigger='<C-l>'
+let g:UltiSnipsSnippetsDir='~/Dropbox/UltiSnips'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/UltiSnips']
+let g:UltiSnipsExpandTrigger='<Enter>'
 let g:UltiSnipsJumpForwardTrigger='<C-j>'
 let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
