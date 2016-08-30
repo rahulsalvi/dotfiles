@@ -6,10 +6,14 @@ else
 fi
 unset termname
 
+zstyle ':prezto:module:editor' key-bindings 'vi'
+bindkey -M vicmd '/' history-incremental-search-backward
+
 zstyle ':prezto:module:syntax-highlighting' color 'yes'
 zstyle ':prezto:load' pmodule \
     'environment' \
     'utility' \
+    'editor' \
     'directory' \
     'history' \
     'completion' \
@@ -111,6 +115,11 @@ TRAPWINCH() {
     PROMPT=$(python3 ~/.velocity.py PROMPT)
 }
 
+function zle-line-init zle-keymap-select {
+    RPROMPT=${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/[INSERT]}
+    zle reset-prompt
+}
+
 DISABLE_AUTO_TITLE="true"
 echo -en "\033];Velocity\007"
 
@@ -119,6 +128,7 @@ export CC=clang
 export CXX=clang++
 export EDITOR=nvim
 export LANG=en_US.UTF-8
+export KEYTIMEOUT=1
 
 alias ls='ls -Fh --color=auto'
 alias la='ls -A'
