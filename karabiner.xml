@@ -53,12 +53,27 @@
     </item>
 
     <item>
-        <name>Change CMD-Q to clean exit (Terminal)</name>
-        <identifier>remap.terminal_cmdq2exit</identifier>
+        <name>Change CMD-Q to clean quit (Terminal)</name>
+        <identifier>remap.terminal_cmdq2quit</identifier>
         <only>TERMINAL</only>
         <autogen>
             __KeyToKey__
             KeyCode::Q, ModifierFlag::COMMAND_L,
+            KeyCode::SPACE, ModifierFlag::CONTROL_L,
+            KeyCode::D,
+            Option::KEYTOKEY_DELAYED_ACTION,
+            KeyCode::Q, ModifierFlag::COMMAND_L,
+            KeyCode::COMMAND_L,
+        </autogen>
+    </item>
+
+    <item>
+        <name>Change CMD-W to clean exit (Terminal)</name>
+        <identifier>remap.terminal_cmdw2exit</identifier>
+        <only>TERMINAL</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::W, ModifierFlag::COMMAND_L,
             KeyCode::SPACE, ModifierFlag::CONTROL_L,
             KeyCode::D,
             Option::KEYTOKEY_DELAYED_ACTION,
