@@ -116,7 +116,7 @@ TRAPWINCH() {
 }
 
 function zle-line-init zle-keymap-select {
-    RPROMPT=${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/[INSERT]}
+    RPROMPT=${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/}
     zle reset-prompt
 }
 
