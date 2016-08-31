@@ -42,7 +42,7 @@ aug CursorLine
     autocmd WinLeave * setl nocursorline
 aug END
 
-map <SPACE> <leader>
+map <SPACE> <LEADER>
 
 nnoremap Y y$
 nnoremap <TAB> gt
@@ -117,8 +117,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " ListToggle
-let g:lt_location_list_toggle_map='<leader>l'
-let g:lt_quickfix_list_toggle_map='<leader>k'
+let g:lt_location_list_toggle_map='<LEADER>l'
+let g:lt_quickfix_list_toggle_map='<LEADER>k'
 
 " Sneak
 let g:sneak#s_next=1
@@ -132,14 +132,14 @@ let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
 
 " Unite
-nnoremap <leader>u :Unite file/async -ignorecase <Enter>
-nnoremap <leader>p :Unite file_rec/async -start-insert -ignorecase <Enter>
+nnoremap <LEADER>u :Unite file/async -ignorecase <ENTER>
+nnoremap <LEADER>p :Unite file_rec/async -start-insert -ignorecase <ENTER>
 call unite#custom#profile('default', 'context', {'vertical': 1, 'winwidth': 35})
 call unite#custom#source('file,file/async,file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'converter_relative_abbr', 'matcher_fuzzy'])
 call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'build/')
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
-    nnoremap <buffer> <ESC> :UniteClose <Enter>
+    nnoremap <buffer> <ESC> :UniteClose <ENTER>
 
     nnoremap <silent><buffer><expr> h unite#do_action('splitswitch')
     nnoremap <silent><buffer><expr> v unite#do_action('vsplitswitch')
@@ -156,5 +156,5 @@ let g:ycm_always_populate_location_list=1
 let g:ycm_max_diagnostics_to_display=1000
 let g:ycm_python_binary_path='python3'
 let g:ycm_filetype_blacklist={}
-map <leader><SPACE> :YcmCompleter<SPACE>
+map <LEADER><SPACE> :YcmCompleter<SPACE>
 set completeopt-=preview
