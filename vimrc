@@ -47,6 +47,7 @@ map <SPACE> <LEADER>
 nnoremap Y y$
 nnoremap <TAB> gt
 nnoremap <S-TAB> gT
+nmap <BS> <C-^>
 
 vnoremap < <gv
 vnoremap > >gv
