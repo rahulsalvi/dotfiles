@@ -129,7 +129,7 @@ export CXX=clang++
 export EDITOR=nvim
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
 
 alias ls='ls -Fh --color=auto'
@@ -147,6 +147,8 @@ alias .5='cd ../../../../../'
 alias .6='cd ../../../../../../'
 alias ~='cd ~'
 alias mux='tmuxinator'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
     tmux new-session -A -s 0
@@ -166,5 +168,3 @@ function exit {
 if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
     echo -e "\033[31mWARNING: No updates within a week"
 fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
