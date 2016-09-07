@@ -117,8 +117,9 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " FZF
-nnoremap <LEADER>p :Files <ENTER>
+nnoremap <LEADER>p :FZFFiles <ENTER>
 let g:fzf_nvim_statusline=0
+let g:fzf_command_prefix='FZF'
 let g:fzf_layout={ 'left': '~30%' }
 let g:fzf_action={
   \ 'ctrl-t': 'tab split',
