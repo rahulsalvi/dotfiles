@@ -87,6 +87,15 @@ fi
 # Load FZF modules
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Set environment variables
+export CC=clang
+export CXX=clang++
+export EDITOR=nvim
+export LANG=en_US.UTF-8
+export KEYTIMEOUT=1
+export FZF_DEFAULT_COMMAND='ag --follow -g ""'
+export FZF_DEFAULT_OPTS="-m --reverse"
+
 # Set window title
 DISABLE_AUTO_TITLE="true"
 echo -en "\033];Velocity\007"
@@ -114,18 +123,55 @@ if [[ $BACKGROUND == "light" ]] ; then
 else
     LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
 fi
-
-# Export environment variables
 export LS_COLORS
-export CC=clang
-export CXX=clang++
-export EDITOR=nvim
-export LANG=en_US.UTF-8
-export KEYTIMEOUT=1
-export FZF_DEFAULT_COMMAND='ag --follow -g ""'
-export FZF_DEFAULT_OPTS="-m --reverse"
 
-# Aliases for ease of use
+# Functions
+# pwd that uses ~ for $HOME
+function CollapsePWD() {
+    echo $(pwd | sed -e "s,^$HOME,~,")
+}
+
+# Open a file in Xcode
+function OpenInXcode() {
+    touch "$@";
+    open -a Xcode "$@"
+}
+
+# Zip a folder
+function ZipF() {
+    zip -r "$1".zip "$1" ;
+}
+
+# Default to FZF for selecting file to edit if none given
+function FZFEditor() {
+    if [[ -z "$EDITOR" ]] ; then
+        echo "no editor variable set"
+        return
+    fi
+    if (( $# == 0 )) then
+        $EDITOR $(fzf)
+    else
+        $EDITOR $@
+    fi
+}
+
+# Reset the prompt after FZF cd widget
+function cdResetPrompt() {
+    fzf-cd-widget
+    PROMPT=$(python3 ~/.velocity.py PROMPT)
+    zle reset-prompt
+}
+
+# Bind functions
+alias cpwd='CollapsePWD'
+alias xcode='OpenInXcode'
+alias zipf='ZipF'
+alias extract='unarchive'
+alias e='FZFEditor'
+zle -N cdResetPrompt
+bindkey '\ec' cdResetPrompt
+
+# General aliases
 alias ls='ls -Fh --color=auto'
 alias la='ls -A'
 alias sl='ls'
@@ -142,60 +188,13 @@ alias .6='cd ../../../../../../'
 alias ~='cd ~'
 alias mux='tmuxinator'
 
-# Functions
-
-# pwd that uses ~ for $HOME
-CollapsePWD() {
-    echo $(pwd | sed -e "s,^$HOME,~,")
-}
-
-# Open a file in Xcode
-OpenInXcode() {
-    touch "$@";
-    open -a Xcode "$@"
-}
-
-# Zip a folder
-ZipF () {
-    zip -r "$1".zip "$1" ;
-}
-
-# Default to FZF for selecting file to edit if none given
-FZFEditor() {
-    if [[ -z "$EDITOR" ]] ; then
-        echo "no editor variable set"
-        return
-    fi
-    if (( $# == 0 )) then
-        $EDITOR $(fzf)
-    else
-        $EDITOR $@
-    fi
-}
-
-# Reset the prompt after FZF cd widget
-cdResetPrompt() {
-    fzf-cd-widget
-    PROMPT=$(python3 ~/.velocity.py PROMPT)
-    zle reset-prompt
-}
-
-# Bind functions
-alias cpwd='CollapsePWD'
-alias xcode='OpenInXcode'
-alias zipf='ZipF'
-alias extract='unarchive'
-alias e='FZFEditor'
-zle -N cdResetPrompt
-bindkey '\ec' cdResetPrompt
-
 # Start a tmux session if not already in one
 if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
     tmux new-session -A -s 0
 fi
 
 # Exit detaches tmux
-function exit {
+function exit() {
     if [[ -z "$TMUX" ]] ; then
         builtin exit
     else
