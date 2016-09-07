@@ -106,6 +106,7 @@ else
 fi
 
 setopt PROMPT_SUBST
+PROMPT=''
 RPROMPT=''
 precmd() {
     PROMPT=$(python3 ~/.velocity.py PROMPT)
@@ -149,6 +150,14 @@ alias ~='cd ~'
 alias mux='tmuxinator'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+cdresetprompt() {
+    fzf-cd-widget
+    PROMPT=$(python3 ~/.velocity.py PROMPT)
+    zle reset-prompt
+}
+zle -N cdresetprompt
+bindkey '\ec' cdresetprompt
 
 if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
     tmux new-session -A -s 0
