@@ -58,12 +58,12 @@ call plug#begin('~/.vim/plugins')
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/bronson/vim-trailing-whitespace.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+Plug 'https://github.com/junegunn/fzf.git', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/Raimondi/delimitMate.git'
-Plug 'https://github.com/Shougo/unite.vim.git'
-Plug 'https://github.com/Shougo/vimproc.vim.git', { 'do': 'make' }
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-dispatch.git'
@@ -116,6 +116,15 @@ endtry
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" FZF
+nnoremap <LEADER>p :Files <ENTER>
+let g:fzf_nvim_statusline=0
+let g:fzf_layout={ 'left': '~30%' }
+let g:fzf_action={
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-h': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
 " ListToggle
 let g:lt_location_list_toggle_map='<LEADER>l'
 let g:lt_quickfix_list_toggle_map='<LEADER>k'
@@ -130,23 +139,6 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/UltiSnips']
 let g:UltiSnipsExpandTrigger='<C-l>'
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
-
-" Unite
-nnoremap <LEADER>u :Unite file/async -ignorecase <ENTER>
-nnoremap <LEADER>p :Unite file_rec/async -start-insert -ignorecase <ENTER>
-call unite#custom#profile('default', 'context', {'vertical': 1, 'winwidth': 35})
-call unite#custom#source('file,file/async,file_rec,file_rec/async', 'matchers', ['converter_relative_word', 'converter_relative_abbr', 'matcher_fuzzy'])
-call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'build/')
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-    nnoremap <buffer> <ESC> :UniteClose <ENTER>
-
-    nnoremap <silent><buffer><expr> h unite#do_action('splitswitch')
-    nnoremap <silent><buffer><expr> v unite#do_action('vsplitswitch')
-
-    inoremap <silent><buffer><expr> <C-h> unite#do_action('splitswitch')
-    inoremap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
-endfunction
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
