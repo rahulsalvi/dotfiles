@@ -1,3 +1,4 @@
+# Determine light or dark terminal
 termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
 if [[ $termname == "Solarized Light" ]] ; then
     export BACKGROUND=light
@@ -6,9 +7,7 @@ else
 fi
 unset termname
 
-zstyle ':prezto:module:editor' key-bindings 'vi'
-bindkey -M vicmd '/' history-incremental-search-backward
-
+# Select modules to load
 zstyle ':prezto:module:syntax-highlighting' color 'yes'
 zstyle ':prezto:load' pmodule \
     'environment' \
@@ -23,6 +22,11 @@ zstyle ':prezto:load' pmodule \
     'syntax-highlighting' \
     'history-substring-search'
 
+# Vi key bindings
+zstyle ':prezto:module:editor' key-bindings 'vi'
+bindkey -M vicmd '/' history-incremental-search-backward
+
+# Syntax highlighting colors and styles
 if [[ $BACKGROUND == "light" ]] ; then
     zstyle ':prezto:module:syntax-highlighting' styles \
         'unknown-token' 'fg=red' \
@@ -77,34 +81,17 @@ else
         'default' 'none'
 fi
 
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# Load Prezto modules
+[ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
-CollapsePWD() {
-    echo $(pwd | sed -e "s,^$HOME,~,")
-}
+# Load FZF modules
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-OpenInXcode() {
-    touch "$@";
-    open -a Xcode "$@"
-}
+# Set window title
+DISABLE_AUTO_TITLE="true"
+echo -en "\033];Velocity\007"
 
-ZipF () {
-    zip -r "$1".zip "$1" ;
-}
-
-alias cpwd='CollapsePWD'
-alias xcode='OpenInXcode'
-alias zipf='ZipF'
-alias extract='unarchive'
-
-if [[ $BACKGROUND == "light" ]] ; then
-    LS_COLORS=$LS_COLORS:'di=36:ln=35:ex=31'
-else
-    LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
-fi
-
+# Set prompt
 setopt PROMPT_SUBST
 PROMPT=''
 RPROMPT=''
@@ -121,9 +108,14 @@ function zle-line-init zle-keymap-select {
     zle reset-prompt
 }
 
-DISABLE_AUTO_TITLE="true"
-echo -en "\033];Velocity\007"
+# Set ls colors
+if [[ $BACKGROUND == "light" ]] ; then
+    LS_COLORS=$LS_COLORS:'di=36:ln=35:ex=31'
+else
+    LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
+fi
 
+# Export environment variables
 export LS_COLORS
 export CC=clang
 export CXX=clang++
@@ -133,6 +125,7 @@ export KEYTIMEOUT=1
 export FZF_DEFAULT_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
 
+# Aliases for ease of use
 alias ls='ls -Fh --color=auto'
 alias la='ls -A'
 alias sl='ls'
@@ -149,20 +142,59 @@ alias .6='cd ../../../../../../'
 alias ~='cd ~'
 alias mux='tmuxinator'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Functions
 
-cdresetprompt() {
+# pwd that uses ~ for $HOME
+CollapsePWD() {
+    echo $(pwd | sed -e "s,^$HOME,~,")
+}
+
+# Open a file in Xcode
+OpenInXcode() {
+    touch "$@";
+    open -a Xcode "$@"
+}
+
+# Zip a folder
+ZipF () {
+    zip -r "$1".zip "$1" ;
+}
+
+# Default to FZF for selecting file to edit if none given
+FZFEditor() {
+    if [[ -z "$EDITOR" ]] ; then
+        echo "no editor variable set"
+        return
+    fi
+    if (( $# == 0 )) then
+        $EDITOR $(fzf)
+    else
+        $EDITOR $@
+    fi
+}
+
+# Reset the prompt after FZF cd widget
+cdResetPrompt() {
     fzf-cd-widget
     PROMPT=$(python3 ~/.velocity.py PROMPT)
     zle reset-prompt
 }
-zle -N cdresetprompt
-bindkey '\ec' cdresetprompt
 
+# Bind functions
+alias cpwd='CollapsePWD'
+alias xcode='OpenInXcode'
+alias zipf='ZipF'
+alias extract='unarchive'
+alias e='FZFEditor'
+zle -N cdResetPrompt
+bindkey '\ec' cdResetPrompt
+
+# Start a tmux session if not already in one
 if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
     tmux new-session -A -s 0
 fi
 
+# Exit detaches tmux
 function exit {
     if [[ -z "$TMUX" ]] ; then
         builtin exit
