@@ -228,7 +228,7 @@ def promptMain():
 
     maxPromptPercent = os.getenv("MAXPROMPTSIZE", 33)
     maxPromptPercent = int(maxPromptPercent)/100
-    maxPromptSize    = int(subprocess.check_output(['stty', 'size']).split()[1]) * maxPromptPercent
+    maxPromptSize    = int(subprocess.check_output(['tput', 'cols'])) * maxPromptPercent
 
     if (len(hostText+dirText+gitText) < maxPromptSize) and (os.getenv("TMUX", "") == ""):
         segments.append(Segment(hostText, hostFormat))
