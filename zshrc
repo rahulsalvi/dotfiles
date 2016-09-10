@@ -149,9 +149,13 @@ function FZFEditor() {
         return
     fi
     if (( $# == 0 )) then
-        $EDITOR $(fzf)
+        # Nasty hack, but it works
+        fzf > ~/.temp                                           # write list of selected files to a temp file
+        local files=(${(ps: :)$(cat ~/.temp | tr '\n' ' ')})    # turn list into an array
+        \rm ~/.temp                                             # delete temp file
+        $EDITOR -p $files                                       # open items in $EDITOR (-p for tabs)
     else
-        $EDITOR $@
+        $EDITOR -p $@
     fi
 }
 
