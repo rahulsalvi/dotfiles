@@ -91,6 +91,7 @@ fi
 export CC=clang
 export CXX=clang++
 export EDITOR=nvim
+export EDITOR_ARGS="-p"
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
 export FZF_DEFAULT_COMMAND='ag --follow -g ""'
@@ -153,9 +154,9 @@ function FZFEditor() {
         fzf > ~/.temp                           # write list of selected files to a temp file
         local files=("${(f)$(cat ~/.temp)}")    # split list into array
         \rm ~/.temp                             # delete temp file
-        $EDITOR -p $files                       # open items in $EDITOR (-p for tabs)
+        $EDITOR $EDITOR_ARGS $files             # open items in $EDITOR using $EDITOR_ARGS
     else
-        $EDITOR -p $@
+        $EDITOR $EDITOR_ARGS $@
     fi
 }
 
