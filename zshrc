@@ -91,10 +91,12 @@ fi
 export CC=clang
 export CXX=clang++
 export EDITOR=nvim
-export EDITOR_ARGS="-p"
+export EDITOR_OPTS="-p"
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
-export FZF_DEFAULT_COMMAND='ag --follow -g ""'
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND='ag -g ""'
+export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
 
 # Set window title
@@ -150,13 +152,15 @@ function FZFEditor() {
         return
     fi
     if (( $# == 0 )) then
-        # Nasty hack, but it works
-        fzf > ~/.temp                           # write list of selected files to a temp file
-        local files=("${(f)$(cat ~/.temp)}")    # split list into array
-        \rm ~/.temp                             # delete temp file
-        $EDITOR $EDITOR_ARGS $files             # open items in $EDITOR using $EDITOR_ARGS
+        setopt localoptions pipefail 2> /dev/null
+        local files=()
+        eval "${FZF_EDITOR_COMMAND:-$FZF_DEFAULT_COMMAND} | $(__fzfcmd) -m $FZF_EDITOR_OPTS" \
+        | while read item; do
+            files+=($item)
+        done
+        $EDITOR $EDITOR_OPTS $files
     else
-        $EDITOR $EDITOR_ARGS $@
+        $EDITOR $EDITOR_OPTS $@
     fi
 }
 
@@ -167,14 +171,16 @@ function cdResetPrompt() {
     zle reset-prompt
 }
 
-# Bind functions
+# Alias functions
 alias cpwd='CollapsePWD'
 alias xcode='OpenInXcode'
 alias zipf='ZipF'
 alias extract='unarchive'
 alias e='FZFEditor'
-zle -N cdResetPrompt
-bindkey '\ec' cdResetPrompt
+
+# Bind functions
+zle     -N     cdResetPrompt
+bindkey '\ec'  cdResetPrompt
 
 # General aliases
 alias ls='ls -Fh --color=auto'
