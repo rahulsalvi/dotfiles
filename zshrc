@@ -222,6 +222,9 @@ alias todo='e ~/Dropbox/TODO.txt'
 # Start a tmux session if not already in one
 if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
     tmux new-session -A -s 0
+# If already in tmux, display a fortune (max once per day, saved in ~/.lastfortune)
+elif [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]] ; then
+    fortune | tee ~/.lastfortune | cowsay
 fi
 
 # Exit detaches tmux
