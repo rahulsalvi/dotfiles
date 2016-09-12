@@ -155,9 +155,10 @@ function FZFEditor() {
         setopt localoptions pipefail 2> /dev/null
         local files=()
         eval "${FZF_EDITOR_COMMAND:-$FZF_DEFAULT_COMMAND} | $(__fzfcmd) -m $FZF_EDITOR_OPTS" \
-        | while read item; do
-            files+=($item)
+        | while read file; do
+            files+=($file)
         done
+        unset file
         $EDITOR $EDITOR_OPTS $files
     else
         $EDITOR $EDITOR_OPTS $@
@@ -171,6 +172,22 @@ function cdResetPrompt() {
     zle reset-prompt
 }
 
+# Open a twitch stream in VLC using FZF to select
+# See https://gist.github.com/rahulsalvi for background and twitcher commands
+function twitch() {
+    setopt localoptions pipefail 2> /dev/null
+    local streams=()
+    eval "twitcher | $(__fzfcmd) -m" \
+    | while read stream; do
+        streams+=($stream)
+    done
+    for stream in $streams
+    do
+        background livestreamer twitch.tv/$stream best
+    done
+    unset stream
+}
+
 # Alias functions
 alias cpwd='CollapsePWD'
 alias xcode='OpenInXcode'
@@ -181,6 +198,8 @@ alias e='FZFEditor'
 # Bind functions
 zle     -N     cdResetPrompt
 bindkey '\ec'  cdResetPrompt
+zle     -N     twitch
+bindkey '\et'  twitch
 
 # General aliases
 alias ls='ls -Fh --color=auto'
