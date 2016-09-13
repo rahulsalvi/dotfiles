@@ -98,6 +98,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND='ag -g ""'
 export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
+export TWITCH_TOKEN=$(cat ~/Dropbox/config/twitchtoken)
 
 # Set window title
 DISABLE_AUTO_TITLE="true"
@@ -173,19 +174,10 @@ function cdResetPrompt() {
 }
 
 # Open a twitch stream in VLC using FZF to select
-# See https://gist.github.com/rahulsalvi for background and twitcher commands
-function twitch() {
+# See https://gist.github.com/rahulsalvi for twitcher-display and twitcher-open commands
+function twitcher() {
     setopt localoptions pipefail 2> /dev/null
-    local streams=()
-    eval "twitcher | $(__fzfcmd) -m" \
-    | while read stream; do
-        streams+=($stream)
-    done
-    for stream in $streams
-    do
-        background livestreamer twitch.tv/$stream best
-    done
-    unset stream
+    twitcher-display | $(__fzfcmd) -m $FZF_TWITCHER_OPTS | twitcher-open
 }
 
 # Alias functions
@@ -198,8 +190,8 @@ alias e='FZFEditor'
 # Bind functions
 zle     -N     cdResetPrompt
 bindkey '\ec'  cdResetPrompt
-zle     -N     twitch
-bindkey '\et'  twitch
+zle     -N     twitcher
+bindkey '\et'  twitcher
 
 # General aliases
 alias ls='ls -Fh --color=auto'
