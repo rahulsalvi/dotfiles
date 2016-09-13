@@ -27,3 +27,6 @@ vim
 
 After updating, run
     $ touch ~/.lastupdate
+
+To create a list of packages, run
+    $ ./packages.sh

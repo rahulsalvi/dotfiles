@@ -2,7 +2,7 @@
 
 dotfilesdir=$HOME/dotfiles
 olddotfilesdir=$HOME/dotfiles_old
-files="bash_profile zshrc vimrc tmux.conf slate.js ycm_extra_conf.py velocity.py karabiner.xml packages.sh git_template"
+files="bash_profile zshrc vimrc tmux.conf slate.js ycm_extra_conf.py velocity.py karabiner.xml git_template"
 
 echo "Creating old dotfiles directory $olddotfilesdir"
 mkdir -p $olddotfilesdir
