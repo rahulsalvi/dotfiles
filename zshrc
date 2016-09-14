@@ -87,6 +87,9 @@ fi
 # Load FZF modules
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Load twitcher module
+[ -f "${TWITCHER_DIR:-$HOME}/.twitcher/twitcher.zsh" ] && source "${TWITCHER_DIR:-$HOME}/.twitcher/twitcher.zsh"
+
 # Set environment variables
 export CC=clang
 export CXX=clang++
@@ -99,6 +102,7 @@ export FZF_CTRL_T_COMMAND='ag -g ""'
 export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
 export TWITCH_TOKEN=$(cat ~/Dropbox/config/twitchtoken)
+export TWITCH_CLIENT_ID=$(cat ~/Dropbox/config/twitchclientid)
 
 # Set window title
 DISABLE_AUTO_TITLE="true"
@@ -173,13 +177,6 @@ function cdResetPrompt() {
     zle reset-prompt
 }
 
-# Open a twitch stream in VLC using FZF to select
-# See https://gist.github.com/rahulsalvi for twitcher-display and twitcher-open commands
-function twitcher() {
-    setopt localoptions pipefail 2> /dev/null
-    twitcher-display | $(__fzfcmd) -m $FZF_TWITCHER_OPTS | twitcher-open
-}
-
 # Alias functions
 alias cpwd='CollapsePWD'
 alias xcode='OpenInXcode'
@@ -190,8 +187,6 @@ alias e='FZFEditor'
 # Bind functions
 zle     -N     cdResetPrompt
 bindkey '\ec'  cdResetPrompt
-zle     -N     twitcher
-bindkey '\et'  twitcher
 
 # General aliases
 alias ls='ls -Fh --color=auto'
