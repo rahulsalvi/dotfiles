@@ -102,7 +102,6 @@ export FZF_CTRL_T_COMMAND='ag -g ""'
 export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
 export TWITCH_TOKEN=$(cat ~/Dropbox/config/twitchtoken)
-export TWITCH_CLIENT_ID=$(cat ~/Dropbox/config/twitchclientid)
 
 # Set window title
 DISABLE_AUTO_TITLE="true"
