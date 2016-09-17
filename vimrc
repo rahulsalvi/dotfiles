@@ -112,6 +112,9 @@ try
 catch
 endtry
 
+" delimitMate
+let g:delimitMate_expand_cr=1
+
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
