@@ -6,6 +6,7 @@ set incsearch
 set mouse=a
 set number
 set relativenumber
+set selection=exclusive
 set shiftwidth=4
 set showcmd
 set sidescroll=1
