@@ -53,6 +53,55 @@ nmap <BS> <C-^>
 vnoremap < <gv
 vnoremap > >gv
 
+" Function parameter completion using YouCompleteMe and UltiSnips
+function! FunctionParameterHint()
+    if !exists('v:completed_item') || empty(v:completed_item)
+        return
+    endif
+
+    let complete_str = v:completed_item.word
+    if complete_str == ''
+        return
+    endif
+    let abbr = v:completed_item.abbr
+    let startIdx = match(abbr,"(")
+    let endIdx = match(abbr,")")
+    let angle = 0
+    if startIdx == -1 || endIdx == -1
+        let startIdx = match(abbr,"<")
+        let endIdx = match(abbr,">")
+        let angle = 1
+    endif
+    if endIdx - startIdx > 1
+        let argsStr = strpart(abbr, startIdx + 1, endIdx - startIdx - 1)
+        let argsList = split(argsStr, ",")
+        if angle
+            let snippet = "<"
+        else
+            let snippet = "("
+        endif
+        let c = 1
+        for i in argsList
+            if c > 1
+                let snippet = snippet. ", "
+            endif
+            " strip space
+            let arg = substitute(i, '^\s*\(.\{-}\)\s*$', '\1', '')
+            let snippet = snippet . '${'.c.":".arg.'}'
+            let c += 1
+        endfor
+        if angle
+            let snippet = snippet . ">$0"
+        else
+            let snippet = snippet . ")$0"
+        endif
+        call UltiSnips#Anon(snippet)
+    elseif endIdx - startIdx == 1
+        call UltiSnips#Anon("()$0")
+    endif
+endfunction
+autocmd CompleteDone * call FunctionParameterHint()
+
 " Both vim and neovim can source their plugins from the same directory
 call plug#begin('~/.vim/plugins')
 
