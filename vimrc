@@ -53,16 +53,13 @@ nmap <BS> <C-^>
 vnoremap < <gv
 vnoremap > >gv
 
-inoremap <expr> <ENTER> pumvisible() ? "\<C-y>" : "\<CR>"
-
 " Function parameter completion using YouCompleteMe and UltiSnips
 function! FunctionParameterHint()
     if !exists('v:completed_item') || empty(v:completed_item)
         return
     endif
 
-    let complete_str = v:completed_item.word
-    if complete_str == ''
+    if v:completed_item.word == ''
         return
     endif
     let abbr = v:completed_item.abbr
@@ -77,11 +74,7 @@ function! FunctionParameterHint()
     if endIdx - startIdx > 1
         let argsStr = strpart(abbr, startIdx + 1, endIdx - startIdx - 1)
         let argsList = split(argsStr, ",")
-        if angle
-            let snippet = "<"
-        else
-            let snippet = "("
-        endif
+        let snippet = angle ? "<" : "("
         let c = 1
         for i in argsList
             if c > 1
@@ -92,11 +85,7 @@ function! FunctionParameterHint()
             let snippet = snippet . '${'.c.":".arg.'}'
             let c += 1
         endfor
-        if angle
-            let snippet = snippet . ">$0"
-        else
-            let snippet = snippet . ")$0"
-        endif
+        let snippet = angle ? snippet . ">$0" : snippet . ")$0"
         call UltiSnips#Anon(snippet)
     elseif endIdx - startIdx == 1
         call UltiSnips#Anon("()$0")
@@ -104,14 +93,14 @@ function! FunctionParameterHint()
 endfunction
 autocmd CompleteDone * call FunctionParameterHint()
 
-" Use C-l to expand functions or snippets
+" Use enter to expand functions or snippets
 function! ExpandFunctionOrSnippet()
     call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
         if pumvisible()
             return "\<C-y>"
         else
-            return ""
+            return "\<CR>"
         endif
     endif
     return ""
@@ -206,7 +195,7 @@ let g:sneak#s_next=1
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir='~/Dropbox/UltiSnips'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/UltiSnips']
-let g:UltiSnipsExpandTrigger='<C-l>'
+let g:UltiSnipsExpandTrigger='<ENTER>'
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=ExpandFunctionOrSnippet()<CR>"
