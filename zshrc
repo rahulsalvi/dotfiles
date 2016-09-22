@@ -204,6 +204,7 @@ alias .6='cd ../../../../../../'
 alias ~='cd ~'
 alias mux='tmuxinator'
 alias todo='e ~/Dropbox/TODO.txt'
+alias t='todo'
 
 # Start a tmux session if not already in one
 if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
