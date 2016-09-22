@@ -53,6 +53,8 @@ nmap <BS> <C-^>
 vnoremap < <gv
 vnoremap > >gv
 
+inoremap <expr> <ENTER> pumvisible() ? "\<C-y>" : "\<CR>"
+
 " Function parameter completion using YouCompleteMe and UltiSnips
 function! FunctionParameterHint()
     if !exists('v:completed_item') || empty(v:completed_item)
@@ -101,6 +103,19 @@ function! FunctionParameterHint()
     endif
 endfunction
 autocmd CompleteDone * call FunctionParameterHint()
+
+" Use C-l to expand functions or snippets
+function! ExpandFunctionOrSnippet()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-y>"
+        else
+            return ""
+        endif
+    endif
+    return ""
+endfunction
 
 " Both vim and neovim can source their plugins from the same directory
 call plug#begin('~/.vim/plugins')
@@ -193,8 +208,10 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/UltiSnips']
 let g:UltiSnipsExpandTrigger='<C-l>'
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=ExpandFunctionOrSnippet()<CR>"
 
 " YouCompleteMe
+let g:ycm_key_invoke_completion='<M-l>'
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 let g:ycm_error_symbol='E>'
 let g:ycm_warning_symbol='W>'
@@ -202,5 +219,6 @@ let g:ycm_always_populate_location_list=1
 let g:ycm_max_diagnostics_to_display=1000
 let g:ycm_python_binary_path='python3'
 let g:ycm_filetype_blacklist={}
+let g:ycm_add_preview_to_completeopt=0
 map <LEADER><SPACE> :YcmCompleter<SPACE>
 set completeopt-=preview
