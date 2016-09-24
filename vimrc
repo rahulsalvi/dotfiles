@@ -161,7 +161,7 @@ Plug 'https://github.com/tpope/vim-obsession.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/Valloric/ListToggle.git'
-Plug 'https://github.com/Valloric/YouCompleteMe.git', { 'do': './install.py --clang-completer' }
+Plug 'https://github.com/Valloric/YouCompleteMe.git', { 'do': 'python3 install.py --clang-completer' }
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 Plug 'https://github.com/wellle/targets.vim.git'
@@ -233,6 +233,7 @@ let g:ycm_error_symbol='E>'
 let g:ycm_warning_symbol='W>'
 let g:ycm_always_populate_location_list=1
 let g:ycm_max_diagnostics_to_display=1000
+let g:ycm_server_python_interpreter='python3'
 let g:ycm_python_binary_path='python3'
 let g:ycm_filetype_blacklist={}
 let g:ycm_add_preview_to_completeopt=0
