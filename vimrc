@@ -1,3 +1,6 @@
+" General Settings
+" ----------------
+
 set backspace=indent,eol,start
 set cursorline
 set expandtab
@@ -21,27 +24,30 @@ set noswapfile
 set nowrap
 set nowritebackup
 
-autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
+" Conditional Settings
+" --------------------
+
+" Only needed in normal vim
 if !has('nvim')
     set ttymouse=xterm2
 endif
 
+" Easy switch between light and dark colorscheme
 if $BACKGROUND == 'light'
     set background=light
 else
     set background=dark
 endif
 
-aug CursorLine
-    autocmd!
-    autocmd BufWinEnter * setl cursorline
-    autocmd InsertEnter * setl nocursorline
-    autocmd InsertLeave * setl cursorline
-    autocmd VimEnter * setl cursorline
-    autocmd WinEnter * setl cursorline
-    autocmd WinLeave * setl nocursorline
-aug END
+" Use ag for faster searching
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+
+" Key Remappings
+" --------------
 
 map <SPACE> <LEADER>
 
@@ -52,6 +58,10 @@ nmap <BS> <C-^>
 
 vnoremap < <gv
 vnoremap > >gv
+
+
+" Functions
+" ---------
 
 " Function parameter completion using YouCompleteMe and UltiSnips
 function! FunctionParameterHint()
@@ -91,9 +101,8 @@ function! FunctionParameterHint()
         call UltiSnips#Anon("()$0")
     endif
 endfunction
-autocmd CompleteDone * call FunctionParameterHint()
 
-" Use enter to expand functions or snippets
+" Use <ENTER> to expand functions or snippets
 function! ExpandFunctionOrSnippet()
     call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
@@ -105,6 +114,31 @@ function! ExpandFunctionOrSnippet()
     endif
     return ""
 endfunction
+
+
+" Autocommands
+" ------------
+
+" Give function parameter hints after finishing completion
+autocmd CompleteDone * call FunctionParameterHint()
+
+" Set filetype to text if not already set
+autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+
+" Cursorline moves with buffers and hides during insert
+augroup CursorLine
+    autocmd!
+    autocmd BufWinEnter * setl cursorline
+    autocmd InsertEnter * setl nocursorline
+    autocmd InsertLeave * setl cursorline
+    autocmd VimEnter * setl cursorline
+    autocmd WinEnter * setl cursorline
+    autocmd WinLeave * setl nocursorline
+augroup END
+
+
+" Plugins
+" -------
 
 " Both vim and neovim can source their plugins from the same directory
 call plug#begin('~/.vim/plugins')
@@ -134,17 +168,9 @@ Plug 'https://github.com/wellle/targets.vim.git'
 
 call plug#end()
 
-" Plugin Configurations
 
-" Ag
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:unite_source_grep_command='ag'
-    let g:unite_source_grep_default_opts =
-                \ '-i --vimgrep --hidden --ignore ' .
-                \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-    let g:unite_source_grep_recursive_opt=''
-endif
+" Plugin Configurations
+" ---------------------
 
 " Airline
 let g:airline_theme='solarized'
@@ -198,10 +224,10 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/UltiSnips']
 let g:UltiSnipsExpandTrigger='<ENTER>'
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=ExpandFunctionOrSnippet()<CR>"
+autocmd BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=ExpandFunctionOrSnippet()<CR>"
 
 " YouCompleteMe
-let g:ycm_key_invoke_completion='<M-l>'
+let g:ycm_key_invoke_completion='<C-l>'
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 let g:ycm_error_symbol='E>'
 let g:ycm_warning_symbol='W>'
