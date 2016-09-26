@@ -23,6 +23,13 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Project files
-scratch
+# Vim
+*.swp
+Session.vim
 .ycm_extra_conf.py
+
+# Scratch files
+scratch*
+
+# Build directory
+build/
