@@ -14,11 +14,17 @@ for file in $files; do
     ln -s $dotfilesdir/$file $HOME/.$file
 done
 
-# neovim config goes in ~/.config/nvim/
+# neovim config belongs at ~/.config/nvim/init.vim
 echo "Moving $HOME/.config/nvim/init.vim to $olddotfilesdir/init.vim"
 mv $HOME/.config/nvim/init.vim $olddotfilesdir/init.vim
 echo "Creating symlink to $dotfilesdir/vimrc in $HOME/.config/nvim/init.vim"
 ln -s $dotfilesdir/vimrc $HOME/.config/nvim/init.vim
+
+# global gitignore belongs at ~/.config/git/ignore
+echo "Moving $HOME/.config/git/ignore to $olddotfilesdir/ignore"
+mv $HOME/.config/git/ignore $olddotfilesdir/ignore
+echo "Creating symlink to $dotfilesdir/gitignore in $HOME/.config/git/ignore"
+ln -s $dotfilesdir/gitignore $HOME/.config/git/ignore
 
 echo "Adding $HOME/.git_template to global git config as init.templatedir"
 git config --global init.templatedir "$HOME/.git_template"
