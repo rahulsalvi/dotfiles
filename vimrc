@@ -227,7 +227,8 @@ autocmd BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R
 
 " YouCompleteMe
 let g:ycm_key_invoke_completion='<C-l>'
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='~/Dropbox/config/Project/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
 let g:ycm_error_symbol='E>'
 let g:ycm_warning_symbol='W>'
 let g:ycm_always_populate_location_list=1
