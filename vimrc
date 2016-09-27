@@ -106,7 +106,7 @@ endfunction
 function! ExpandFunctionOrSnippet()
     call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
-        if pumvisible()
+        if pumvisible() && exists('v:completed_item.kind') && v:completed_item.kind == 'f'
             return "\<C-y>"
         else
             return "\<CR>"
