@@ -218,8 +218,8 @@ let g:sneak#s_next=1
 
 " UltiSnips
 let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetsDir='~/Dropbox/UltiSnips'
-let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/UltiSnips']
+let g:UltiSnipsSnippetsDir='~/Dropbox/config/OSX/UltiSnips'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/config/OSX/UltiSnips']
 let g:UltiSnipsExpandTrigger='<ENTER>'
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
