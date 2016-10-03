@@ -16,6 +16,7 @@ set sidescroll=1
 set splitbelow
 set splitright
 set tabstop=4
+set wildmenu
 
 set nobackup
 set nocompatible
