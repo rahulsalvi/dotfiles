@@ -49,11 +49,12 @@ endif
 " Key Remappings
 " --------------
 
-map <SPACE> <LEADER>
+let mapleader="\<SPACE>"
 
 nnoremap Y y$
 nnoremap <TAB> gt
 nnoremap <S-TAB> gT
+nnoremap <LEADER><SPACE> :nohlsearch<ENTER>
 nmap <BS> <C-^>
 
 vnoremap < <gv
@@ -238,5 +239,5 @@ let g:ycm_server_python_interpreter='python3'
 let g:ycm_python_binary_path='python3'
 let g:ycm_filetype_blacklist={}
 let g:ycm_add_preview_to_completeopt=0
-map <LEADER><SPACE> :YcmCompleter<SPACE>
+nnoremap <LEADER>y :YcmCompleter<SPACE>
 set completeopt-=preview
