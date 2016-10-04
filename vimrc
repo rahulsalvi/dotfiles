@@ -137,6 +137,9 @@ augroup CursorLine
     autocmd WinLeave * setl nocursorline
 augroup END
 
+" Run pylint after saving Python files
+autocmd! BufEnter,BufWritePost *.py Neomake
+
 
 " Plugins
 " -------
@@ -153,6 +156,7 @@ Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kchmck/vim-coffee-script.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
+Plug 'https://github.com/neomake/neomake.git'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
@@ -214,6 +218,16 @@ let g:fzf_action={
 " ListToggle
 let g:lt_location_list_toggle_map='<LEADER>l'
 let g:lt_quickfix_list_toggle_map='<LEADER>k'
+
+" Neomake
+let g:neomake_cpp_enabled_makers=[]
+let g:neomake_python_enabled_makers=['pylint']
+let g:neomake_error_sign={
+    \ 'text': 'E>',
+    \ 'texthl': 'Error' }
+let g:neomake_warning_sign={
+    \ 'text': 'W>',
+    \ 'texthl': 'Todo' }
 
 " Sneak
 let g:sneak#s_next=1
