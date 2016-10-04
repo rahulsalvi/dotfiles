@@ -2,7 +2,6 @@
 " ----------------
 
 set backspace=indent,eol,start
-set cursorline
 set expandtab
 set hlsearch
 set incsearch
@@ -108,7 +107,7 @@ endfunction
 function! ExpandFunctionOrSnippet()
     call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
-        if pumvisible() && exists('v:completed_item.kind') && v:completed_item.kind == 'f'
+        if pumvisible() && exists('v:completed_item.kind') && (v:completed_item.kind == 'f' || v:completed_item.kind == 'c')
             return "\<C-y>"
         else
             return "\<CR>"
@@ -208,9 +207,9 @@ let g:fzf_nvim_statusline=0
 let g:fzf_command_prefix='FZF'
 let g:fzf_layout={ 'left': '~30%' }
 let g:fzf_action={
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-h': 'split',
-  \ 'ctrl-v': 'vsplit' }
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-h': 'split',
+    \ 'ctrl-v': 'vsplit' }
 
 " ListToggle
 let g:lt_location_list_toggle_map='<LEADER>l'
