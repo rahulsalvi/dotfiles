@@ -235,10 +235,10 @@ let g:lt_quickfix_list_toggle_map='<LEADER>k'
 let g:neomake_cpp_enabled_makers=[]
 let g:neomake_python_enabled_makers=['pylint']
 let g:neomake_error_sign={
-    \ 'text': 'E>',
+    \ 'text': '✕',
     \ 'texthl': 'Error' }
 let g:neomake_warning_sign={
-    \ 'text': 'W>',
+    \ 'text': '🤔',
     \ 'texthl': 'Todo' }
 
 " Sneak
@@ -257,8 +257,8 @@ autocmd BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R
 let g:ycm_key_invoke_completion='<C-l>'
 let g:ycm_global_ycm_extra_conf='~/Dropbox/config/Project/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
-let g:ycm_error_symbol='E>'
-let g:ycm_warning_symbol='W>'
+let g:ycm_error_symbol='✕'
+let g:ycm_warning_symbol='🤔'
 let g:ycm_always_populate_location_list=1
 let g:ycm_max_diagnostics_to_display=1000
 let g:ycm_server_python_interpreter='python3'
