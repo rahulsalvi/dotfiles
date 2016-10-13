@@ -233,7 +233,7 @@ let g:lt_quickfix_list_toggle_map='<LEADER>k'
 
 " Neomake
 let g:neomake_cpp_enabled_makers=[]
-let g:neomake_python_enabled_makers=['pylint']
+let g:neomake_python_enabled_makers=['pylint', 'mypy']
 let g:neomake_error_sign={
     \ 'text': '✕',
     \ 'texthl': 'Error' }
