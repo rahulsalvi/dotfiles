@@ -149,8 +149,9 @@ augroup CursorLine
     autocmd WinLeave * setl nocursorline
 augroup END
 
-" Run pylint after saving Python files
+" Run Neomake automatically on certain filetypes
 autocmd! BufEnter,BufWritePost *.py Neomake
+autocmd! BufWritePost *.tex Neomake
 
 
 " Plugins
@@ -232,8 +233,11 @@ let g:lt_location_list_toggle_map='<LEADER>l'
 let g:lt_quickfix_list_toggle_map='<LEADER>k'
 
 " Neomake
+let g:neomake_tex_latexmk_maker = {
+    \ 'args': ['-pdf'] }
 let g:neomake_cpp_enabled_makers=[]
 let g:neomake_python_enabled_makers=['pylint', 'mypy']
+let g:neomake_tex_enabled_makers=['latexmk']
 let g:neomake_error_sign={
     \ 'text': '✕',
     \ 'texthl': 'Error' }
