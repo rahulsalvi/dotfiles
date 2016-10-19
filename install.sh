@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# NOTE:
+# This script is now deprecated
+# Use install.py instead
+
 dotfilesdir=$HOME/dotfiles
 olddotfilesdir=$HOME/dotfiles_old
 files="bash_profile zshrc vimrc tmux.conf slate.js velocity.py karabiner.xml git_template"
