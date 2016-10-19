@@ -233,11 +233,11 @@ let g:lt_location_list_toggle_map='<LEADER>l'
 let g:lt_quickfix_list_toggle_map='<LEADER>k'
 
 " Neomake
-let g:neomake_tex_latexmk_maker = {
-    \ 'args': ['-pdf'] }
+let g:neomake_tex_pdflatex_maker = {
+    \ 'args': ['-file-line-error', '-interaction=nonstopmode'] }
 let g:neomake_cpp_enabled_makers=[]
 let g:neomake_python_enabled_makers=['pylint', 'mypy']
-let g:neomake_tex_enabled_makers=['latexmk']
+let g:neomake_tex_enabled_makers=['pdflatex']
 let g:neomake_error_sign={
     \ 'text': '✕',
     \ 'texthl': 'Error' }
