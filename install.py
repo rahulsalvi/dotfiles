@@ -16,6 +16,7 @@ files = [
             ('bash_profile',  ['.bash_profile']),
             ('git_template',  ['.git_template']),
             ('gitignore',     ['.config/git/ignore']),
+            ('hammerspoon',   ['.hammerspoon']),
             ('karabiner.xml', ['Library/Application Support/Karabiner/private.xml']),
             ('pylintrc',      ['.pylintrc']),
             ('slate.js',      ['.slate.js']),
