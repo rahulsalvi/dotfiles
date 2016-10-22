@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 <root>
-    <appdef>
-        <appname>SKIM</appname>
-        <equal>net.sourceforge.skim-app.skim</equal>
-    </appdef>
-
+    <!-- League of Legends -->
     <appdef>
         <appname>LEAGUEOFLEGENDS</appname>
         <equal>com.riotgames.LeagueofLegends.GameClient</equal>
@@ -17,81 +13,11 @@
         <autogen>__PassThrough__</autogen>
     </item>
 
-    <item>
-        <name>Change PC Application Key to ESCAPE/HYPER (Terminal)</name>
-        <identifier>remap.terminal_application2escape</identifier>
-        <only>TERMINAL</only>
-        <autogen>
-            __HoldingKeyToKey__
-            KeyCode::PC_APPLICATION,
-
-            @begin
-            KeyCode::ESCAPE,
-            @end
-
-            @begin
-            KeyCode::CONTROL_L, ModifierFlag::SHIFT_L | ModifierFlag::OPTION_L,
-            @end
-        </autogen>
-    </item>
-
-    <item>
-        <name>Change PC Application Key to CAPSLOCK/HYPER</name>
-        <identifier>remap.application2capslock</identifier>
-        <autogen>
-            __HoldingKeyToKey__
-            KeyCode::PC_APPLICATION,
-
-            @begin
-            KeyCode::CAPSLOCK,
-            @end
-
-            @begin
-            KeyCode::CONTROL_L, ModifierFlag::SHIFT_L | ModifierFlag::OPTION_L,
-            @end
-        </autogen>
-    </item>
-
-    <item>
-        <name>Change CMD-Q to clean quit (Terminal)</name>
-        <identifier>remap.terminal_cmdq2quit</identifier>
-        <only>TERMINAL</only>
-        <autogen>
-            __KeyToKey__
-            KeyCode::Q, ModifierFlag::COMMAND_L,
-            KeyCode::SPACE, ModifierFlag::CONTROL_L,
-            KeyCode::D,
-            Option::KEYTOKEY_DELAYED_ACTION,
-            KeyCode::Q, ModifierFlag::COMMAND_L,
-            KeyCode::COMMAND_L,
-        </autogen>
-    </item>
-
-    <item>
-        <name>Change CMD-W to clean exit (Terminal)</name>
-        <identifier>remap.terminal_cmdw2exit</identifier>
-        <only>TERMINAL</only>
-        <autogen>
-            __KeyToKey__
-            KeyCode::W, ModifierFlag::COMMAND_L,
-            KeyCode::SPACE, ModifierFlag::CONTROL_L,
-            KeyCode::D,
-            Option::KEYTOKEY_DELAYED_ACTION,
-            KeyCode::W, ModifierFlag::COMMAND_L,
-            KeyCode::COMMAND_L,
-        </autogen>
-    </item>
-
-    <item>
-        <name>Change CMD-NONE to CMD-SPACE</name>
-        <identifier>remap.cmdnone2cmdspace</identifier>
-        <autogen>
-            __KeyOverlaidModifier__
-            KeyCode::COMMAND_L,
-            KeyCode::COMMAND_L,
-            KeyCode::SPACE, ModifierFlag::COMMAND_L,
-        </autogen>
-    </item>
+    <!-- Skim -->
+    <appdef>
+        <appname>SKIM</appname>
+        <equal>net.sourceforge.skim-app.skim</equal>
+    </appdef>
 
     <item>
         <name>Add vi bindings to Skim</name>
@@ -120,6 +46,87 @@
         </autogen>
     </item>
 
+    <!-- Terminal -->
+    <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_EXIT_TERMINAL</name>
+        <url>hammerspoon://ExitTerminal</url>
+        <background/>
+    </vkopenurldef>
+    <item>
+        <name>Change CMD-W to clean exit (Terminal)</name>
+        <identifier>remap.terminal_cmdw2exit</identifier>
+        <only>TERMINAL</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::W, ModifierFlag::COMMAND_L,
+            KeyCode::VK_OPEN_URL_EXIT_TERMINAL
+        </autogen>
+    </item>
+
+    <vkopenurldef>
+        <name>KeyCode::VK_OPEN_URL_QUIT_TERMINAL</name>
+        <url>hammerspoon://QuitTerminal</url>
+        <background/>
+    </vkopenurldef>
+    <item>
+        <name>Change CMD-Q to clean quit (Terminal)</name>
+        <identifier>remap.terminal_cmdq2quit</identifier>
+        <only>TERMINAL</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::Q, ModifierFlag::COMMAND_L,
+            KeyCode::VK_OPEN_URL_QUIT_TERMINAL
+        </autogen>
+    </item>
+
+    <item>
+        <name>Change PC Application Key to ESCAPE/HYPER (Terminal)</name>
+        <identifier>remap.terminal_application2escape</identifier>
+        <only>TERMINAL</only>
+        <autogen>
+            __HoldingKeyToKey__
+            KeyCode::PC_APPLICATION,
+
+            @begin
+            KeyCode::ESCAPE,
+            @end
+
+            @begin
+            KeyCode::CONTROL_L, ModifierFlag::SHIFT_L | ModifierFlag::OPTION_L,
+            @end
+        </autogen>
+    </item>
+
+    <!-- General -->
+    <item>
+        <name>Change PC Application Key to CAPSLOCK/HYPER</name>
+        <identifier>remap.application2capslock</identifier>
+        <autogen>
+            __HoldingKeyToKey__
+            KeyCode::PC_APPLICATION,
+
+            @begin
+            KeyCode::CAPSLOCK,
+            @end
+
+            @begin
+            KeyCode::CONTROL_L, ModifierFlag::SHIFT_L | ModifierFlag::OPTION_L,
+            @end
+        </autogen>
+    </item>
+
+    <item>
+        <name>Change CMD-NONE to CMD-SPACE</name>
+        <identifier>remap.cmdnone2cmdspace</identifier>
+        <autogen>
+            __KeyOverlaidModifier__
+            KeyCode::COMMAND_L,
+            KeyCode::COMMAND_L,
+            KeyCode::SPACE, ModifierFlag::COMMAND_L,
+        </autogen>
+    </item>
+
+    <!-- Launcher -->
     <vkopenurldef>
         <name>KeyCode::VK_OPEN_URL_APP_CHROME</name>
         <url type="file">/Applications/Google Chrome.app</url>
