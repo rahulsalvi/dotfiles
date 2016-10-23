@@ -1,4 +1,7 @@
-local Terminal = require('Terminal')
+local terminal = require('Terminal')
+local mute     = require('Mute')
 
-hs.urlevent.bind("ExitTerminal", Terminal.exitTerminal)
-hs.urlevent.bind("QuitTerminal", Terminal.quitTerminal)
+hs.urlevent.bind("ExitTerminal", terminal.exit)
+hs.urlevent.bind("QuitTerminal", terminal.quit)
+
+hs.urlevent.bind("ToggleMute",   mute.toggle)

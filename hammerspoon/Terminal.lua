@@ -1,6 +1,6 @@
 local M = {}
 
-function M.exitTerminal()
+function M.exit()
     hs.eventtap.keyStroke({"ctrl"}, "Space")
     hs.eventtap.keyStrokes("d")
     hs.timer.doAfter(0.15, function()
@@ -8,7 +8,7 @@ function M.exitTerminal()
     end)
 end
 
-function M.quitTerminal()
+function M.quit()
     hs.eventtap.keyStroke({"ctrl"}, "Space")
     hs.eventtap.keyStrokes("d")
     hs.timer.doAfter(0.15, function()
