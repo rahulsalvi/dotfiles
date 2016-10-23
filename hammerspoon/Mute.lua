@@ -8,10 +8,10 @@ M.unmuteSound = hs.sound.getByName("Unmute"):volume(0.35)
 
 M.muteIcon = hs.image.imageFromPath(
     "~/Dropbox/config/OSX/Hammerspoon/Images/muted.png"
-    ):setSize({h=20, w=20}, false)
+    ):setSize({h=18, w=18}, false)
 M.unmuteIcon = hs.image.imageFromPath(
     "~/Dropbox/config/OSX/Hammerspoon/Images/unmuted.png"
-    ):setSize({h=20, w=20}, false)
+    ):setSize({h=18, w=18}, false)
 
 M.menubar = hs.menubar.new():setIcon(M.unmuteIcon)
 
