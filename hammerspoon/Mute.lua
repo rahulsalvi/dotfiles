@@ -1,7 +1,7 @@
 local M = {}
 
 M.device = hs.audiodevice.defaultInputDevice()
-M.micVolume = 0.0
+M.micVolume = 75
 
 M.muteSound   = hs.sound.getByName("Mute"):  volume(0.35)
 M.unmuteSound = hs.sound.getByName("Unmute"):volume(0.35)
@@ -12,8 +12,6 @@ M.muteIcon = hs.image.imageFromPath(
 M.unmuteIcon = hs.image.imageFromPath(
     "~/Dropbox/config/OSX/Hammerspoon/Images/unmuted.png"
     ):setSize({h=18, w=18}, false)
-
-M.menubar = hs.menubar.new():setIcon(M.unmuteIcon)
 
 function M.toggle()
     inputVolume = M.device:inputVolume()
@@ -29,6 +27,6 @@ function M.toggle()
     end
 end
 
-M.menubar:setClickCallback(M.toggle)
+M.menubar = hs.menubar.new():setIcon(M.unmuteIcon):setClickCallback(M.toggle)
 
 return M
