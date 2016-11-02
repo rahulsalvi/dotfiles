@@ -1,7 +1,19 @@
-local terminal = require('Terminal')
-local mute     = require('Mute')
+local mute        = require('Mute')
+local terminal    = require('Terminal')
 
-hs.urlevent.bind("ExitTerminal", terminal.exit)
-hs.urlevent.bind("QuitTerminal", terminal.quit)
+-- helper functions
+function toggleMenuIcon()
+    hs.menuIcon(not hs.menuIcon())
+end
 
-hs.urlevent.bind("ToggleMute",   mute.toggle)
+-- initial state
+hs.menuIcon(false)
+
+-- URL events
+hs.urlevent.bind("ToggleMenuIcon", toggleMenuIcon)
+hs.urlevent.bind("Reload",         hs.reload)
+
+hs.urlevent.bind("ToggleMute",     mute.toggle)
+
+hs.urlevent.bind("ExitTerminal",   terminal.exit)
+hs.urlevent.bind("QuitTerminal",   terminal.quit)

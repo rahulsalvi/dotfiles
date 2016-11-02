@@ -1,5 +1,6 @@
 local M = {}
 
+-- close tmux and terminal window
 function M.exit()
     hs.eventtap.keyStroke({"ctrl"}, "Space")
     hs.eventtap.keyStrokes("d")
@@ -8,6 +9,7 @@ function M.exit()
     end)
 end
 
+-- close tmux and quit terminal
 function M.quit()
     hs.eventtap.keyStroke({"ctrl"}, "Space")
     hs.eventtap.keyStrokes("d")
