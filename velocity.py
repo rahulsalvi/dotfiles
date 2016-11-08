@@ -269,7 +269,7 @@ def tmuxStatusRightMain():
                         segmentFlags[3] = "true"
         setTmuxOption("@NOSONGTICK", "g", segmentFlags[0])
         setTmuxOption("@SHORTDATE", "g", segmentFlags[1])
-        setTmuxOption("@NOSPOTIFY", "g", segmentFlags[2])
+        # setTmuxOption("@NOSPOTIFY", "g", segmentFlags[2])
         setTmuxOption("@NOBATTERY", "g", segmentFlags[3])
 
     segments.append(Segment("PREFIX,}", Format('white', 'red')))
