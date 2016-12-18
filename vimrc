@@ -28,8 +28,10 @@ set nowritebackup
 " Conditional Settings
 " --------------------
 
-" Only needed in normal vim
-if !has('nvim')
+" A few different settings in neovim vs. vim
+if has('nvim')
+    set inccommand=nosplit
+else
     set ttymouse=xterm2
 endif
 
