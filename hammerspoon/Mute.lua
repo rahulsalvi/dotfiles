@@ -10,10 +10,10 @@ M.unmuteSound = hs.sound.getByName("Unmute"):volume(0.35)
 
 -- load mute and unmute icons
 M.muteIcon = hs.image.imageFromPath(
-    "~/Dropbox/config/OSX/Hammerspoon/Images/muted.png"
+    "~/GDrive/config/OSX/Hammerspoon/Images/muted.png"
     ):setSize({h=18, w=18}, false)
 M.unmuteIcon = hs.image.imageFromPath(
-    "~/Dropbox/config/OSX/Hammerspoon/Images/unmuted.png"
+    "~/GDrive/config/OSX/Hammerspoon/Images/unmuted.png"
     ):setSize({h=18, w=18}, false)
 
 -- toggle mic muted

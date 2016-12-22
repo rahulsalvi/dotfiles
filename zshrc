@@ -101,7 +101,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND='ag -g ""'
 export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
-export TWITCH_TOKEN=$(cat ~/Dropbox/config/twitchtoken)
+export TWITCH_TOKEN=$(cat ~/GDrive/config/twitchtoken)
 
 # Set window title
 DISABLE_AUTO_TITLE="true"
@@ -203,7 +203,7 @@ alias .5='cd ../../../../../'
 alias .6='cd ../../../../../../'
 alias ~='cd ~'
 alias mux='tmuxinator'
-alias todo='e ~/Dropbox/TODO.txt'
+alias todo='e ~/GDrive/TODO.txt'
 alias t='todo'
 
 # Start a tmux session if not already in one
