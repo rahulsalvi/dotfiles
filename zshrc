@@ -87,9 +87,6 @@ fi
 # Load FZF modules
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Load twitcher module
-[ -f "${TWITCHER_DIR:-$HOME}/.twitcher/twitcher.zsh" ] && source "${TWITCHER_DIR:-$HOME}/.twitcher/twitcher.zsh"
-
 # Set environment variables
 export CC=clang
 export CXX=clang++
@@ -101,28 +98,13 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND='ag -g ""'
 export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
-export TWITCH_TOKEN=$(cat ~/GDrive/config/twitchtoken)
 
 # Set window title
 DISABLE_AUTO_TITLE="true"
 echo -en "\033];Velocity\007"
 
 # Set prompt
-setopt PROMPT_SUBST
-PROMPT=''
-RPROMPT=''
-precmd() {
-    PROMPT=$(python3 ~/.velocity.py PROMPT)
-}
-
-TRAPWINCH() {
-    PROMPT=$(python3 ~/.velocity.py PROMPT)
-}
-
-function zle-line-init zle-keymap-select {
-    RPROMPT=${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/}
-    zle reset-prompt
-}
+PROMPT='%n@%M %3d $ '
 
 # Set ls colors
 if [[ $BACKGROUND == "light" ]] ; then
@@ -133,22 +115,6 @@ fi
 export LS_COLORS
 
 # Functions
-# pwd that uses ~ for $HOME
-function CollapsePWD() {
-    echo $(pwd | sed -e "s,^$HOME,~,")
-}
-
-# Open a file in Xcode
-function OpenInXcode() {
-    touch "$@";
-    open -a Xcode "$@"
-}
-
-# Zip a folder
-function ZipF() {
-    zip -r "$1".zip "$1" ;
-}
-
 # Default to FZF for selecting file to edit if none given
 function FZFEditor() {
     if [[ -z "$EDITOR" ]] ; then
@@ -169,23 +135,24 @@ function FZFEditor() {
     fi
 }
 
-# Reset the prompt after FZF cd widget
-function cdResetPrompt() {
-    fzf-cd-widget
-    PROMPT=$(python3 ~/.velocity.py PROMPT)
+# Indicator for normal/insert mode
+function zle-line-init zle-keymap-select {
+    RPROMPT=${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/}
     zle reset-prompt
 }
 
+# Exit detaches tmux
+function exit() {
+    if [[ -z "$TMUX" ]] ; then
+        builtin exit
+    else
+        tmux detach
+    fi
+}
+
 # Alias functions
-alias cpwd='CollapsePWD'
-alias xcode='OpenInXcode'
-alias zipf='ZipF'
 alias extract='unarchive'
 alias e='FZFEditor'
-
-# Bind functions
-zle     -N     cdResetPrompt
-bindkey '\ec'  cdResetPrompt
 
 # General aliases
 alias ls='ls -Fh --color=auto'
@@ -193,6 +160,7 @@ alias la='ls -A'
 alias sl='ls'
 alias cp='cp -iv'
 alias mv='mv -iv'
+alias rm='rm -v'
 alias mkdir='mkdir -pv'
 alias cd..='cd ../'
 alias ..='cd ../'
@@ -206,26 +174,27 @@ alias mux='tmuxinator'
 alias todo='e ~/GDrive/TODO.txt'
 alias t='todo'
 
-# Start a tmux session if not already in one
-if [[ -z "$TMUX" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
-    tmux new-session -A -s 0
-# If already in tmux, display a fortune (max once per day, saved in ~/.lastfortune)
-elif [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]] ; then
-    fortune -a | tee ~/.lastfortune | cowsay
-fi
-
-# Exit detaches tmux
-function exit() {
-    if [[ -z "$TMUX" ]] ; then
-        builtin exit
-    else
-        tmux detach
-    fi
-}
-
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run
 # touch ~/.lastupdate
 if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
     echo -e "\033[31mWARNING: No updates within a week"
+fi
+
+# Not connected through SSH
+if [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
+    # Start a tmux session if not in one
+    if [[ -z "$TMUX" ]] ; then
+        tmux new-session -A -s 0
+    else
+        # display a fortune (max once per day, saved in ~/.lastfortune)
+        if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]] ; then
+            fortune -a | tee ~/.lastfortune | cowsay
+        fi
+        # Load twitcher module
+        export TWITCH_TOKEN=$(cat ~/GDrive/config/twitchtoken)
+        [ -f "${TWITCHER_DIR:-$HOME}/.twitcher/twitcher.zsh" ] && source "${TWITCHER_DIR:-$HOME}/.twitcher/twitcher.zsh"
+        # Load velocity module
+        [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
+    fi
 fi
