@@ -21,7 +21,6 @@ files = [
             ('pylintrc',      ['.pylintrc']),
             ('slate.js',      ['.slate.js']),
             ('tmux.conf',     ['.tmux.conf']),
-            ('velocity.py',   ['.velocity.py']),
             ('vimrc',         ['.vimrc', '.config/nvim/init.vim']),
             ('zshrc',         ['.zshrc'])
         ]
