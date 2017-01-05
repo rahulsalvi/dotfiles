@@ -9,9 +9,6 @@ Configuration files for zsh, tmux, vim, and more.
     - vim-plug (https://github.com/junegunn/vim-plug)
   - tmux
     - Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)
-  - Velocity theme
-    - A font with powerline characters
-    - Python3
   - Some Unix know-how
 
 ## Setup
@@ -20,9 +17,6 @@ Configuration files for zsh, tmux, vim, and more.
     git clone https://github.com/rahulsalvi/dotfiles.git
     cd dotfiles
     ./install.py
-  - Terminal
-    - Preferences --> Import "Solarized Dark.terminal"
-    - Preferences --> Import "Solarized Light.terminal"
   - Karabiner (https://pqrs.org/osx/karabiner/)
     - Select the appropriate options in the application
   - Seil (https://pqrs.org/osx/karabiner/seil.html.en)
