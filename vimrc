@@ -5,6 +5,7 @@ set backspace=indent,eol,start
 set expandtab
 set hlsearch
 set incsearch
+set lazyredraw
 set mouse=a
 set number
 set relativenumber
