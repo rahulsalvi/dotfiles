@@ -178,7 +178,7 @@ alias t='todo'
 # To reset the counter, run
 # touch ~/.lastupdate
 if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
-    echo -e "\033[31mWARNING: No updates within a week"
+    echo -e "\033[31mWARNING: No updates within a week\033[0m"
 fi
 
 # Not connected through SSH
