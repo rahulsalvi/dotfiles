@@ -5,13 +5,13 @@ import shlex
 import subprocess
 
 try:
-    home              = os.environ['HOME']
+    home = os.environ['HOME']
 except KeyError:
     print('Error: $HOME is not defined')
 
 # The files to create symbolic links to
 # The format of this array is:
-#   (source, [destination1, destination2])
+#   (source, [destination1, destination2, ...])
 files = [
             ('bash_profile',  ['.bash_profile']),
             ('git_template',  ['.git_template']),
@@ -31,13 +31,13 @@ commands = [
                ''.join(['git config --global init.templatedir "', home, '/.git_template"'])
            ]
 
-# The path, relative to ~, where the actual files are kept
+# The path, relative to $HOME, where the actual files are kept
 sourcePrefix      = 'dotfiles'
 
-# The path, relative to ~, to create symbolic links
+# The path, relative to $HOME, to create symbolic links
 destinationPrefix = ''
 
-# The path, relative to ~, to place old dotfiles
+# The path, relative to $HOME, to place old dotfiles
 oldPrefix         = 'dotfiles_old'
 
 def createLinks():
