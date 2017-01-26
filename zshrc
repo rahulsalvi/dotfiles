@@ -174,6 +174,7 @@ alias mux='tmuxinator'
 alias todo='e ~/GDrive/TODO.txt'
 alias t='todo'
 alias c='clear'
+alias s='cd ~;clear'
 
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run
