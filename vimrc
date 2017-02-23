@@ -62,6 +62,8 @@ nnoremap <LEADER>g :call GoogleSearchWord()<ENTER>
 nnoremap <LEADER><C-g> :call GoogleSearchLine()<ENTER>
 nmap <BS> <C-^>
 
+inoremap <C-l> <C-o>a
+
 vnoremap < <gv
 vnoremap > >gv
 
