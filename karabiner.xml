@@ -79,10 +79,10 @@
         </autogen>
     </item>
 
+    <!-- General -->
     <item>
-        <name>Change PC Application Key to ESCAPE/HYPER (Terminal)</name>
-        <identifier>remap.terminal_application2escape</identifier>
-        <only>TERMINAL</only>
+        <name>Change PC Application Key to ESCAPE/HYPER</name>
+        <identifier>remap.application2escape</identifier>
         <autogen>
             __HoldingKeyToKey__
             KeyCode::PC_APPLICATION,
@@ -97,21 +97,13 @@
         </autogen>
     </item>
 
-    <!-- General -->
     <item>
-        <name>Change PC Application Key to CAPSLOCK/HYPER</name>
-        <identifier>remap.application2capslock</identifier>
+        <name>Change ESCAPE to CAPSLOCK</name>
+        <identifier>remap.escape2caps</identifier>
         <autogen>
-            __HoldingKeyToKey__
-            KeyCode::PC_APPLICATION,
-
-            @begin
-            KeyCode::CAPSLOCK,
-            @end
-
-            @begin
-            KeyCode::CONTROL_L, ModifierFlag::SHIFT_L | ModifierFlag::OPTION_L,
-            @end
+            __KeyToKey__
+            KeyCode::ESCAPE,
+            KeyCode::CAPSLOCK
         </autogen>
     </item>
 
