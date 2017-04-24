@@ -5,8 +5,8 @@ M.device = hs.audiodevice.defaultInputDevice()
 M.micVolume = 75
 
 -- load mute and unmute sounds
-M.muteSound   = hs.sound.getByName("Mute"):  volume(0.35)
-M.unmuteSound = hs.sound.getByName("Unmute"):volume(0.35)
+M.muteSound   = hs.sound.getByName("Mute"):  volume(0.03)
+M.unmuteSound = hs.sound.getByName("Unmute"):volume(0.03)
 
 -- load mute and unmute icons
 M.muteIcon = hs.image.imageFromPath(
