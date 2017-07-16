@@ -88,7 +88,6 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Set environment variables
-export PATH=/Applications/CMake.app/Contents/bin:$PATH
 export CC=clang
 export CXX=clang++
 export EDITOR=nvim
