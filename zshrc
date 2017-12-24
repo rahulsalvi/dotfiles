@@ -1,11 +1,26 @@
+# Determine OS
+unameResult=$(uname -s)
+case "${unameResult}" in
+    Linux*) OS=Linux;;
+    Darwin*) OS=Mac;;
+    *) OS="UNKNOWN:${unameResult}"
+esac
+
 # Determine light or dark terminal
-termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
-if [[ $termname == "Solarized Light" ]] ; then
-    export BACKGROUND=light
+if [[ $OS == "Mac" ]] ; then
+    termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
+    if [[ $termname == "Solarized Light" ]] ; then
+        export BACKGROUND=light
+    else
+        export BACKGROUND=dark
+    fi
+    unset termname
+elif [[ $OS == "Linux" ]] ; then
+    #TODO
+    export BACKGROUND=dark
 else
     export BACKGROUND=dark
 fi
-unset termname
 
 # Select modules to load
 zstyle ':prezto:module:syntax-highlighting' color 'yes'
@@ -139,6 +154,11 @@ function FZFEditor() {
 function zle-line-init zle-keymap-select {
     RPROMPT=${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/}
     zle reset-prompt
+    if [[ $KEYMAP == vicmd ]] ; then
+        echo -ne '\e[1 q'
+    else
+        echo -ne '\e[5 q'
+    fi
 }
 
 # Exit detaches tmux
@@ -176,6 +196,13 @@ alias t='todo'
 alias c='clear'
 alias s='cd ~;clear'
 
+# Start Insync
+#if [[ $OS == "Linux" ]] ; then
+#    insync_status=$(insync get_status)
+#    if [[ $(expr length ${insync_status}) -ge 50 ]] ; then
+#        insync star
+#fi
+
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run
 # touch ~/.lastupdate
@@ -184,7 +211,7 @@ if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
 fi
 
 # Not connected through SSH
-if [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ; then
+if [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] && [[ -n "$DISPLAY" ]] ; then
     # Start a tmux session if not in one
     if [[ -z "$TMUX" ]] ; then
         tmux new-session -A -s 0
@@ -193,10 +220,11 @@ if [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] ;
         if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]] ; then
             fortune -a | tee ~/.lastfortune | cowsay
         fi
-        # Load twitcher module
-        export TWITCH_TOKEN=$(cat ~/GDrive/config/twitchtoken)
-        [ -f "${TWITCHER_DIR:-$HOME}/.twitcher/twitcher.zsh" ] && source "${TWITCHER_DIR:-$HOME}/.twitcher/twitcher.zsh"
         # Load velocity module
         [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
     fi
+fi
+
+if [[ -z "$DISPLAY" ]] && [[ -n "$XDG_VTNR" ]] && [[ "$XDG_VTNR" -eq 1 ]] ; then
+    exec startx
 fi

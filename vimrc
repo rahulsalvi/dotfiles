@@ -253,8 +253,8 @@ let g:sneak#s_next=1
 
 " UltiSnips
 let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetsDir='~/GDrive/config/OSX/UltiSnips'
-let g:UltiSnipsSnippetDirectories=[$HOME.'/GDrive/config/OSX/UltiSnips']
+let g:UltiSnipsSnippetsDir='~/GDrive/config/UltiSnips'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/GDrive/config/UltiSnips']
 let g:UltiSnipsExpandTrigger='<ENTER>'
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
