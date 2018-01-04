@@ -43,6 +43,9 @@ bindsym Mod1+n exec termite -e ncmpcpp
 # start chrome
 bindsym Mod1+c exec google-chrome-stable
 
+# start discord
+bindsym Mod1+m exec discord
+
 # media key bindings
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioStop exec mpc stop
@@ -178,9 +181,7 @@ bindsym Mod1+r mode "resize"
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id insync start
-
-#for_window [instance="__scratchpad"] move scratchpad
-#exec --no-startup-id pavucontrol --name __scratchpad
+#exec --no-startup-id discord
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

@@ -199,13 +199,6 @@ alias shutdown='sudo shutdown now'
 alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
 
-# Start Insync
-#if [[ $OS == "Linux" ]] ; then
-#    insync_status=$(insync get_status)
-#    if [[ $(expr length ${insync_status}) -ge 50 ]] ; then
-#        insync star
-#fi
-
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run
 # touch ~/.lastupdate
@@ -217,7 +210,13 @@ fi
 if [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] && [[ -n "$DISPLAY" ]] ; then
     # Start a tmux session if not in one
     if [[ -z "$TMUX" ]] ; then
-        tmux new-session -A -s 0
+        session_number=0
+        while [[ -n "$(tmux list-clients -t ${session_number} 2>/dev/null)" ]]
+        do
+            (( session_number++ ))
+        done
+        tmux new-session -A -s $session_number
+        unset session_number
     else
         # display a fortune (max once per day, saved in ~/.lastfortune)
         if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]] ; then
