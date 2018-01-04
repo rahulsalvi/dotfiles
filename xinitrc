@@ -3,4 +3,5 @@
 setxkbmap -option caps:swapescape
 compton &
 ~/.fehbg &
+numlockx on &
 exec i3
