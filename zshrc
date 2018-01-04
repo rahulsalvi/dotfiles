@@ -195,6 +195,9 @@ alias todo='e ~/GDrive/TODO.txt'
 alias t='todo'
 alias c='clear'
 alias s='cd ~;clear'
+alias shutdown='sudo shutdown now'
+alias reboot='sudo reboot'
+alias poweroff='sudo poweroff'
 
 # Start Insync
 #if [[ $OS == "Linux" ]] ; then
