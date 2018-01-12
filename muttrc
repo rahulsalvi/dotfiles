@@ -1,0 +1,5 @@
+set folder = "~/Mail"
+source ~/.mutt/mailboxes
+set spoolfile = "+icloud/INBOX"
+set record = "+icloud/Sent\ Messages"
+set postponed = "+icloud/Drafts"
