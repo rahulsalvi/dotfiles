@@ -1,0 +1,9 @@
+[topydo]
+filename=~/GDrive/TODO.txt
+archive_filename=~/GDrive/DONE.txt
+
+[columns]
+column_width=33
+
+[edit]
+editor=nvim
