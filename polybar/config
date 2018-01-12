@@ -19,7 +19,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:DisplayPort-0}
 width = 100%
 height = 27
 ;offset-x = 1%
@@ -246,7 +246,7 @@ type = internal/date
 interval = 5
 
 date = %m/%d
-date-alt = %m/%d/%Y
+date-alt = %A %m/%d/%Y
 
 time = %I:%M %p
 time-alt = %I:%M:%S %p
