@@ -114,6 +114,10 @@ export FZF_CTRL_T_COMMAND='ag -g ""'
 export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
 
+# for gpg-agent
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
 # Set window title
 DISABLE_AUTO_TITLE="true"
 echo -en "\033];Velocity\007"
@@ -198,6 +202,7 @@ alias s='cd ~;clear'
 alias shutdown='sudo shutdown now'
 alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
+
 
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run
