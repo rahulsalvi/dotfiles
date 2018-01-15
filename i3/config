@@ -46,6 +46,9 @@ bindsym Mod1+c exec google-chrome-stable
 # start discord
 bindsym Mod1+m exec discord
 
+# start neomutt
+bindsym Mod1+z exec termite -e neomutt
+
 # media key bindings
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioStop exec mpc stop
