@@ -13,7 +13,7 @@ footer = "\n"
 [Account icloud]
 localrepository = icloud-local
 remoterepository = icloud-remote
-postsynchook = notmuch new
+postsynchook = ~/.offlineimap/offlineimap-postsync.sh
 
 [Repository icloud-local]
 type = Maildir
