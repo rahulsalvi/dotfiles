@@ -3,3 +3,6 @@ source ~/.mutt/mailboxes
 set spoolfile = "+icloud/INBOX"
 set record = "+icloud/Sent\ Messages"
 set postponed = "+icloud/Drafts"
+set trash = "+icloud/Deleted\ Messages"
+
+source mutt-colors-solarized-dark-16.muttrc
