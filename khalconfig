@@ -1,0 +1,40 @@
+[calendars]
+    [[Events]]
+        type = discover
+        path = ~/Calendars/*-BC59-*
+        color = "#FDF6E3"
+    [[Clubs]]
+        type = discover
+        path = ~/Calendars/*-67C4-*
+        color = "#D33682"
+    [[CS M151B]]
+        type = discover
+        path = ~/Calendars/*-6189-*
+        color = "#268BD2"
+    [[CS M152A]]
+        type = discover
+        path = ~/Calendars/*-1F5C-*
+        color = "#DC322F"
+    [[ECE 131A]]
+        type = discover
+        path = ~/Calendars/*-C013-*
+        color = "#859900"
+    [[Engr 185EW]]
+        type = discover
+        path = ~/Calendars/*-8ADB-*
+        color = "#B58900"
+
+[default]
+default_command = interactive
+highlight_event_days = True
+
+[highlight_days]
+color = "#EEE8D5"
+
+[locale]
+dateformat = %m/%d
+timeformat = %I:%M %p
+longdateformat = %m/%d/%Y
+datetimeformat = %m/%d %I:%M %p
+longdatetimeformat = %m/%d/%Y %I:%M %p
+firstweekday = 6
