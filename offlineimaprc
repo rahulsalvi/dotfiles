@@ -1,0 +1,29 @@
+[general]
+accounts = icloud
+pythonfile = ~/.offlineimap/offlineimap.py
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+[Account icloud]
+localrepository = icloud-local
+remoterepository = icloud-remote
+postsynchook = notmuch new
+
+[Repository icloud-local]
+type = Maildir
+localfolders = ~/Mail/icloud
+
+[Repository icloud-remote]
+type = IMAP
+remotehost = imap.mail.me.com
+port = 993
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+remoteusereval = get_username()
+remotepasseval = get_password()
