@@ -33,3 +33,6 @@ scratch*
 
 # Build directory
 build/
+
+# Error logs
+error.log
