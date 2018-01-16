@@ -49,6 +49,9 @@ bindsym Mod1+m exec discord
 # start neomutt
 bindsym Mod1+z exec termite -e neomutt
 
+# start topydo
+bindsym Mod1+t exec termite -e "topydo columns"
+
 # media key bindings
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioStop exec mpc stop
