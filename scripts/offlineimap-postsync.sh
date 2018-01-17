@@ -1,10 +1,22 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 notmuch new
 
-newmail=$(find ~/Mail -regex .*/new/.*)
-while IFS= read -r line ; do
-    from=$(ag "^From" $line | sed 's/.*: //')
-    subject=$(ag "^Subject" $line | sed 's/.*: //')
-    notify-send -i mailspring "$from" "$subject"
-done <<< "$newmail"
+mail_location="${HOME}/Mail"
+notify_location="${HOME}/Mail/.notified"
+
+new_mail=$(find $mail_location -regex '.*/new/.*')
+if [[ -n "$new_mail" ]]; then
+    while IFS= read -r line ; do
+        stripped=$(echo ${line#$mail_location} | tr / _)
+        if [[ ! -e "$notify_location/$stripped" ]]; then
+            from=$(ag "^From" $line)
+            subject=$(ag "^Subject" $line)
+            notify-send -i mailspring "${from#From: }" "${subject#Subject: }"
+            ln -s $line $notify_location/$stripped
+        fi
+    done <<< "$new_mail"
+fi
+
+setopt null_glob
+rm -f -- ${notify_location}/*(-@D)
