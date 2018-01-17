@@ -7,4 +7,12 @@ set postponed = "+icloud/Drafts"
 set trash = "+icloud/Deleted\ Messages"
 set editor = nvim
 
+source "gpg -dq ~/.mutt/realname.gpg |"
+source "gpg -dq ~/.mutt/from.gpg |"
+
+set realname = $my_realname
+set from = $my_from
+set sendmail = "/usr/bin/sendmail"
+set edit_headers = yes
+
 source mutt-colors-solarized-dark-16.muttrc
