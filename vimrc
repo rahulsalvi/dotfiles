@@ -158,6 +158,13 @@ augroup END
 autocmd! BufEnter,BufWritePost *.py Neomake
 autocmd! BufWritePost *.tex Neomake
 
+" Settings for composing mail
+autocmd FileType mail setlocal formatoptions+=aw
+autocmd FileType mail setlocal spell spelllang=en_us
+autocmd FileType mail setlocal wrap
+autocmd FileType mail setlocal linebreak
+autocmd FileType mail execute "normal /^$/\no"
+autocmd FileType mail execute ":startinsert"
 
 " Plugins
 " -------
@@ -166,7 +173,6 @@ autocmd! BufWritePost *.tex Neomake
 call plug#begin('~/.vim/plugins')
 
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
-Plug 'https://github.com/bronson/vim-trailing-whitespace.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/junegunn/fzf.git', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim.git'
@@ -175,6 +181,7 @@ Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kchmck/vim-coffee-script.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/neomake/neomake.git'
+Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
@@ -247,6 +254,10 @@ let g:neomake_error_sign={
 let g:neomake_warning_sign={
     \ 'text': '🤔',
     \ 'texthl': 'Todo' }
+
+" Vim-Better-Whitespace
+highlight ExtraWhitespace ctermbg=darkred guibg=darkred
+let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
 
 " Sneak
 let g:sneak#s_next=1

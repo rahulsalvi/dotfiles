@@ -15,4 +15,6 @@ set from = $my_from
 set sendmail = "/usr/bin/sendmail"
 set edit_headers = yes
 
+set text_flowed = yes
+
 source mutt-colors-solarized-dark-16.muttrc
