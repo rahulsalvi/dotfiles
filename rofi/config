@@ -1,0 +1,2 @@
+rofi.theme: /usr/share/rofi/themes/solarized.rasi
+rofi.modi: apps:~/.config/rofi/apps.sh,window,run
