@@ -46,7 +46,7 @@ cursor_shape = ibeam
 
 foreground = #839496
 foreground_bold = #EEE8D5
-background = rgba(0, 43, 54, 0.97)
+background = rgba(0, 43, 54, 0.80)
 cursor = #93A1A1
 
 # 20% background transparency (requires a compositor)
