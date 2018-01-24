@@ -173,9 +173,14 @@ autocmd FileType mail execute ":startinsert"
 " Both vim and neovim can source their plugins from the same directory
 call plug#begin('~/.vim/plugins')
 
+if $OS == 'Mac'
+    Plug 'https://github.com/junegunn/fzf.git', { 'dir': '~/.fzf', 'do': './install --all' }
+elseif $OS == 'Linux'
+    Plug 'https://github.com/junegunn/fzf.git'
+endif
+
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
-Plug 'https://github.com/junegunn/fzf.git', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'

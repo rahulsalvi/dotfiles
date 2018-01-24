@@ -5,6 +5,7 @@ case "${unameResult}" in
     Darwin*) OS=Mac;;
     *) OS="UNKNOWN:${unameResult}"
 esac
+export OS
 
 # Determine light or dark terminal
 if [[ $OS == "Mac" ]] ; then
@@ -100,7 +101,12 @@ fi
 [ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 # Load FZF modules
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ $OS == "Mac" ]] ; then
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+elif [[ $OS == "Linux" ]]; then
+    [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+    [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+fi
 
 # Set environment variables
 export CC=clang
