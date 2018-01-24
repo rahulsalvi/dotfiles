@@ -219,6 +219,50 @@ mode "open" {
 
 bindsym Mod1+o mode "open"
 
+gaps inner 5
+gaps outer 0
+
+set $mode_gaps       "gaps (o|i)"
+set $mode_gaps_outer "gaps - outer (+|-|0)"
+set $mode_gaps_inner "gaps - inner (+|-|0)"
+
+
+mode $mode_gaps_outer {
+    bindsym plus  gaps outer current plus  5
+    bindsym minus gaps outer current minus 5
+    bindsym 0     gaps outer current set   0
+
+    bindsym Shift+plus  gaps outer all plus  5
+    bindsym Shift+minus gaps outer all minus 5
+    bindsym Shift+0     gaps outer all set   0
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode $mode_gaps_inner {
+    bindsym plus  gaps inner current plus  5
+    bindsym minus gaps inner current minus 5
+    bindsym 0     gaps inner current set   0
+
+    bindsym Shift+plus  gaps inner all plus  5
+    bindsym Shift+minus gaps inner all minus 5
+    bindsym Shift+0     gaps inner all set   0
+
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode $mode_gaps  {
+    bindsym o mode $mode_gaps_outer
+    bindsym i mode $mode_gaps_inner
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym Mod1+Shift+g mode $mode_gaps
+
 # launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
