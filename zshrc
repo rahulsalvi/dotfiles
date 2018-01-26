@@ -8,15 +8,15 @@ esac
 export OS
 
 # Determine light or dark terminal
-if [[ $OS == "Mac" ]] ; then
+if [[ $OS == "Mac" ]]; then
     termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
-    if [[ $termname == "Solarized Light" ]] ; then
+    if [[ $termname == "Solarized Light" ]]; then
         export BACKGROUND=light
     else
         export BACKGROUND=dark
     fi
     unset termname
-elif [[ $OS == "Linux" ]] ; then
+elif [[ $OS == "Linux" ]]; then
     #TODO
     export BACKGROUND=dark
 else
@@ -25,25 +25,54 @@ fi
 
 # Select modules to load
 zstyle ':prezto:module:syntax-highlighting' color 'yes'
-zstyle ':prezto:load' pmodule \
-    'environment' \
-    'utility' \
-    'editor' \
-    'directory' \
-    'history' \
-    'completion' \
-    'git' \
-    'macports' \
-    'archive' \
-    'syntax-highlighting' \
-    'history-substring-search'
+
+if [[ $OS == "Mac" ]]; then
+    zstyle ':prezto:load' pmodule \
+        'environment' \
+        'utility' \
+        'editor' \
+        'directory' \
+        'history' \
+        'completion' \
+        'git' \
+        'macports' \
+        'archive' \
+        'syntax-highlighting' \
+        'history-substring-search'
+elif [[ $OS == "Linux" ]]; then
+    zstyle ':prezto:load' pmodule \
+        'environment' \
+        'utility' \
+        'editor' \
+        'directory' \
+        'history' \
+        'completion' \
+        'git' \
+        'archive' \
+        'syntax-highlighting' \
+        'history-substring-search' \
+        'pacman'
+    zstyle ':prezto:module:pacman' frontend 'pacaur'
+else
+    zstyle ':prezto:load' pmodule \
+        'environment' \
+        'utility' \
+        'editor' \
+        'directory' \
+        'history' \
+        'completion' \
+        'git' \
+        'archive' \
+        'syntax-highlighting' \
+        'history-substring-search'
+fi
 
 # Vi key bindings
 zstyle ':prezto:module:editor' key-bindings 'vi'
 bindkey -M vicmd '/' history-incremental-search-backward
 
 # Syntax highlighting colors and styles
-if [[ $BACKGROUND == "light" ]] ; then
+if [[ $BACKGROUND == "light" ]]; then
     zstyle ':prezto:module:syntax-highlighting' styles \
         'unknown-token' 'fg=red' \
         'reserved-word' 'fg=red,bold' \
@@ -101,7 +130,7 @@ fi
 [ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 # Load FZF modules
-if [[ $OS == "Mac" ]] ; then
+if [[ $OS == "Mac" ]]; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 elif [[ $OS == "Linux" ]]; then
     [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
@@ -109,8 +138,8 @@ elif [[ $OS == "Linux" ]]; then
 fi
 
 # Set environment variables
-export CC=clang
-export CXX=clang++
+export CC=gcc
+export CXX=g++
 export EDITOR=nvim
 export EDITOR_OPTS="-p"
 export LANG=en_US.UTF-8
@@ -132,7 +161,7 @@ echo -en "\033];Velocity\007"
 PROMPT='%n@%M %3d $ '
 
 # Set ls colors
-if [[ $BACKGROUND == "light" ]] ; then
+if [[ $BACKGROUND == "light" ]]; then
     LS_COLORS=$LS_COLORS:'di=36:ln=35:ex=31'
 else
     LS_COLORS=$LS_COLORS:'di=34:ln=33:ex=31'
@@ -142,7 +171,7 @@ export LS_COLORS
 # Functions
 # Default to FZF for selecting file to edit if none given
 function FZFEditor() {
-    if [[ -z "$EDITOR" ]] ; then
+    if [[ -z "$EDITOR" ]]; then
         echo "no editor variable set"
         return
     fi
@@ -164,7 +193,7 @@ function FZFEditor() {
 function zle-line-init zle-keymap-select {
     RPROMPT=${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/}
     zle reset-prompt
-    if [[ $KEYMAP == vicmd ]] ; then
+    if [[ $KEYMAP == vicmd ]]; then
         echo -ne '\e[1 q'
     else
         echo -ne '\e[5 q'
@@ -173,7 +202,7 @@ function zle-line-init zle-keymap-select {
 
 # Exit detaches tmux
 function exit() {
-    if [[ -z "$TMUX" ]] ; then
+    if [[ -z "$TMUX" ]]; then
         builtin exit
     else
         tmux detach
@@ -195,12 +224,7 @@ alias mkdir='mkdir -pv'
 alias cd..='cd ../'
 alias ..='cd ../'
 alias ...='cd ../../'
-alias .3='cd ../../../'
-alias .4='cd ../../../../'
-alias .5='cd ../../../../../'
-alias .6='cd ../../../../../../'
 alias ~='cd ~'
-alias mux='tmuxinator'
 alias todo='topydo columns'
 alias t='todo'
 alias c='clear'
@@ -213,31 +237,33 @@ alias poweroff='sudo poweroff'
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run
 # touch ~/.lastupdate
-if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]] ; then
+if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]]; then
     echo -e "\033[31mWARNING: No updates within a week\033[0m"
 fi
 
 # Not connected through SSH
-if [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]] && [[ -z "$SSH_CONNECTION" ]] && [[ -n "$DISPLAY" ]] ; then
-    # Start a tmux session if not in one
-    if [[ -z "$TMUX" ]] ; then
-        session_number=0
-        while [[ -n "$(tmux list-clients -t ${session_number} 2>/dev/null)" ]]
-        do
-            (( session_number++ ))
-        done
-        tmux new-session -A -s $session_number
-        unset session_number
-    else
-        # display a fortune (max once per day, saved in ~/.lastfortune)
-        if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]] ; then
-            fortune -a | tee ~/.lastfortune | cowsay
+if [[ $OS == "Mac" || ( $OS == "Linux" && -n "$DISPLAY" ) ]]; then
+    if [[ -z "$SSH_CLIENT" && -z "$SSH_TTY" && -z "$SSH_CONNECTION" ]]; then
+        # Start a tmux session if not in one
+        if [[ -z "$TMUX" ]]; then
+            session_number=0
+            while [[ -n "$(tmux list-clients -t ${session_number} 2>/dev/null)" ]]
+            do
+                (( session_number++ ))
+            done
+            tmux new-session -A -s $session_number
+            unset session_number
+        else
+            # display a fortune (max once per day, saved in ~/.lastfortune)
+            if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]]; then
+                fortune -a | tee ~/.lastfortune | cowsay
+            fi
+            # Load velocity module
+            [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
         fi
-        # Load velocity module
-        [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
     fi
 fi
 
-if [[ -z "$DISPLAY" ]] && [[ -n "$XDG_VTNR" ]] && [[ "$XDG_VTNR" -eq 1 ]] ; then
+if [[ $OS == "Linux" && -z "$DISPLAY" && -n "$XDG_VTNR" && "$XDG_VTNR" -eq 1 ]]; then
     exec startx
 fi
