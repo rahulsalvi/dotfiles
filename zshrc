@@ -150,8 +150,10 @@ export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
 
 # for gpg-agent
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null
+if [[ $OS == "Linux" ]]; then
+    export GPG_TTY=$(tty)
+    gpg-connect-agent updatestartuptty /bye >/dev/null
+fi
 
 # Set window title
 DISABLE_AUTO_TITLE="true"
