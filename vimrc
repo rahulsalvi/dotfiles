@@ -59,8 +59,6 @@ nnoremap Y y$
 nnoremap <TAB> gt
 nnoremap <S-TAB> gT
 nnoremap <LEADER><SPACE> :nohlsearch<ENTER>
-nnoremap <LEADER>g :call GoogleSearchWord()<ENTER>
-nnoremap <LEADER><C-g> :call GoogleSearchLine()<ENTER>
 nmap <BS> <C-^>
 
 inoremap <C-l> <C-o>a
@@ -122,16 +120,6 @@ function! ExpandFunctionOrSnippet()
         endif
     endif
     return ""
-endfunction
-
-function! GoogleSearchWord()
-    let url = "https://www.google.com/search?q=".expand("<cword>")
-    exec "silent !open '".url."'"
-endfunction
-
-function! GoogleSearchLine()
-    let url = "https://www.google.com/search?q=".getline('.')
-    exec "silent !open '".url."'"
 endfunction
 
 
