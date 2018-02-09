@@ -28,6 +28,7 @@ case "$@" in
         echo "termite"
         echo "topydo"
         echo "vlc"
+        echo "zathura"
     ;;
     *)
         app_to_run=$@
