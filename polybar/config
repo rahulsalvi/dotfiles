@@ -203,7 +203,7 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/mpd]
 type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+format-online = <label-song>    <icon-prev> <toggle> <icon-next>     |<bar-progress>|
 
 icon-prev = ⏪
 icon-stop = ■
@@ -213,6 +213,11 @@ icon-next = ⏩
 
 label-song-maxlen = 75
 label-song-ellipsis = true
+
+bar-progress-width = 60
+bar-progress-indicator = |
+bar-progress-fill = -
+bar-progress-empty = -
 
 [module/xbacklight]
 type = internal/xbacklight
