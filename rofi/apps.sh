@@ -16,17 +16,22 @@ case "$@" in
     "topydo")
         app_to_run="SHELL:topydo columns"
     ;;
+    "transmission")
+        app_to_run="transmission-gtk"
+    ;;
     "")
         echo "chrome"
         echo "discord"
         echo "keepassxc"
         echo "khal"
+        echo "logisim"
         echo "mutt"
         echo "ncmpcpp"
         echo "pavucontrol"
         echo "steam"
         echo "termite"
         echo "topydo"
+        echo "transmission"
         echo "vlc"
         echo "zathura"
     ;;
