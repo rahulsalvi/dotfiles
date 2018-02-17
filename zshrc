@@ -156,7 +156,7 @@ fi
 if which rg > /dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND='rg --no-ignore --files'
     export FZF_CTRL_T_COMMAND='rg --no-ignore --files'
-    export FZF_EDITOR_COMMAND='rg --no-ignore --files --follow'
+    export FZF_EDITOR_COMMAND='rg --no-ignore --files'
 fi
 
 # for gpg-agent
