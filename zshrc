@@ -144,10 +144,20 @@ export EDITOR=nvim
 export EDITOR_OPTS="-p"
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_CTRL_T_COMMAND='ag -g ""'
-export FZF_EDITOR_COMMAND='ag --follow -g ""'
 export FZF_DEFAULT_OPTS="-m --reverse"
+
+# Use ag for FZF
+if which ag > /dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='ag -g ""'
+    export FZF_CTRL_T_COMMAND='ag -g ""'
+    export FZF_EDITOR_COMMAND='ag --follow -g ""'
+fi
+# Use rg for FZF (preferred over ag)
+if which rg > /dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='rg --no-ignore --files'
+    export FZF_CTRL_T_COMMAND='rg --no-ignore --files'
+    export FZF_EDITOR_COMMAND='rg --no-ignore --files --follow'
+fi
 
 # for gpg-agent
 if [[ $OS == "Linux" ]]; then

@@ -10,8 +10,8 @@ if [[ -n "$new_mail" ]]; then
     while IFS= read -r line ; do
         stripped=$(echo ${line#$mail_location} | tr / _)
         if [[ ! -e "$notify_location/$stripped" ]]; then
-            from=$(ag "^From" $line)
-            subject=$(ag "^Subject" $line)
+            from=$(rg "^From" $line)
+            subject=$(rg "^Subject" $line)
             notify-send -i mailspring "${from#From: }" "${subject#Subject: }"
             ln -s $line $notify_location/$stripped
         fi
