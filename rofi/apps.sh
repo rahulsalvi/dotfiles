@@ -4,6 +4,9 @@ case "$@" in
     "chrome")
         app_to_run="google-chrome-stable"
     ;;
+    "dc")
+        app_to_run="SHELL:dc"
+    ;;
     "khal")
         app_to_run="SHELL:khal"
     ;;
@@ -21,6 +24,7 @@ case "$@" in
     ;;
     "")
         echo "chrome"
+        echo "dc"
         echo "discord"
         echo "keepassxc"
         echo "khal"
