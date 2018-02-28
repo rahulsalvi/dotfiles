@@ -32,6 +32,7 @@ case "$@" in
         echo "mutt"
         echo "ncmpcpp"
         echo "pavucontrol"
+        echo "remmina"
         echo "steam"
         echo "termite"
         echo "topydo"
