@@ -16,6 +16,9 @@ case "$@" in
     "ncmpcpp")
         app_to_run="SHELL:ncmpcpp"
     ;;
+    "ranger")
+        app_to_run="SHELL:ranger"
+    ;;
     "topydo")
         app_to_run="SHELL:topydo columns"
     ;;
@@ -32,12 +35,14 @@ case "$@" in
         echo "mutt"
         echo "ncmpcpp"
         echo "pavucontrol"
+        echo "ranger"
         echo "remmina"
         echo "steam"
         echo "termite"
         echo "topydo"
         echo "transmission"
         echo "vlc"
+        echo "yed"
         echo "zathura"
     ;;
     *)
