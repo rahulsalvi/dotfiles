@@ -1,27 +1,27 @@
 [calendars]
     [[Events]]
         type = discover
-        path = ~/Calendars/*-BC59-*
-        color = "#FDF6E3"
+        path = ~/Calendars/rsal*
+        color = "#FDF5E3"
     [[Clubs]]
         type = discover
-        path = ~/Calendars/*-67C4-*
+        path = ~/Calendars/k5bm*
         color = "#D33682"
-    [[CS M151B]]
+    [[EE 111L]]
         type = discover
-        path = ~/Calendars/*-6189-*
+        path = ~/Calendars/pi8g*
         color = "#268BD2"
-    [[CS M152A]]
+    [[EE 113]]
         type = discover
-        path = ~/Calendars/*-1F5C-*
+        path = ~/Calendars/li3q*
         color = "#DC322F"
-    [[ECE 131A]]
+    [[EE 110]]
         type = discover
-        path = ~/Calendars/*-C013-*
+        path = ~/Calendars/kikc*
         color = "#859900"
-    [[Engr 185EW]]
+    [[EE 141]]
         type = discover
-        path = ~/Calendars/*-8ADB-*
+        path = ~/Calendars/1art*
         color = "#B58900"
 
 [default]

@@ -1,20 +1,20 @@
 [general]
 status_path = "~/.vdirsyncer/status/"
 
-[pair icloud]
-a = "icloud_local"
-b = "icloud_remote"
+[pair google_calendar]
+a = "google_calendar_local"
+b = "google_calendar_remote"
 collections = ["from a", "from b"]
 metadata = ["displayname"]
 conflict_resolution = "b wins"
 
-[storage icloud_local]
+[storage google_calendar_local]
 type = "filesystem"
 path = "~/Calendars"
 fileext = ".ics"
 
-[storage icloud_remote]
-type = "caldav"
-url = "https://caldav.icloud.com/"
-username.fetch = ["command", "~/.vdirsyncer/get_username.sh"]
-password.fetch = ["command", "~/.vdirsyncer/get_password.sh"]
+[storage google_calendar_remote]
+type = "google_calendar"
+token_file = "~/.vdirsyncer/token"
+client_id.fetch = ["command", "~/.vdirsyncer/get_client_id.sh"]
+client_secret.fetch = ["command", "~/.vdirsyncer/get_client_secret.sh"]
