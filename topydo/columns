@@ -1,6 +1,6 @@
 [General]
 title = General
-filterexpr = -+computer -+car -@homework -@bill -@code -@buy
+filterexpr = -@computer -@car -@homework -@bill -@code -@buy
 show_all = 1
 
 [Due]
@@ -16,14 +16,14 @@ show_all = 1
 
 [Computer]
 title = Computer
-filterexpr = +computer
-groupexpr = context
+filterexpr = @computer
+groupexpr = project
 show_all = 1
 
 [Car]
 title = Car
-filterexpr = +car
-groupexpr = context
+filterexpr = @car
+groupexpr = project
 show_all = 1
 
 [Bills]
