@@ -52,7 +52,7 @@ elif [[ $OS == "Linux" ]]; then
         'syntax-highlighting' \
         'history-substring-search' \
         'pacman'
-    zstyle ':prezto:module:pacman' frontend 'pacaur'
+    zstyle ':prezto:module:pacman' frontend 'yay'
 else
     zstyle ':prezto:load' pmodule \
         'environment' \
