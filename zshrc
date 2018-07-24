@@ -145,6 +145,7 @@ export EDITOR_OPTS="-p"
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="-m --reverse"
+export PATH="/home/rahulsalvi/.local/bin:$PATH"
 
 # Use ag for FZF
 if which ag > /dev/null 2>&1; then
