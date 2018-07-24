@@ -23,7 +23,10 @@ case "$@" in
         app_to_run="SHELL:topydo columns"
     ;;
     "transmission")
-        app_to_run="transmission-gtk"
+        app_to_run="transmission-qt"
+    ;;
+    "wicd")
+        app_to_run="wicd-client"
     ;;
     "")
         echo "chrome"
@@ -42,6 +45,7 @@ case "$@" in
         echo "topydo"
         echo "transmission"
         echo "vlc"
+        echo "wicd"
         echo "yed"
         echo "zathura"
     ;;
