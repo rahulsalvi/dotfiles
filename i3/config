@@ -272,6 +272,3 @@ exec_always --no-startup-id ~/.vdirsyncer/env/bin/vdirsyncer sync
 
 # start insync
 exec --no-startup-id insync start
-
-# start indicator-kdeconnect
-exec --no-startup-id indicator-kdeconnect
