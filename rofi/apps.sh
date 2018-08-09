@@ -40,6 +40,7 @@ case "$@" in
         echo "pavucontrol"
         echo "ranger"
         echo "remmina"
+        echo "spotify"
         echo "steam"
         echo "termite"
         echo "topydo"

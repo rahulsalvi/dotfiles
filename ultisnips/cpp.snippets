@@ -1,0 +1,104 @@
+extends c
+
+priority 2
+
+# Preprocessor Commands
+# ---------------------
+
+snippet incio "include iostream"
+#include <iostream>
+endsnippet
+
+snippet incb "boost include"
+#include <boost/$0.hpp>
+endsnippet
+
+# Loops
+# -----
+
+snippet foreach "foreach loop"
+for (${1:auto} ${2:i} : ${3:container}){
+	$0
+}
+endsnippet
+
+# Functions
+# ---------
+
+snippet mfun "class member function"
+${4:void} ${1:`!v expand('%:r')`}::$2($3) {
+	$0
+}
+endsnippet
+
+# Types
+# -----
+
+snippet class "C++ class"
+class ${1:`!v expand('%:r')`} {
+	public:
+		$1();
+		~$1();
+	private:
+		$0
+};
+endsnippet
+
+snippet ns "namespace"
+namespace ${1:name} {
+	$0
+}
+endsnippet
+
+# Casts
+# -----
+
+snippet sca "static cast"
+static_cast<${1:type}>(${2:expression})
+endsnippet
+
+snippet dca "dynamic cast"
+dynamic_cast<${1:type}>(${2:expression})
+endsnippet
+
+snippet rca "reinterpret cast"
+reinterpret_cast<${1:type}>(${2:expression})
+endsnippet
+
+snippet cca "const cast"
+const_cast<${1:type}>(${2:expression})
+endsnippet
+
+# I/O
+# ---
+
+snippet cout "cout"
+std::cout << $0 << std::endl;
+endsnippet
+
+snippet cin "cin"
+std::cin >> $0;
+endsnippet
+
+# Keywords
+# ________
+
+snippet pri "private"
+private
+endsnippet
+
+snippet pro "protected"
+protected
+endsnippet
+
+snippet pub "public"
+public
+endsnippet
+
+snippet fr "friend"
+friend
+endsnippet
+
+snippet mut "mutable"
+mutable
+endsnippet
