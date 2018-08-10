@@ -14,6 +14,7 @@ set selection=exclusive
 set shiftwidth=4
 set showcmd
 set sidescroll=1
+set softtabstop=4
 set splitbelow
 set splitright
 set tabstop=4
@@ -273,7 +274,7 @@ autocmd BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R
 
 " YouCompleteMe
 let g:ycm_key_invoke_completion='<C-l>'
-let g:ycm_global_ycm_extra_conf='~/GDrive/config/Project/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
 let g:ycm_error_symbol='✕'
 let g:ycm_warning_symbol='🤔'
