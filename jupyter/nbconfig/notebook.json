@@ -1,0 +1,18 @@
+{
+  "Cell": {
+    "cm_config": {
+      "lineNumbers": true
+    }
+  },
+  "keys": {
+    "command": {
+      "bind": {
+        "ctrl-shift-enter": "jupyter-notebook:run-all-cells",
+        "b": "jupyter-notebook:insert-cell-below"
+      },
+      "unbind": [
+        "b"
+      ]
+    }
+  }
+}
