@@ -272,3 +272,6 @@ exec_always --no-startup-id ~/.vdirsyncer/env/bin/vdirsyncer sync
 
 # start insync
 exec --no-startup-id insync start
+
+# start jupyter notebook
+exec --no-startup-id jupyter notebook
