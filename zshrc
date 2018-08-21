@@ -38,7 +38,8 @@ if [[ $OS == "Mac" ]]; then
         'macports' \
         'archive' \
         'syntax-highlighting' \
-        'history-substring-search'
+        'history-substring-search' \
+        'autosuggestions'
 elif [[ $OS == "Linux" ]]; then
     zstyle ':prezto:load' pmodule \
         'environment' \
@@ -51,6 +52,7 @@ elif [[ $OS == "Linux" ]]; then
         'archive' \
         'syntax-highlighting' \
         'history-substring-search' \
+        'autosuggestions' \
         'pacman'
     zstyle ':prezto:module:pacman' frontend 'yay'
 else
@@ -64,8 +66,11 @@ else
         'git' \
         'archive' \
         'syntax-highlighting' \
-        'history-substring-search'
+        'history-substring-search' \
+        'autosuggestions'
 fi
+
+zstyle ':prezto:module:autosuggestions:color' found ''
 
 # Vi key bindings
 zstyle ':prezto:module:editor' key-bindings 'vi'
@@ -146,6 +151,7 @@ export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="-m --reverse"
 export PATH="/home/rahulsalvi/.local/bin:$PATH"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 
 # Use ag for FZF
 if which ag > /dev/null 2>&1; then
