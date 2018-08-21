@@ -2,9 +2,9 @@ set folder = "~/Mail"
 source ~/.mutt/mailboxes
 
 set spoolfile = "+icloud/INBOX"
-set record = "+icloud/Sent\ Messages"
+set record = "+icloud/Sent"
 set postponed = "+icloud/Drafts"
-set trash = "+icloud/Deleted\ Messages"
+set trash = "+icloud/Trash"
 set editor = nvim
 
 source "gpg -dq ~/.mutt/realname.gpg |"
