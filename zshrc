@@ -150,8 +150,13 @@ export EDITOR_OPTS="-p"
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="-m --reverse"
-export PATH="/home/rahulsalvi/.local/bin:$PATH"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
+
+if [[ $OS == "Mac" ]]; then
+    export PATH="/Users/rahulsalvi/.local/bin:$PATH"
+elif [[ $OS == "Linux" ]]; then
+    export PATH="/home/rahulsalvi/.local/bin:$PATH"
+fi
 
 # Use ag for FZF
 if which ag > /dev/null 2>&1; then
