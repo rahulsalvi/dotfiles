@@ -9,7 +9,7 @@ export OS
 
 # Determine light or dark terminal
 if [[ $OS == "Mac" ]]; then
-    termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string")
+    termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string" 2>/dev/null)
     if [[ $termname == "Solarized Light" ]]; then
         export BACKGROUND=light
     else
