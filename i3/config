@@ -50,7 +50,7 @@ bindsym Mod1+m exec discord
 bindsym Mod1+z exec termite -e neomutt
 
 # start khal
-bindsym Mod1+x exec termite -e "/home/rahulsalvi/.local/bin/khal"
+bindsym Mod1+x exec termite -e "khal"
 
 # start topydo
 bindsym Mod1+t exec termite -e "/home/rahulsalvi/.local/bin/topydo columns"
