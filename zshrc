@@ -143,8 +143,8 @@ elif [[ $OS == "Linux" ]]; then
 fi
 
 # Set environment variables
-export CC=gcc
-export CXX=g++
+export CC=clang
+export CXX=clang++
 export EDITOR=nvim
 export EDITOR_OPTS="-p"
 export LANG=en_US.UTF-8
