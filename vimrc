@@ -66,7 +66,9 @@ nnoremap Y y$
 nnoremap <TAB> gt
 nnoremap <S-TAB> gT
 nnoremap <LEADER><SPACE> :nohlsearch<ENTER>
+nnoremap <LEADER>s :StripWhitespace<ENTER>
 nmap <BS> <C-^>
+nmap <LEADER>c yygccp
 
 inoremap <C-l> <C-o>a
 
