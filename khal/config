@@ -1,25 +1,25 @@
 [calendars]
-    [[Events]]
+    [[0]]
         type = discover
         path = ~/Calendars/rsal*
         color = "#FDF5E3"
-    [[Clubs]]
+    [[1]]
         type = discover
         path = ~/Calendars/k5bm*
         color = "#D33682"
-    [[EE 111L]]
+    [[2]]
         type = discover
         path = ~/Calendars/pi8g*
         color = "#268BD2"
-    [[EE 113]]
+    [[3]]
         type = discover
         path = ~/Calendars/li3q*
         color = "#DC322F"
-    [[EE 110]]
+    [[4]]
         type = discover
         path = ~/Calendars/kikc*
         color = "#859900"
-    [[EE 141]]
+    [[5]]
         type = discover
         path = ~/Calendars/1art*
         color = "#B58900"
