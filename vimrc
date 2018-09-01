@@ -65,8 +65,8 @@ let mapleader="\<SPACE>"
 nnoremap Y y$
 nnoremap <TAB> gt
 nnoremap <S-TAB> gT
-nnoremap <LEADER><SPACE> :nohlsearch<ENTER>
-nnoremap <LEADER>s :StripWhitespace<ENTER>
+nnoremap <LEADER><SPACE> :nohlsearch<CR>
+nnoremap <LEADER>s :StripWhitespace<CR>
 nmap <BS> <C-^>
 nmap <LEADER>c yygccp
 
@@ -74,6 +74,8 @@ inoremap <C-l> <C-o>a
 
 vnoremap < <gv
 vnoremap > >gv
+
+map <LEADER>f :pyf /usr/share/clang/clang-format.py<CR>
 
 
 " Functions
@@ -118,7 +120,7 @@ function! FunctionParameterHint()
     endif
 endfunction
 
-" Use <ENTER> to expand functions or snippets
+" Use <CR> to expand functions or snippets
 function! ExpandFunctionOrSnippet()
     call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
@@ -129,6 +131,12 @@ function! ExpandFunctionOrSnippet()
         endif
     endif
     return ""
+endfunction
+
+" Run clang-format on current file
+function! ClangFormatOnSave()
+    let l:lines="all"
+    pyf /usr/share/clang/clang-format.py
 endfunction
 
 
@@ -151,6 +159,8 @@ augroup CursorLine
     autocmd WinEnter * setl cursorline
     autocmd WinLeave * setl nocursorline
 augroup END
+
+autocmd BufWritePre *.h,*.cc,*.cpp call ClangFormatOnSave()
 
 " Run Neomake automatically on certain filetypes
 autocmd! BufEnter,BufWritePost *.py Neomake
@@ -231,7 +241,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " FZF
-nnoremap <LEADER>p :FZFFiles <ENTER>
+nnoremap <LEADER>p :FZFFiles<CR>
 let g:fzf_nvim_statusline=0
 let g:fzf_command_prefix='FZF'
 let g:fzf_layout={ 'left': '~30%' }
@@ -268,7 +278,7 @@ let g:sneak#s_next=1
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir='~/.config/ultisnips'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/ultisnips']
-let g:UltiSnipsExpandTrigger='<ENTER>'
+let g:UltiSnipsExpandTrigger='<CR>'
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
 autocmd BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=ExpandFunctionOrSnippet()<CR>"
