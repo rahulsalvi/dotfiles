@@ -56,6 +56,12 @@ if executable('rg')
     set grepformat=%f:%l:%c:%m,%f:%l,%m
 endif
 
+if $OS == 'Mac'
+    let g:clang_format_file_path="/opt/local/libexec/llvm-6.0/share/clang/clang-format.py"
+elseif $OS == 'Linux'
+    let g:clang_format_file_path="/usr/share/clang/clang-format.py"
+endif
+
 
 " Key Remappings
 " --------------
@@ -74,8 +80,6 @@ inoremap <C-l> <C-o>a
 
 vnoremap < <gv
 vnoremap > >gv
-
-map <LEADER>f :pyf /usr/share/clang/clang-format.py<CR>
 
 
 " Functions
@@ -134,9 +138,9 @@ function! ExpandFunctionOrSnippet()
 endfunction
 
 " Run clang-format on current file
-function! ClangFormatOnSave()
+function! ClangFormatCurrentFile()
     let l:lines="all"
-    pyf /usr/share/clang/clang-format.py
+    execute "pyf " . fnameescape(g:clang_format_file_path)
 endfunction
 
 
@@ -160,7 +164,9 @@ augroup CursorLine
     autocmd WinLeave * setl nocursorline
 augroup END
 
-autocmd BufWritePre *.h,*.cc,*.cpp call ClangFormatOnSave()
+if exists("g:clang_format_file_path")
+    autocmd BufWritePre *.h,*.cc,*.cpp call ClangFormatCurrentFile()
+endif
 
 " Run Neomake automatically on certain filetypes
 autocmd! BufEnter,BufWritePost *.py Neomake
