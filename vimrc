@@ -18,6 +18,7 @@ set softtabstop=4
 set splitbelow
 set splitright
 set tabstop=4
+set virtualedit=all
 set wildmenu
 
 set nobackup
