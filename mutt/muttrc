@@ -21,4 +21,9 @@ set mailcap_path = ~/.mutt/mailcap
 auto_view text/html
 alternative_order text/plain test/enriched text/html
 
+set sidebar_visible
+bind index,pager \CK sidebar-prev
+bind index,pager \CJ sidebar-next
+bind index,pager \CO sidebar-open
+
 source mutt-colors-solarized-dark-16.muttrc
