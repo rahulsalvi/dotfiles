@@ -18,7 +18,7 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/example]
+[bar/bar0]
 monitor = ${env:MONITOR:DisplayPort-0}
 width = 100%
 height = 27
@@ -69,8 +69,57 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/example2]
+[bar/bar1]
 monitor = ${env:MONITOR:HDMI-A-0}
+width = 100%
+height = 27
+;offset-x = 1%
+;offset-y = 1%
+radius = 6.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Roboto:pixelsize=12;1
+font-1 = Symbola:pixelsize=12;1
+font-2 = NotoColorEmoji:pixelsize=12;1
+
+modules-left = i3
+modules-center = mpd
+modules-right = memory cpu temperature date powermenu
+
+;tray-transparent = true
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/bar2]
+monitor = ${env:MONITOR:HDMI-A-1}
 width = 100%
 height = 27
 ;offset-x = 1%
@@ -385,7 +434,7 @@ ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 
-hwmon-path = /sys/devices/platform/nct6775.656/hwmon/hwmon3/temp2_input
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
 
 [module/powermenu]
 type = custom/menu
