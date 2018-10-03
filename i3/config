@@ -148,12 +148,19 @@ bindsym Mod1+Shift+8 move container to workspace 8
 bindsym Mod1+Shift+9 move container to workspace 9
 bindsym Mod1+Shift+0 move container to workspace 10
 
+bindsym Mod1+Control+c exec "~/.i3/new_workspace"
+bindsym Mod1+Control+n exec "~/.i3/next_workspace"
+bindsym Mod1+Control+p exec "~/.i3/prev_workspace"
+bindsym Mod1+Shift+c exec "~/.i3/move_to_new_workspace"
+bindsym Mod1+Shift+n exec "~/.i3/move_to_next_workspace"
+bindsym Mod1+Shift+p exec "~/.i3/move_to_prev_workspace"
+
 # reload the configuration file
-bindsym Mod1+Shift+c reload
+bindsym Mod1+Control+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym Mod1+Shift+r restart
+bindsym Mod1+Control+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym Mod1+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym Mod1+Control+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 new_window pixel
 new_float pixel
