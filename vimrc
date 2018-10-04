@@ -165,6 +165,7 @@ augroup CursorLine
     autocmd WinLeave * setl nocursorline
 augroup END
 
+" Run clang-format before writing file
 if exists("g:clang_format_file_path")
     autocmd BufWritePre *.h,*.cc,*.cpp call ClangFormatCurrentFile()
 endif
