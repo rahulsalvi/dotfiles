@@ -279,12 +279,11 @@ bindsym Mod1+Shift+g mode $mode_gaps
 # launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-# sync mail and calendar
-exec_always --no-startup-id offlineimap
-exec_always --no-startup-id ~/.vdirsyncer/env/bin/vdirsyncer sync
+# start KeePassXC
+exec_always --no-startup-id ~/.i3/start_keepassxc.sh
 
 # start insync
-exec --no-startup-id insync start
+exec_always --no-startup-id insync start
 
 # start jupyter notebook
-exec --no-startup-id jupyter notebook
+exec_always --no-startup-id jupyter notebook

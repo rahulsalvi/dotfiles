@@ -25,9 +25,6 @@ case "$@" in
     "transmission")
         app_to_run="transmission-qt"
     ;;
-    "wicd")
-        app_to_run="wicd-client"
-    ;;
     "")
         echo "chrome"
         echo "dc"
@@ -40,13 +37,13 @@ case "$@" in
         echo "pavucontrol"
         echo "ranger"
         echo "remmina"
+        echo "seahorse"
         echo "spotify"
         echo "steam"
         echo "termite"
         echo "topydo"
         echo "transmission"
         echo "vlc"
-        echo "wicd"
         echo "yed"
         echo "zathura"
     ;;
