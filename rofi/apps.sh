@@ -26,6 +26,7 @@ case "$@" in
         app_to_run="transmission-qt"
     ;;
     "")
+        echo "arandr"
         echo "chrome"
         echo "dc"
         echo "discord"
