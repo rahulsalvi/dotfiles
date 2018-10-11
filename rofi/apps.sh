@@ -7,6 +7,9 @@ case "$@" in
     "dc")
         app_to_run="SHELL:dc"
     ;;
+    "htop")
+        app_to_run="SHELL:htop"
+    ;;
     "khal")
         app_to_run="SHELL:khal"
     ;;
@@ -30,6 +33,7 @@ case "$@" in
         echo "chrome"
         echo "dc"
         echo "discord"
+        echo "htop"
         echo "keepassxc"
         echo "khal"
         echo "logisim"
