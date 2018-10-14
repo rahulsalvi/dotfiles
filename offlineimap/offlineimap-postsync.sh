@@ -5,7 +5,7 @@ notmuch new
 mail_location="${HOME}/Mail"
 notify_location="${HOME}/Mail/.notified"
 
-new_mail=$(find $mail_location -regex '.*/new/.*')
+new_mail=$(find $mail_location -regex '.*/INBOX/new/.*')
 if [[ -n "$new_mail" ]]; then
     while IFS= read -r line ; do
         stripped=$(echo ${line#$mail_location} | tr / _)

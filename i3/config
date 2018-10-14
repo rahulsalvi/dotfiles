@@ -288,8 +288,5 @@ exec_always --no-startup-id ~/.i3/start_keepassxc.sh
 # start insync
 exec_always --no-startup-id insync start
 
-# start jupyter notebook
-exec_always --no-startup-id jupyter notebook
-
 # lock after 10 mins of inactivity
 exec --no-startup-id xautolock -time 10 -corners ---- -cornersize 10 -locker "/home/rahulsalvi/.i3/lock.sh"
