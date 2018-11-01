@@ -36,7 +36,7 @@ case "$@" in
         echo "htop"
         echo "keepassxc"
         echo "khal"
-        echo "logisim"
+        echo "libreoffice"
         echo "mutt"
         echo "ncmpcpp"
         echo "pavucontrol"
