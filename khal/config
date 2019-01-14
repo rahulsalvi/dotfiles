@@ -9,19 +9,19 @@
         color = "#D33682"
     [[2]]
         type = discover
-        path = ~/Calendars/pi8g*
+        path = ~/Calendars/svgk*
         color = "#268BD2"
     [[3]]
         type = discover
-        path = ~/Calendars/li3q*
+        path = ~/Calendars/bp6b*
         color = "#DC322F"
     [[4]]
         type = discover
-        path = ~/Calendars/kikc*
+        path = ~/Calendars/b6eg*
         color = "#859900"
     [[5]]
         type = discover
-        path = ~/Calendars/1art*
+        path = ~/Calendars/64o0*
         color = "#B58900"
 
 [default]
