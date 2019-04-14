@@ -195,6 +195,7 @@ elseif $OS == 'Linux'
 endif
 
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
+Plug 'https://github.com/arakashic/chromatica.nvim.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/google/yapf.git', { 'rtp': 'plugins/vim', 'for': 'python' }
 Plug 'https://github.com/junegunn/fzf.vim.git'
@@ -203,6 +204,7 @@ Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/neomake/neomake.git'
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
+Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
@@ -241,6 +243,9 @@ try
     colorscheme solarized
 catch
 endtry
+
+" Chromatica
+let g:chromatica#responsive_mode=1
 
 " delimitMate
 let g:delimitMate_expand_cr=1
