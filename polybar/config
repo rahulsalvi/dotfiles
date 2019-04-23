@@ -48,7 +48,7 @@ font-2 = NotoColorEmoji:pixelsize=12;1
 
 modules-left = i3
 modules-center = mpd
-modules-right = memory cpu temperature date powermenu
+modules-right = openvpn memory cpu temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -99,7 +99,7 @@ font-2 = NotoColorEmoji:pixelsize=12;1
 
 modules-left = i3
 modules-center = mpd
-modules-right = memory cpu temperature date powermenu
+modules-right = openvpn memory cpu temperature date powermenu
 
 ;tray-transparent = true
 ;tray-background = #0063ff
@@ -148,7 +148,7 @@ font-2 = NotoColorEmoji:pixelsize=12;1
 
 modules-left = i3
 modules-center = mpd
-modules-right = memory cpu temperature date powermenu
+modules-right = openvpn memory cpu temperature date powermenu
 
 ;tray-transparent = true
 ;tray-background = #0063ff
@@ -464,6 +464,15 @@ menu-2-0 = shutdown
 menu-2-0-exec = shutdown now
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+[module/openvpn]
+type = custom/script
+exec = echo VPN OFF
+exec-if = ! pgrep openvpn
+format-foreground = ${colors.secondary}
+format-background = ${colors.background}
+interval = 1
+click-left = sudo systemctl start openvpn-client@US-California.service
 
 [settings]
 screenchange-reload = true

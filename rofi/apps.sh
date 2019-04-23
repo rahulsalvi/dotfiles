@@ -28,6 +28,12 @@ case "$@" in
     "transmission")
         app_to_run="transmission-qt"
     ;;
+    "vpnoff")
+        app_to_run="sudo systemctl stop openvpn-client@US-California.service"
+    ;;
+    "vpnon")
+        app_to_run="sudo systemctl start openvpn-client@US-California.service"
+    ;;
     "")
         echo "arandr"
         echo "chrome"
@@ -51,6 +57,8 @@ case "$@" in
         echo "topydo"
         echo "transmission"
         echo "vlc"
+        echo "vpnoff"
+        echo "vpnon"
         echo "yed"
         echo "zathura"
     ;;
@@ -60,11 +68,11 @@ case "$@" in
 esac
 
 if [[ "$app_to_run" == SHELL:* ]]; then
-    termite -e ${app_to_run#SHELL:} >/dev/null 2>&1 &
+    eval termite -e ${app_to_run#SHELL:} >/dev/null 2>&1 &
     exit
 fi
 
 if [[ -n "$app_to_run" ]]; then
-    $app_to_run >/dev/null 2>&1 &
+    eval $app_to_run >/dev/null 2>&1 &
     exit
 fi
