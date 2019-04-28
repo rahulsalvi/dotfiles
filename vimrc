@@ -58,7 +58,7 @@ if executable('rg')
 endif
 
 if $OS == 'Mac'
-    let g:clang_format_file_path="/opt/local/libexec/llvm-6.0/share/clang/clang-format.py"
+    let g:clang_format_file_path="/opt/local/libexec/llvm-8.0/share/clang/clang-format.py"
 elseif $OS == 'Linux'
     let g:clang_format_file_path="/usr/share/clang/clang-format.py"
 endif
