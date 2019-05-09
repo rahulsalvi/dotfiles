@@ -25,7 +25,6 @@
         color = "#B58900"
 
 [default]
-default_command = interactive
 highlight_event_days = True
 
 [highlight_days]
