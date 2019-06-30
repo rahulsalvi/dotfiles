@@ -114,10 +114,12 @@ endif
 
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
+Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
 Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/Raimondi/delimitMate.git'
@@ -127,6 +129,7 @@ Plug 'https://github.com/tpope/vim-obsession.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/wellle/targets.vim.git'
+Plug 'https://github.com/w0rp/ale.git'
 
 call plug#end()
 
@@ -138,6 +141,13 @@ call plug#end()
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 colorscheme solarized
+
+" Lightline
+set laststatus=2
+set t_Co=256
+let g:lightline={
+    \ 'colorscheme': 'solarized',
+    \ }
 
 " delimitMate
 let g:delimitMate_expand_cr=1
@@ -154,7 +164,8 @@ let g:fzf_layout={ 'left': '~30%' }
 let g:fzf_action={
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
-    \ 'ctrl-v': 'vsplit' }
+    \ 'ctrl-v': 'vsplit',
+    \ }
 
 " Vim-Better-Whitespace
 highlight ExtraWhitespace ctermbg=darkred guibg=darkred
@@ -163,10 +174,25 @@ let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
 " Sneak
 let g:sneak#s_next=1
 
+" coc
+let g:coc_global_extensions = ['coc-ultisnips']
+
 " UltiSnips
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir='~/.config/ultisnips'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/ultisnips']
-let g:UltiSnipsExpandTrigger='<CR>'
+" let g:UltiSnipsExpandTrigger='<CR>'
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
+
+" ALE
+let g:ale_linters={
+    \ }
+let g:ale_fixers={
+    \ 'c': ['clang-format'],
+    \ 'cpp': ['clang-format']
+    \ }
+let g:ale_linters_explicit=1
+let g:ale_fix_on_save=1
+let g:ale_sign_error = '😡'
+let g:ale_sign_warning = '🤔'
