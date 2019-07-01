@@ -40,8 +40,8 @@ bindsym Mod1+Return exec termite
 # start ncmpcpp
 bindsym Mod1+n exec termite -e ncmpcpp
 
-# start chrome
-bindsym Mod1+c exec google-chrome-stable
+# start firefox
+bindsym Mod1+c exec firefox
 
 # start discord
 bindsym Mod1+m exec discord
@@ -207,8 +207,8 @@ mode "open" {
     # start ncmpcpp
     bindsym n exec termite -e ncmpcpp; mode "default"
 
-    # start chrome
-    bindsym c exec google-chrome-stable; mode "default"
+    # start firefox
+    bindsym c exec firefox; mode "default"
 
     # start discord
     bindsym m exec discord; mode "default"

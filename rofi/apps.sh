@@ -1,9 +1,6 @@
 #!/usr/bin/env zsh
 
 case "$@" in
-    "chrome")
-        app_to_run="google-chrome-stable"
-    ;;
     "dc")
         app_to_run="SHELL:dc"
     ;;
@@ -36,9 +33,9 @@ case "$@" in
     ;;
     "")
         echo "arandr"
-        echo "chrome"
         echo "dc"
         echo "discord"
+        echo "firefox"
         echo "htop"
         echo "keepassxc"
         echo "khal"
