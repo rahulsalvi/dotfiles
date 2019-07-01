@@ -50,8 +50,8 @@ modules-left = i3
 modules-center = mpd
 modules-right = openvpn memory cpu temperature date powermenu
 
-tray-position = right
-tray-padding = 2
+;tray-position = right
+;tray-padding = 2
 ;tray-transparent = true
 ;tray-background = #0063ff
 
@@ -101,6 +101,8 @@ modules-left = i3
 modules-center = mpd
 modules-right = openvpn memory cpu temperature date powermenu
 
+tray-position = right
+tray-padding = 2
 ;tray-transparent = true
 ;tray-background = #0063ff
 
