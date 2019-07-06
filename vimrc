@@ -1,6 +1,5 @@
 " General Settings
 " ----------------
-
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set expandtab
@@ -18,6 +17,7 @@ set softtabstop=4
 set splitbelow
 set splitright
 set tabstop=4
+set updatetime=300
 set virtualedit=all
 set wildmenu
 
@@ -29,11 +29,8 @@ set noswapfile
 set nowrap
 set nowritebackup
 
-
 " Conditional Settings
 " --------------------
-
-" A few different settings in neovim vs. vim
 if has('nvim')
     set inccommand=nosplit
 else
@@ -58,18 +55,13 @@ if executable('rg')
     set grepformat=%f:%l:%c:%m,%f:%l,%m
 endif
 
-
 " Key Remappings
 " --------------
-
 let mapleader="\<SPACE>"
 
 nnoremap Y y$
-nnoremap <TAB> gt
-nnoremap <S-TAB> gT
 nnoremap <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <LEADER>s :StripWhitespace<CR>
-nmap <BS> <C-^>
 nmap <LEADER>c yygccp
 
 inoremap <C-l> <C-o>a
@@ -77,14 +69,85 @@ inoremap <C-l> <C-o>a
 vnoremap < <gv
 vnoremap > >gv
 
+nnoremap <silent> <TAB> :call <SID>n_tab_mapping()<CR>
+nnoremap <silent> <S-TAB> :call <SID>n_shift_tab_mapping()<CR>
+inoremap <silent> <TAB> <C-R>=(<SID>i_tab_mapping())<CR>
+inoremap <silent> <S-TAB> <C-R>=(<SID>i_shift_tab_mapping())<CR>
+inoremap <silent> <CR> <C-R>=(<SID>i_cr_mapping())<CR>
 
 " Functions
 " ---------
+function! s:check_prev_whitespace()
+    let c = col('.') - 1
+    return !c || getline('.')[c - 1] =~# '\W'
+endfunction
 
+let g:ulti_jump_forwards_res = 0
+function! s:ulti_jump_forwards()
+    call UltiSnips#JumpForwards()
+    return g:ulti_jump_forwards_res
+endfunction
+
+let g:ulti_jump_backwards_res = 0
+function! s:ulti_jump_backwards()
+    call UltiSnips#JumpBackwards()
+    return g:ulti_jump_backwards_res
+endfunction
+
+let g:ulti_expand_res = 0
+function! s:ulti_expand_snippet()
+    call UltiSnips#ExpandSnippet()
+    return g:ulti_expand_res
+endfunction
+
+function! s:n_tab_mapping()
+    if <SID>ulti_jump_forwards()
+        return
+    else
+        normal gt
+        return
+    endif
+endfunction
+
+function! s:n_shift_tab_mapping()
+    if <SID>ulti_jump_backwards()
+        return
+    else
+        normal gT
+        return
+    endif
+endfunction
+
+function! s:i_tab_mapping()
+    if pumvisible()
+        return "\<C-n>"
+    elseif <SID>ulti_jump_forwards()
+        return ""
+    elseif <SID>check_prev_whitespace()
+        return "\<TAB>"
+    else
+        return coc#refresh()
+    endif
+endfunction
+
+function! s:i_shift_tab_mapping()
+    if pumvisible()
+        return "\<C-p>"
+    else
+        return UltiSnips#JumpBackwards()
+    endif
+endfunction
+
+function! s:i_cr_mapping()
+    if <SID>ulti_expand_snippet()
+        return ""
+    else
+        return "\<CR>"
+    endif
+endfunction
 
 " Autocommands
 " ------------
-
 " Set filetype to text if not already set
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
@@ -99,12 +162,9 @@ augroup CursorLine
     autocmd WinLeave * setl nocursorline
 augroup END
 
-
 " Plugins
 " -------
-
-" Both vim and neovim can source their plugins from the same directory
-call plug#begin('~/.vim_refresh/plugins')
+call plug#begin('~/.vim/plugins')
 
 if $OS == 'Mac'
     Plug 'https://github.com/junegunn/fzf.git', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -133,10 +193,8 @@ Plug 'https://github.com/w0rp/ale.git'
 
 call plug#end()
 
-
 " Plugin Configurations
 " ---------------------
-
 " Colorscheme
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
@@ -181,9 +239,9 @@ let g:coc_global_extensions = ['coc-ultisnips']
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir='~/.config/ultisnips'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/ultisnips']
-" let g:UltiSnipsExpandTrigger='<CR>'
-let g:UltiSnipsJumpForwardTrigger='<TAB>'
-let g:UltiSnipsJumpBackwardTrigger='<S-TAB>'
+let g:UltiSnipsExpandTrigger='<NOP>'
+let g:UltiSnipsJumpForwardTrigger='<NOP>'
+let g:UltiSnipsJumpBackwardTrigger='<NOP>'
 
 " ALE
 let g:ale_linters={
