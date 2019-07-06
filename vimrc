@@ -64,8 +64,6 @@ nnoremap <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <LEADER>s :StripWhitespace<CR>
 nmap <LEADER>c yygccp
 
-inoremap <C-l> <C-o>a
-
 vnoremap < <gv
 vnoremap > >gv
 
@@ -96,56 +94,37 @@ function! s:ulti_jump_backwards()
     return g:ulti_jump_backwards_res
 endfunction
 
-let g:ulti_expand_res = 0
-function! s:ulti_expand_snippet()
-    call UltiSnips#ExpandSnippet()
-    return g:ulti_expand_res
+let g:ulti_expand_or_jump_res = 0
+function! s:ulti_expand_or_jump()
+    call UltiSnips#ExpandSnippetOrJump()
+    return g:ulti_expand_or_jump_res
 endfunction
 
 function! s:n_tab_mapping()
-    if <SID>ulti_jump_forwards()
-        return
-    else
+    if <SID>ulti_jump_forwards() == 0
         normal gt
-        return
     endif
 endfunction
 
 function! s:n_shift_tab_mapping()
-    if <SID>ulti_jump_backwards()
-        return
-    else
+    if <SID>ulti_jump_backwards() == 0
         normal gT
-        return
     endif
 endfunction
 
 function! s:i_tab_mapping()
-    if pumvisible()
-        return "\<C-n>"
-    elseif <SID>ulti_jump_forwards()
-        return ""
-    elseif <SID>check_prev_whitespace()
-        return "\<TAB>"
-    else
-        return coc#refresh()
-    endif
+    return pumvisible() ? "\<C-n>" :
+         \ <SID>ulti_jump_forwards() ? "" :
+         \ <SID>check_prev_whitespace() ? "\<TAB>" :
+         \ coc#refresh()
 endfunction
 
 function! s:i_shift_tab_mapping()
-    if pumvisible()
-        return "\<C-p>"
-    else
-        return UltiSnips#JumpBackwards()
-    endif
+    return pumvisible() ? "\<C-p>" : UltiSnips#JumpBackwards()
 endfunction
 
 function! s:i_cr_mapping()
-    if <SID>ulti_expand_snippet()
-        return ""
-    else
-        return "\<CR>"
-    endif
+    return <SID>ulti_expand_or_jump() ? "" : "\<CR>"
 endfunction
 
 " Autocommands
@@ -208,9 +187,6 @@ set t_Co=256
 let g:lightline={
     \ 'colorscheme': 'solarized',
     \ }
-
-" delimitMate
-let g:delimitMate_expand_cr=1
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
