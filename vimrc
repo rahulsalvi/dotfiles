@@ -74,6 +74,8 @@ nnoremap <silent> <S-TAB> :call <SID>n_shift_tab_mapping()<CR>
 inoremap <silent> <TAB> <C-R>=(<SID>i_tab_mapping())<CR>
 inoremap <silent> <S-TAB> <C-R>=(<SID>i_shift_tab_mapping())<CR>
 inoremap <silent> <CR> <C-R>=(<SID>i_cr_mapping())<CR>
+snoremap <TAB> <C-g>:<C-u>call UltiSnips#JumpForwards()<CR>
+snoremap <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
 
 " Functions
 " ---------
@@ -242,6 +244,7 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/ultisnips']
 let g:UltiSnipsExpandTrigger='<NOP>'
 let g:UltiSnipsJumpForwardTrigger='<NOP>'
 let g:UltiSnipsJumpBackwardTrigger='<NOP>'
+let g:UltiSnipsRemoveSelectModeMappings=0
 
 " ALE
 let g:ale_linters={
