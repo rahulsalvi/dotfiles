@@ -64,6 +64,8 @@ nnoremap <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <LEADER>s :StripWhitespace<CR>
 nmap <LEADER>c yygccp
 
+inoremap <silent><expr> <C-l> delimitMate#JumpAny()
+
 vnoremap < <gv
 vnoremap > >gv
 
@@ -72,8 +74,8 @@ nnoremap <silent> <S-TAB> :call <SID>n_shift_tab_mapping()<CR>
 inoremap <silent> <TAB> <C-R>=(<SID>i_tab_mapping())<CR>
 inoremap <silent> <S-TAB> <C-R>=(<SID>i_shift_tab_mapping())<CR>
 inoremap <silent> <CR> <C-R>=(<SID>i_cr_mapping())<CR>
-snoremap <TAB> <C-g>:<C-u>call UltiSnips#JumpForwards()<CR>
-snoremap <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
+snoremap <silent> <TAB> <C-g>:<C-u>call UltiSnips#JumpForwards()<CR>
+snoremap <silent> <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
 
 " Functions
 " ---------
@@ -211,15 +213,15 @@ let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
 let g:sneak#s_next=1
 
 " coc
-let g:coc_global_extensions = ['coc-ultisnips']
+let g:coc_global_extensions=['coc-ultisnips']
 
 " UltiSnips
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir='~/.config/ultisnips'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/ultisnips']
-let g:UltiSnipsExpandTrigger='<NOP>'
-let g:UltiSnipsJumpForwardTrigger='<NOP>'
-let g:UltiSnipsJumpBackwardTrigger='<NOP>'
+let g:UltiSnipsExpandTrigger='<F13>'
+let g:UltiSnipsJumpForwardTrigger='<F14>'
+let g:UltiSnipsJumpBackwardTrigger='<F15>'
 let g:UltiSnipsRemoveSelectModeMappings=0
 
 " ALE
