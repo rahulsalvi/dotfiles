@@ -81,7 +81,7 @@ snoremap <silent> <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
 " ---------
 function! s:check_prev_whitespace()
     let c = col('.') - 1
-    return !c || getline('.')[c - 1] =~# '\W'
+    return !c || getline('.')[c - 1] =~# '\s'
 endfunction
 
 let g:ulti_jump_forwards_res = 0
@@ -126,7 +126,9 @@ function! s:i_shift_tab_mapping()
 endfunction
 
 function! s:i_cr_mapping()
-    return <SID>ulti_expand_or_jump() ? "" : "\<CR>"
+    return <SID>ulti_expand_or_jump() ? "" :
+         \ pumvisible() ? "\<C-]>" :
+         \ "\<CR>"
 endfunction
 
 " Autocommands
