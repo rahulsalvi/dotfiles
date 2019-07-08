@@ -228,6 +228,8 @@ let g:UltiSnipsRemoveSelectModeMappings=0
 
 " ALE
 let g:ale_linters={
+    \ 'c': ['cppcheck'],
+    \ 'cpp': ['cppcheck']
     \ }
 let g:ale_fixers={
     \ 'c': ['clang-format'],
