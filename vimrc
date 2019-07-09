@@ -62,6 +62,9 @@ let mapleader="\<SPACE>"
 nnoremap Y y$
 nnoremap <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <LEADER>s :StripWhitespace<CR>
+nmap <LEADER>j <Plug>(coc-git-nextchunk)
+nmap <LEADER>k <Plug>(coc-git-prevchunk)
+nnoremap <LEADER>gs :CocCommand git.chunkStage<CR>
 nmap <LEADER>c yygccp
 
 inoremap <silent><expr> <C-l> delimitMate#JumpAny()
@@ -215,7 +218,9 @@ let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
 let g:sneak#s_next=1
 
 " coc
-let g:coc_global_extensions=['coc-ultisnips']
+let g:coc_global_extensions=['coc-git',
+                           \ 'coc-ultisnips'
+                           \ ]
 
 " UltiSnips
 let g:UltiSnipsEditSplit='vertical'
