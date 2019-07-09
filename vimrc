@@ -134,8 +134,50 @@ function! s:i_cr_mapping()
          \ "\<CR>"
 endfunction
 
+" function parameter hints using UltiSnips
+function! s:function_parameter_hint()
+    if !exists('v:completed_item') || empty(v:completed_item)
+        return
+    endif
+    if v:completed_item.word == ''
+        return
+    endif
+    let abbr = v:completed_item.abbr
+    let startIdx = match(abbr,"(")
+    let endIdx = match(abbr,")")
+    let angle = 0
+    if startIdx == -1 || endIdx == -1
+        let startIdx = match(abbr,"<")
+        let endIdx = match(abbr,">")
+        let angle = 1
+    endif
+    if endIdx - startIdx > 1
+        let argsStr = strpart(abbr, startIdx+1, endIdx-startIdx-1)
+        let argsList = split(argsStr, ",")
+        let snippet = angle ? "<" : "("
+        let c = 1
+        for i in argsList
+            if c > 1
+                let snippet = snippet. ", "
+            endif
+            " strip space
+            let arg = substitute(i, '^\s*\(.\{-}\)\s*$', '\1', '')
+            let snippet = snippet . '${'.c.":".arg.'}'
+            let c += 1
+        endfor
+        let snippet = angle ? snippet.">$0" : snippet.")$0"
+        call UltiSnips#Anon(snippet)
+    elseif endIdx - startIdx == 1
+        call UltiSnips#Anon("()$0")
+    endif
+endfunction
+
 " Autocommands
 " ------------
+
+" Give function parameter hints after finishing completion
+autocmd CompleteDone * call <SID>function_parameter_hint()
+
 " Set filetype to text if not already set
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
