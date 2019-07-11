@@ -134,6 +134,19 @@ function! s:i_cr_mapping()
          \ "\<CR>"
 endfunction
 
+function! GitInfo()
+    let branch = get(g:, 'coc_git_status', '')
+    let status = get(b:, 'coc_git_status', '')
+    let status = substitute(status, '  ', '', '')
+    return status . branch
+endfunction
+
+function! LightlineFilename()
+    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    let modified = &modified ? ' +' : ''
+    return filename . modified
+endfunction
+
 " function parameter hints using UltiSnips
 function! s:function_parameter_hint()
     if !exists('v:completed_item') || empty(v:completed_item)
@@ -235,6 +248,22 @@ set laststatus=2
 set t_Co=256
 let g:lightline={
     \ 'colorscheme': 'solarized',
+    \ 'active':{
+    \   'left':[['mode','paste'],['readonly','filename']],
+    \   'right':[['lineinfo'],['fileencoding','fileformat','filetype'],['git']]
+    \ },
+    \ 'component_function':{
+    \   'filename':'LightlineFilename',
+    \   'git':'GitInfo',
+    \ },
+    \ 'separator':{
+    \   'left':'',
+    \   'right':''
+    \ },
+    \ 'subseparator':{
+    \   'left':'',
+    \   'right':''
+    \ }
     \ }
 
 " EasyAlign

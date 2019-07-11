@@ -1,6 +1,7 @@
 {
     "diagnostic.errorSign": "😡",
     "diagnostic.warningSign": "🤔",
+    "git.realtimeGutters": false,
     "languageserver": {
         "ccls": {
             "command": "ccls",
