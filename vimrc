@@ -60,11 +60,14 @@ endif
 let mapleader="\<SPACE>"
 
 nnoremap Y y$
-nnoremap <LEADER><SPACE> :nohlsearch<CR>
-nnoremap <LEADER>s :StripWhitespace<CR>
-nmap <LEADER>j <Plug>(coc-git-nextchunk)
-nmap <LEADER>k <Plug>(coc-git-prevchunk)
-nnoremap <LEADER>gs :CocCommand git.chunkStage<CR>
+nnoremap <silent> <LEADER><SPACE> :nohlsearch<CR>
+nnoremap <silent> <LEADER>s :StripWhitespace<CR>
+nmap <silent> <LEADER>j <Plug>(coc-git-nextchunk)
+nmap <silent> <LEADER>k <Plug>(coc-git-prevchunk)
+nmap <silent> <LEADER>d <Plug>(coc-definition)
+nmap <silent> <LEADER>i <Plug>(coc-implementation)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
 nmap <LEADER>c yygccp
 
 inoremap <silent><expr> <C-l> delimitMate#JumpAny()
@@ -85,6 +88,14 @@ snoremap <silent> <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
 function! s:check_prev_whitespace()
     let c = col('.') - 1
     return !c || getline('.')[c - 1] =~# '\s'
+endfunction
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 let g:ulti_jump_forwards_res = 0
@@ -191,6 +202,9 @@ endfunction
 " Give function parameter hints after finishing completion
 autocmd CompleteDone * call <SID>function_parameter_hint()
 
+" Highlight hovered text
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " Set filetype to text if not already set
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
@@ -292,6 +306,7 @@ let g:sneak#s_next=1
 let g:coc_global_extensions=['coc-git',
                            \ 'coc-ultisnips'
                            \ ]
+highlight CocHighlightText ctermfg=White ctermbg=DarkMagenta
 
 " UltiSnips
 let g:UltiSnipsEditSplit='vertical'
