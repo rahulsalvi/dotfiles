@@ -72,11 +72,11 @@ inoremap <silent><expr> <C-l> delimitMate#JumpAny()
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <silent> <TAB> :call <SID>n_tab_mapping()<CR>
-nnoremap <silent> <S-TAB> :call <SID>n_shift_tab_mapping()<CR>
-inoremap <silent> <TAB> <C-R>=(<SID>i_tab_mapping())<CR>
-inoremap <silent> <S-TAB> <C-R>=(<SID>i_shift_tab_mapping())<CR>
-inoremap <silent> <CR> <C-R>=(<SID>i_cr_mapping())<CR>
+nnoremap <silent> <TAB> :call <SID>n_tab()<CR>
+nnoremap <silent> <S-TAB> :call <SID>n_stab()<CR>
+inoremap <silent> <TAB> <C-R>=(<SID>i_tab())<CR>
+inoremap <silent> <S-TAB> <C-R>=(<SID>i_stab())<CR>
+inoremap <silent> <CR> <C-R>=(<SID>i_cr())<CR>
 snoremap <silent> <TAB> <C-g>:<C-u>call UltiSnips#JumpForwards()<CR>
 snoremap <silent> <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
 
@@ -105,36 +105,36 @@ function! s:ulti_expand_or_jump()
     return g:ulti_expand_or_jump_res
 endfunction
 
-function! s:n_tab_mapping()
+function! s:n_tab()
     if <SID>ulti_jump_forwards() == 0
         normal gt
     endif
 endfunction
 
-function! s:n_shift_tab_mapping()
+function! s:n_stab()
     if <SID>ulti_jump_backwards() == 0
         normal gT
     endif
 endfunction
 
-function! s:i_tab_mapping()
+function! s:i_tab()
     return pumvisible() ? "\<C-n>" :
          \ <SID>ulti_jump_forwards() ? "" :
          \ <SID>check_prev_whitespace() ? "\<TAB>" :
          \ coc#refresh()
 endfunction
 
-function! s:i_shift_tab_mapping()
+function! s:i_stab()
     return pumvisible() ? "\<C-p>" : UltiSnips#JumpBackwards()
 endfunction
 
-function! s:i_cr_mapping()
+function! s:i_cr()
     return <SID>ulti_expand_or_jump() ? "" :
          \ pumvisible() ? "\<C-]>" :
          \ "\<CR>"
 endfunction
 
-function! GitInfo()
+function! LightlineGitInfo()
     let branch = get(g:, 'coc_git_status', '')
     let status = get(b:, 'coc_git_status', '')
     let status = substitute(status, '  ', '', '')
@@ -254,7 +254,7 @@ let g:lightline={
     \ },
     \ 'component_function':{
     \   'filename':'LightlineFilename',
-    \   'git':'GitInfo',
+    \   'git':'LightlineGitInfo',
     \ },
     \ 'separator':{
     \   'left':'',
