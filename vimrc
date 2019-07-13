@@ -141,6 +141,7 @@ endfunction
 
 function! s:i_cr()
     return <SID>ulti_expand_or_jump() ? "" :
+         \ delimitMate#WithinEmptyPair() ? delimitMate#ExpandReturn() :
          \ pumvisible() ? "\<C-]>" :
          \ "\<CR>"
 endfunction
