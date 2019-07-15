@@ -59,10 +59,10 @@ bindsym Mod1+t exec termite -e "/home/rahulsalvi/.local/bin/topydo columns"
 bindsym Mod1+Control+Escape exec ~/.i3/lock.sh
 
 # media key bindings
-bindsym XF86AudioPlay exec mpc toggle
-bindsym XF86AudioStop exec mpc stop
-bindsym XF86AudioPrev exec mpc prev
-bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
 
 # kill focused window
 bindsym Mod1+q kill
