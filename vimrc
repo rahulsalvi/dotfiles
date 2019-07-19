@@ -13,6 +13,7 @@ set selection=exclusive
 set shiftwidth=4
 set showcmd
 set sidescroll=1
+set signcolumn=yes
 set softtabstop=4
 set splitbelow
 set splitright
@@ -257,6 +258,7 @@ call plug#end()
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 colorscheme solarized
+highlight SignColumn ctermbg=None
 
 " Lightline
 set laststatus=2
