@@ -233,6 +233,7 @@ endif
 
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
@@ -248,7 +249,6 @@ Plug 'https://github.com/tpope/vim-obsession.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/wellle/targets.vim.git'
-Plug 'https://github.com/w0rp/ale.git'
 
 call plug#end()
 
@@ -307,7 +307,8 @@ let g:sneak#s_next=1
 
 " coc
 let g:coc_global_extensions=['coc-git',
-                           \ 'coc-ultisnips'
+                           \ 'coc-ultisnips',
+                           \ 'coc-python'
                            \ ]
 highlight CocHighlightText ctermfg=White ctermbg=DarkMagenta
 
@@ -323,13 +324,16 @@ let g:UltiSnipsRemoveSelectModeMappings=0
 " ALE
 let g:ale_linters={
     \ 'c': ['cppcheck'],
-    \ 'cpp': ['cppcheck']
+    \ 'cpp': ['cppcheck'],
+    \ 'python': ['pylint']
     \ }
 let g:ale_fixers={
     \ 'c': ['clang-format'],
-    \ 'cpp': ['clang-format']
+    \ 'cpp': ['clang-format'],
+    \ 'python': ['yapf']
     \ }
 let g:ale_linters_explicit=1
 let g:ale_fix_on_save=1
 let g:ale_sign_error = '😡'
 let g:ale_sign_warning = '🤔'
+let g:ale_echo_msg_format='[%linter%] %code: %%s'

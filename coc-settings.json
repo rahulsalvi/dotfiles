@@ -14,5 +14,7 @@
                 }
             }
         }
-    }
+    },
+    "python.formatting.provider": "",
+    "python.linting.enabled": false,
 }
