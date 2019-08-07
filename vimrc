@@ -59,6 +59,7 @@ endif
 " Key Remappings
 " --------------
 let mapleader="\<SPACE>"
+let maplocalleader="\<SPACE>"
 
 nnoremap Y y$
 nnoremap <silent> <LEADER><SPACE> :nohlsearch<CR>
@@ -235,6 +236,8 @@ Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/itchyny/lightline.vim.git'
+Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight.git'
+Plug 'https://github.com/jceb/vim-orgmode.git'
 Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
@@ -283,6 +286,9 @@ let g:lightline={
     \ }
     \ }
 
+" vim-orgmode
+let g:org_todo_keywords = [['TODO(t)', '|', 'DONE(d)']]
+
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -325,12 +331,14 @@ let g:UltiSnipsRemoveSelectModeMappings=0
 let g:ale_linters={
     \ 'c': ['cppcheck'],
     \ 'cpp': ['cppcheck'],
-    \ 'python': ['pylint']
+    \ 'python': ['pylint'],
+    \ 'sh': ['shellcheck'],
     \ }
 let g:ale_fixers={
     \ 'c': ['clang-format'],
     \ 'cpp': ['clang-format'],
-    \ 'python': ['yapf']
+    \ 'python': ['yapf'],
+    \ 'sh': ['shfmt'],
     \ }
 let g:ale_linters_explicit=1
 let g:ale_fix_on_save=1
