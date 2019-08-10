@@ -1,6 +1,6 @@
 [topydo]
-filename = ~/GDrive/todo/todo.txt
-archive_filename = ~/GDrive/todo/done.txt
+filename = ~/todo/todo.txt
+archive_filename = ~/todo/done.txt
 
 [columns]
 column_width = 33

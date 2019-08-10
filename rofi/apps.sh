@@ -8,7 +8,7 @@ case "$@" in
         app_to_run="SHELL:htop"
     ;;
     "khal")
-        app_to_run="SHELL:khal"
+        app_to_run="SHELL:ikhal"
     ;;
     "mutt")
         app_to_run="SHELL:neomutt"
@@ -18,6 +18,9 @@ case "$@" in
     ;;
     "ranger")
         app_to_run="SHELL:ranger"
+    ;;
+    "todo")
+        app_to_run="SHELL:nvim /home/rahulsalvi/todo/todo.org"
     ;;
     "topydo")
         app_to_run="SHELL:topydo columns"
@@ -51,6 +54,7 @@ case "$@" in
         echo "spotify"
         echo "steam"
         echo "termite"
+        echo "todo"
         echo "topydo"
         echo "transmission"
         echo "vlc"
@@ -65,7 +69,7 @@ case "$@" in
 esac
 
 if [[ "$app_to_run" == SHELL:* ]]; then
-    eval termite -e ${app_to_run#SHELL:} >/dev/null 2>&1 &
+    eval termite -e '${app_to_run#SHELL:}' >/dev/null 2>&1 &
     exit
 fi
 

@@ -52,8 +52,8 @@ bindsym Mod1+z exec termite -e neomutt
 # start khal
 bindsym Mod1+x exec termite -e "ikhal"
 
-# start topydo
-bindsym Mod1+t exec termite -e "/home/rahulsalvi/.local/bin/topydo columns"
+# start todo
+bindsym Mod1+t exec termite -e "nvim /home/rahulsalvi/todo/todo.org"
 
 # lock
 bindsym Mod1+Control+Escape exec ~/.i3/lock.sh

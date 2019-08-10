@@ -71,6 +71,7 @@ nmap <silent> <LEADER>i <Plug>(coc-implementation)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
 nmap <LEADER>c yygccp
+nnoremap <LEADER>ol :Utl<CR>
 
 inoremap <silent><expr> <C-l> delimitMate#JumpAny()
 
@@ -222,6 +223,8 @@ augroup CursorLine
     autocmd WinLeave * setl nocursorline
 augroup END
 
+autocmd FileType org setlocal foldlevel=1
+
 " Plugins
 " -------
 call plug#begin('~/.vim/plugins')
@@ -237,7 +240,7 @@ Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight.git'
-Plug 'https://github.com/jceb/vim-orgmode.git'
+Plug 'https://github.com/rahulsalvi/vim-orgmode.git'
 Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
@@ -251,6 +254,7 @@ Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-obsession.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-surround.git'
+Plug 'https://github.com/vim-scripts/utl.vim.git'
 Plug 'https://github.com/wellle/targets.vim.git'
 
 call plug#end()
@@ -262,6 +266,7 @@ let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 colorscheme solarized
 highlight SignColumn ctermbg=None
+highlight Folded cterm=bold ctermbg=None
 
 " Lightline
 set laststatus=2
@@ -287,7 +292,14 @@ let g:lightline={
     \ }
 
 " vim-orgmode
-let g:org_todo_keywords = [['TODO(t)', '|', 'DONE(d)']]
+let g:org_agenda_files = ['~/todo/*.org']
+let g:org_todo_keywords = [
+    \ ['TODO(t)', 'IN_PROGRESS(i)', '|', 'DONE(d)'],
+    \ ['PLANNED(p)', 'PARTS_READY(r)', 'WORKING(w)', '|', 'DONE(d)'],
+    \ ]
+let g:org_prefer_insert_mode = 0
+let g:org_indent = 1
+let g:org_heading_shade_leading_stars = 0
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
