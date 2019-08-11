@@ -161,9 +161,14 @@ function! LightlineGitInfo()
 endfunction
 
 function! LightlineFilename()
-    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
     let modified = &modified ? ' +' : ''
-    return filename . modified
+    let root = fnamemodify(get(b:, 'git_dir'), ':h')
+    let path = expand('%:p')
+    if path[:len(root)-1] ==# root
+        return path[len(root)+1:] . modified
+    endif
+        let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+        return filename . modified
 endfunction
 
 " function parameter hints using UltiSnips
