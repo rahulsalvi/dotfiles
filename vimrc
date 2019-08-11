@@ -62,6 +62,7 @@ let mapleader="\<SPACE>"
 let maplocalleader="\<SPACE>"
 
 nnoremap Y y$
+nnoremap <LEADER>p :FZFFiles<CR>
 nnoremap <silent> <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <silent> <LEADER>s :StripWhitespace<CR>
 nmap <silent> <LEADER>j <Plug>(coc-git-nextchunk)
@@ -308,7 +309,6 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " FZF
-nnoremap <LEADER>p :FZFFiles<CR>
 let g:fzf_nvim_statusline=0
 let g:fzf_command_prefix='FZF'
 let g:fzf_layout={ 'left': '~30%' }
