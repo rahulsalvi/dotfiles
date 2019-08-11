@@ -163,12 +163,16 @@ endfunction
 function! LightlineFilename()
     let modified = &modified ? ' +' : ''
     let root = fnamemodify(get(b:, 'git_dir'), ':h')
+    let fugitive_root = 'fugitive://' . root
     let path = expand('%:p')
     if path[:len(root)-1] ==# root
         return path[len(root)+1:] . modified
-    endif
+    elseif path[:len(fugitive_root)-1] ==# fugitive_root
+        return path[len(fugitive_root)+1:] . modified
+    else
         let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
         return filename . modified
+    endif
 endfunction
 
 " function parameter hints using UltiSnips
