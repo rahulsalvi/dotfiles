@@ -71,7 +71,10 @@ nmap <silent> <LEADER>i <Plug>(coc-implementation)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
 nmap <LEADER>c yygccp
-nnoremap <LEADER>ol :Utl<CR>
+nnoremap <silent> <LEADER>le :Utl openLink underCursor e<CR>
+nnoremap <silent> <LEADER>lv :Utl openLink underCursor vsp<CR>
+nnoremap <silent> <LEADER>ls :Utl openLink underCursor sp<CR>
+nnoremap <silent> <LEADER>lt :Utl openLink underCursor tabe<CR>
 
 inoremap <silent><expr> <C-l> delimitMate#JumpAny()
 
@@ -298,7 +301,6 @@ let g:org_todo_keywords = [
     \ ['PLANNED(p)', 'PARTS_READY(r)', 'WORKING(w)', '|', 'DONE(d)'],
     \ ]
 let g:org_prefer_insert_mode = 0
-let g:org_indent = 1
 let g:org_heading_shade_leading_stars = 0
 
 " EasyAlign
