@@ -234,6 +234,8 @@ augroup END
 
 autocmd FileType org setlocal foldlevel=1
 
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
 " Plugins
 " -------
 call plug#begin('~/.vim/plugins')
