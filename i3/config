@@ -50,7 +50,7 @@ bindsym Mod1+z exec termite -e neomutt
 bindsym Mod1+x exec termite -e "ikhal"
 
 # start todo
-bindsym Mod1+t exec termite -e "nvim /home/rahulsalvi/todo/todo.org"
+bindsym Mod1+t exec termite -d "/home/rahulsalvi/todo" -e "nvim todo.org"
 
 # lock
 bindsym Mod1+Control+Escape exec ~/.i3/lock.sh
