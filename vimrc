@@ -323,7 +323,7 @@ nmap ga <Plug>(EasyAlign)
 " FZF
 let g:fzf_nvim_statusline=0
 let g:fzf_command_prefix='FZF'
-let g:fzf_layout={ 'left': '~30%' }
+let g:fzf_layout={ 'down': '~40%' }
 let g:fzf_action={
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
