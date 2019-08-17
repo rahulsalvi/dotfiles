@@ -26,7 +26,7 @@ endsnippet
 # ---------
 
 snippet mfun "class member function"
-${4:void} ${1:`!v expand('%:r')`}::$2($3) {
+${4:void} ${1:`!v expand('%:t:r')`}::$2($3) {
 	$0
 }
 endsnippet
@@ -35,7 +35,7 @@ endsnippet
 # -----
 
 snippet class "C++ class"
-class ${1:`!v expand('%:r')`} {
+class ${1:`!v expand('%:t:r')`} {
 	public:
 		$1();
 		~$1();

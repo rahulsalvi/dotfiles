@@ -56,7 +56,7 @@ endsnippet
 
 # header ifndef guard
 snippet guard "header guard"
-#ifndef ${1:`!v toupper(expand('%:r'))`_`!v toupper(expand('%:e'))`}
+#ifndef ${1:`!v toupper(expand('%:t:r'))`_`!v toupper(expand('%:e'))`}
 #define $1
 $0
 #endif // $1
