@@ -13,9 +13,7 @@
                     "directory": "/tmp/ccls"
                 }
             }
-        }
-    },
-    "languageserver": {
+        },
         "bash": {
             "command": "bash-language-server",
             "args": ["start"],
