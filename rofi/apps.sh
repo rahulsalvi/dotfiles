@@ -70,10 +70,10 @@ esac
 
 if [[ "$app_to_run" == SHELL:* ]]; then
     eval termite -e '${app_to_run#SHELL:}' >/dev/null 2>&1 &
-    exit
+    exit 0
 fi
 
 if [[ -n "$app_to_run" ]]; then
-    eval $app_to_run >/dev/null 2>&1 &
-    exit
+    $app_to_run >/dev/null 2>&1 &
+    exit 0
 fi
