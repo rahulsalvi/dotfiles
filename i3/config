@@ -53,7 +53,7 @@ bindsym Mod1+x exec termite -e "ikhal"
 bindsym Mod1+t exec termite -d "/home/rahulsalvi/todo" -e "nvim todo.org"
 
 # lock
-bindsym Mod1+Control+Escape exec ~/.i3/lock.sh
+bindsym Mod1+Control+Escape exec xset s activate
 
 # media key bindings
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -292,4 +292,5 @@ exec_always --no-startup-id radeon-profile
 exec_always --no-startup-id discord
 
 # lock after 30 mins of inactivity
-exec --no-startup-id xautolock -time 30 -corners ---- -cornersize 10 -locker "/home/rahulsalvi/.i3/lock.sh"
+exec_always --no-startup-id xset s 1800 0
+exec_always --no-startup-id xss-lock "/home/rahulsalvi/.i3/lock.sh"
