@@ -19,6 +19,9 @@ case "$@" in
     "ranger")
         app_to_run="SHELL:ranger"
     ;;
+    "sensors")
+        app_to_run="SHELL:watch sensors"
+    ;;
     "todo")
         app_to_run="SHELL:nvim /home/rahulsalvi/todo/todo.org"
     ;;
@@ -51,6 +54,7 @@ case "$@" in
         echo "ranger"
         echo "remmina"
         echo "seahorse"
+        echo "sensors"
         echo "spotify"
         echo "steam"
         echo "termite"
