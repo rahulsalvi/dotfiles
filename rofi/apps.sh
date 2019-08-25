@@ -13,8 +13,8 @@ case "$@" in
     "mutt")
         app_to_run="SHELL:neomutt"
     ;;
-    "ncmpcpp")
-        app_to_run="SHELL:ncmpcpp"
+    "python")
+        app_to_run="SHELL:python"
     ;;
     "ranger")
         app_to_run="SHELL:ranger"
@@ -48,8 +48,8 @@ case "$@" in
         echo "kicad"
         echo "libreoffice"
         echo "mutt"
-        echo "ncmpcpp"
         echo "pavucontrol"
+        echo "python"
         echo "radeon-profile"
         echo "ranger"
         echo "remmina"
