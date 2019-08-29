@@ -229,6 +229,12 @@ mode "open" {
 
 bindsym Mod1+o mode "open"
 
+mode "passthrough" {
+    bindsym Mod1+Control+Shift+F10 mode "default"
+}
+
+bindsym Mod1+Control+Shift+F10 mode "passthrough"
+
 gaps inner 5
 gaps outer 0
 
