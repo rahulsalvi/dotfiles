@@ -8,10 +8,10 @@ case "$@" in
         app_to_run="SHELL:htop"
     ;;
     "khal")
-        app_to_run="SHELL:ikhal"
+        app_to_run="SHELL:khal"
     ;;
     "mutt")
-        app_to_run="SHELL:neomutt"
+        app_to_run="SHELL:mutt"
     ;;
     "python")
         app_to_run="SHELL:python"
@@ -20,13 +20,10 @@ case "$@" in
         app_to_run="SHELL:ranger"
     ;;
     "sensors")
-        app_to_run="SHELL:watch sensors"
+        app_to_run="SHELL:sensors"
     ;;
     "todo")
-        app_to_run="SHELL:nvim /home/rahulsalvi/todo/todo.org"
-    ;;
-    "topydo")
-        app_to_run="SHELL:topydo columns"
+        app_to_run="SHELL:todo"
     ;;
     "transmission")
         app_to_run="transmission-qt"
@@ -57,9 +54,7 @@ case "$@" in
         echo "sensors"
         echo "spotify"
         echo "steam"
-        echo "termite"
         echo "todo"
-        echo "topydo"
         echo "transmission"
         echo "vlc"
         echo "vpnoff"
@@ -73,7 +68,7 @@ case "$@" in
 esac
 
 if [[ "$app_to_run" == SHELL:* ]]; then
-    eval termite -e '${app_to_run#SHELL:}' >/dev/null 2>&1 &
+    eval kitty --session ~/.kitty/'${app_to_run#SHELL:}'.kitty >/dev/null 2>&1 &
     exit 0
 fi
 

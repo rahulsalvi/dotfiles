@@ -35,8 +35,8 @@ set $right l
 floating_modifier Mod1
 
 # start a terminal
-bindsym Mod1+Return exec termite
-
+bindsym Mod1+Return exec kitty
+#
 # start firefox
 bindsym Mod1+c exec firefox
 
@@ -44,13 +44,13 @@ bindsym Mod1+c exec firefox
 bindsym Mod1+m exec discord
 
 # start neomutt
-bindsym Mod1+z exec termite -e neomutt
+bindsym Mod1+z exec kitty --session ~/.kitty/mutt.kitty
 
 # start khal
-bindsym Mod1+x exec termite -e "ikhal"
+bindsym Mod1+x exec kitty --session ~/.kitty/khal.kitty
 
 # start todo
-bindsym Mod1+t exec termite -d "/home/rahulsalvi/todo" -e "nvim todo.org"
+bindsym Mod1+t exec kitty --session ~/.kitty/todo.kitty
 
 # lock
 bindsym Mod1+Control+Escape exec xset s activate
@@ -199,10 +199,7 @@ bindsym Mod1+r mode "resize"
 
 mode "open" {
     # start a terminal
-    bindsym Return exec termite; mode "default"
-
-    # start ncmpcpp
-    bindsym n exec termite -e ncmpcpp; mode "default"
+    bindsym Return exec kitty; mode "default"
 
     # start firefox
     bindsym c exec firefox; mode "default"
@@ -211,13 +208,13 @@ mode "open" {
     bindsym m exec discord; mode "default"
 
     # start neomutt
-    bindsym z exec termite -e neomutt; mode "default"
+    bindsym z exec kitty --session ~/.kitty/mutt.kitty; mode "default"
 
     # start khal
-    bindsym x exec termite -e khal; mode "default"
+    bindsym x exec kitty --session ~/.kitty/khal.kitty; mode "default"
 
-    # start topydo
-    bindsym t exec termite -e "topydo columns"; mode "default"
+    # start todo
+    bindsym t exec kitty --session ~/.kitty/todo.kitty; mode "default"
 
     # start steam
     bindsym s exec steam; mode "default"
