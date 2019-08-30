@@ -397,7 +397,8 @@ let g:neoterm_default_mod='botright'
 " coc
 let g:coc_global_extensions=['coc-git',
                            \ 'coc-ultisnips',
-                           \ 'coc-python'
+                           \ 'coc-python',
+                           \ 'coc-texlab'
                            \ ]
 highlight CocHighlightText ctermfg=White ctermbg=DarkMagenta
 
