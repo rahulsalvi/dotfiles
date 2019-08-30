@@ -41,6 +41,7 @@ case "$@" in
         echo "firefox"
         echo "htop"
         echo "keepassxc"
+        echo "kitty"
         echo "khal"
         echo "kicad"
         echo "libreoffice"
