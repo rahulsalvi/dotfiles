@@ -61,27 +61,39 @@ endif
 let mapleader="\<SPACE>"
 let maplocalleader="\<SPACE>"
 
+" general
 nnoremap Y y$
 nnoremap <LEADER>p :FZFFiles<CR>
+nmap <LEADER>c yygccp
 nnoremap <silent> <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <silent> <LEADER>s :StripWhitespace<CR>
+inoremap <silent><expr> <C-l> delimitMate#JumpAny()
+
+" coc
 nmap <silent> <LEADER>j <Plug>(coc-git-nextchunk)
 nmap <silent> <LEADER>k <Plug>(coc-git-prevchunk)
 nmap <silent> <LEADER>d <Plug>(coc-definition)
 nmap <silent> <LEADER>i <Plug>(coc-implementation)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
-nmap <LEADER>c yygccp
+
+" links
 nnoremap <silent> <LEADER>le :Utl openLink underCursor e<CR>
 nnoremap <silent> <LEADER>lv :Utl openLink underCursor vsp<CR>
 nnoremap <silent> <LEADER>ls :Utl openLink underCursor sp<CR>
 nnoremap <silent> <LEADER>lt :Utl openLink underCursor tabe<CR>
 
-inoremap <silent><expr> <C-l> delimitMate#JumpAny()
+" terminal
+nnoremap <silent> <LEADER>tsi :call <SID>neoterm_shell()<CR>
+nnoremap <silent> <LEADER>tsm :call <SID>neoterm_shell_make()<CR>
+nnoremap <silent> <LEADER>tpi :call <SID>neoterm_python()<CR>
+nnoremap <silent> <LEADER>tpm :call <SID>neoterm_python_main()<CR>
+nnoremap <silent> <LEADER>tpc :call <SID>neoterm_python_current()<CR>
+nnoremap <silent> <LEADER>tt :Ttoggle<CR>
+nnoremap <silent> <LEADER>tc :Tclose!<CR>
+tnoremap <Esc> <C-\><C-n>
 
-vnoremap < <gv
-vnoremap > >gv
-
+" tab/cr keys
 nnoremap <silent> <TAB> :call <SID>n_tab()<CR>
 nnoremap <silent> <S-TAB> :call <SID>n_stab()<CR>
 inoremap <silent> <TAB> <C-R>=(<SID>i_tab())<CR>
@@ -89,6 +101,10 @@ inoremap <silent> <S-TAB> <C-R>=(<SID>i_stab())<CR>
 inoremap <silent> <CR> <C-R>=(<SID>i_cr())<CR>
 snoremap <silent> <TAB> <C-g>:<C-u>call UltiSnips#JumpForwards()<CR>
 snoremap <silent> <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
+
+" visual
+vnoremap < <gv
+vnoremap > >gv
 
 " Functions
 " ---------
@@ -213,6 +229,41 @@ function! s:function_parameter_hint()
     endif
 endfunction
 
+function! s:neoterm_start(shell)
+    let prev = g:neoterm_shell
+    let g:neoterm_shell = a:shell
+    execute 'Tnew'
+    let g:neoterm_shell = prev
+endfunction
+
+function! s:neoterm_exec(shell, cmd)
+    let prev = g:neoterm_shell
+    let g:neoterm_shell = a:shell
+    execute 'T ' . a:cmd
+    let g:neoterm_shell = prev
+endfunction
+
+function! s:neoterm_shell()
+    call <SID>neoterm_start(&shell)
+endfunction
+
+function! s:neoterm_shell_make()
+    call <SID>neoterm_exec(&shell, "make")
+endfunction
+
+function! s:neoterm_python()
+    call <SID>neoterm_start("python")
+endfunction
+
+function! s:neoterm_python_main()
+    call <SID>neoterm_exec("python", "from main import *")
+endfunction
+
+function! s:neoterm_python_current()
+    let cur_file = expand('%:t:r')
+    call <SID>neoterm_exec("python", "from " . cur_file . " import *")
+endfunction
+
 " Autocommands
 " ------------
 
@@ -259,6 +310,7 @@ Plug 'https://github.com/rahulsalvi/vim-orgmode.git'
 Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
+Plug 'https://github.com/kassio/neoterm.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
@@ -336,6 +388,11 @@ let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
 
 " Sneak
 let g:sneak#s_next=1
+
+" neoterm
+let g:neoterm_size='20%'
+let g:neoterm_autojump=1
+let g:neoterm_default_mod='botright'
 
 " coc
 let g:coc_global_extensions=['coc-git',
