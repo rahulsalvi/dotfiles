@@ -417,6 +417,7 @@ let g:ale_linters={
     \ 'cpp': ['cppcheck'],
     \ 'python': ['pylint'],
     \ 'sh': ['shellcheck'],
+    \ 'tex': ['chktex'],
     \ }
 let g:ale_fixers={
     \ 'c': ['clang-format'],

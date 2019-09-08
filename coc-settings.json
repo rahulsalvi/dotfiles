@@ -24,7 +24,7 @@
     "python.formatting.provider": "",
     "python.linting.enabled": false,
     "latex.build.executable": "latexmk",
-    "latex.build.args": ["-pdf"],
+    "latex.build.args": ["-pdf", "-pdflatex=xelatex"],
     "latex.build.onSave": true,
     "latex.lint.onSave": false,
     "latex.lint.onChange": false,
