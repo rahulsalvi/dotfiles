@@ -10,6 +10,9 @@ case "$@" in
     "khal")
         app_to_run="SHELL:khal"
     ;;
+    "minecraft")
+        app_to_run="minecraft-launcher"
+    ;;
     "mutt")
         app_to_run="SHELL:mutt"
     ;;
@@ -45,6 +48,7 @@ case "$@" in
         echo "khal"
         echo "kicad"
         echo "libreoffice"
+        echo "minecraft"
         echo "mutt"
         echo "pavucontrol"
         echo "python"
