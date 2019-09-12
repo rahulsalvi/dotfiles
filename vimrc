@@ -264,6 +264,26 @@ function! s:neoterm_python_current()
     call <SID>neoterm_exec("python", "from " . cur_file . " import *")
 endfunction
 
+function! s:goyo_enter()
+    set textwidth=0
+    set wrapmargin=0
+    set wrap
+    set linebreak
+    set nolist
+    nnoremap j gj
+    nnoremap k gk
+    nnoremap $ g$
+    nnoremap 0 g0
+endfunction
+
+function! s:goyo_leave()
+    set nowrap
+    nunmap j
+    nunmap k
+    nunmap $
+    nunmap 0
+endfunction
+
 " Autocommands
 " ------------
 
@@ -291,6 +311,11 @@ autocmd FileType org setlocal foldlevel=1
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+autocmd! VimEnter /tmp/neomutt-* :Goyo
+
 " Plugins
 " -------
 call plug#begin('~/.vim/plugins')
@@ -308,6 +333,7 @@ Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight.git'
 Plug 'https://github.com/rahulsalvi/vim-orgmode.git'
 Plug 'https://github.com/junegunn/fzf.vim.git'
+Plug 'https://github.com/junegunn/goyo.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kassio/neoterm.git'
