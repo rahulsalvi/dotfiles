@@ -28,10 +28,8 @@ alternative_order text/plain test/enriched text/html
 # sidebar
 set sidebar_visible = yes
 set sidebar_short_path = yes
-set sidebar_delim_chars = '/.'
 set sidebar_format = '%B%* %?F?[%F!]? %?N?%N/?%S'
 set sidebar_folder_indent = yes
-set sidebar_indent_string = "  "
 set mail_check_stats = yes
 bind index,pager \CK sidebar-prev
 bind index,pager \CJ sidebar-next
