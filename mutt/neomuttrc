@@ -1,5 +1,5 @@
 set folder = "~/Mail"
-source ~/.mutt/mailboxes
+source mailboxes
 
 set spoolfile = "+icloud/INBOX"
 set record = "+icloud/Sent"
@@ -7,8 +7,8 @@ set postponed = "+icloud/Drafts"
 set trash = "+icloud/Trash"
 set editor = nvim
 
-source "gpg -dq ~/.mutt/realname.gpg |"
-source "gpg -dq ~/.mutt/from.gpg |"
+source "gpg -dq ~/.config/neomutt/realname.gpg |"
+source "gpg -dq ~/.config/neomutt/from.gpg |"
 
 set realname = $my_realname
 set from = $my_from
@@ -21,7 +21,7 @@ set pager_index_lines=10
 set markers = no
 set wrap = 80
 
-set mailcap_path = ~/.mutt/mailcap
+set mailcap_path = ~/.config/neomutt/mailcap
 auto_view text/html
 alternative_order text/plain test/enriched text/html
 
@@ -39,12 +39,18 @@ bind index,pager \CO sidebar-open
 bind index,pager B sidebar-toggle-visible
 
 # general vim bindings
-bind attach,index,pager \CD next-page
-bind attach,index,pager \CU previous-page
-bind pager g top
+bind attach,browser,index,pager \CD half-down
+bind attach,browser,index,pager \CU half-up
+bind attach,browser,index g noop
+bind attach,browser,index gg first-entry
+bind attach,browser,index G last-entry
+bind pager g noop
+bind pager gg top
 bind pager G bottom
-bind attach,index g first-entry
-bind attach,index G last-entry
+bind pager k previous-line
+bind pager j next-line
+bind pager,index d noop
+bind pager,index dd delete-message
 bind attach <return> view-mailcap
 
 # contacts
@@ -54,4 +60,13 @@ bind editor <Tab> complete-query
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
+# colorscheme
 source mutt-colors-solarized-dark-16.muttrc
+# modifications
+color index default default "~R~p!~F" # messages to me
+color sidebar_divider cyan default
+color sidebar_flagged red default
+color sidebar_highlight black yellow
+color sidebar_indicator black cyan
+color sidebar_new blue default
+color sidebar_spoolfile magenta default
