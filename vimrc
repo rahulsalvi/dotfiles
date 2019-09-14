@@ -9,6 +9,7 @@ set lazyredraw
 set mouse=a
 set number
 set relativenumber
+set scrolloff=5
 set selection=exclusive
 set shiftwidth=4
 set showcmd
