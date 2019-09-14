@@ -287,6 +287,8 @@ function! s:goyo_leave()
     nunmap k
     nunmap $
     nunmap 0
+    highlight SignColumn ctermbg=None
+    highlight Folded cterm=bold ctermbg=None
     if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
         if b:quitting_bang
             qa!
