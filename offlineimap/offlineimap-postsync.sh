@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-notmuch new
-
 mail_location="${HOME}/Mail"
 notify_location="${HOME}/Mail/.notified"
 

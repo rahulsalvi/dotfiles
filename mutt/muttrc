@@ -16,14 +16,42 @@ set sendmail = "/usr/bin/sendmail"
 set edit_headers = yes
 
 set text_flowed = yes
+set sleep_time = 0
+set pager_index_lines=10
+set markers = no
+set wrap = 80
 
 set mailcap_path = ~/.mutt/mailcap
 auto_view text/html
 alternative_order text/plain test/enriched text/html
 
-set sidebar_visible
+# sidebar
+set sidebar_visible = yes
+set sidebar_short_path = yes
+set sidebar_delim_chars = '/.'
+set sidebar_format = '%B%* %?F?[%F!]? %?N?%N/?%S'
+set sidebar_folder_indent = yes
+set sidebar_indent_string = "  "
+set mail_check_stats = yes
 bind index,pager \CK sidebar-prev
 bind index,pager \CJ sidebar-next
 bind index,pager \CO sidebar-open
+bind index,pager B sidebar-toggle-visible
+
+# general vim bindings
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry
+bind attach <return> view-mailcap
+
+# contacts
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
 source mutt-colors-solarized-dark-16.muttrc

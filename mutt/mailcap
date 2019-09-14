@@ -1,1 +1,5 @@
+text/html; firefox %s; test=test -n "$DISPLAY"; needsterminal;
 text/html; w3m -I %{charset} -T text/html; copiousoutput;
+audio/*; /usr/bin/xdg-open %s; copiousoutput;
+image/*; /usr/bin/xdg-open %s; copiousoutput;
+application/*; /usr/bin/xdg-open %s; copiousoutput;
