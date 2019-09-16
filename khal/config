@@ -2,26 +2,26 @@
     [[0]]
         type = discover
         path = ~/Calendars/rsal*
-        color = "#FDF5E3"
+        color = "#FDF6E3"
     [[1]]
         type = discover
-        path = ~/Calendars/k5bm*
+        path = ~/Calendars/v0fd*
         color = "#D33682"
     [[2]]
         type = discover
-        path = ~/Calendars/svgk*
+        path = ~/Calendars/jk0e*
         color = "#268BD2"
     [[3]]
         type = discover
-        path = ~/Calendars/bp6b*
+        path = ~/Calendars/eppf*
         color = "#DC322F"
     [[4]]
         type = discover
-        path = ~/Calendars/b6eg*
+        path = ~/Calendars/nhme*
         color = "#859900"
     [[5]]
         type = discover
-        path = ~/Calendars/64o0*
+        path = ~/Calendars/ola7*
         color = "#B58900"
 
 [default]
