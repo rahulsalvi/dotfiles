@@ -298,6 +298,23 @@ function! s:goyo_leave()
     endif
 endfunction
 
+function! FloatingFZF()
+    let buf = nvim_create_buf(v:false, v:true)
+    let height = float2nr(&lines * 0.2)
+    let width = float2nr(&columns * 0.8)
+    let horizontal=float2nr((&columns - width) / 2)
+    let vertical = 1
+    let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+    \ }
+    call nvim_open_win(buf, v:true, opts)
+endfunction
+
 " Autocommands
 " ------------
 
@@ -375,6 +392,7 @@ let g:solarized_termcolors=256
 colorscheme solarized
 highlight SignColumn ctermbg=None
 highlight Folded cterm=bold ctermbg=None
+highlight NormalFloat ctermbg=Black ctermfg=White
 
 " Lightline
 set laststatus=2
@@ -415,7 +433,7 @@ nmap ga <Plug>(EasyAlign)
 " FZF
 let g:fzf_nvim_statusline=0
 let g:fzf_command_prefix='FZF'
-let g:fzf_layout={ 'down': '~40%' }
+let g:fzf_layout={ 'window': 'call FloatingFZF()' }
 let g:fzf_action={
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
