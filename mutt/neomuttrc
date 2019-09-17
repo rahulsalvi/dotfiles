@@ -48,8 +48,6 @@ bind pager gg top
 bind pager G bottom
 bind pager k previous-line
 bind pager j next-line
-bind pager,index d noop
-bind pager,index dd delete-message
 bind attach <return> view-mailcap
 
 # contacts
