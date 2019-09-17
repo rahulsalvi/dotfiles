@@ -11,6 +11,9 @@
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
+                },
+                "highlight": {
+                    "lsRanges": true
                 }
             }
         },
