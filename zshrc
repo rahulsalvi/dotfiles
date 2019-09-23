@@ -171,8 +171,6 @@ if [[ $OS == "Mac" ]]; then
     export SSH_AGENT_PID=""
     export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
 fi
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
 
 # Set window title
 DISABLE_AUTO_TITLE="true"
