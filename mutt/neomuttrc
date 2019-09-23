@@ -54,8 +54,12 @@ bind attach <return> view-mailcap
 set query_command="goobook query '%s'"
 bind editor <Tab> complete-query
 
+# extract urls
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+# mark all messages as read
+macro index <f1> "T ~U\n;WN^T .\n"
 
 # colorscheme
 source mutt-colors-solarized-dark-16.muttrc
