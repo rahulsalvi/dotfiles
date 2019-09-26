@@ -54,6 +54,7 @@ case "$@" in
         echo "python"
         echo "radeon-profile"
         echo "ranger"
+        echo "rclone-browser"
         echo "remmina"
         echo "seahorse"
         echo "sensors"

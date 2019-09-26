@@ -286,7 +286,8 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.i3/start_keepassxc.sh
 
 # start insync
-exec_always --no-startup-id insync start
+# insync 3 is broken atm
+# exec_always --no-startup-id insync start
 
 # start radeon-profile
 exec_always --no-startup-id radeon-profile
