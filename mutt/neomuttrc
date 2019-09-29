@@ -49,6 +49,7 @@ bind pager G bottom
 bind pager k previous-line
 bind pager j next-line
 bind attach <return> view-mailcap
+bind pager \CR group-reply
 
 # contacts
 set query_command="goobook query '%s'"
