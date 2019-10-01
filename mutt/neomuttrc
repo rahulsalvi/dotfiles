@@ -15,6 +15,10 @@ set from = $my_from
 set sendmail = "/usr/bin/sendmail"
 set edit_headers = yes
 
+# formats
+set folder_format = "%2C %f"
+set index_format = "%4C %Z %{%b %d} %-16.16L %s"
+
 set text_flowed = yes
 set sleep_time = 0
 set pager_index_lines=10
