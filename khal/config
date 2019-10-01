@@ -13,16 +13,16 @@
         color = "#268BD2"
     [[3]]
         type = discover
-        path = ~/Calendars/eppf*
-        color = "#DC322F"
-    [[4]]
-        type = discover
         path = ~/Calendars/nhme*
         color = "#859900"
-    [[5]]
+    [[4]]
         type = discover
         path = ~/Calendars/ola7*
         color = "#B58900"
+#    [[5]]
+#        type = discover
+#        path = ~/Calendars/xxxx*
+#        color = "#DC322F"
 
 [default]
 highlight_event_days = True
