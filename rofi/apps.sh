@@ -78,6 +78,6 @@ if [[ "$app_to_run" == SHELL:* ]]; then
 fi
 
 if [[ -n "$app_to_run" ]]; then
-    $app_to_run >/dev/null 2>&1 &
+    eval "$app_to_run >/dev/null 2>&1 &"
     exit 0
 fi
