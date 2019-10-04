@@ -339,6 +339,8 @@ augroup CursorLine
 augroup END
 
 autocmd FileType org setlocal foldlevel=1
+autocmd BufWinEnter *.org nunmap <buffer> <localleader>pa
+autocmd BufWinEnter *.org nunmap <buffer> <localleader>pi
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
