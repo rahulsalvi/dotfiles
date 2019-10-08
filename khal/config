@@ -6,7 +6,7 @@
     [[1]]
         type = discover
         path = ~/Calendars/v0fd*
-        color = "#D33682"
+        color = "#CB4B16"
     [[2]]
         type = discover
         path = ~/Calendars/jk0e*
@@ -19,10 +19,10 @@
         type = discover
         path = ~/Calendars/ola7*
         color = "#B58900"
-#    [[5]]
-#        type = discover
-#        path = ~/Calendars/xxxx*
-#        color = "#DC322F"
+    [[5]]
+        type = discover
+        path = ~/Calendars/lc78*
+        color = "#D33682"
 
 [default]
 highlight_event_days = True
