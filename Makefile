@@ -1,0 +1,87 @@
+.PHONY: clang-format compton dunst git gtk i3 jupyter khal kitty mutt
+.PHONY: offlineimap polybar pylint redshift rofi tmux ultisnips vdirsyncer
+.PHONY: vim xinit yapf zathura zsh
+
+clang-format :
+	SRC=clang-format DST=.clang-format ./install.sh
+
+compton :
+	SRC=compton.conf DST=.config/compton.conf ./install.sh
+
+dunst :
+	SRC=dunst DST=.config/dunst ./install.sh
+
+git :
+	SRC=gitignore DST=.config/git/ignore ./install.sh
+
+gtk :
+	SRC=gtkrc-2.0 DST=.gtkrc-2.0 ./install.sh
+	SRC=gtk-3.0/settings.ini DST=.config/gtk-3.0/settings.ini ./install.sh
+
+i3 :
+	SRC=i3/config DST=.i3/config ./install.sh
+	SRC=i3/move_to_new_workspace DST=.i3/move_to_new_workspace ./install.sh
+	SRC=i3/move_to_next_workspace DST=.i3/move_to_next_workspace ./install.sh
+	SRC=i3/move_to_prev_workspace DST=.i3/move_to_prev_workspace ./install.sh
+	SRC=i3/new_workspace DST=.i3/new_workspace ./install.sh
+	SRC=i3/next_workspace DST=.i3/next_workspace ./install.sh
+	SRC=i3/prev_workspace DST=.i3/prev_workspace ./install.sh
+
+jupyter :
+	SRC=jupyter/custom DST=.jupyter/custom ./install.sh
+	SRC=jupyter/jupyter_notebook_config.py DST=.jupyter/jupyter_notebook_config.py ./install.sh
+	SRC=jupyter/nbconfig DST=.jupyter/nbconfig ./install.sh
+
+khal :
+	SRC=khal/config DST=.config/khal/config ./install.sh
+
+kitty :
+	SRC=kitty.conf DST=.config/kitty/kitty.conf ./install.sh
+	SRC=kitty DST=.kitty ./install.sh
+
+mutt :
+	SRC=mutt/mailcap DST=.config/neomutt/mailcap ./install.sh
+	SRC=mutt/neomuttrc DST=.config/neomutt/neomuttrc ./install.sh
+
+offlineimap :
+	SRC=offlineimap/offlineimaprc DST=.offlineimaprc ./install.sh
+	SRC=offlineimap/offlineimap-postsync.sh DST=.offlineimap/offlineimap-postsync.sh ./install.sh
+
+polybar :
+	SRC=polybar/config DST=.config/polybar/config ./install.sh
+	SRC=polybar/launch.sh DST=.config/polybar/launch.sh ./install.sh
+
+pylint :
+	SRC=pylintrc DST=.pylintrc ./install.sh
+
+redshift :
+	SRC=redshift.conf DST=.config/redshift.conf ./install.sh
+
+rofi :
+	SRC=rofi/config DST=.config/rofi/config ./install.sh
+	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
+
+tmux :
+	SRC=tmux.conf DST=.tmux.conf ./install.sh
+
+ultisnips :
+	SRC=ultisnips DST=.config/ultisnips ./install.sh
+
+vdirsyncer :
+	SRC=vdirsyncer/config DST=.config/vdirsyncer/config ./install.sh
+
+vim :
+	SRC=vim/vimrc DST=.config/nvim/init.vim ./install.sh
+	SRC=vim/coc-settings.json DST=.config/nvim/coc-settings.json ./install.sh
+
+xinit :
+	SRC=xinitrc DST=.xinitrc ./install.sh
+
+yapf :
+	SRC=yapf/style DST=.config/yapf/style ./install.sh
+
+zathura :
+	SRC=zathura/zathurarc DST=.config/zathura/zathurarc ./install.sh
+
+zsh :
+	SRC=zshrc DST=.zshrc ./install.sh
