@@ -1,6 +1,6 @@
 .PHONY: clang-format compton dunst git gtk i3 jupyter khal kitty mutt
-.PHONY: offlineimap polybar pylint redshift rofi tmux ultisnips vdirsyncer
-.PHONY: vim xinit yapf zathura zsh
+.PHONY: offlineimap polybar profile pylint redshift rofi tmux ultisnips
+.PHONY: vdirsyncer vim xinit yapf zathura zsh
 
 clang-format :
 	SRC=clang-format DST=.clang-format ./install.sh
@@ -50,6 +50,9 @@ offlineimap :
 polybar :
 	SRC=polybar/config DST=.config/polybar/config ./install.sh
 	SRC=polybar/launch.sh DST=.config/polybar/launch.sh ./install.sh
+
+profile :
+	SRC=profile DST=.profile ./install.sh
 
 pylint :
 	SRC=pylintrc DST=.pylintrc ./install.sh
