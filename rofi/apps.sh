@@ -59,6 +59,7 @@ case "$@" in
         echo "sensors"
         echo "spotify"
         echo "steam"
+        echo "stm32cubemx"
         echo "todo"
         echo "transmission"
         echo "vlc"
