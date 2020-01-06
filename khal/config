@@ -5,11 +5,11 @@
         color = "#FDF6E3"
     [[1]]
         type = discover
-        path = ~/Calendars/v0fd*
+        path = ~/Calendars/5c08*
         color = "#CB4B16"
     [[2]]
         type = discover
-        path = ~/Calendars/jk0e*
+        path = ~/Calendars/n9jd*
         color = "#268BD2"
     [[3]]
         type = discover
@@ -17,7 +17,7 @@
         color = "#859900"
     [[4]]
         type = discover
-        path = ~/Calendars/ola7*
+        path = ~/Calendars/inhd*
         color = "#B58900"
     [[5]]
         type = discover
