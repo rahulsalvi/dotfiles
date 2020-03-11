@@ -67,6 +67,7 @@ case "$@" in
         echo "vpnon"
         echo "yed"
         echo "zathura"
+        echo "zoom"
     ;;
     *)
         app_to_run=$@
