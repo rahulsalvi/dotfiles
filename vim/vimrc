@@ -353,18 +353,13 @@ autocmd! VimEnter /tmp/neomutt-* :Goyo
 " -------
 call plug#begin('~/.vim/plugins')
 
-if $OS == 'Mac'
-    Plug 'https://github.com/junegunn/fzf.git', { 'dir': '~/.fzf', 'do': './install --all' }
-elseif $OS == 'Linux'
-    Plug 'https://github.com/junegunn/fzf.git'
-endif
-
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight.git'
 Plug 'https://github.com/rahulsalvi/vim-orgmode.git'
+Plug 'https://github.com/junegunn/fzf.git'
 Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/goyo.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'

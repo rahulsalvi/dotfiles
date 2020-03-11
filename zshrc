@@ -1,75 +1,21 @@
-# Determine OS
-unameResult=$(uname -s)
-case "${unameResult}" in
-    Linux*) OS=Linux;;
-    Darwin*) OS=Mac;;
-    *) OS="UNKNOWN:${unameResult}"
-esac
-export OS
-
-# Determine light or dark terminal
-if [[ $OS == "Mac" ]]; then
-    termname=$(osascript -e "tell first window of application \"Terminal\" to return name of current settings as string" 2>/dev/null)
-    if [[ $termname == "Solarized Light" ]]; then
-        export BACKGROUND=light
-    else
-        export BACKGROUND=dark
-    fi
-    unset termname
-elif [[ $OS == "Linux" ]]; then
-    #TODO
-    export BACKGROUND=dark
-else
-    export BACKGROUND=dark
-fi
+export BACKGROUND=dark
 
 # Select modules to load
 zstyle ':prezto:module:syntax-highlighting' color 'yes'
-
-if [[ $OS == "Mac" ]]; then
-    zstyle ':prezto:load' pmodule \
-        'environment' \
-        'utility' \
-        'editor' \
-        'directory' \
-        'history' \
-        'completion' \
-        'git' \
-        'macports' \
-        'archive' \
-        'syntax-highlighting' \
-        'history-substring-search' \
-        'autosuggestions'
-elif [[ $OS == "Linux" ]]; then
-    zstyle ':prezto:load' pmodule \
-        'environment' \
-        'utility' \
-        'editor' \
-        'directory' \
-        'history' \
-        'completion' \
-        'git' \
-        'archive' \
-        'syntax-highlighting' \
-        'history-substring-search' \
-        'autosuggestions' \
-        'pacman'
-    zstyle ':prezto:module:pacman' frontend 'yay'
-else
-    zstyle ':prezto:load' pmodule \
-        'environment' \
-        'utility' \
-        'editor' \
-        'directory' \
-        'history' \
-        'completion' \
-        'git' \
-        'archive' \
-        'syntax-highlighting' \
-        'history-substring-search' \
-        'autosuggestions'
-fi
-
+zstyle ':prezto:load' pmodule \
+    'environment' \
+    'utility' \
+    'editor' \
+    'directory' \
+    'history' \
+    'completion' \
+    'git' \
+    'archive' \
+    'syntax-highlighting' \
+    'history-substring-search' \
+    'autosuggestions' \
+    'pacman'
+zstyle ':prezto:module:pacman' frontend 'yay'
 zstyle ':prezto:module:autosuggestions:color' found ''
 
 # Vi key bindings
@@ -135,12 +81,8 @@ fi
 [ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 # Load FZF modules
-if [[ $OS == "Mac" ]]; then
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-elif [[ $OS == "Linux" ]]; then
-    [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-    [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-fi
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
 # Set environment variables
 export CC=clang
@@ -166,15 +108,9 @@ if which rg > /dev/null 2>&1; then
     export FZF_EDITOR_COMMAND='rg --no-ignore --files'
 fi
 
-# for gpg-agent
-if [[ $OS == "Mac" ]]; then
-    export SSH_AGENT_PID=""
-    export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
-fi
-
 # Set window title
 DISABLE_AUTO_TITLE="true"
-echo -en "\033];Velocity\007"
+echo -en "\033]Velocity\007"
 
 # Set prompt
 PROMPT='%n@%M %3d $ '
@@ -236,7 +172,7 @@ alias e='FZFEditor'
 alias ls='ls -Fh --color=auto'
 alias la='ls -A'
 alias sl='ls'
-alias cp='cp -iv'
+alias cp='cp -iv --reflink=auto'
 alias mv='mv -iv'
 alias rm='rm -v'
 alias mkdir='mkdir -pv'
@@ -264,28 +200,22 @@ if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]]; then
 fi
 
 # Not connected through SSH
-if [[ $OS == "Mac" || ( $OS == "Linux" && -n "$DISPLAY" ) ]]; then
-    if [[ -z "$SSH_CLIENT" && -z "$SSH_TTY" && -z "$SSH_CONNECTION" ]]; then
-        # Start a tmux session if not in one
-        if [[ -z "$TMUX" ]]; then
-            session_number=0
-            while [[ -n "$(tmux list-clients -t ${session_number} 2>/dev/null)" ]]
-            do
-                (( session_number++ ))
-            done
-            tmux new-session -A -s $session_number
-            unset session_number
-        else
-            # display a fortune (max once per day, saved in ~/.lastfortune)
-            if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]]; then
-                fortune -a | tee ~/.lastfortune | cowsay
-            fi
-            # Load velocity module
-            [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
+if [[ -z "$SSH_CLIENT" && -z "$SSH_TTY" && -z "$SSH_CONNECTION" ]]; then
+    # Start a tmux session if not in one
+    if [[ -z "$TMUX" ]]; then
+        session_number=0
+        while [[ -n "$(tmux list-clients -t ${session_number} 2>/dev/null)" ]]
+        do
+            (( session_number++ ))
+        done
+        tmux new-session -A -s $session_number
+        unset session_number
+    else
+        # display a fortune (max once per day, saved in ~/.lastfortune)
+        if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]]; then
+            fortune -a | tee ~/.lastfortune | cowsay
         fi
+        # Load velocity module
+        [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
     fi
-fi
-
-if [[ $OS == "Linux" && -z "$DISPLAY" && -n "$XDG_VTNR" && "$XDG_VTNR" -eq 1 ]]; then
-    exec startx
 fi
