@@ -9,7 +9,8 @@ compton :
 	SRC=compton.conf DST=.config/compton.conf ./install.sh
 
 dunst :
-	SRC=dunst DST=.config/dunst ./install.sh
+	m4 <dunst/dunstrc.m4 >dunst/dunstrc
+	SRC=dunst/dunstrc DST=.config/dunst/dunstrc ./install.sh
 
 git :
 	SRC=gitignore DST=.config/git/ignore ./install.sh

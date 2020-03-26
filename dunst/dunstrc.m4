@@ -1,7 +1,9 @@
+define(HOSTNAME, `esyscmd(`printf $HOSTNAME')')dnl
 [global]
     monitor = 0
     follow = keyboard
-    geometry = "300x5-15+40"
+    ifelse(HOSTNAME,`Kyogre',geometry = "300x5-15+40",
+           HOSTNAME,`darkrai',geometry = "1000x5-15+40")
     indicate_hidden = yes
     shrink = no
     transparency = 15
