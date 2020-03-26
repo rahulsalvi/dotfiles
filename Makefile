@@ -9,7 +9,7 @@ compton :
 	SRC=compton.conf DST=.config/compton.conf ./install.sh
 
 dunst :
-	m4 <dunst/dunstrc.m4 >dunst/dunstrc
+	m4 dunst/dunstrc.m4 >dunst/dunstrc
 	SRC=dunst/dunstrc DST=.config/dunst/dunstrc ./install.sh
 
 git :
@@ -62,6 +62,8 @@ redshift :
 	SRC=redshift.conf DST=.config/redshift.conf ./install.sh
 
 rofi :
+	m4 rofi/apps.sh.m4 >rofi/apps.sh
+	chmod +x rofi/apps.sh
 	SRC=rofi/config DST=.config/rofi/config ./install.sh
 	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
 
