@@ -7,8 +7,8 @@ set postponed = "+icloud/Drafts"
 set trash = "+icloud/Trash"
 set editor = nvim
 
-source "gpg -dq ~/.config/neomutt/realname.gpg |"
-source "gpg -dq ~/.config/neomutt/from.gpg |"
+source "~/.config/neomutt/get_realname.sh |"
+source "~/.config/neomutt/get_from.sh |"
 
 set realname = $my_realname
 set from = $my_from
