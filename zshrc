@@ -187,6 +187,7 @@ alias s='cd ~;clear'
 alias shutdown='sudo shutdown now'
 alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
+alias open='rifle'
 
 alias vpnon='sudo systemctl start openvpn-client@US-California.service'
 alias vpnoff='sudo systemctl stop openvpn-client@US-California.service'
