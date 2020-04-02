@@ -1,12 +1,9 @@
-.PHONY: clang-format compton dunst git gtk i3 jupyter khal kitty mutt
+.PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty mutt
 .PHONY: offlineimap polybar profile pylint redshift rofi tmux ultisnips
 .PHONY: vdirsyncer vim xinit yapf zathura zsh
 
 clang-format :
 	SRC=clang-format DST=.clang-format ./install.sh
-
-compton :
-	SRC=compton.conf DST=.config/compton.conf ./install.sh
 
 dunst :
 	m4 dunst/dunstrc.m4 >dunst/dunstrc
@@ -20,6 +17,7 @@ gtk :
 	SRC=gtk-3.0/settings.ini DST=.config/gtk-3.0/settings.ini ./install.sh
 
 i3 :
+	m4 i3/config.m4 >i3/config
 	SRC=i3/config DST=.i3/config ./install.sh
 	SRC=i3/move_to_new_workspace DST=.i3/move_to_new_workspace ./install.sh
 	SRC=i3/move_to_next_workspace DST=.i3/move_to_next_workspace ./install.sh
@@ -47,6 +45,9 @@ mutt :
 offlineimap :
 	SRC=offlineimap/offlineimaprc DST=.offlineimaprc ./install.sh
 	SRC=offlineimap/offlineimap-postsync.sh DST=.offlineimap/offlineimap-postsync.sh ./install.sh
+
+picom :
+	SRC=picom.conf DST=.config/picom.conf ./install.sh
 
 polybar :
 	SRC=polybar/config DST=.config/polybar/config ./install.sh

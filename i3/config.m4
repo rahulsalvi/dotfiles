@@ -1,28 +1,8 @@
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
-#
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
-#
-
+define(HOST, `esyscmd(`printf $HOSTNAME')')dnl
+include(i3/HOST.m4)dnl
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font Input 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
@@ -36,7 +16,7 @@ floating_modifier Mod1
 
 # start a terminal
 bindsym Mod1+Return exec kitty
-#
+
 # start firefox
 bindsym Mod1+c exec firefox
 
@@ -53,13 +33,14 @@ bindsym Mod1+x exec kitty --session ~/.kitty/khal.kitty
 bindsym Mod1+t exec kitty --session ~/.kitty/todo.kitty
 
 # lock
-bindsym Mod1+Control+Escape exec xset s activate
+bindsym Mod1+Control+Escape exec LOCKCMD
 
 # media key bindings
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioStop exec playerctl stop
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioNext exec playerctl next
+ifdef(`BACKLIGHT', BACKLIGHT, `dnl')
 
 # kill focused window
 bindsym Mod1+q kill
@@ -111,19 +92,6 @@ bindsym Mod1+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym Mod1+space focus mode_toggle
 
-# focus the parent container
-bindsym Mod1+a focus parent
-
-# focus the child container
-#bindsym Mod1+d focus child
-
-# move the currently focused window to the scratchpad
-bindsym Mod1+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym Mod1+minus scratchpad show
-
 # switch to workspace
 bindsym Mod1+1 workspace 1
 bindsym Mod1+2 workspace 2
@@ -147,13 +115,6 @@ bindsym Mod1+Shift+7 move container to workspace 7
 bindsym Mod1+Shift+8 move container to workspace 8
 bindsym Mod1+Shift+9 move container to workspace 9
 bindsym Mod1+Shift+0 move container to workspace 10
-
-# reload the configuration file
-bindsym Mod1+Control+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym Mod1+Control+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym Mod1+Control+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 new_window pixel
 new_float pixel
@@ -197,38 +158,6 @@ mode "resize" {
 
 bindsym Mod1+r mode "resize"
 
-mode "open" {
-    # start a terminal
-    bindsym Return exec kitty; mode "default"
-
-    # start firefox
-    bindsym c exec firefox; mode "default"
-
-    # start discord
-    bindsym m exec discord; mode "default"
-
-    # start neomutt
-    bindsym z exec kitty --session ~/.kitty/mutt.kitty; mode "default"
-
-    # start khal
-    bindsym x exec kitty --session ~/.kitty/khal.kitty; mode "default"
-
-    # start todo
-    bindsym t exec kitty --session ~/.kitty/todo.kitty; mode "default"
-
-    # start steam
-    bindsym s exec steam; mode "default"
-
-    # start vlc
-    bindsym v exec vlc; mode "default"
-
-    # return to normal mode
-    bindsym q mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym Mod1+o mode "open"
-
 mode "passthrough" {
     bindsym Mod1+Control+Shift+F10 mode "default"
 }
@@ -238,46 +167,11 @@ bindsym Mod1+Control+Shift+F10 mode "passthrough"
 gaps inner 5
 gaps outer 0
 
-set $mode_gaps       "gaps (o|i)"
-set $mode_gaps_outer "gaps - outer (+|-|0)"
-set $mode_gaps_inner "gaps - inner (+|-|0)"
+# launch feh for wallpaper
+exec_always --no-startup-id ~/.fehbg
 
-
-mode $mode_gaps_outer {
-    bindsym plus  gaps outer current plus  5
-    bindsym minus gaps outer current minus 5
-    bindsym 0     gaps outer current set   0
-
-    bindsym Shift+plus  gaps outer all plus  5
-    bindsym Shift+minus gaps outer all minus 5
-    bindsym Shift+0     gaps outer all set   0
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-mode $mode_gaps_inner {
-    bindsym plus  gaps inner current plus  5
-    bindsym minus gaps inner current minus 5
-    bindsym 0     gaps inner current set   0
-
-    bindsym Shift+plus  gaps inner all plus  5
-    bindsym Shift+minus gaps inner all minus 5
-    bindsym Shift+0     gaps inner all set   0
-
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-mode $mode_gaps  {
-    bindsym o mode $mode_gaps_outer
-    bindsym i mode $mode_gaps_inner
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym Mod1+Shift+g mode $mode_gaps
+# launch picom
+exec_always --no-startup-id picom
 
 # launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
@@ -288,13 +182,12 @@ exec_always --no-startup-id ~/.i3/start_keepassxc.sh
 # start insync
 exec_always --no-startup-id insync start
 
-# start radeon-profile
-exec_always --no-startup-id radeon-profile
-
-# start discord
-exec_always --no-startup-id discord
-
-# lock after 30 mins of inactivity
-exec_always --no-startup-id xset s 1800 0
-exec_always --no-startup-id xset dpms 2700 2700 2700
-exec_always --no-startup-id xss-lock "/home/rahulsalvi/.i3/lock.sh"
+### GENERATED FROM M4 ###
+ifdef(`RADEON_PROFILE', RADEON_PROFILE, `dnl')
+ifdef(`NM_APPLET', NM_APPLET, `dnl')
+ifdef(`BLUEMAN_APPLET', BLUEMAN_APPLET, `dnl')
+ifdef(`DISCORD', DISCORD, `dnl')
+ifdef(`TOUCHSCREEN', TOUCHSCREEN, `dnl')
+ifdef(`TOUCHPAD', TOUCHPAD, `dnl')
+ifdef(`SCREENROTATOR', SCREENROTATOR, `dnl')
+ifdef(`SCREENSAVER', SCREENSAVER, `dnl')
