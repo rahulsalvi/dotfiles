@@ -184,6 +184,7 @@ exec_always --no-startup-id insync start
 
 ### GENERATED FROM M4 ###
 ifdef(`RADEON_PROFILE', RADEON_PROFILE, `dnl')
+ifdef(`NUMLOCK', NUMLOCK, `dnl')
 ifdef(`NM_APPLET', NM_APPLET, `dnl')
 ifdef(`BLUEMAN_APPLET', BLUEMAN_APPLET, `dnl')
 ifdef(`DISCORD', DISCORD, `dnl')
