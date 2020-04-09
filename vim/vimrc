@@ -370,6 +370,7 @@ Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
 Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/Raimondi/delimitMate.git'
+Plug 'https://github.com/rhysd/clever-f.vim.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
@@ -456,6 +457,10 @@ let g:coc_global_extensions=['coc-git',
                            \ 'coc-texlab'
                            \ ]
 highlight CocHighlightText ctermfg=White ctermbg=DarkMagenta
+
+" clever-f
+let g:clever_f_across_no_line=1
+let g:clever_f_smart_case=1
 
 " UltiSnips
 let g:UltiSnipsEditSplit='vertical'
