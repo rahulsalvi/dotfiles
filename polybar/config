@@ -10,7 +10,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/bar0]
-monitor = ${env:MONITOR:DisplayPort-0}
+monitor = ${env:POLYBAR_MONITOR:DisplayPort-0}
 width = 100%
 height = ${env:POLYBAR_HEIGHT:27}
 ;offset-x = 1%
@@ -41,7 +41,7 @@ modules-left = i3
 modules-center =
 modules-right = ${env:POLYBAR_MODULES_RIGHT:openvpn memory cpu temperature date powermenu}
 
-tray-position = right
+tray-position = ${env:POLYBAR_TRAY_POS:right}
 tray-padding = 2
 tray-scale = 1.0
 tray-maxsize = ${env:POLYBAR_TRAY_MAXSIZE:16}
