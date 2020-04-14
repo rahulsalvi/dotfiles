@@ -10,7 +10,7 @@ dunst :
 	SRC=dunst/dunstrc DST=.config/dunst/dunstrc ./install.sh
 
 git :
-	SRC=gitignore DST=.config/git/ignore ./install.sh
+	SRC=git/ignore DST=.config/git/ignore ./install.sh
 
 gtk :
 	SRC=gtkrc-2.0 DST=.gtkrc-2.0 ./install.sh
