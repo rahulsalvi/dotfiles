@@ -45,6 +45,8 @@ mutt :
 offlineimap :
 	SRC=offlineimap/offlineimaprc DST=.offlineimaprc ./install.sh
 	SRC=offlineimap/offlineimap-postsync.sh DST=.offlineimap/offlineimap-postsync.sh ./install.sh
+	SRC=offlineimap/get_mail_from DST=.offlineimap/get_mail_from ./install.sh
+	SRC=offlineimap/get_mail_subject DST=.offlineimap/get_mail_subject ./install.sh
 
 picom :
 	SRC=picom.conf DST=.config/picom.conf ./install.sh
