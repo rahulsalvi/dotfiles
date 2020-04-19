@@ -5,9 +5,6 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym Shift+XF86MonBrightnessUp exec xbacklight -ctrl tpacpi::kbd_backlight -inc 50
 bindsym Shift+XF86MonBrightnessDown exec xbacklight -ctrl tpacpi::kbd_backlight -dec 50')dnl
-define(NM_APPLET,`
-# start nm-applet
-exec_always --no-startup-id nm-applet')dnl
 define(TOUCHSCREEN,`
 # turn on touchscreen gestures
 exec_always --no-startup-id xsetwacom set "Wacom Pen and multitouch sensor Finger touch" Gesture on')dnl

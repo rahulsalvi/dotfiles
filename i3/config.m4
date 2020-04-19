@@ -182,13 +182,15 @@ exec_always --no-startup-id ~/.i3/start_keepassxc.sh
 # start insync
 exec_always --no-startup-id insync start
 
+# start nm-applet
+exec_always --no-startup-id nm-applet
+
 # start blueman-applet
 exec_always --no-startup-id blueman-applet
 
 ### GENERATED FROM M4 ###
 ifdef(`RADEON_PROFILE', RADEON_PROFILE, `dnl')
 ifdef(`NUMLOCK', NUMLOCK, `dnl')
-ifdef(`NM_APPLET', NM_APPLET, `dnl')
 ifdef(`DISCORD', DISCORD, `dnl')
 ifdef(`TOUCHSCREEN', TOUCHSCREEN, `dnl')
 ifdef(`TOUCHPAD', TOUCHPAD, `dnl')
