@@ -371,7 +371,7 @@ exec-if = ! pgrep openvpn
 format-foreground = ${colors.secondary}
 format-background = ${colors.background}
 interval = 1
-click-left = sudo systemctl start openvpn-client@US-California.service
+click-left = nmcli con up id "US California"
 
 [settings]
 screenchange-reload = true

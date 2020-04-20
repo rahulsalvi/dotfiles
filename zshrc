@@ -189,8 +189,8 @@ alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
 alias open='rifle'
 
-alias vpnon='sudo systemctl start openvpn-client@US-California.service'
-alias vpnoff='sudo systemctl stop openvpn-client@US-California.service'
+alias vpnon="nmcli con up id 'US California'"
+alias vpnoff="nmcli con down id 'US California'"
 
 
 # Display a message if system hasn't been updated within a week
