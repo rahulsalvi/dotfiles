@@ -94,6 +94,7 @@ export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="-m --reverse"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 export PATH="$HOME/.local/bin:$PATH"
+export MAKEFLAGS="-j$(nproc)"
 
 # Use ag for FZF
 if which ag > /dev/null 2>&1; then
