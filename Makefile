@@ -35,7 +35,7 @@ khal :
 	SRC=khal/config DST=.config/khal/config ./install.sh
 
 kitty :
-	SRC=kitty.conf DST=.config/kitty/kitty.conf ./install.sh
+	SRC=kitty/kitty.conf DST=.config/kitty/kitty.conf ./install.sh
 	SRC=kitty DST=.kitty ./install.sh
 
 mutt :
