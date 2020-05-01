@@ -2,14 +2,15 @@
 
 mail_location="${HOME}/Mail"
 notify_location="${HOME}/Mail/.notified"
+script_location="${HOME}/.config/offlineimap"
 
 new_mail=$(find $mail_location -regex '.*/INBOX/new/.*')
 if [[ -n "$new_mail" ]]; then
     while IFS= read -r line ; do
         stripped=$(echo ${line#$mail_location} | tr / _)
         if [[ ! -e "$notify_location/$stripped" ]]; then
-            from=$(${HOME}/.offlineimap/get_mail_from $line)
-            subject=$(${HOME}/.offlineimap/get_mail_subject $line)
+            from=$(${script_location}/get_mail_from $line)
+            subject=$(${script_location}/get_mail_subject $line)
             notify-send -i mailspring "${from}" "${subject}"
             ln -s $line $notify_location/$stripped
         fi

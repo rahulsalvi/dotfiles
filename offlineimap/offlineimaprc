@@ -1,6 +1,7 @@
 [general]
 accounts = icloud
-pythonfile = ~/.offlineimap/offlineimap.py
+metadata = ~/.config/offlineimap
+pythonfile = ~/.config/offlineimap/offlineimap.py
 
 [mbnames]
 enabled = yes
@@ -13,7 +14,7 @@ footer = "\n"
 [Account icloud]
 localrepository = icloud-local
 remoterepository = icloud-remote
-postsynchook = ~/.offlineimap/offlineimap-postsync.sh
+postsynchook = ~/.config/offlineimap/offlineimap-postsync.sh
 
 [Repository icloud-local]
 type = Maildir
