@@ -1,4 +1,4 @@
-.PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty mutt
+.PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty latexmk mutt
 .PHONY: offlineimap polybar profile pylint redshift rofi tmux ultisnips
 .PHONY: vdirsyncer vim xinit yapf zathura zsh
 
@@ -37,6 +37,9 @@ khal :
 kitty :
 	SRC=kitty/kitty.conf DST=.config/kitty/kitty.conf ./install.sh
 	SRC=kitty DST=.kitty ./install.sh
+
+latexmk :
+	SRC=latexmkrc DST=.config/latexmk/latexmkrc ./install.sh
 
 mutt :
 	SRC=mutt/mailcap DST=.config/neomutt/mailcap ./install.sh
