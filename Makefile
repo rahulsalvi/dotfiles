@@ -76,7 +76,7 @@ rofi :
 	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
 
 tmux :
-	SRC=tmux.conf DST=.tmux.conf ./install.sh
+	SRC=tmux.conf DST=.config/tmux/tmux.conf ./install.sh
 
 ultisnips :
 	SRC=ultisnips DST=.config/ultisnips ./install.sh
