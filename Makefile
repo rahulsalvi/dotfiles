@@ -36,7 +36,7 @@ khal :
 
 kitty :
 	SRC=kitty/kitty.conf DST=.config/kitty/kitty.conf ./install.sh
-	SRC=kitty DST=.kitty ./install.sh
+	SRC=kitty DST=.config/kitty/sessions ./install.sh
 
 latexmk :
 	SRC=latexmkrc DST=.config/latexmk/latexmkrc ./install.sh

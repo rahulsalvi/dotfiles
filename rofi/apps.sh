@@ -70,7 +70,7 @@ case "$@" in
 esac
 
 if [[ "$app_to_run" == SHELL:* ]]; then
-    eval kitty --session ~/.kitty/'${app_to_run#SHELL:}'.kitty >/dev/null 2>&1 &
+    eval kitty --session ~/.config/kitty/sessions/'${app_to_run#SHELL:}'.kitty >/dev/null 2>&1 &
     exit 0
 fi
 
