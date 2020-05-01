@@ -59,7 +59,7 @@ profile :
 	SRC=profile DST=.profile ./install.sh
 
 pylint :
-	SRC=pylintrc DST=.pylintrc ./install.sh
+	SRC=pylintrc DST=.config/pylintrc ./install.sh
 
 redshift :
 	SRC=redshift.conf DST=.config/redshift.conf ./install.sh
