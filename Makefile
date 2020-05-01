@@ -1,6 +1,6 @@
-.PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty latexmk mutt
+.PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty latexmk mutt nvim
 .PHONY: offlineimap polybar profile pylint redshift rofi tmux ultisnips
-.PHONY: vdirsyncer vim xinit yapf zathura zsh
+.PHONY: vdirsyncer xinit yapf zathura zsh
 
 clang-format :
 	SRC=clang-format DST=.clang-format ./install.sh
@@ -45,6 +45,10 @@ mutt :
 	SRC=mutt/mailcap DST=.config/neomutt/mailcap ./install.sh
 	SRC=mutt/neomuttrc DST=.config/neomutt/neomuttrc ./install.sh
 
+nvim :
+	SRC=nvim/init.vim DST=.config/nvim/init.vim ./install.sh
+	SRC=nvim/coc-settings.json DST=.config/nvim/coc-settings.json ./install.sh
+
 offlineimap :
 	SRC=offlineimap/offlineimaprc DST=.config/offlineimap/config ./install.sh
 	SRC=offlineimap/offlineimap-postsync.sh DST=.config/offlineimap/offlineimap-postsync.sh ./install.sh
@@ -79,10 +83,6 @@ ultisnips :
 
 vdirsyncer :
 	SRC=vdirsyncer/config DST=.config/vdirsyncer/config ./install.sh
-
-vim :
-	SRC=vim/vimrc DST=.config/nvim/init.vim ./install.sh
-	SRC=vim/coc-settings.json DST=.config/nvim/coc-settings.json ./install.sh
 
 xinit :
 	SRC=xinitrc DST=.xinitrc ./install.sh

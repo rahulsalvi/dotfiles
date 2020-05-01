@@ -351,7 +351,7 @@ autocmd! VimEnter /tmp/neomutt-* :Goyo
 
 " Plugins
 " -------
-call plug#begin('~/.vim/plugins')
+call plug#begin('~/.config/nvim/plugins')
 
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
