@@ -78,7 +78,7 @@ else
 fi
 
 # Load Prezto modules
-[ -f "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+[ -f "${HOME}/.config/prezto/init.zsh" ] && source "${HOME}/.config/prezto/init.zsh"
 
 # Load FZF modules
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
