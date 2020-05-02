@@ -1,5 +1,5 @@
 .PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty latexmk mutt nvim
-.PHONY: offlineimap polybar profile pylint redshift rofi tmux ultisnips
+.PHONY: offlineimap polybar profile pylint redshift rofi tmux ultisnips update
 .PHONY: vdirsyncer xinit yapf zathura zsh
 
 clang-format :
@@ -80,6 +80,9 @@ tmux :
 
 ultisnips :
 	SRC=ultisnips DST=.config/ultisnips ./install.sh
+
+update :
+	SRC=update DST=.local/bin/update ./install.sh
 
 vdirsyncer :
 	SRC=vdirsyncer/config DST=.config/vdirsyncer/config ./install.sh
