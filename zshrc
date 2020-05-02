@@ -93,7 +93,6 @@ export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="-m --reverse"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
-export PATH="$HOME/.local/bin:$PATH"
 export MAKEFLAGS="-j$(nproc)"
 export PYLINTHOME="$HOME/.cache/pylint.d"
 
