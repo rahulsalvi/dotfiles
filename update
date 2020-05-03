@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-UPDATEFILE="$HOME/.lastupdate"
+UPDATEFILE=${UPDATEFILE:-"$HOME/.cache/lastupdate"}
 
 # update nvim
 echo "Updating nvim"

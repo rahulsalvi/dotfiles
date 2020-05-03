@@ -99,6 +99,7 @@ export MAKEFLAGS="-j$(nproc)"
 # Environment variables to clean up $HOME
 export PYLINTHOME="$HOME/.cache/pylint.d"
 export LESSHISTFILE="$HOME/.cache/lesshst"
+export UPDATEFILE="$HOME/.cache/lastupdate"
 
 # Use ag for FZF
 if which ag > /dev/null 2>&1; then
@@ -200,8 +201,8 @@ alias vpnoff="nmcli con down id 'US California'"
 
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run
-# touch ~/.lastupdate
-if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastupdate)) -gt 604800 ]]; then
+# touch $UPDATEFILE
+if [[ $(expr $(date +%s) - $(date +%s -r "$UPDATEFILE")) -gt 604800 ]]; then
     echo -e "\033[31mWARNING: No updates within a week\033[0m"
 fi
 
