@@ -18,10 +18,11 @@ git -C $HOME/.config/prezto submodule update --init
 # check for system updates
 echo "Checking for system updates"
 checkupdates >/dev/null
-if [ $? -eq 2 ]; then
+RESULT=$?
+if [ $RESULT -eq 2 ]; then
     echo "No system updates available"
     touch "$UPDATEFILE"
-elif [ $? -eq 0 ]; then
+elif [ $RESULT -eq 0 ]; then
     read REPLY\?"System updates are available. Would you like to update now? [y/N] "
     REPLY=$(echo "$REPLY" | tr '[:upper:]' '[:lower:]')
     if [ "${REPLY}" = "y" ]; then
