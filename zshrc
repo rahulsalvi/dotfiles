@@ -100,6 +100,7 @@ export MAKEFLAGS="-j$(nproc)"
 export PYLINTHOME="$HOME/.cache/pylint.d"
 export LESSHISTFILE="$HOME/.cache/lesshst"
 export UPDATEFILE="$HOME/.cache/lastupdate"
+export FORTUNEFILE="$HOME/.cache/lastfortune"
 
 # Use ag for FZF
 if which ag > /dev/null 2>&1; then
@@ -218,9 +219,9 @@ if [[ -z "$SSH_CLIENT" && -z "$SSH_TTY" && -z "$SSH_CONNECTION" ]]; then
         tmux new-session -A -s $session_number
         unset session_number
     else
-        # display a fortune (max once per day, saved in ~/.lastfortune)
-        if [[ $(expr $(date +%s) - $(date +%s -r ~/.lastfortune)) -gt 86400 ]]; then
-            fortune -a | tee ~/.lastfortune | cowsay
+        # display a fortune (max once per day, saved in $FORTUNEFILE)
+        if [[ $(expr $(date +%s) - $(date +%s -r "$FORTUNEFILE")) -gt 86400 ]]; then
+            fortune -a | cowsay | tee "$FORTUNEFILE"
         fi
         # Load velocity module
         [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
