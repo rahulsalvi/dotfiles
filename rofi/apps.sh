@@ -5,10 +5,10 @@ apps=("arandr" "dc" "discord" "firefox" "glances" "htop" "keepassxc" "kitty"
     "ranger" "remmina" "seahorse" "sensors" "spotify" "steam" "stm32cubemx"
     "todo" "transmission" "vlc" "vpnoff" "vpnon" "zathura" "zoom")
 darkrai_apps=("write")
-Kyogre_apps=("radeon-profile")
+kyogre_apps=("radeon-profile")
 
 [[ $HOST == "darkrai" ]] && apps=($apps $darkrai_apps)
-[[ $HOST == "Kyogre" ]] && apps=($apps $Kyogre_apps)
+[[ $HOST == "kyogre" ]] && apps=($apps $kyogre_apps)
 
 case "$@" in
 "dc")

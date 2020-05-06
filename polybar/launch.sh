@@ -4,7 +4,7 @@ killall -q polybar
 
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-if [[ "$HOST" == "Kyogre" ]]; then
+if [[ "$HOST" == "kyogre" ]]; then
     POLYBAR_MONITOR="HDMI-A-0" \
     polybar bar0 >/dev/null 2>&1 &
     POLYBAR_MONITOR="DisplayPort-0" \
