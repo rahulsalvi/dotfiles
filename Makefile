@@ -1,6 +1,6 @@
 .PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty latexmk mutt nvim
 .PHONY: offlineimap polybar profile pylint redshift rofi tmux ultisnips update
-.PHONY: vdirsyncer xinit yapf zathura zsh
+.PHONY: vdirsyncer yapf zathura zsh
 
 clang-format :
 	SRC=clang-format DST=.clang-format ./install.sh
@@ -86,9 +86,6 @@ update :
 
 vdirsyncer :
 	SRC=vdirsyncer/config DST=.config/vdirsyncer/config ./install.sh
-
-xinit :
-	SRC=xinitrc DST=.xinitrc ./install.sh
 
 yapf :
 	SRC=yapf/style DST=.config/yapf/style ./install.sh
