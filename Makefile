@@ -18,13 +18,13 @@ gtk :
 
 i3 :
 	m4 i3/config.m4 >i3/config
-	SRC=i3/config DST=.i3/config ./install.sh
-	SRC=i3/move_to_new_workspace DST=.i3/move_to_new_workspace ./install.sh
-	SRC=i3/move_to_next_workspace DST=.i3/move_to_next_workspace ./install.sh
-	SRC=i3/move_to_prev_workspace DST=.i3/move_to_prev_workspace ./install.sh
-	SRC=i3/new_workspace DST=.i3/new_workspace ./install.sh
-	SRC=i3/next_workspace DST=.i3/next_workspace ./install.sh
-	SRC=i3/prev_workspace DST=.i3/prev_workspace ./install.sh
+	SRC=i3/config DST=.config/i3/config ./install.sh
+	SRC=i3/move_to_new_workspace DST=.config/i3/move_to_new_workspace ./install.sh
+	SRC=i3/move_to_next_workspace DST=.config/i3/move_to_next_workspace ./install.sh
+	SRC=i3/move_to_prev_workspace DST=.config/i3/move_to_prev_workspace ./install.sh
+	SRC=i3/new_workspace DST=.config/i3/new_workspace ./install.sh
+	SRC=i3/next_workspace DST=.config/i3/next_workspace ./install.sh
+	SRC=i3/prev_workspace DST=.config/i3/prev_workspace ./install.sh
 
 jupyter :
 	SRC=jupyter/custom DST=.jupyter/custom ./install.sh

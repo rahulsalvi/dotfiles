@@ -120,12 +120,12 @@ new_window pixel
 new_float pixel
 
 mode "move" {
-    bindsym c exec "~/.i3/new_workspace"; mode "default"
-    bindsym n exec "~/.i3/next_workspace"; mode "default"
-    bindsym p exec "~/.i3/prev_workspace"; mode "default"
-    bindsym Shift+c exec "~/.i3/move_to_new_workspace"; mode "default"
-    bindsym Shift+n exec "~/.i3/move_to_next_workspace"; mode "default"
-    bindsym Shift+p exec "~/.i3/move_to_prev_workspace"; mode "default"
+    bindsym c exec "~/.config/i3/new_workspace"; mode "default"
+    bindsym n exec "~/.config/i3/next_workspace"; mode "default"
+    bindsym p exec "~/.config/i3/prev_workspace"; mode "default"
+    bindsym Shift+c exec "~/.config/i3/move_to_new_workspace"; mode "default"
+    bindsym Shift+n exec "~/.config/i3/move_to_next_workspace"; mode "default"
+    bindsym Shift+p exec "~/.config/i3/move_to_prev_workspace"; mode "default"
     bindsym q mode "default"
     bindsym Escape mode "default"
 }
@@ -177,7 +177,7 @@ exec_always --no-startup-id picom
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # start KeePassXC
-exec_always --no-startup-id ~/.i3/start_keepassxc.sh
+exec_always --no-startup-id ~/.config/lock/start_keepassxc.sh
 
 # start insync
 exec_always --no-startup-id insync start
