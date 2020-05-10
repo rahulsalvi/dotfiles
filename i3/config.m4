@@ -131,6 +131,7 @@ mode "move" {
 }
 
 bindsym Mod1+Tab mode "move"
+bindsym Mod4+Tab exec "~/.config/i3/next_workspace"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
