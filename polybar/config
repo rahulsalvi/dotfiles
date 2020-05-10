@@ -39,7 +39,7 @@ font-2 = NotoColorEmoji:pixelsize=12;1
 
 modules-left = i3
 modules-center = spotify
-modules-right = ${env:POLYBAR_MODULES_RIGHT:mail_sync vpn memory cpu temperature date powermenu}
+modules-right = ${env:POLYBAR_MODULES_RIGHT:mail_sync vpn unread_mail date powermenu}
 
 tray-position = ${env:POLYBAR_TRAY_POS:right}
 tray-padding = 2
@@ -390,6 +390,15 @@ format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 interval = 1
 click-left = "~/.config/polybar/spotify.sh click"
+
+[module/unread_mail]
+type = custom/script
+exec = "~/.config/polybar/unread_mail.sh text"
+exec-if = "~/.config/polybar/unread_mail.sh show"
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+interval = 5
+click-left = "~/.config/polybar/unread_mail.sh click"
 
 [settings]
 screenchange-reload = true
