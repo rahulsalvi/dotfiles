@@ -39,7 +39,7 @@ font-2 = NotoColorEmoji:pixelsize=12;1
 
 modules-left = i3
 modules-center =
-modules-right = ${env:POLYBAR_MODULES_RIGHT:vpn memory cpu temperature date powermenu}
+modules-right = ${env:POLYBAR_MODULES_RIGHT:mail_sync vpn memory cpu temperature date powermenu}
 
 tray-position = ${env:POLYBAR_TRAY_POS:right}
 tray-padding = 2
@@ -372,6 +372,15 @@ format-foreground = ${colors.secondary}
 format-background = ${colors.background}
 interval = 1
 click-left = "~/.config/polybar/vpn.sh click"
+
+[module/mail_sync]
+type = custom/script
+exec = "~/.config/polybar/mail_sync.sh text"
+exec-if = "~/.config/polybar/mail_sync.sh show"
+format-foreground = ${colors.secondary}
+format-background = ${colors.background}
+interval = 1
+click-left = "~/.config/polybar/mail_sync.sh click"
 
 [settings]
 screenchange-reload = true
