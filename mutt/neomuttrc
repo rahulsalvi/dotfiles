@@ -24,6 +24,8 @@ set sleep_time = 0
 set pager_index_lines=10
 set markers = no
 set wrap = 80
+set sort = threads
+set sort_aux = last-date-received
 
 # mailcap
 set mailcap_path = ~/.config/neomutt/mailcap
