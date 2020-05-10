@@ -1,9 +1,10 @@
 #!/usr/bin/env zsh
 
 apps=("arandr" "dc" "discord" "firefox" "glances" "htop" "keepassxc" "kitty"
-    "khal" "kicad" "libreoffice" "minecraft" "mutt" "pavucontrol" "python"
-    "ranger" "remmina" "seahorse" "sensors" "spotify" "steam" "stm32cubemx"
-    "todo" "transmission" "vlc" "vpnoff" "vpnon" "zathura" "zoom")
+    "khal" "kicad" "libreoffice" "lutris" "minecraft" "mutt" "pavucontrol"
+    "python" "ranger" "remmina" "seahorse" "sensors" "spotify" "steam"
+    "stm32cubemx" "todo" "transmission" "vlc" "vpnoff" "vpnon" "zathura"
+    "zoom")
 darkrai_apps=("write")
 kyogre_apps=("radeon-profile")
 
