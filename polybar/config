@@ -38,7 +38,7 @@ font-1 = Symbola:pixelsize=12;1
 font-2 = NotoColorEmoji:pixelsize=12;1
 
 modules-left = i3
-modules-center =
+modules-center = spotify
 modules-right = ${env:POLYBAR_MODULES_RIGHT:mail_sync vpn memory cpu temperature date powermenu}
 
 tray-position = ${env:POLYBAR_TRAY_POS:right}
@@ -381,6 +381,15 @@ format-foreground = ${colors.secondary}
 format-background = ${colors.background}
 interval = 1
 click-left = "~/.config/polybar/mail_sync.sh click"
+
+[module/spotify]
+type = custom/script
+exec = "~/.config/polybar/spotify.sh text"
+exec-if = "~/.config/polybar/spotify.sh show"
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+interval = 1
+click-left = "~/.config/polybar/spotify.sh click"
 
 [settings]
 screenchange-reload = true

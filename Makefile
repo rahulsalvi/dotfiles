@@ -63,6 +63,7 @@ polybar :
 	SRC=polybar/launch.sh DST=.config/polybar/launch.sh ./install.sh
 	SRC=polybar/vpn.sh DST=.config/polybar/vpn.sh ./install.sh
 	SRC=polybar/mail_sync.sh DST=.config/polybar/mail_sync.sh ./install.sh
+	SRC=polybar/spotify.sh DST=.config/polybar/spotify.sh ./install.sh
 
 profile :
 	SRC=profile DST=.profile ./install.sh
