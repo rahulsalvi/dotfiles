@@ -61,6 +61,7 @@ picom :
 polybar :
 	SRC=polybar/config DST=.config/polybar/config ./install.sh
 	SRC=polybar/launch.sh DST=.config/polybar/launch.sh ./install.sh
+	SRC=polybar/vpn.sh DST=.config/polybar/vpn.sh ./install.sh
 
 profile :
 	SRC=profile DST=.profile ./install.sh

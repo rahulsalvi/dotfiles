@@ -14,7 +14,7 @@ if [[ "$HOST" == "kyogre" ]]; then
 elif [[ "$HOST" ==  "darkrai" ]]; then
     POLYBAR_MONITOR="eDP-1" \
     POLYBAR_HEIGHT="60" \
-    POLYBAR_MODULES_RIGHT="openvpn memory cpu temperature battery date powermenu" \
+    POLYBAR_MODULES_RIGHT="vpn memory cpu temperature battery date powermenu" \
     POLYBAR_TRAY_MAXSIZE="38" \
     POLYBAR_DPI="231" \
     polybar bar0 >/dev/null 2>&1 &

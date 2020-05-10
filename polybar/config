@@ -39,7 +39,7 @@ font-2 = NotoColorEmoji:pixelsize=12;1
 
 modules-left = i3
 modules-center =
-modules-right = ${env:POLYBAR_MODULES_RIGHT:openvpn memory cpu temperature date powermenu}
+modules-right = ${env:POLYBAR_MODULES_RIGHT:vpn memory cpu temperature date powermenu}
 
 tray-position = ${env:POLYBAR_TRAY_POS:right}
 tray-padding = 2
@@ -364,14 +364,14 @@ menu-2-0-exec = shutdown now
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
-[module/openvpn]
+[module/vpn]
 type = custom/script
-exec = echo VPN OFF
-exec-if = ! pgrep openvpn
+exec = "~/.config/polybar/vpn.sh text"
+exec-if = "~/.config/polybar/vpn.sh show"
 format-foreground = ${colors.secondary}
 format-background = ${colors.background}
 interval = 1
-click-left = nmcli con up id "US California"
+click-left = "~/.config/polybar/vpn.sh click"
 
 [settings]
 screenchange-reload = true
