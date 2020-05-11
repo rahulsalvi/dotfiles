@@ -13,7 +13,7 @@ case $1 in
     ;;
 "text")
     text=$(python ~/.config/polybar/count_unread_mail.py $maildir)
-    echo "U:$text"
+    echo " $text"
     ;;
 "click")
     kitty --session ~/.config/kitty/sessions/mutt.kitty >/dev/null 2>&1
