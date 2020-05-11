@@ -113,15 +113,18 @@ full-at = 96
 
 time-format = %H:%M
 
+label-charging = %percentage%%
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging-underline = ${colors.cyan}
 
+label-discharging = %percentage%%
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-discharging-underline = ${colors.yellow}
 
-format-full-prefix = " "
+label-full = %percentage%%
+format-full = <label-full>
 format-full-prefix-foreground = ${colors.text_light}
-format-full-underline = ${self.format-charging-underline}
+format-full-underline = ${colors.purple}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
