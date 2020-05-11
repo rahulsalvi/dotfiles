@@ -6,6 +6,8 @@ set expandtab
 set hlsearch
 set incsearch
 set lazyredraw
+set modeline
+set modelines=1
 set mouse=a
 set number
 set relativenumber
@@ -25,7 +27,6 @@ set wildmenu
 
 set nobackup
 set nocompatible
-set nomodeline
 set noshowmode
 set noswapfile
 set nowrap
