@@ -6,11 +6,11 @@ fi
 
 case $1 in
 "show")
-    ! systemctl --user is-active --quiet offlineimap-oneshot.timer
+    ! systemctl --user is-active --quiet vdirsyncer.timer
     exit $?
     ;;
 "text")
-    echo ""
+    echo ""
     ;;
 "click")
     systemctl --user start offlineimap-oneshot.timer

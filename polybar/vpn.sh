@@ -10,7 +10,7 @@ case $1 in
     exit $?
     ;;
 "text")
-    echo "VPN OFF"
+    echo ""
     ;;
 "click")
     nmcli con up id "US California"

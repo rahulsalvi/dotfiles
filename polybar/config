@@ -45,7 +45,7 @@ font-3 = "Font Awesome 5 Free Solid:pixelsize=12;1"
 
 modules-left = i3
 modules-center = spotify
-modules-right = ${env:POLYBAR_MODULES_RIGHT:mail_sync vpn unread_mail date powermenu}
+modules-right = ${env:POLYBAR_MODULES_RIGHT:mail_sync calendar_sync vpn unread_mail date powermenu}
 
 tray-position = ${env:POLYBAR_TRAY_POS:right}
 tray-padding = 2
@@ -184,6 +184,16 @@ format-background = ${colors.alert}
 format-padding = 2
 interval = 1
 click-left = "~/.config/polybar/mail_sync.sh click"
+
+[module/calendar_sync]
+type = custom/script
+exec = "~/.config/polybar/calendar_sync.sh text"
+exec-if = "~/.config/polybar/calendar_sync.sh show"
+format-foreground = ${colors.text_dark}
+format-background = ${colors.alert}
+format-padding = 2
+interval = 1
+click-left = "~/.config/polybar/calendar_sync.sh click"
 
 [module/spotify]
 type = custom/script

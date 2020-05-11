@@ -63,6 +63,7 @@ polybar :
 	SRC=polybar/launch.sh DST=.config/polybar/launch.sh ./install.sh
 	SRC=polybar/vpn.sh DST=.config/polybar/vpn.sh ./install.sh
 	SRC=polybar/mail_sync.sh DST=.config/polybar/mail_sync.sh ./install.sh
+	SRC=polybar/calendar_sync.sh DST=.config/polybar/calendar_sync.sh ./install.sh
 	SRC=polybar/spotify.sh DST=.config/polybar/spotify.sh ./install.sh
 	SRC=polybar/count_unread_mail.py DST=.config/polybar/count_unread_mail.py ./install.sh
 	SRC=polybar/unread_mail.sh DST=.config/polybar/unread_mail.sh ./install.sh
