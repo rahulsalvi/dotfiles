@@ -1,6 +1,6 @@
 .PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty latexmk mutt nvim
-.PHONY: offlineimap polybar profile pylint redshift rofi tmux ultisnips update
-.PHONY: vdirsyncer yapf zathura zsh
+.PHONY: offlineimap polybar profile pylint ranger redshift rofi tmux ultisnips
+.PHONY: update vdirsyncer yapf zathura zsh
 
 clang-format :
 	SRC=clang-format DST=.clang-format ./install.sh
@@ -73,6 +73,10 @@ profile :
 
 pylint :
 	SRC=pylintrc DST=.config/pylintrc ./install.sh
+
+ranger :
+	SRC=ranger/rc.conf DST=.config/ranger/rc.conf ./install.sh
+	SRC=ranger/rifle.conf DST=.config/ranger/rifle.conf ./install.sh
 
 redshift :
 	SRC=redshift.conf DST=.config/redshift.conf ./install.sh
