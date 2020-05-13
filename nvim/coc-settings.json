@@ -24,6 +24,7 @@
             "ignoredRootPaths": ["~"]
         }
     },
+    "python.jediEnabled": false,
     "python.formatting.provider": "",
     "python.linting.enabled": false,
     "latex.build.executable": "latexmk",
