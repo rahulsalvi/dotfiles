@@ -84,6 +84,9 @@ fi
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
+# Load velocity module
+[ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
+
 # Set environment variables
 export CC=clang
 export CXX=clang++
@@ -117,9 +120,10 @@ if which rg > /dev/null 2>&1; then
     export FZF_EDITOR_COMMAND='rg --no-ignore --files'
 fi
 
-# Set window title
-DISABLE_AUTO_TITLE="true"
-echo -en "\033]Velocity\007"
+# Set window title to running command
+function preexec() {
+    print -Pn "\e]0;${1%% *}\a"
+}
 
 # Set prompt
 PROMPT='%n@%M %3d $ '
@@ -209,23 +213,7 @@ if [[ $(expr $(date +%s) - $(date +%s -r "$UPDATEFILE")) -gt 604800 ]]; then
     echo -e "\033[31mWARNING: No updates within a week\033[0m"
 fi
 
-# Not connected through SSH
-if [[ -z "$SSH_CLIENT" && -z "$SSH_TTY" && -z "$SSH_CONNECTION" ]]; then
-    # Start a tmux session if not in one
-    if [[ -z "$TMUX" ]]; then
-        session_number=0
-        while [[ -n "$(tmux list-clients -t ${session_number} 2>/dev/null)" ]]
-        do
-            (( session_number++ ))
-        done
-        tmux new-session -A -s $session_number
-        unset session_number
-    else
-        # display a fortune (max once per day, saved in $FORTUNEFILE)
-        if [[ $(expr $(date +%s) - $(date +%s -r "$FORTUNEFILE")) -gt 86400 ]]; then
-            fortune -a | cowsay | tee "$FORTUNEFILE"
-        fi
-        # Load velocity module
-        [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
-    fi
+# display a fortune (max once per day, saved in $FORTUNEFILE)
+if [[ $(expr $(date +%s) - $(date +%s -r "$FORTUNEFILE")) -gt 86400 ]]; then
+   fortune -a | cowsay | tee "$FORTUNEFILE"
 fi

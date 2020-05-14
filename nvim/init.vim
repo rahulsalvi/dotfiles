@@ -366,6 +366,7 @@ Plug 'https://github.com/junegunn/goyo.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kassio/neoterm.git'
+Plug 'https://github.com/knubie/vim-kitty-navigator.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
