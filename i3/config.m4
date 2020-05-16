@@ -24,13 +24,13 @@ bindsym Mod1+c exec firefox
 bindsym Mod1+m exec discord
 
 # start neomutt
-bindsym Mod1+z exec kitty --session ~/.config/kitty/sessions/mutt.kitty
+bindsym Mod1+z exec kitty neomutt
 
 # start khal
-bindsym Mod1+x exec kitty --session ~/.config/kitty/sessions/khal.kitty
+bindsym Mod1+x exec kitty ikhal
 
 # start todo
-bindsym Mod1+t exec kitty --session ~/.config/kitty/sessions/todo.kitty
+bindsym Mod1+t exec kitty --directory ~/todo nvim todo.org
 
 # lock
 bindsym Mod1+Control+Escape exec LOCKCMD

@@ -16,7 +16,7 @@ case $1 in
     echo " $text"
     ;;
 "click")
-    kitty --session ~/.config/kitty/sessions/mutt.kitty >/dev/null 2>&1
+    kitty neomutt >/dev/null 2>&1 &
     ;;
 *)
     exit 0

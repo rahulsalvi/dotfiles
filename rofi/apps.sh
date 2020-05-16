@@ -25,13 +25,13 @@ case "$@" in
     app_to_run="~/.config/lock/start_keepassxc.sh"
     ;;
 "khal")
-    app_to_run="SHELL:khal"
+    app_to_run="SHELL:ikhal"
     ;;
 "minecraft")
     app_to_run="minecraft-launcher"
     ;;
 "mutt")
-    app_to_run="SHELL:mutt"
+    app_to_run="SHELL:neomutt"
     ;;
 "python")
     app_to_run="SHELL:python"
@@ -40,14 +40,15 @@ case "$@" in
     app_to_run="SHELL:ranger"
     ;;
 "sensors")
-    app_to_run="SHELL:sensors"
+    app_to_run="SHELL:watch sensors"
     ;;
 "spotify")
     app_to_run="spotify"
     [[ $HOST == "darkrai" ]] && app_to_run="spotify --force-device-scale-factor=2"
     ;;
 "todo")
-    app_to_run="SHELL:todo"
+    eval kitty --directory ~/todo $EDITOR todo.org >/dev/null 2>&1 &
+    exit 0
     ;;
 "transmission")
     app_to_run="transmission-qt"
@@ -74,7 +75,7 @@ case "$@" in
 esac
 
 if [[ "$app_to_run" == SHELL:* ]]; then
-    eval kitty --session ~/.config/kitty/sessions/'${app_to_run#SHELL:}'.kitty >/dev/null 2>&1 &
+    eval kitty ${app_to_run#SHELL:} >/dev/null 2>&1 &
     exit 0
 fi
 
