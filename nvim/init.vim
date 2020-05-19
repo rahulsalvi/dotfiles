@@ -282,9 +282,8 @@ function! s:goyo_leave()
     endif
 endfunction
 
-function! FloatingFZF()
-    let buf = nvim_create_buf(v:false, v:true)
-    let height = float2nr(&lines * 0.2)
+function! CreateBorderedFloatingWindow()
+    let height = float2nr(&lines * 0.6)
     let width = float2nr(&columns * 0.8)
     let horizontal=float2nr((&columns - width) / 2)
     let vertical = 1
@@ -296,7 +295,20 @@ function! FloatingFZF()
         \ 'height': height,
         \ 'style': 'minimal'
     \ }
-    call nvim_open_win(buf, v:true, opts)
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+    set winhl=Normal:Floating
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    au BufWipeout <buffer> exe 'bw '.s:buf
 endfunction
 
 " Autocommands
@@ -424,7 +436,7 @@ nmap ga <Plug>(EasyAlign)
 " FZF
 let g:fzf_nvim_statusline=0
 let g:fzf_command_prefix='FZF'
-let g:fzf_layout={ 'window': 'call FloatingFZF()' }
+let g:fzf_layout={ 'window': 'call CreateBorderedFloatingWindow()' }
 let g:fzf_action={
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
