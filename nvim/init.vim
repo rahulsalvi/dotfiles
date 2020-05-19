@@ -90,14 +90,14 @@ nnoremap <silent> <LEADER>ls :Utl openLink underCursor sp<CR>
 nnoremap <silent> <LEADER>lt :Utl openLink underCursor tabe<CR>
 
 " terminal
-nnoremap <silent> <LEADER>tsi :call <SID>neoterm_shell()<CR>
-nnoremap <silent> <LEADER>tsm :call <SID>neoterm_shell_make()<CR>
-nnoremap <silent> <LEADER>tpi :call <SID>neoterm_python()<CR>
-nnoremap <silent> <LEADER>tpm :call <SID>neoterm_python_main()<CR>
-nnoremap <silent> <LEADER>tpc :call <SID>neoterm_python_current()<CR>
-nnoremap <silent> <LEADER>tt :Ttoggle<CR>
-nnoremap <silent> <LEADER>tc :Tclose!<CR>
-tnoremap <Esc> <C-\><C-n>
+nnoremap <silent> <LEADER>t :Ttoggle<CR>
+nnoremap <silent> <LEADER>y :call <SID>neoterm_start("python")<CR>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+tnoremap <C-w> <C-\><C-n>:Ttoggle<CR>
+tnoremap <C-q> <C-\><C-n>:Tclose!<CR>
 
 " tab/cr keys
 nnoremap <silent> <TAB> :call <SID>n_tab()<CR>
@@ -249,27 +249,6 @@ function! s:neoterm_exec(shell, cmd)
     let g:neoterm_shell = prev
 endfunction
 
-function! s:neoterm_shell()
-    call <SID>neoterm_start(&shell)
-endfunction
-
-function! s:neoterm_shell_make()
-    call <SID>neoterm_exec(&shell, "make")
-endfunction
-
-function! s:neoterm_python()
-    call <SID>neoterm_start("python")
-endfunction
-
-function! s:neoterm_python_main()
-    call <SID>neoterm_exec("python", "from main import *")
-endfunction
-
-function! s:neoterm_python_current()
-    let cur_file = expand('%:t:r')
-    call <SID>neoterm_exec("python", "from " . cur_file . " import *")
-endfunction
-
 function! s:goyo_enter()
     set textwidth=0
     set wrapmargin=0
@@ -353,6 +332,13 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 autocmd! VimEnter /tmp/neomutt-* :Goyo
+
+" enter terminals in insert mode
+if has('nvim')
+    autocmd TermOpen term://* startinsert
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+endif
 
 " Plugins
 " -------
