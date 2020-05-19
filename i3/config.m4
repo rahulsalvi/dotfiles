@@ -21,7 +21,7 @@ bindsym Mod1+Return exec kitty
 bindsym Mod1+c exec firefox
 
 # start discord
-bindsym Mod1+m exec discord
+bindsym Mod1+m exec pgrep Discord && i3-msg '[class="discord"] focus' || discord
 
 # start neomutt
 bindsym Mod1+z exec kitty neomutt
