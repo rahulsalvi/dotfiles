@@ -1,4 +1,4 @@
-rofi.theme: /usr/share/rofi/themes/solarized.rasi
+rofi.theme: ~/.config/rofi/velocity.rasi
 rofi.modi: apps:~/.config/rofi/apps.sh,window,run
 rofi.matching: fuzzy
 rofi.monitor: -4
