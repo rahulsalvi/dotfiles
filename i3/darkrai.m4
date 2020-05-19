@@ -1,4 +1,5 @@
 define(LOCKCMD, `systemctl suspend-then-hibernate')dnl
+define(SPOTIFY, `spotify --force-device-scale-factor=2')dnl
 define(BACKLIGHT,`
 # brightness key bindings
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10

@@ -25,6 +25,7 @@ i3 :
 	SRC=i3/new_workspace DST=.config/i3/new_workspace ./install.sh
 	SRC=i3/next_workspace DST=.config/i3/next_workspace ./install.sh
 	SRC=i3/prev_workspace DST=.config/i3/prev_workspace ./install.sh
+	i3-msg 'reload'
 
 jupyter :
 	SRC=jupyter/custom DST=.jupyter/custom ./install.sh

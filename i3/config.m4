@@ -23,6 +23,9 @@ bindsym Mod1+c exec firefox
 # start discord
 bindsym Mod1+m exec pgrep Discord && i3-msg '[class="discord"] focus' || discord
 
+# start spotify
+bindsym Mod1+s exec pgrep spotify && i3-msg '[class="Spotify"] focus' || SPOTIFY
+
 # start neomutt
 bindsym Mod1+z exec kitty neomutt
 
@@ -82,7 +85,6 @@ bindsym Mod1+v split v
 bindsym Mod1+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym Mod1+s layout stacking
 bindsym Mod1+w layout tabbed
 bindsym Mod1+e layout splith
 
