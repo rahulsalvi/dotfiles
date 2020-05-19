@@ -79,6 +79,10 @@ nmap <silent> <LEADER>i <Plug>(coc-implementation)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
 
+" Vista
+nnoremap <silent> <LEADER>b :Vista!!<CR>
+nnoremap <silent> <LEADER>v :Vista finder fzf:coc<CR>
+
 " links
 nnoremap <silent> <LEADER>le :Utl openLink underCursor e<CR>
 nnoremap <silent> <LEADER>lv :Utl openLink underCursor vsp<CR>
@@ -367,6 +371,7 @@ Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kassio/neoterm.git'
 Plug 'https://github.com/knubie/vim-kitty-navigator.git'
+Plug 'https://github.com/liuchengxu/vista.vim.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
@@ -451,6 +456,16 @@ let g:sneak#s_next=1
 let g:neoterm_size='20%'
 let g:neoterm_autojump=1
 let g:neoterm_default_mod='botright'
+
+" Vista
+let g:vista_default_executive='coc'
+let g:vista_close_on_jump=1
+let g:vista_sidebar_width=40
+let g:vista#renderer#enable_icon=1
+let g:vista#renderer#icons={
+    \ 'function': 'λ',
+    \ 'variable': ''
+    \ }
 
 " coc
 let g:coc_global_extensions=['coc-git',
