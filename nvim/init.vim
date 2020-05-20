@@ -75,13 +75,12 @@ inoremap <silent><expr> <C-l> delimitMate#JumpAny()
 nmap <silent> <LEADER>j <Plug>(coc-git-nextchunk)
 nmap <silent> <LEADER>k <Plug>(coc-git-prevchunk)
 nmap <silent> <LEADER>d <Plug>(coc-definition)
-nmap <silent> <LEADER>i <Plug>(coc-implementation)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
 
 " Vista
 nnoremap <silent> <LEADER>b :Vista!!<CR>
-nnoremap <silent> <LEADER>v :Vista finder fzf:coc<CR>
+nnoremap <silent> <LEADER>P :Vista finder fzf:coc<CR>
 
 " links
 nnoremap <silent> <LEADER>le :Utl openLink underCursor e<CR>
@@ -91,7 +90,7 @@ nnoremap <silent> <LEADER>lt :Utl openLink underCursor tabe<CR>
 
 " terminal
 nnoremap <silent> <LEADER>t :Ttoggle<CR>
-nnoremap <silent> <LEADER>y :call <SID>neoterm_start("python")<CR>
+nnoremap <silent> <LEADER>T :call <SID>neoterm_start("python")<CR>
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
