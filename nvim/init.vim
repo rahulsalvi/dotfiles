@@ -112,6 +112,17 @@ snoremap <silent> <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" vimspector
+nmap <F3> :VimspectorReset<CR>
+nmap <F4> <Plug>VimspectorRestart
+nmap <F5> <Plug>VimspectorContinue
+nmap <F9> <Plug>VimspectorToggleBreakpoint
+nmap <F10> <Plug>VimspectorStepOver
+nmap <F11> <Plug>VimspectorStepInto
+nmap <F12> <Plug>VimspectorStepOut
+nnoremap <LEADER>vw :VimspectorWatch 
+nnoremap <LEADER>ve :VimspectorEval 
+
 " Functions
 " ---------
 function! s:check_prev_whitespace()
@@ -374,6 +385,7 @@ Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
 Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
+Plug 'https://github.com/puremourning/vimspector.git'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/rhysd/clever-f.vim.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
