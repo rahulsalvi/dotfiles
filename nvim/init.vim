@@ -21,6 +21,7 @@ set softtabstop=4
 set splitbelow
 set splitright
 set tabstop=4
+set termguicolors
 set updatetime=300
 set virtualedit=all
 set wildmenu
@@ -379,6 +380,7 @@ Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kassio/neoterm.git'
 Plug 'https://github.com/knubie/vim-kitty-navigator.git'
+Plug 'https://github.com/lifepillar/vim-solarized8.git'
 Plug 'https://github.com/liuchengxu/vista.vim.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
@@ -403,7 +405,7 @@ call plug#end()
 " Colorscheme
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme solarized8_high
 highlight SignColumn ctermbg=None
 highlight Folded cterm=bold ctermbg=None
 highlight NormalFloat ctermbg=Black ctermfg=White
