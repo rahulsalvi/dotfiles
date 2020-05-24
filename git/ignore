@@ -279,3 +279,6 @@ scratch*
 
 # Build directory
 build
+
+# vimspector file
+.vimspector.json
