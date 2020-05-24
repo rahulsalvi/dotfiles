@@ -17,8 +17,11 @@ case $1 in
         echo "$text - ▶"
     fi
     ;;
-"click")
+"click-left")
     playerctl -p spotify play-pause
+    ;;
+"click-right")
+    i3-msg '[class="Spotify"] focus'
     ;;
 *)
     exit 0

@@ -204,7 +204,8 @@ format-background = ${colors.background}
 format-underline = ${colors.purple}
 format-padding = 2
 interval = 1
-click-left = "~/.config/polybar/spotify.sh click"
+click-left = "~/.config/polybar/spotify.sh click-left"
+click-right = "~/.config/polybar/spotify.sh click-right"
 
 [module/unread_mail]
 type = custom/script
