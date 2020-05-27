@@ -452,7 +452,7 @@ let g:fzf_command_prefix='FZF'
 let g:fzf_layout={ 'window': 'call CreateBorderedFloatingWindow()' }
 let g:fzf_action={
     \ 'ctrl-t': 'tab split',
-    \ 'ctrl-h': 'split',
+    \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit',
     \ }
 
