@@ -27,6 +27,9 @@ set wrap = 80
 set sort = threads
 set sort_aux = last-date-received
 
+# don't collapse threads with unread messages
+unset collapse_unread
+
 # mailcap
 set mailcap_path = ~/.config/neomutt/mailcap
 auto_view text/html
@@ -57,6 +60,10 @@ bind pager j next-line
 bind attach <return> view-mailcap
 bind pager \CR group-reply
 
+# other bindings
+bind index - collapse-thread
+bind index _ collapse-all
+
 # contacts
 set query_command="goobook query '%s'"
 bind editor <Tab> complete-query
@@ -67,6 +74,9 @@ macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract 
 
 # mark all messages as read
 macro index <f1> "T ~U\n;WN^T .\n"
+
+# collapse threads by default
+folder-hook . "exec collapse-all"
 
 # colorscheme
 source mutt-colors-solarized-dark-16.muttrc
