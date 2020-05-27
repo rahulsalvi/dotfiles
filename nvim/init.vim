@@ -479,8 +479,9 @@ let g:vista#renderer#icons={
     \ }
 
 " coc
-let g:coc_global_extensions=['coc-git',
-                           \ 'coc-ultisnips',
+let g:coc_global_extensions=['coc-cmake',
+                           \ 'coc-git',
+                           \ 'coc-snippets',
                            \ 'coc-python',
                            \ 'coc-texlab'
                            \ ]
@@ -510,6 +511,7 @@ let g:ale_linters={
 let g:ale_fixers={
     \ 'c': ['clang-format'],
     \ 'cpp': ['clang-format'],
+    \ 'cmake': ['cmakeformat'],
     \ 'python': ['yapf'],
     \ 'sh': ['shfmt'],
     \ }
