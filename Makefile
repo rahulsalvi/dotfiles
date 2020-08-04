@@ -1,6 +1,6 @@
-.PHONY: clang-format picom dunst git gtk i3 jupyter khal kitty latexmk mutt nvim
-.PHONY: offlineimap polybar profile pylint ranger redshift rofi tmux ultisnips
-.PHONY: update vdirsyncer yapf zathura zsh
+.PHONY: clang-format dunst fehbg git gtk i3 jupyter khal kitty latexmk mutt nvim
+.PHONY: offlineimap picom polybar profile pylint ranger redshift rofi tmux
+.PHONY: ultisnips update vdirsyncer yapf zathura zsh
 
 clang-format :
 	SRC=clang-format DST=.clang-format ./install.sh
@@ -8,6 +8,9 @@ clang-format :
 dunst :
 	m4 dunst/dunstrc.m4 >dunst/dunstrc
 	SRC=dunst/dunstrc DST=.config/dunst/dunstrc ./install.sh
+
+fehbg :
+	SRC=fehbg DST=.config/fehbg ./install.sh
 
 git :
 	SRC=git/ignore DST=.config/git/ignore ./install.sh

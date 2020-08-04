@@ -172,7 +172,7 @@ gaps inner 5
 gaps outer 0
 
 # launch feh for wallpaper
-exec_always --no-startup-id ~/.fehbg
+exec_always --no-startup-id ~/.config/fehbg
 
 # launch picom
 exec_always --no-startup-id picom
