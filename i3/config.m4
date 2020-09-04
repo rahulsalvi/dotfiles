@@ -26,6 +26,11 @@ bindsym Mod1+m exec pgrep Discord && i3-msg '[class="discord"] focus' || discord
 # start spotify
 bindsym Mod1+s exec pgrep spotify && i3-msg '[class="Spotify"] focus' || SPOTIFY
 
+# start keepassxc
+bindsym Mod1+p exec keepassxc
+# window rule to make KeepassXC always float
+for_window [class="KeePassXC" instance="keepassxc"] floating enable
+
 # start neomutt
 bindsym Mod1+z exec kitty neomutt
 
