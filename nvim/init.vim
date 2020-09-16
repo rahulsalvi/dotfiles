@@ -482,6 +482,7 @@ let g:ale_fixers={
     \ 'python': ['yapf'],
     \ 'sh': ['shfmt'],
     \ }
+command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
 let g:ale_linters_explicit=1
 let g:ale_fix_on_save=1
 let g:ale_sign_error = '😡'
