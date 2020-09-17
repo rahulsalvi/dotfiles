@@ -63,6 +63,10 @@ endif
 " --------------
 let mapleader="\<SPACE>"
 let maplocalleader="\<SPACE>"
+nnoremap <silent> <LEADER>      :<c-u>WhichKey '<SPACE>'<CR>
+nnoremap <silent> <LOCALLEADER> :<c-u>WhichKey '<SPACE>'<CR>
+vnoremap <silent> <LEADER>      :<c-u>WhichKeyVisual '<SPACE>'<CR>
+vnoremap <silent> <LOCALLEADER> :<c-u>WhichKeyVisual '<SPACE>'<CR>
 
 " general
 nnoremap Y y$
@@ -122,6 +126,27 @@ nmap <F11> <Plug>VimspectorStepInto
 nmap <F12> <Plug>VimspectorStepOut
 nnoremap <LEADER>vw :VimspectorWatch 
 nnoremap <LEADER>ve :VimspectorEval 
+
+" define bindings for vim-which-key
+let g:leader_key_map={
+    \ 'name' : 'leader',
+    \ 'b'    : [ ':Vista!!',                           'toggle-vista'              ],
+    \ 'c'    : [ 'yygccp',                             'copy-comment-current-line' ],
+    \ 'd'    : [ '<Plug>(coc-definition)',             'go-to-definition'          ],
+    \ 'j'    : [ '<Plug>(coc-git-nextchunk)',          'git-next-chunk'            ],
+    \ 'k'    : [ '<Plug>(coc-git-prevchunk)',          'git-previous-chunk'        ],
+    \ 'P'    : [ ':Vista finder fzf:coc',              'vista-finder'              ],
+    \ 'p'    : [ ':FZFFiles',                          'fzf-files'                 ],
+    \ 's'    : [ ':StripWhitespace',                   'strip-whitespace'          ],
+    \ 'T'    : [ ':call <SID>neoterm_start("python")', 'python-interpreter'        ],
+    \ 't'    : [ ':Ttoggle',                           'toggle-terminal'           ],
+    \ }
+let g:leader_key_map['g']={
+    \ 'name' : '+git',
+    \ 's'    : [ ':CocCommand git.chunkStage', 'git-stage-chunk' ],
+    \ }
+let g:leader_key_map['l']={ 'name' : '+utl' }
+let g:leader_key_map['v']={ 'name' : '+vimspector' }
 
 " Functions
 " ---------
@@ -348,6 +373,7 @@ Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kassio/neoterm.git'
 Plug 'https://github.com/knubie/vim-kitty-navigator.git'
 Plug 'https://github.com/lifepillar/vim-solarized8.git'
+Plug 'https://github.com/liuchengxu/vim-which-key.git'
 Plug 'https://github.com/liuchengxu/vista.vim.git'
 Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
 Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
@@ -434,6 +460,10 @@ let g:sneak#s_next=1
 let g:neoterm_size='20%'
 let g:neoterm_autojump=1
 let g:neoterm_default_mod='botright'
+
+" vim-which-key
+let g:which_key_use_floating_win=1
+call which_key#register('<SPACE>', "g:leader_key_map")
 
 " Vista
 let g:vista_default_executive='coc'
