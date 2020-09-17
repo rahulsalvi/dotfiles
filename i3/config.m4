@@ -40,6 +40,9 @@ bindsym Mod1+x exec kitty ikhal
 # start todo
 bindsym Mod1+t exec kitty --directory ~/todo nvim todo.org
 
+# take screenshot
+bindsym --release Mod1+o exec scrot -s
+
 # lock
 bindsym Mod1+Control+Escape exec LOCKCMD
 
