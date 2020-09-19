@@ -212,7 +212,7 @@ endfunction
 
 function! s:i_cr()
     return <SID>ulti_expand() ? "" :
-         \ pumvisible() ? "\<C-]>" :
+         \ pumvisible() ? "\<C-y>" :
          \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
          \ <SID>ulti_expand_or_jump() ? "" :
          \ delimitMate#WithinEmptyPair() ? delimitMate#ExpandReturn() :
