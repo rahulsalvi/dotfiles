@@ -113,6 +113,16 @@ bindsym Mod1+7 workspace 7
 bindsym Mod1+8 workspace 8
 bindsym Mod1+9 workspace 9
 bindsym Mod1+0 workspace 10
+bindsym Mod1+Mod2+KP_1 workspace 1
+bindsym Mod1+Mod2+KP_2 workspace 2
+bindsym Mod1+Mod2+KP_3 workspace 3
+bindsym Mod1+Mod2+KP_4 workspace 4
+bindsym Mod1+Mod2+KP_5 workspace 5
+bindsym Mod1+Mod2+KP_6 workspace 6
+bindsym Mod1+Mod2+KP_7 workspace 7
+bindsym Mod1+Mod2+KP_8 workspace 8
+bindsym Mod1+Mod2+KP_9 workspace 9
+bindsym Mod1+Mod2+KP_0 workspace 10
 
 # move focused container to workspace
 bindsym Mod1+Shift+1 move container to workspace 1
@@ -125,6 +135,16 @@ bindsym Mod1+Shift+7 move container to workspace 7
 bindsym Mod1+Shift+8 move container to workspace 8
 bindsym Mod1+Shift+9 move container to workspace 9
 bindsym Mod1+Shift+0 move container to workspace 10
+bindsym Mod1+Shift+Mod2+KP_End move container to workspace 1
+bindsym Mod1+Shift+Mod2+KP_Down move container to workspace 2
+bindsym Mod1+Shift+Mod2+KP_Next move container to workspace 3
+bindsym Mod1+Shift+Mod2+KP_Left move container to workspace 4
+bindsym Mod1+Shift+Mod2+KP_Begin move container to workspace 5
+bindsym Mod1+Shift+Mod2+KP_Right move container to workspace 6
+bindsym Mod1+Shift+Mod2+KP_Home move container to workspace 7
+bindsym Mod1+Shift+Mod2+KP_Up move container to workspace 8
+bindsym Mod1+Shift+Mod2+KP_Prior move container to workspace 9
+bindsym Mod1+Shift+Mod2+KP_Insert move container to workspace 10
 
 new_window pixel
 new_float pixel
