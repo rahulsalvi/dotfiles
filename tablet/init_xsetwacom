@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+# needed for udev
+sleep 1
+
+xsetwacom set "HID 256c:006d Pen stylus" Mode Relative
+xsetwacom set "HID 256c:006d Pen stylus" Rotate ccw # Need to fix area so the output isn't scaled weirdly
+xsetwacom set "HID 256c:006d Pen stylus" Area "0 0 31750 50800"
