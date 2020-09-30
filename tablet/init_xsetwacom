@@ -3,6 +3,8 @@
 # needed for udev
 sleep 1
 
-xsetwacom set "HID 256c:006d Pen stylus" Mode Relative
-xsetwacom set "HID 256c:006d Pen stylus" Rotate ccw # Need to fix area so the output isn't scaled weirdly
-xsetwacom set "HID 256c:006d Pen stylus" Area "0 0 31750 50800"
+xsetwacom set "HID 256c:006d Pen stylus" Mode Absolute
+xsetwacom set "HID 256c:006d Pen stylus" Rotate ccw
+# right half of ultrawide screen
+xsetwacom set "HID 256c:006d Pen stylus" MapToOutput "1280x1080+1280+0"
+xsetwacom set "HID 256c:006d Pen stylus" Area "0 0 37630 31750"
