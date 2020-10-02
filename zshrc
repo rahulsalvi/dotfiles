@@ -115,9 +115,9 @@ if which ag > /dev/null 2>&1; then
 fi
 # Use rg for FZF (preferred over ag)
 if which rg > /dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND='rg --no-ignore --files'
-    export FZF_CTRL_T_COMMAND='rg --no-ignore --files'
-    export FZF_EDITOR_COMMAND='rg --no-ignore --files'
+    export FZF_DEFAULT_COMMAND='rg --files'
+    export FZF_CTRL_T_COMMAND='rg --files'
+    export FZF_EDITOR_COMMAND='rg --files'
 fi
 
 # Set window title to running command
