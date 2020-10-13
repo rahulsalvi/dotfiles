@@ -80,6 +80,7 @@ inoremap <silent><expr> <C-l> delimitMate#JumpAny()
 nmap <silent> <LEADER>j <Plug>(coc-git-nextchunk)
 nmap <silent> <LEADER>k <Plug>(coc-git-prevchunk)
 nmap <silent> <LEADER>d <Plug>(coc-definition)
+nmap <silent> <LEADER>r <Plug>(coc-rename)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
 
@@ -137,6 +138,7 @@ let g:leader_key_map={
     \ 'k'    : [ '<Plug>(coc-git-prevchunk)',          'git-previous-chunk'        ],
     \ 'P'    : [ ':Vista finder fzf:coc',              'vista-finder'              ],
     \ 'p'    : [ ':FZFFiles',                          'fzf-files'                 ],
+    \ 'r'    : [ '<Plug>(coc-rename)',                 'rename'                    ],
     \ 's'    : [ ':StripWhitespace',                   'strip-whitespace'          ],
     \ 'T'    : [ ':call <SID>neoterm_start("python")', 'python-interpreter'        ],
     \ 't'    : [ ':Ttoggle',                           'toggle-terminal'           ],
