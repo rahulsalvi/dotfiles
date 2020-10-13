@@ -97,6 +97,7 @@ nnoremap <silent> <LEADER>lt :Utl openLink underCursor tabe<CR>
 " terminal
 nnoremap <silent> <LEADER>t :Ttoggle<CR>
 nnoremap <silent> <LEADER>T :call <SID>neoterm_start("python")<CR>
+tnoremap <C-n> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
