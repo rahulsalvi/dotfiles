@@ -88,8 +88,6 @@ fi
 [ -f "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh" ] && source "${VELOCITY_DIR:-$HOME}/.velocity/velocity.zsh"
 
 # Set environment variables
-export CC=clang
-export CXX=clang++
 export EDITOR=nvim
 export EDITOR_OPTS="-p"
 export TERMCMD=kitty
