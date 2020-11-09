@@ -120,11 +120,6 @@ if which rg > /dev/null 2>&1; then
     export FZF_EDITOR_COMMAND='rg --files'
 fi
 
-# Set window title to running command
-function preexec() {
-    print -Pn "\e]0;${1%% *}\a"
-}
-
 # Set prompt
 PROMPT='%n@%M %3d $ '
 

@@ -22,6 +22,7 @@ set splitbelow
 set splitright
 set tabstop=4
 set termguicolors
+set title
 set updatetime=300
 set virtualedit=all
 set wildmenu
