@@ -87,6 +87,7 @@ redshift :
 rofi :
 	SRC=rofi/config DST=.config/rofi/config ./install.sh
 	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
+	SRC=rofi/apps.txt DST=.config/rofi/apps.txt ./install.sh
 
 tablet :
 	SRC=tablet/init_xsetwacom DST=.config/tablet/init_xsetwacom ./install.sh
