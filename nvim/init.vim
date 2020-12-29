@@ -82,7 +82,8 @@ inoremap <silent><expr> <C-l> delimitMate#JumpAny()
 " coc
 nmap <silent> <LEADER>j <Plug>(coc-git-nextchunk)
 nmap <silent> <LEADER>k <Plug>(coc-git-prevchunk)
-nmap <silent> <LEADER>d <Plug>(coc-definition)
+nmap <silent> <LEADER>d :call CocAction('jumpDefinition', 'vsplit')<CR>
+nmap <silent> <LEADER>D <Plug>(coc-definition)
 nmap <silent> <LEADER>r <Plug>(coc-rename)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
