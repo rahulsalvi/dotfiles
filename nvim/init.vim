@@ -34,6 +34,8 @@ set noswapfile
 set nowrap
 set nowritebackup
 
+let &titlestring="nvim"
+
 " Conditional Settings
 " --------------------
 if has('nvim')
