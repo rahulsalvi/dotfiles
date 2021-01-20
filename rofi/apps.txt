@@ -30,6 +30,7 @@ transmission
 vlc
 vpnoff
 vpnon
+wireshark
 write
 xournalpp
 zathura
