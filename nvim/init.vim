@@ -389,6 +389,7 @@ Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/puremourning/vimspector.git'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/rhysd/clever-f.vim.git'
+Plug 'https://github.com/sirtaj/vim-openscad.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
