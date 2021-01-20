@@ -22,14 +22,57 @@
             "args": ["start"],
             "filetypes": ["sh"],
             "ignoredRootPaths": ["~"]
+        },
+        "python": {
+            "command": "python",
+            "args": [
+                "-mpyls",
+                "-vv",
+                "--log-file",
+                "/tmp/lsp_python.log"
+            ],
+            "trace.server": "verbose",
+            "filetypes": [
+                "python"
+            ],
+            "settings": {
+                "pyls": {
+                    "enable": true,
+                    "trace": {
+                        "server": "verbose"
+                    },
+                    "commandPath": "",
+                    "configurationSources": [
+                        "pycodestyle"
+                    ],
+                    "plugins": {
+                        "jedi_completion": {
+                            "enabled": true
+                        },
+                        "jedi_hover": {
+                            "enabled": true
+                        },
+                        "jedi_references": {
+                            "enabled": true
+                        },
+                        "jedi_signature_help": {
+                            "enabled": true
+                        },
+                        "jedi_symbols": {
+                            "enabled": true,
+                            "all_scopes": true
+                        },
+                        "rope_completion": {
+                            "enabled": true
+                        }
+                    }
+                }
+            }
         }
     },
-    "python.jediEnabled": false,
-    "python.formatting.provider": "",
-    "python.linting.enabled": false,
     "latex.build.executable": "latexmk",
     "latex.build.args": ["-pdf", "-pdflatex=xelatex"],
     "latex.build.onSave": true,
     "latex.lint.onSave": false,
-    "latex.lint.onChange": false,
+    "latex.lint.onChange": false
 }

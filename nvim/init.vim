@@ -486,7 +486,6 @@ let g:vista#renderer#icons={
 let g:coc_global_extensions=['coc-cmake',
                            \ 'coc-git',
                            \ 'coc-snippets',
-                           \ 'coc-python',
                            \ 'coc-texlab'
                            \ ]
 highlight CocHighlightText ctermfg=White ctermbg=DarkMagenta
