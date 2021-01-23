@@ -1,0 +1,11 @@
+[Unit]
+Description=X11 Audio Visualizer
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/xava
+KillSignal=SIGINT
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
