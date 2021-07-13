@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+lw.comm-server-linux-amd64-v4.0.138.AppImage >/dev/null 2>&1 &
+SERVER_PID=$!
+sleep 1
+LaserWeb-linux-amd64-v4.0.996-152-pre.AppImage
+sleep 1
+kill -TERM "$SERVER_PID"
