@@ -4,7 +4,7 @@ UPDATEFILE=${UPDATEFILE:-"$HOME/.cache/lastupdate"}
 
 # update nvim
 echo "Updating nvim"
-nvim -c "PlugUpgrade" -c "PlugUpdate" -c "CocUpdate" -c "quitall"
+nvim -c "PlugUpgrade" -c "PlugUpdate" -c "quitall"
 
 # update tmux plugins
 echo "Updating tmux plugins"

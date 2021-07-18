@@ -50,7 +50,6 @@ mutt :
 
 nvim :
 	SRC=nvim/init.vim DST=.config/nvim/init.vim ./install.sh
-	SRC=nvim/coc-settings.json DST=.config/nvim/coc-settings.json ./install.sh
 
 offlineimap :
 	SRC=offlineimap/offlineimaprc DST=.config/offlineimap/config ./install.sh

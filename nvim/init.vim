@@ -2,8 +2,10 @@
 " ----------------
 set backspace=indent,eol,start
 set clipboard=unnamedplus
+set completeopt=menuone,noselect
 set expandtab
 set hlsearch
+set inccommand=nosplit
 set incsearch
 set lazyredraw
 set modeline
@@ -12,7 +14,6 @@ set mouse=a
 set number
 set relativenumber
 set scrolloff=5
-set selection=exclusive
 set shiftwidth=4
 set showcmd
 set sidescroll=1
@@ -36,14 +37,6 @@ set nowritebackup
 
 let &titlestring="nvim"
 
-" Conditional Settings
-" --------------------
-if has('nvim')
-    set inccommand=nosplit
-else
-    set ttymouse=xterm2
-endif
-
 " Easy switch between light and dark colorscheme
 if $BACKGROUND == 'light'
     set background=light
@@ -51,12 +44,7 @@ else
     set background=dark
 endif
 
-" Use ag for faster searching
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-endif
-
-" Use rg for faster searching (preferred over ag)
+" Use rg for faster searching
 if executable('rg')
     set grepprg=rg\ --vimgrep\ --no-heading
     set grepformat=%f:%l:%c:%m,%f:%l,%m
@@ -64,6 +52,7 @@ endif
 
 " Key Remappings
 " --------------
+" leader
 let mapleader="\<SPACE>"
 let maplocalleader="\<SPACE>"
 nnoremap <silent> <LEADER>      :<c-u>WhichKey '<SPACE>'<CR>
@@ -78,25 +67,20 @@ nmap <LEADER>c yygccp
 nnoremap <silent> <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <silent> <LEADER>s :StripWhitespace<CR>
 inoremap <silent><expr> <C-l> delimitMate#JumpAny()
+inoremap <silent><expr> <C-e> compe#close('<C-e>')
+nnoremap <LEADER>a :BufferPick<CR>
+vnoremap < <gv
+vnoremap > >gv
 
-" coc
-nmap <silent> <LEADER>j <Plug>(coc-git-nextchunk)
-nmap <silent> <LEADER>k <Plug>(coc-git-prevchunk)
-nmap <silent> <LEADER>d :call CocAction('jumpDefinition', 'vsplit')<CR>
-nmap <silent> <LEADER>D <Plug>(coc-definition)
-nmap <silent> <LEADER>r <Plug>(coc-rename)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-nnoremap <silent> <LEADER>gs :CocCommand git.chunkStage<CR>
+" git
+nmap <LEADER>j <Plug>(GitGutterNextHunk)
+nmap <LEADER>k <Plug>(GitGutterPrevHunk)
+nmap <LEADER>gs <Plug>(GitGutterStageHunk)
+nmap <LEADER>gu <Plug>(GitGutterUndoHunk)
 
 " Vista
 nnoremap <silent> <LEADER>b :Vista!!<CR>
-nnoremap <silent> <LEADER>P :Vista finder fzf:coc<CR>
-
-" links
-nnoremap <silent> <LEADER>le :Utl openLink underCursor e<CR>
-nnoremap <silent> <LEADER>lv :Utl openLink underCursor vsp<CR>
-nnoremap <silent> <LEADER>ls :Utl openLink underCursor sp<CR>
-nnoremap <silent> <LEADER>lt :Utl openLink underCursor tabe<CR>
+nnoremap <silent> <LEADER>P :Vista finder fzf:nvim_lsp<CR>
 
 " terminal
 nnoremap <silent> <LEADER>t :Ttoggle<CR>
@@ -110,127 +94,96 @@ tnoremap <C-w> <C-\><C-n>:Ttoggle<CR>
 tnoremap <C-q> <C-\><C-n>:Tclose!<CR>
 
 " tab/cr keys
-nnoremap <silent> <TAB> :call <SID>n_tab()<CR>
-nnoremap <silent> <S-TAB> :call <SID>n_stab()<CR>
-inoremap <silent> <TAB> <C-R>=(<SID>i_tab())<CR>
-inoremap <silent> <S-TAB> <C-R>=(<SID>i_stab())<CR>
-inoremap <silent> <CR> <C-R>=(<SID>i_cr())<CR>
-snoremap <silent> <TAB> <C-g>:<C-u>call UltiSnips#JumpForwards()<CR>
-snoremap <silent> <S-TAB> <C-g>:<C-u>call UltiSnips#JumpBackwards()<CR>
-
-" visual
-vnoremap < <gv
-vnoremap > >gv
-
-" vimspector
-nmap <F3> :VimspectorReset<CR>
-nmap <F4> <Plug>VimspectorRestart
-nmap <F5> <Plug>VimspectorContinue
-nmap <F9> <Plug>VimspectorToggleBreakpoint
-nmap <F10> <Plug>VimspectorStepOver
-nmap <F11> <Plug>VimspectorStepInto
-nmap <F12> <Plug>VimspectorStepOut
-nnoremap <LEADER>vw :VimspectorWatch 
-nnoremap <LEADER>ve :VimspectorEval 
+nmap <silent> <TAB> :call <SID>n_tab()<CR>
+nmap <silent> <S-TAB> :call <SID>n_stab()<CR>
+imap <silent><expr> <TAB> <SID>i_tab()
+imap <silent><expr> <S-TAB> <SID>i_stab()
+imap <silent><expr> <CR> <SID>i_cr()
+smap <silent><expr> <TAB> vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<TAB>"
+smap <silent><expr> <S-TAB> vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<TAB>"
 
 " define bindings for vim-which-key
 let g:leader_key_map={
     \ 'name' : 'leader',
+    \ 'a'    : [ ':BufferPick',                        'change-buffer'             ],
     \ 'b'    : [ ':Vista!!',                           'toggle-vista'              ],
     \ 'c'    : [ 'yygccp',                             'copy-comment-current-line' ],
-    \ 'd'    : [ '<Plug>(coc-definition)',             'go-to-definition'          ],
-    \ 'j'    : [ '<Plug>(coc-git-nextchunk)',          'git-next-chunk'            ],
-    \ 'k'    : [ '<Plug>(coc-git-prevchunk)',          'git-previous-chunk'        ],
-    \ 'P'    : [ ':Vista finder fzf:coc',              'vista-finder'              ],
+    \ 'd'    : [ 'GotoDefinition()',                   'go-to-definition'          ],
+    \ 'j'    : [ '<Plug>(GitGutterNextHunk)',          'git-next-chunk'            ],
+    \ 'k'    : [ '<Plug>(GitGutterPrevHunk)',          'git-previous-chunk'        ],
+    \ 'P'    : [ ':Vista finder fzf:nvim_lsp',         'vista-finder'              ],
     \ 'p'    : [ ':FZFFiles',                          'fzf-files'                 ],
-    \ 'r'    : [ '<Plug>(coc-rename)',                 'rename'                    ],
+    \ 'r'    : [ ':Lspsaga rename',                    'rename'                    ],
     \ 's'    : [ ':StripWhitespace',                   'strip-whitespace'          ],
     \ 'T'    : [ ':call <SID>neoterm_start("python")', 'python-interpreter'        ],
     \ 't'    : [ ':Ttoggle',                           'toggle-terminal'           ],
     \ }
 let g:leader_key_map['g']={
     \ 'name' : '+git',
-    \ 's'    : [ ':CocCommand git.chunkStage', 'git-stage-chunk' ],
+    \ 's'    : [ '<Plug>(GitGutterStageHunk)', 'git-stage-chunk' ],
+    \ 'u'    : [ '<Plug>(GitGutterUndoHunk)',  'git-stage-chunk' ],
     \ }
-let g:leader_key_map['l']={ 'name' : '+utl' }
-let g:leader_key_map['v']={ 'name' : '+vimspector' }
 
 " Functions
 " ---------
+function! GotoDefinition()
+    lua vim.lsp.buf.definition()
+endfunction
+
 function! s:check_prev_whitespace()
     let c = col('.') - 1
     return !c || getline('.')[c - 1] =~# '\s'
 endfunction
 
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-
-let g:ulti_jump_forwards_res = 0
-function! s:ulti_jump_forwards()
-    call UltiSnips#JumpForwards()
-    return g:ulti_jump_forwards_res
-endfunction
-
-let g:ulti_jump_backwards_res = 0
-function! s:ulti_jump_backwards()
-    call UltiSnips#JumpBackwards()
-    return g:ulti_jump_backwards_res
-endfunction
-
-let g:ulti_expand_res = 0
-function! s:ulti_expand()
-    call UltiSnips#ExpandSnippet()
-    return g:ulti_expand_res
-endfunction
-
-let g:ulti_expand_or_jump_res = 0
-function! s:ulti_expand_or_jump()
-    call UltiSnips#ExpandSnippetOrJump()
-    return g:ulti_expand_or_jump_res
-endfunction
-
 function! s:n_tab()
-    if <SID>ulti_jump_forwards() == 0
+    if vsnip#jumpable(1)
+        execute "normal i\<Plug>(vsnip-jump-next)"
+    else
         normal gt
     endif
 endfunction
 
 function! s:n_stab()
-    if <SID>ulti_jump_backwards() == 0
+    if vsnip#jumpable(-1)
+        execute "normal i\<Plug>(vsnip-jump-prev)"
+    else
         normal gT
     endif
 endfunction
 
 function! s:i_tab()
-    return pumvisible() ? "\<C-n>" :
-         \ <SID>ulti_jump_forwards() ? "" :
-         \ <SID>check_prev_whitespace() ? "\<TAB>" :
-         \ coc#refresh()
+    return
+        \ pumvisible() ? "\<C-n>" :
+        \ vsnip#jumpable(1) ? "\<Plug>(vsnip-jump-next)" :
+        \ <SID>check_prev_whitespace() ? "\<TAB>" :
+        \ delimitMate#ShouldJump() ? delimitMate#JumpAny() :
+        \ compe#complete()
 endfunction
 
 function! s:i_stab()
-    return pumvisible() ? "\<C-p>" : UltiSnips#JumpBackwards()
+    return
+        \ pumvisible() ? "\<C-p>" :
+        \ vsnip#jumpable(-1) ? "\<Plug>(vsnip-jump-prev)" :
+        \ "\<S-TAB>"
 endfunction
 
 function! s:i_cr()
-    return <SID>ulti_expand() ? "" :
-         \ pumvisible() ? "\<C-y>" :
-         \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-         \ <SID>ulti_expand_or_jump() ? "" :
-         \ delimitMate#WithinEmptyPair() ? delimitMate#ExpandReturn() :
-         \ "\<CR>"
+    return
+        \ vsnip#expandable() ? "\<Plug>(vsnip-expand)" :
+        \ pumvisible() ? compe#confirm("") :
+        \ vsnip#available(1) ? "\<Plug>(vsnip-expand-or-jump)" :
+        \ delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" :
+        \ delimitMate#ShouldJump() ? delimitMate#JumpAny() :
+        \ "\<CR>"
 endfunction
 
 function! LightlineGitInfo()
-    let branch = get(g:, 'coc_git_status', '')
-    let status = get(b:, 'coc_git_status', '')
-    let status = substitute(status, '  ', '', '')
-    return status . branch
+    let branch = fugitive#head(8)
+    let [a,m,r] = GitGutterGetHunkSummary()
+    let added    = a > 0 ? printf("+%d ", a) : ""
+    let modified = m > 0 ? printf("~%d ", m) : ""
+    let removed  = r > 0 ? printf("-%d ", r) : ""
+    return added . modified . removed . branch
 endfunction
 
 function! LightlineFilename()
@@ -324,12 +277,9 @@ function! CreateBorderedFloatingWindow()
     au BufWipeout <buffer> exe 'bw '.s:buf
 endfunction
 
+
 " Autocommands
 " ------------
-
-" Highlight hovered text
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 " Set filetype to text if not already set
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
@@ -355,20 +305,21 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 autocmd! VimEnter /tmp/neomutt-* :Goyo
 
-" enter terminals in insert mode
-if has('nvim')
-    autocmd TermOpen term://* startinsert
-    autocmd BufWinEnter,WinEnter term://* startinsert
-    autocmd BufLeave term://* stopinsert
-endif
+autocmd TermOpen term://* startinsert
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
 
 " Plugins
 " -------
 call plug#begin('~/.config/nvim/plugins')
 
-Plug 'https://github.com/altercation/vim-colors-solarized.git'
+Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/dense-analysis/ale.git'
+Plug 'https://github.com/glepnir/lspsaga.nvim'
+Plug 'https://github.com/hrsh7th/nvim-compe'
+Plug 'https://github.com/hrsh7th/vim-vsnip'
+Plug 'https://github.com/ishan9299/nvim-solarized-lua'
 Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight.git'
 Plug 'https://github.com/jceb/vim-orgmode.git'
@@ -379,24 +330,23 @@ Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kassio/neoterm.git'
 Plug 'https://github.com/knubie/vim-kitty-navigator.git'
-Plug 'https://github.com/lifepillar/vim-solarized8.git'
+Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/liuchengxu/vim-which-key.git'
 Plug 'https://github.com/liuchengxu/vista.vim.git'
-Plug 'https://github.com/mrtazz/DoxygenToolkit.vim.git', { 'on': 'Dox' }
-Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
+Plug 'https://github.com/neovim/nvim-lspconfig'
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
 Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
-Plug 'https://github.com/puremourning/vimspector.git'
+Plug 'https://github.com/rahulsalvi/rahulsalvi-snippets'
 Plug 'https://github.com/Raimondi/delimitMate.git'
+Plug 'https://github.com/ray-x/lsp_signature.nvim'
 Plug 'https://github.com/rhysd/clever-f.vim.git'
+Plug 'https://github.com/romgrk/barbar.nvim'
 Plug 'https://github.com/sirtaj/vim-openscad.git'
-Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-obsession.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'https://github.com/vim-scripts/utl.vim.git'
 Plug 'https://github.com/wellle/targets.vim.git'
 
 call plug#end()
@@ -405,11 +355,82 @@ call plug#end()
 " ---------------------
 " Colorscheme
 let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-colorscheme solarized8_high
-highlight SignColumn ctermbg=None
-highlight Folded cterm=bold ctermbg=None
-highlight NormalFloat ctermbg=Black ctermfg=White
+colorscheme solarized-high
+highlight SignColumn guibg=None
+highlight Folded gui=bold guibg=None
+highlight NormalFloat guibg=Black guifg=White
+highlight LspDiagnosticsDefaultError       gui=NONE guifg=Red
+highlight LspDiagnosticsDefaultWarning     gui=NONE guifg=Yellow
+highlight LspDiagnosticsDefaultInformation gui=NONE guifg=Cyan
+highlight LspDiagnosticsDefaultHint        gui=NONE guifg=Green
+highlight! link ALEError            LspDiagnosticsUnderlineError
+highlight! link ALEWarning          LspDiagnosticsUnderlineWarning
+highlight! link ALEInfo             LspDiagnosticsDefaultInformation
+highlight! link ALEStyleError       LspDiagnosticsDefaultError
+highlight! link ALEStyleWarning     LspDiagnosticsDefaultWarning
+highlight! link ALEErrorSign        LspDiagnosticsSignError
+highlight! link ALEWarningSign      LspDiagnosticsSignWarning
+highlight! link ALEInfoSign         LspDiagnosticsSignInformation
+highlight! link ALEStyleErrorSign   LspDiagnosticsSignError
+highlight! link ALEStyleWarningSign LspDiagnosticsSignWarning
+sign define LspDiagnosticsSignError       text=😡 texthl=LspDiagnosticsSignError       linehl= numhl=LspDiagnosticsSignError
+sign define LspDiagnosticsSignWarning     text=🤔 texthl=LspDiagnosticsSignWarning     linehl= numhl=LspDiagnosticsSignWarning
+sign define LspDiagnosticsSignInformation text=I  texthl=LspDiagnosticsSignInformation linehl= numhl=LspDiagnosticsSignInformation
+sign define LspDiagnosticsSignHint        text=H  texthl=LspDiagnosticsSignHint        linehl= numhl=LspDiagnosticsSignHint
+
+" vim-gitgutter
+let g:gitgutter_map_keys = 0
+let g:gitgutter_sign_priority = 0
+
+" ALE
+let g:ale_linters={
+    \ 'c': ['cppcheck'],
+    \ 'cpp': ['cppcheck'],
+    \ 'python': ['pylint'],
+    \ 'sh': ['shellcheck'],
+    \ 'tex': ['chktex'],
+    \ }
+let g:ale_fixers={
+    \ 'c': ['clang-format'],
+    \ 'cpp': ['clang-format'],
+    \ 'cmake': ['cmakeformat'],
+    \ 'python': ['yapf'],
+    \ 'sh': ['shfmt'],
+    \ }
+command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
+let g:ale_linters_explicit=1
+let g:ale_fix_on_save=1
+let g:ale_sign_priority = 100
+let g:ale_sign_error = '😡'
+let g:ale_sign_warning = '🤔'
+let g:ale_sign_info = 'I'
+let g:ale_sign_style_error = '😡'
+let g:ale_sign_style_warning = '🤔'
+let g:ale_echo_msg_format='[%linter%] %code: %%s'
+
+" nvim-compe
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.debug = v:false
+let g:compe.min_length = 1
+let g:compe.preselect = 'always'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.resolve_timeout = 800
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 100
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 100
+let g:compe.documentation = v:true
+
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+let g:compe.source.vsnip = v:true
 
 " Lightline
 set laststatus=2
@@ -434,6 +455,9 @@ let g:lightline={
     \ }
     \ }
 
+" vim-lsp-cxx-highlight
+let g:lsp_cxx_hl_use_text_props = 1
+
 " vim-orgmode
 let g:org_agenda_files = ['~/todo/*.org']
 let g:org_todo_keywords = [
@@ -442,10 +466,6 @@ let g:org_todo_keywords = [
     \ ]
 let g:org_prefer_insert_mode = 0
 let g:org_heading_shade_leading_stars = 0
-
-" EasyAlign
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 
 " FZF
 let g:fzf_nvim_statusline=0
@@ -457,9 +477,9 @@ let g:fzf_action={
     \ 'ctrl-v': 'vsplit',
     \ }
 
-" Vim-Better-Whitespace
-highlight ExtraWhitespace ctermbg=darkred guibg=darkred
-let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Sneak
 let g:sneak#s_next=1
@@ -474,7 +494,7 @@ let g:which_key_use_floating_win=1
 call which_key#register('<SPACE>', "g:leader_key_map")
 
 " Vista
-let g:vista_default_executive='coc'
+let g:vista_default_executive='nvim_lsp'
 let g:vista_close_on_jump=1
 let g:vista_sidebar_width=40
 let g:vista#renderer#enable_icon=1
@@ -483,45 +503,72 @@ let g:vista#renderer#icons={
     \ 'variable': ''
     \ }
 
-" coc
-let g:coc_global_extensions=['coc-cmake',
-                           \ 'coc-git',
-                           \ 'coc-snippets',
-                           \ 'coc-texlab'
-                           \ ]
-highlight CocHighlightText ctermfg=White ctermbg=DarkMagenta
+" Vim-Better-Whitespace
+highlight ExtraWhitespace ctermbg=darkred guibg=darkred
+let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
 
 " clever-f
 let g:clever_f_across_no_line=1
 let g:clever_f_smart_case=1
 
-" UltiSnips
-let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetsDir='~/.config/ultisnips'
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/ultisnips']
-let g:UltiSnipsExpandTrigger='<F13>'
-let g:UltiSnipsJumpForwardTrigger='<F14>'
-let g:UltiSnipsJumpBackwardTrigger='<F15>'
-let g:UltiSnipsRemoveSelectModeMappings=0
+" barbar.nvim
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.auto_hide = v:true
+let bufferline.icon_close_tab = '✕'
 
-" ALE
-let g:ale_linters={
-    \ 'c': ['cppcheck'],
-    \ 'cpp': ['cppcheck'],
-    \ 'python': ['pylint'],
-    \ 'sh': ['shellcheck'],
-    \ 'tex': ['chktex'],
-    \ }
-let g:ale_fixers={
-    \ 'c': ['clang-format'],
-    \ 'cpp': ['clang-format'],
-    \ 'cmake': ['cmakeformat'],
-    \ 'python': ['yapf'],
-    \ 'sh': ['shfmt'],
-    \ }
-command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
-let g:ale_linters_explicit=1
-let g:ale_fix_on_save=1
-let g:ale_sign_error = '😡'
-let g:ale_sign_warning = '🤔'
-let g:ale_echo_msg_format='[%linter%] %code: %%s'
+" Lua Configuration
+" -----------------
+lua << EOF
+-- lspsaga
+local saga = require 'lspsaga'
+saga.init_lsp_saga {
+    error_sign = '😡',
+    warn_sign = '🤔',
+    rename_prompt_prefix = 'New Name ➤'
+}
+
+-- nvim-lspconfig
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', '<LEADER>d', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<LEADER>r', '<Cmd>lua require("lspsaga.rename").rename()<CR>', opts)
+  buf_set_keymap('n', 'K',         '<Cmd>lua require("lspsaga.hover").render_hover_doc()<CR>', opts)
+
+  lsp_signature_cfg = {
+      hint_prefix = ''
+  }
+
+  require'lsp_signature'.on_attach(lsp_signature_cfg)
+end
+
+local nvim_lsp = require('lspconfig')
+nvim_lsp.ccls.setup{
+    init_options = {
+        cache = {
+            directory = "/tmp/ccls";
+        };
+        highlight = {
+            lsRanges = true;
+        };
+    },
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+}
+
+nvim_lsp.pyright.setup{
+    on_attach=on_attach
+}
+
+nvim_lsp.bashls.setup{}
+nvim_lsp.cmake.setup{}
+EOF
