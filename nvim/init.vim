@@ -549,6 +549,9 @@ local on_attach = function(client, bufnr)
   require'lsp_signature'.on_attach(lsp_signature_cfg)
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 local nvim_lsp = require('lspconfig')
 nvim_lsp.ccls.setup{
     init_options = {
@@ -560,6 +563,7 @@ nvim_lsp.ccls.setup{
         };
     },
     on_attach = on_attach,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
