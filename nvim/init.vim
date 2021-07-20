@@ -570,17 +570,17 @@ nvim_lsp.ccls.setup{
 }
 
 nvim_lsp.jedi_language_server.setup{
-    on_attach=on_attach,
+    on_attach = on_attach,
     capabilities = capabilities
 }
 
 nvim_lsp.bashls.setup{
-    on_attach=on_attach,
+    on_attach = on_attach,
     capabilities = capabilities
 }
 
 nvim_lsp.cmake.setup{
-    on_attach=on_attach,
+    on_attach = on_attach,
     capabilities = capabilities
 }
 EOF
