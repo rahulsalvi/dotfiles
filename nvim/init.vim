@@ -68,7 +68,6 @@ nnoremap <silent> <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <silent> <LEADER>s :StripWhitespace<CR>
 inoremap <silent><expr> <C-l> delimitMate#JumpAny()
 inoremap <silent><expr> <C-e> compe#close('<C-e>')
-nnoremap <LEADER>a :BufferPick<CR>
 vnoremap < <gv
 vnoremap > >gv
 
@@ -105,7 +104,6 @@ smap <silent><expr> <S-TAB> vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<T
 " define bindings for vim-which-key
 let g:leader_key_map={
     \ 'name' : 'leader',
-    \ 'a'    : [ ':BufferPick',                        'change-buffer'             ],
     \ 'b'    : [ ':Vista!!',                           'toggle-vista'              ],
     \ 'c'    : [ 'yygccp',                             'copy-comment-current-line' ],
     \ 'd'    : [ 'GotoDefinition()',                   'go-to-definition'          ],
@@ -340,7 +338,6 @@ Plug 'https://github.com/rahulsalvi/rahulsalvi-snippets'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/ray-x/lsp_signature.nvim'
 Plug 'https://github.com/rhysd/clever-f.vim.git'
-Plug 'https://github.com/romgrk/barbar.nvim'
 Plug 'https://github.com/sirtaj/vim-openscad.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
@@ -510,11 +507,6 @@ let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
 " clever-f
 let g:clever_f_across_no_line=1
 let g:clever_f_smart_case=1
-
-" barbar.nvim
-let bufferline = get(g:, 'bufferline', {})
-let bufferline.auto_hide = v:true
-let bufferline.icon_close_tab = '✕'
 
 " Lua Configuration
 " -----------------
