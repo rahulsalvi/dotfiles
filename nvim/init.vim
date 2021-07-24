@@ -292,9 +292,8 @@ augroup CursorLine
     autocmd WinLeave * setl nocursorline
 augroup END
 
-autocmd FileType org setlocal foldlevel=1
-autocmd BufWinEnter *.org nunmap <buffer> <localleader>pa
-autocmd BufWinEnter *.org nunmap <buffer> <localleader>pi
+" Default to showing contents
+autocmd BufWinEnter *.org :lua require('orgmode').action('org_mappings.global_cycle')
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
@@ -320,7 +319,6 @@ Plug 'https://github.com/hrsh7th/vim-vsnip'
 Plug 'https://github.com/ishan9299/nvim-solarized-lua'
 Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight.git'
-Plug 'https://github.com/jceb/vim-orgmode.git'
 Plug 'https://github.com/junegunn/fzf.git'
 Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/goyo.vim.git'
@@ -328,6 +326,7 @@ Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kassio/neoterm.git'
 Plug 'https://github.com/knubie/vim-kitty-navigator.git'
+Plug 'https://github.com/kristijanhusak/orgmode.nvim'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/liuchengxu/vim-which-key.git'
 Plug 'https://github.com/liuchengxu/vista.vim.git'
@@ -428,6 +427,7 @@ let g:compe.source.calc = v:true
 let g:compe.source.nvim_lsp = v:true
 let g:compe.source.nvim_lua = v:true
 let g:compe.source.vsnip = v:true
+let g:compe.source.orgmode = v:true
 
 " Lightline
 set laststatus=2
@@ -454,15 +454,6 @@ let g:lightline={
 
 " vim-lsp-cxx-highlight
 let g:lsp_cxx_hl_use_text_props = 1
-
-" vim-orgmode
-let g:org_agenda_files = ['~/todo/*.org']
-let g:org_todo_keywords = [
-    \ ['TODO(t)', 'IN_PROGRESS(i)', '|', 'DONE(d)'],
-    \ ['PLANNED(p)', 'PARTS_READY(r)', 'WORKING(w)', '|', 'DONE(d)'],
-    \ ]
-let g:org_prefer_insert_mode = 0
-let g:org_heading_shade_leading_stars = 0
 
 " FZF
 let g:fzf_nvim_statusline=0
@@ -574,5 +565,10 @@ nvim_lsp.bashls.setup{
 nvim_lsp.cmake.setup{
     on_attach = on_attach,
     capabilities = capabilities
+}
+
+require('orgmode').setup{
+    org_agenda_files = {'~/todo/*.org', '~/todo/**/*.org'},
+    org_default_notes_file = '~/todo/notes.org',
 }
 EOF
