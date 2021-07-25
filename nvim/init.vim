@@ -55,20 +55,21 @@ endif
 " leader
 let mapleader="\<SPACE>"
 let maplocalleader="\<SPACE>"
-nnoremap <silent> <LEADER>      :<c-u>WhichKey '<SPACE>'<CR>
-nnoremap <silent> <LOCALLEADER> :<c-u>WhichKey '<SPACE>'<CR>
-vnoremap <silent> <LEADER>      :<c-u>WhichKeyVisual '<SPACE>'<CR>
-vnoremap <silent> <LOCALLEADER> :<c-u>WhichKeyVisual '<SPACE>'<CR>
+nnoremap <LEADER>      <Cmd>WhichKey '<SPACE>'<CR>
+nnoremap <LOCALLEADER> <Cmd>WhichKey '<SPACE>'<CR>
+vnoremap <LEADER>      <Cmd>WhichKeyVisual '<SPACE>'<CR>
+vnoremap <LOCALLEADER> <Cmd>WhichKeyVisual '<SPACE>'<CR>
 
 " general
 nnoremap Y y$
-nnoremap <LEADER>p :FZFFiles<CR>
+nnoremap <LEADER>p <Cmd>FZFFiles<CR>
+nnoremap <LEADER><SPACE> <Cmd>nohlsearch<CR>
+nnoremap <LEADER>s <Cmd>StripWhitespace<CR>
+nnoremap <LEADER>z <Cmd>tab sp<CR>
+nnoremap <LEADER>a <Cmd>NvimTreeToggle<CR>
 nmap <LEADER>c yygccp
-nnoremap <silent> <LEADER><SPACE> :nohlsearch<CR>
-nnoremap <silent> <LEADER>s :StripWhitespace<CR>
-nnoremap <silent> <LEADER>z :tab sp<CR>
-inoremap <silent><expr> <C-l> delimitMate#JumpAny()
-inoremap <silent><expr> <C-e> compe#close('<C-e>')
+inoremap <expr> <C-l> delimitMate#JumpAny()
+inoremap <expr> <C-e> compe#close('<C-e>')
 vnoremap < <gv
 vnoremap > >gv
 
@@ -79,12 +80,12 @@ nmap <LEADER>gs <Plug>(GitGutterStageHunk)
 nmap <LEADER>gu <Plug>(GitGutterUndoHunk)
 
 " Vista
-nnoremap <silent> <LEADER>b :Vista!!<CR>
-nnoremap <silent> <LEADER>P :Vista finder fzf:nvim_lsp<CR>
+nnoremap <LEADER>v <Cmd>Vista!!<CR>
+nnoremap <LEADER>P <Cmd>Vista finder fzf:nvim_lsp<CR>
 
 " terminal
-nnoremap <silent> <LEADER>t :Ttoggle<CR>
-nnoremap <silent> <LEADER>T :call <SID>neoterm_start("python")<CR>
+nnoremap <LEADER>t <Cmd>Ttoggle<CR>
+nnoremap <LEADER>T <Cmd>call <SID>neoterm_start("python")<CR>
 tnoremap <C-n> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
@@ -94,18 +95,19 @@ tnoremap <C-w> <C-\><C-n>:Ttoggle<CR>
 tnoremap <C-q> <C-\><C-n>:Tclose!<CR>
 
 " tab/cr keys
-nmap <silent> <TAB> :call <SID>n_tab()<CR>
-nmap <silent> <S-TAB> :call <SID>n_stab()<CR>
-imap <silent><expr> <TAB> <SID>i_tab()
-imap <silent><expr> <S-TAB> <SID>i_stab()
-imap <silent><expr> <CR> <SID>i_cr()
-smap <silent><expr> <TAB> vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<TAB>"
-smap <silent><expr> <S-TAB> vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<TAB>"
+nmap <TAB> <Cmd>call <SID>n_tab()<CR>
+nmap <S-TAB> <Cmd>call <SID>n_stab()<CR>
+imap <expr> <TAB> <SID>i_tab()
+imap <expr> <S-TAB> <SID>i_stab()
+imap <expr> <CR> <SID>i_cr()
+smap <expr> <TAB> vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<TAB>"
+smap <expr> <S-TAB> vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<TAB>"
 
 " define bindings for vim-which-key
 let g:leader_key_map={
     \ 'name' : 'leader',
-    \ 'b'    : [ ':Vista!!',                           'toggle-vista'              ],
+    \ ' '    : [ ':nohlsearch',                        'nohlsearch'                ],
+    \ 'a'    : [ ':NvimTreeToggle',                    'nvim-tree-toggle'          ],
     \ 'c'    : [ 'yygccp',                             'copy-comment-current-line' ],
     \ 'd'    : [ 'GotoDefinition()',                   'go-to-definition'          ],
     \ 'j'    : [ '<Plug>(GitGutterNextHunk)',          'git-next-chunk'            ],
@@ -116,18 +118,32 @@ let g:leader_key_map={
     \ 's'    : [ ':StripWhitespace',                   'strip-whitespace'          ],
     \ 'T'    : [ ':call <SID>neoterm_start("python")', 'python-interpreter'        ],
     \ 't'    : [ ':Ttoggle',                           'toggle-terminal'           ],
+    \ 'v'    : [ ':Vista!!',                           'toggle-vista'              ],
     \ 'z'    : [ ':tab sp',                            'fullscreen'                ],
-    \ }
+\ }
 let g:leader_key_map['g']={
     \ 'name' : '+git',
     \ 's'    : [ '<Plug>(GitGutterStageHunk)', 'git-stage-chunk' ],
-    \ 'u'    : [ '<Plug>(GitGutterUndoHunk)',  'git-stage-chunk' ],
-    \ }
+    \ 'u'    : [ '<Plug>(GitGutterUndoHunk)',  'git-undo-chunk'  ],
+\ }
+let g:leader_key_map['o']={
+    \ 'name' : '+orgmode',
+    \ 'a'    : [ 'OrgmodeAgenda()',   'orgmode-agenda'  ],
+    \ 'c'    : [ 'OrgmodeCapture()',  'orgmode-capture' ],
+\ }
 
 " Functions
 " ---------
 function! GotoDefinition()
     lua vim.lsp.buf.definition()
+endfunction
+
+function! OrgmodeAgenda()
+    lua require("orgmode").action("agenda.prompt")
+endfunction
+
+function! OrgmodeCapture()
+    lua require("orgmode").action("capture.prompt")
 endfunction
 
 function! s:check_prev_whitespace()
@@ -330,6 +346,7 @@ Plug 'https://github.com/kassio/neoterm.git'
 Plug 'https://github.com/knubie/vim-kitty-navigator.git'
 Plug 'https://github.com/kristijanhusak/orgmode.nvim'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
+Plug 'https://github.com/kyazdani42/nvim-tree.lua'
 Plug 'https://github.com/liuchengxu/vim-which-key.git'
 Plug 'https://github.com/liuchengxu/vista.vim.git'
 Plug 'https://github.com/neovim/nvim-lspconfig'
@@ -479,6 +496,26 @@ let g:neoterm_size='20%'
 let g:neoterm_autojump=1
 let g:neoterm_default_mod='botright'
 
+" nvim-tree
+let g:nvim_tree_width = '30%'
+let g:nvim_tree_ignore = [ '.git' ]
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_quit_on_open = 1
+let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_hide_dotfiles = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_highlight_opened_files = 1
+let g:nvim_tree_root_folder_modifier = ':~'
+let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_group_empty = 1
+
+let g:nvim_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ 'folder_arrows': 1,
+    \ }
+
 " vim-which-key
 let g:which_key_use_floating_win=1
 call which_key#register('<SPACE>', "g:leader_key_map")
@@ -569,8 +606,15 @@ nvim_lsp.cmake.setup{
     capabilities = capabilities
 }
 
+-- orgmode.nvim
 require('orgmode').setup{
     org_agenda_files = {'~/todo/*.org', '~/todo/**/*.org'},
     org_default_notes_file = '~/todo/notes.org',
+}
+
+-- nvim-tree.lua
+local tree_cb = require('nvim-tree.config').nvim_tree_callback
+vim.g.nvim_tree_bindings = {
+    { key = { "<C-s>" }, cb = tree_cb("split") }
 }
 EOF
