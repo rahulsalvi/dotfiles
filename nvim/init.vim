@@ -66,6 +66,7 @@ nnoremap <LEADER>p :FZFFiles<CR>
 nmap <LEADER>c yygccp
 nnoremap <silent> <LEADER><SPACE> :nohlsearch<CR>
 nnoremap <silent> <LEADER>s :StripWhitespace<CR>
+nnoremap <silent> <LEADER>z :tab sp<CR>
 inoremap <silent><expr> <C-l> delimitMate#JumpAny()
 inoremap <silent><expr> <C-e> compe#close('<C-e>')
 vnoremap < <gv
@@ -115,6 +116,7 @@ let g:leader_key_map={
     \ 's'    : [ ':StripWhitespace',                   'strip-whitespace'          ],
     \ 'T'    : [ ':call <SID>neoterm_start("python")', 'python-interpreter'        ],
     \ 't'    : [ ':Ttoggle',                           'toggle-terminal'           ],
+    \ 'z'    : [ ':tab sp',                            'fullscreen'                ],
     \ }
 let g:leader_key_map['g']={
     \ 'name' : '+git',
