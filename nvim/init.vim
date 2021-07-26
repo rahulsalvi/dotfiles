@@ -67,6 +67,7 @@ nnoremap <LEADER><SPACE> <Cmd>nohlsearch<CR>
 nnoremap <LEADER>s <Cmd>StripWhitespace<CR>
 nnoremap <LEADER>z <Cmd>tab sp<CR>
 nnoremap <LEADER>a <Cmd>NvimTreeToggle<CR>
+nnoremap <LEADER>f <Cmd>FZFRg<CR>
 nmap <LEADER>c yygccp
 inoremap <expr> <C-l> delimitMate#JumpAny()
 inoremap <expr> <C-e> compe#close('<C-e>')
@@ -110,6 +111,7 @@ let g:leader_key_map={
     \ 'a'    : [ ':NvimTreeToggle',                    'nvim-tree-toggle'          ],
     \ 'c'    : [ 'yygccp',                             'copy-comment-current-line' ],
     \ 'd'    : [ 'GotoDefinition()',                   'go-to-definition'          ],
+    \ 'f'    : [ ':FZFRg',                             'fzf-rg'                    ],
     \ 'j'    : [ '<Plug>(GitGutterNextHunk)',          'git-next-chunk'            ],
     \ 'k'    : [ '<Plug>(GitGutterPrevHunk)',          'git-previous-chunk'        ],
     \ 'P'    : [ ':Vista finder fzf:nvim_lsp',         'vista-finder'              ],
