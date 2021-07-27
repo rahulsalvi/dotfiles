@@ -74,12 +74,6 @@ inoremap <expr> <C-e> compe#close('<C-e>')
 vnoremap < <gv
 vnoremap > >gv
 
-" git
-nmap <LEADER>j <Plug>(GitGutterNextHunk)
-nmap <LEADER>k <Plug>(GitGutterPrevHunk)
-nmap <LEADER>gs <Plug>(GitGutterStageHunk)
-nmap <LEADER>gu <Plug>(GitGutterUndoHunk)
-
 " Vista
 nnoremap <LEADER>v <Cmd>Vista!!<CR>
 nnoremap <LEADER>P <Cmd>Vista finder fzf:nvim_lsp<CR>
@@ -112,8 +106,8 @@ let g:leader_key_map={
     \ 'c'    : [ 'yygccp',                             'copy-comment-current-line' ],
     \ 'd'    : [ 'GotoDefinition()',                   'go-to-definition'          ],
     \ 'f'    : [ ':FZFRg',                             'fzf-rg'                    ],
-    \ 'j'    : [ '<Plug>(GitGutterNextHunk)',          'git-next-chunk'            ],
-    \ 'k'    : [ '<Plug>(GitGutterPrevHunk)',          'git-previous-chunk'        ],
+    \ 'j'    : [ ':Gitsigns next_hunk',                'git-next-hunk'             ],
+    \ 'k'    : [ ':Gitsigns prev_hunk',                'git-prev-hunk'         ],
     \ 'P'    : [ ':Vista finder fzf:nvim_lsp',         'vista-finder'              ],
     \ 'p'    : [ ':FZFFiles',                          'fzf-files'                 ],
     \ 'r'    : [ ':Lspsaga rename',                    'rename'                    ],
@@ -125,8 +119,12 @@ let g:leader_key_map={
 \ }
 let g:leader_key_map['g']={
     \ 'name' : '+git',
-    \ 's'    : [ '<Plug>(GitGutterStageHunk)', 'git-stage-chunk' ],
-    \ 'u'    : [ '<Plug>(GitGutterUndoHunk)',  'git-undo-chunk'  ],
+    \ 'b'    : [ ':Gitsigns blame_line',       'git-blame-line'   ],
+    \ 'p'    : [ ':Gitsigns preview_hunk',     'git-preview-hunk' ],
+    \ 'R'    : [ ':Gitsigns reset_buffer',     'git-reset-buffer' ],
+    \ 'r'    : [ ':Gitsigns reset_hunk',       'git-reset-hunk'   ],
+    \ 's'    : [ ':Gitsigns stage_hunk',       'git-stage-hunk'   ],
+    \ 'u'    : [ ':Gitsigns undo_stage_hunk',  'git-undo-hunk'    ],
 \ }
 let g:leader_key_map['o']={
     \ 'name' : '+orgmode',
@@ -197,11 +195,8 @@ endfunction
 
 function! LightlineGitInfo()
     let branch = fugitive#head(8)
-    let [a,m,r] = GitGutterGetHunkSummary()
-    let added    = a > 0 ? printf("+%d ", a) : ""
-    let modified = m > 0 ? printf("~%d ", m) : ""
-    let removed  = r > 0 ? printf("-%d ", r) : ""
-    return added . modified . removed . branch
+    let status = get(b:,'gitsigns_status','')
+    return status . ' ' . branch
 endfunction
 
 function! LightlineFilename()
@@ -330,7 +325,6 @@ autocmd BufLeave term://* stopinsert
 " -------
 call plug#begin('~/.config/nvim/plugins')
 
-Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/glepnir/lspsaga.nvim'
@@ -349,11 +343,13 @@ Plug 'https://github.com/knubie/vim-kitty-navigator.git'
 Plug 'https://github.com/kristijanhusak/orgmode.nvim'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/kyazdani42/nvim-tree.lua'
+Plug 'https://github.com/lewis6991/gitsigns.nvim'
 Plug 'https://github.com/liuchengxu/vim-which-key.git'
 Plug 'https://github.com/liuchengxu/vista.vim.git'
 Plug 'https://github.com/neovim/nvim-lspconfig'
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
 Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
+Plug 'https://github.com/nvim-lua/plenary.nvim'
 Plug 'https://github.com/rahulsalvi/rahulsalvi-snippets'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/ray-x/lsp_signature.nvim'
@@ -390,6 +386,9 @@ highlight! link ALEWarningSign      LspDiagnosticsSignWarning
 highlight! link ALEInfoSign         LspDiagnosticsSignInformation
 highlight! link ALEStyleErrorSign   LspDiagnosticsSignError
 highlight! link ALEStyleWarningSign LspDiagnosticsSignWarning
+highlight! GitSignsAdd gui=NONE guibg=NONE guifg=#859900
+highlight! GitSignsChange gui=NONE guibg=NONE guifg=#b58900
+highlight! GitSignsDelete gui=NONE guibg=NONE guifg=#dc322f
 sign define LspDiagnosticsSignError       text=😡 texthl=LspDiagnosticsSignError       linehl= numhl=LspDiagnosticsSignError
 sign define LspDiagnosticsSignWarning     text=🤔 texthl=LspDiagnosticsSignWarning     linehl= numhl=LspDiagnosticsSignWarning
 sign define LspDiagnosticsSignInformation text=I  texthl=LspDiagnosticsSignInformation linehl= numhl=LspDiagnosticsSignInformation
@@ -618,5 +617,31 @@ require('orgmode').setup{
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 vim.g.nvim_tree_bindings = {
     { key = { "<C-s>" }, cb = tree_cb("split") }
+}
+
+-- gitsigns.nvim
+require('gitsigns').setup{
+    signs = {
+        add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+        change       = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        changedelete = {hl = 'GitSignsChange', text = '~_', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    },
+    keymaps = {
+        noremap = true,
+        ['n <LEADER>j']  = '<cmd>lua require("gitsigns").next_hunk()<CR>',
+        ['n <LEADER>k']  = '<cmd>lua require("gitsigns").prev_hunk()<CR>',
+        ['n <LEADER>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+        ['v <LEADER>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+        ['n <LEADER>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+        ['n <LEADER>gr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+        ['v <LEADER>gr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+        ['n <LEADER>gR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+        ['n <LEADER>gp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+        ['n <LEADER>gb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+        ['o ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
+        ['x ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
+    }
 }
 EOF
