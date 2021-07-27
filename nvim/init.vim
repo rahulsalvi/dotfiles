@@ -107,7 +107,7 @@ let g:leader_key_map={
     \ 'd'    : [ 'GotoDefinition()',                   'go-to-definition'          ],
     \ 'f'    : [ ':FZFRg',                             'fzf-rg'                    ],
     \ 'j'    : [ ':Gitsigns next_hunk',                'git-next-hunk'             ],
-    \ 'k'    : [ ':Gitsigns prev_hunk',                'git-prev-hunk'         ],
+    \ 'k'    : [ ':Gitsigns prev_hunk',                'git-prev-hunk'             ],
     \ 'P'    : [ ':Vista finder fzf:nvim_lsp',         'vista-finder'              ],
     \ 'p'    : [ ':FZFFiles',                          'fzf-files'                 ],
     \ 'r'    : [ ':Lspsaga rename',                    'rename'                    ],
@@ -622,11 +622,11 @@ vim.g.nvim_tree_bindings = {
 -- gitsigns.nvim
 require('gitsigns').setup{
     signs = {
-        add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-        change       = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+        change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
         delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
         topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-        changedelete = {hl = 'GitSignsChange', text = '~_', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        changedelete = {hl = 'GitSignsChange', text = '│_', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
     },
     keymaps = {
         noremap = true,
