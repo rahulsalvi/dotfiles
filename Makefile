@@ -1,24 +1,26 @@
-.PHONY: clang-format dunst fehbg git gtk i3 jupyter khal kitty latexmk lazygit
-.PHONY: mutt nvim offlineimap picom polybar profile pylint ranger redshift rofi
-.PHONY: tablet tmux ultisnips update vdirsyncer xava yapf zathura zsh
-
+.PHONY: clang-format
 clang-format :
 	SRC=clang-format DST=.clang-format ./install.sh
 
+.PHONY: dunst
 dunst :
 	m4 dunst/dunstrc.m4 >dunst/dunstrc
 	SRC=dunst/dunstrc DST=.config/dunst/dunstrc ./install.sh
 
+.PHONY: fehbg
 fehbg :
 	SRC=fehbg DST=.config/fehbg ./install.sh
 
+.PHONY: git
 git :
 	SRC=git/ignore DST=.config/git/ignore ./install.sh
 
+.PHONY: gtk
 gtk :
 	SRC=gtkrc-2.0 DST=.gtkrc-2.0 ./install.sh
 	SRC=gtk-3.0/settings.ini DST=.config/gtk-3.0/settings.ini ./install.sh
 
+.PHONY: i3
 i3 :
 	m4 i3/config.m4 >i3/config
 	SRC=i3/config DST=.config/i3/config ./install.sh
@@ -30,39 +32,49 @@ i3 :
 	SRC=i3/prev_workspace DST=.config/i3/prev_workspace ./install.sh
 	i3-msg 'reload'
 
+.PHONY: jupyter
 jupyter :
 	SRC=jupyter/custom DST=.jupyter/custom ./install.sh
 	SRC=jupyter/jupyter_notebook_config.py DST=.jupyter/jupyter_notebook_config.py ./install.sh
 	SRC=jupyter/nbconfig DST=.jupyter/nbconfig ./install.sh
 
+.PHONY: khal
 khal :
 	SRC=khal/config DST=.config/khal/config ./install.sh
 
+.PHONY: kitty
 kitty :
 	SRC=kitty/kitty.conf DST=.config/kitty/kitty.conf ./install.sh
 
+.PHONY: latexmk
 latexmk :
 	SRC=latexmkrc DST=.config/latexmk/latexmkrc ./install.sh
 
+.PHONY: lazygit
 lazygit :
 	SRC=lazygit/config.yml DST=.config/lazygit/config.yml ./install.sh
 
+.PHONY: mutt
 mutt :
 	SRC=mutt/mailcap DST=.config/neomutt/mailcap ./install.sh
 	SRC=mutt/neomuttrc DST=.config/neomutt/neomuttrc ./install.sh
 
+.PHONY: nvim
 nvim :
 	SRC=nvim/init.vim DST=.config/nvim/init.vim ./install.sh
 
+.PHONY: offlineimap
 offlineimap :
 	SRC=offlineimap/offlineimaprc DST=.config/offlineimap/config ./install.sh
 	SRC=offlineimap/offlineimap-postsync.sh DST=.config/offlineimap/offlineimap-postsync.sh ./install.sh
 	SRC=offlineimap/get_mail_from DST=.config/offlineimap/get_mail_from ./install.sh
 	SRC=offlineimap/get_mail_subject DST=.config/offlineimap/get_mail_subject ./install.sh
 
+.PHONY: picom
 picom :
 	SRC=picom.conf DST=.config/picom.conf ./install.sh
 
+.PHONY: polybar
 polybar :
 	SRC=polybar/config DST=.config/polybar/config ./install.sh
 	SRC=polybar/launch.sh DST=.config/polybar/launch.sh ./install.sh
@@ -73,48 +85,62 @@ polybar :
 	SRC=polybar/count_unread_mail.py DST=.config/polybar/count_unread_mail.py ./install.sh
 	SRC=polybar/unread_mail.sh DST=.config/polybar/unread_mail.sh ./install.sh
 
+.PHONY: profile
 profile :
 	SRC=profile DST=.profile ./install.sh
 
+.PHONY: pylint
 pylint :
 	SRC=pylintrc DST=.config/pylintrc ./install.sh
 
+.PHONY: ranger
 ranger :
 	SRC=ranger/rc.conf DST=.config/ranger/rc.conf ./install.sh
 	SRC=ranger/rifle.conf DST=.config/ranger/rifle.conf ./install.sh
 
+.PHONY: redshift
 redshift :
 	SRC=redshift.conf DST=.config/redshift.conf ./install.sh
 
+.PHONY: rofi
 rofi :
 	SRC=rofi/config DST=.config/rofi/config ./install.sh
 	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
 	SRC=rofi/apps.txt DST=.config/rofi/apps.txt ./install.sh
 
+.PHONY: tablet
 tablet :
 	SRC=tablet/init_xsetwacom DST=.config/tablet/init_xsetwacom ./install.sh
 
+.PHONY: tmux
 tmux :
 	SRC=tmux.conf DST=.config/tmux/tmux.conf ./install.sh
 
+.PHONY: ultisnips
 ultisnips :
 	SRC=ultisnips DST=.config/ultisnips ./install.sh
 
+.PHONY: update
 update :
 	SRC=update DST=.local/bin/update ./install.sh
 
+.PHONY: vdirsyncer
 vdirsyncer :
 	SRC=vdirsyncer/config DST=.config/vdirsyncer/config ./install.sh
 
+.PHONY: xava
 xava :
 	SRC=xava/config DST=.config/xava/config ./install.sh
 	SRC=xava/xava.service DST=.config/systemd/user/xava.service ./install.sh
 
+.PHONY: yapf
 yapf :
 	SRC=yapf/style DST=.config/yapf/style ./install.sh
 
+.PHONY: zathura
 zathura :
 	SRC=zathura/zathurarc DST=.config/zathura/zathurarc ./install.sh
 
+.PHONY: zsh
 zsh :
 	SRC=zshrc DST=.zshrc ./install.sh
