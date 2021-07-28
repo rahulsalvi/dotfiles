@@ -1,0 +1,3 @@
+git:
+  branchLogCmd: 'git log --oneline --graph --color=always --abbrev-commit --decorate --date=relative {{branchName}} --'
+  allBranchesLogCmd: 'git log --oneline --graph --all --color=always --abbrev-commit --decorate --date=relative'

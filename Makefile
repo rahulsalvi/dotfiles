@@ -1,6 +1,6 @@
-.PHONY: clang-format dunst fehbg git gtk i3 jupyter khal kitty latexmk mutt nvim
-.PHONY: offlineimap picom polybar profile pylint ranger redshift rofi tablet
-.PHONY: tmux ultisnips update vdirsyncer xava yapf zathura zsh
+.PHONY: clang-format dunst fehbg git gtk i3 jupyter khal kitty latexmk lazygit
+.PHONY: mutt nvim offlineimap picom polybar profile pylint ranger redshift rofi
+.PHONY: tablet tmux ultisnips update vdirsyncer xava yapf zathura zsh
 
 clang-format :
 	SRC=clang-format DST=.clang-format ./install.sh
@@ -43,6 +43,9 @@ kitty :
 
 latexmk :
 	SRC=latexmkrc DST=.config/latexmk/latexmkrc ./install.sh
+
+lazygit :
+	SRC=lazygit/config.yml DST=.config/lazygit/config.yml ./install.sh
 
 mutt :
 	SRC=mutt/mailcap DST=.config/neomutt/mailcap ./install.sh
