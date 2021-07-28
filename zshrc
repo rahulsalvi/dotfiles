@@ -194,6 +194,7 @@ alias shutdown='sudo shutdown now'
 alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
 alias open='rifle'
+alias lg='lazygit'
 
 alias vpnon="nmcli con up id 'US California'"
 alias vpnoff="nmcli con down id 'US California'"
