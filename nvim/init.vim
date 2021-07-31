@@ -4,6 +4,7 @@ set backspace=indent,eol,start
 set clipboard=unnamedplus
 set completeopt=menuone,noselect
 set expandtab
+set hidden
 set hlsearch
 set inccommand=nosplit
 set incsearch
@@ -68,6 +69,8 @@ nnoremap <LEADER>s <Cmd>StripWhitespace<CR>
 nnoremap <LEADER>z <Cmd>tab sp<CR>
 nnoremap <LEADER>a <Cmd>NvimTreeToggle<CR>
 nnoremap <LEADER>f <Cmd>FZFRg<CR>
+nnoremap <LEADER>gl <Cmd>lua _lazygit_toggle()<CR>
+nnoremap <LEADER>T <Cmd>lua _python_toggle()<CR>
 nmap <LEADER>c yygccp
 inoremap <expr> <C-l> delimitMate#JumpAny()
 inoremap <expr> <C-e> compe#close('<C-e>')
@@ -79,15 +82,11 @@ nnoremap <LEADER>v <Cmd>Vista!!<CR>
 nnoremap <LEADER>P <Cmd>Vista finder fzf:nvim_lsp<CR>
 
 " terminal
-nnoremap <LEADER>t <Cmd>Ttoggle<CR>
-nnoremap <LEADER>T <Cmd>call <SID>neoterm_start("python")<CR>
 tnoremap <C-n> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
-tnoremap <C-w> <C-\><C-n>:Ttoggle<CR>
-tnoremap <C-q> <C-\><C-n>:Tclose!<CR>
 
 " tab/cr keys
 nmap <TAB> <Cmd>call <SID>n_tab()<CR>
@@ -112,8 +111,6 @@ let g:leader_key_map={
     \ 'p'    : [ ':FZFFiles',                          'fzf-files'                 ],
     \ 'r'    : [ ':Lspsaga rename',                    'rename'                    ],
     \ 's'    : [ ':StripWhitespace',                   'strip-whitespace'          ],
-    \ 'T'    : [ ':call <SID>neoterm_start("python")', 'python-interpreter'        ],
-    \ 't'    : [ ':Ttoggle',                           'toggle-terminal'           ],
     \ 'v'    : [ ':Vista!!',                           'toggle-vista'              ],
     \ 'z'    : [ ':tab sp',                            'fullscreen'                ],
 \ }
@@ -325,6 +322,7 @@ autocmd BufLeave term://* stopinsert
 " -------
 call plug#begin('~/.config/nvim/plugins')
 
+Plug 'https://github.com/akinsho/nvim-toggleterm.lua.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/glepnir/lspsaga.nvim'
@@ -338,7 +336,6 @@ Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/junegunn/goyo.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
-Plug 'https://github.com/kassio/neoterm.git'
 Plug 'https://github.com/knubie/vim-kitty-navigator.git'
 Plug 'https://github.com/kristijanhusak/orgmode.nvim'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
@@ -371,7 +368,6 @@ let g:solarized_termtrans=1
 colorscheme solarized-high
 highlight SignColumn guibg=None
 highlight Folded gui=bold guibg=None
-highlight NormalFloat guibg=Black guifg=White
 highlight LspDiagnosticsDefaultError       gui=NONE guifg=Red
 highlight LspDiagnosticsDefaultWarning     gui=NONE guifg=Yellow
 highlight LspDiagnosticsDefaultInformation gui=NONE guifg=Cyan
@@ -644,4 +640,43 @@ require('gitsigns').setup{
         ['x ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
     }
 }
+
+-- nvim-toggleterm.lua
+require('toggleterm').setup{
+    size = 20,
+    open_mapping = [[<C-t>]],
+    hide_numbers = true,
+    shade_terminals = false,
+    start_in_insert = true,
+    insert_mappings = false,
+    persist_size = true,
+    direction = 'horizontal',
+    close_on_exit = true,
+    float_opts = {
+        border = 'curved',
+    }
+}
+
+local Terminal = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({
+    cmd = 'lazygit',
+    direction = 'float',
+    close_on_exit = true,
+    hidden = true
+})
+
+function _lazygit_toggle()
+    lazygit:toggle()
+end
+
+local python = Terminal:new({
+    cmd = 'python',
+    direction = 'horizontal',
+    close_on_exit = true,
+    hidden = true
+})
+
+function _python_toggle()
+    python:toggle()
+end
 EOF
