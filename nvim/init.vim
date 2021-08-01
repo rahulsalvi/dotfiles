@@ -385,6 +385,7 @@ highlight! link ALEStyleWarningSign LspDiagnosticsSignWarning
 highlight! GitSignsAdd gui=NONE guibg=NONE guifg=#859900
 highlight! GitSignsChange gui=NONE guibg=NONE guifg=#b58900
 highlight! GitSignsDelete gui=NONE guibg=NONE guifg=#dc322f
+highlight! OrgHideLeadingStars gui=NONE guibg=NONE guifg=#001e26
 sign define LspDiagnosticsSignError       text=😡 texthl=LspDiagnosticsSignError       linehl= numhl=LspDiagnosticsSignError
 sign define LspDiagnosticsSignWarning     text=🤔 texthl=LspDiagnosticsSignWarning     linehl= numhl=LspDiagnosticsSignWarning
 sign define LspDiagnosticsSignInformation text=I  texthl=LspDiagnosticsSignInformation linehl= numhl=LspDiagnosticsSignInformation
@@ -607,6 +608,7 @@ nvim_lsp.cmake.setup{
 require('orgmode').setup{
     org_agenda_files = {'~/todo/*.org', '~/todo/**/*.org'},
     org_default_notes_file = '~/todo/notes.org',
+    org_hide_leading_stars = true
 }
 
 -- nvim-tree.lua
