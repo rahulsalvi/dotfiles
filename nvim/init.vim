@@ -367,7 +367,6 @@ call plug#end()
 let g:solarized_termtrans=1
 colorscheme solarized-high
 highlight SignColumn guibg=None
-highlight Folded gui=bold guibg=None
 highlight LspDiagnosticsDefaultError       gui=NONE guifg=Red
 highlight LspDiagnosticsDefaultWarning     gui=NONE guifg=Yellow
 highlight LspDiagnosticsDefaultInformation gui=NONE guifg=Cyan
@@ -596,7 +595,10 @@ nvim_lsp.cmake.setup{
 require('orgmode').setup{
     org_agenda_files = {'~/todo/*.org', '~/todo/**/*.org'},
     org_default_notes_file = '~/todo/notes.org',
-    org_hide_leading_stars = true
+    org_hide_leading_stars = true,
+    org_agenda_start_on_weekday = 0,
+    org_agenda_skip_scheduled_if_done = true,
+    org_agenda_skip_deadline_if_done = true,
 }
 
 -- nvim-tree.lua
