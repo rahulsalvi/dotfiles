@@ -1,0 +1,13 @@
+configuration {
+    modi: "apps:~/.config/rofi/apps.sh,window,run";
+    matching: "fuzzy";
+    theme: "~/.config/rofi/velocity.rasi";
+    timeout {
+        action: "kb-cancel";
+        delay:  0;
+    }
+    filebrowser {
+        directories-first: true;
+        sorting-method:    "name";
+    }
+}

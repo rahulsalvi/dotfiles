@@ -104,7 +104,7 @@ redshift :
 
 .PHONY: rofi
 rofi :
-	SRC=rofi/config DST=.config/rofi/config ./install.sh
+	SRC=rofi/config.rasi DST=.config/rofi/config.rasi ./install.sh
 	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
 	SRC=rofi/apps.txt DST=.config/rofi/apps.txt ./install.sh
 
