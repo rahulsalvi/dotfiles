@@ -54,11 +54,6 @@ latexmk :
 lazygit :
 	SRC=lazygit/config.yml DST=.config/lazygit/config.yml ./install.sh
 
-.PHONY: mutt
-mutt :
-	SRC=mutt/mailcap DST=.config/neomutt/mailcap ./install.sh
-	SRC=mutt/neomuttrc DST=.config/neomutt/neomuttrc ./install.sh
-
 .PHONY: nvim
 nvim :
 	SRC=nvim/init.vim DST=.config/nvim/init.vim ./install.sh

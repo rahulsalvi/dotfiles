@@ -1,5 +1,0 @@
-text/html; firefox %s; test=test -n "$DISPLAY"; needsterminal;
-text/html; w3m -I %{charset} -T text/html; copiousoutput;
-audio/*; /usr/bin/rifle %s; copiousoutput;
-image/*; /usr/bin/rifle %s; copiousoutput;
-application/*; /usr/bin/rifle %s; copiousoutput;
