@@ -612,6 +612,7 @@ require('orgmode').setup{
     org_agenda_files = {'~/todo/*.org', '~/todo/**/*.org'},
     org_default_notes_file = '~/todo/notes.org',
     org_hide_leading_stars = true,
+    org_indent_mode = 'noindent',
     org_agenda_start_on_weekday = 0,
     org_agenda_skip_scheduled_if_done = true,
     org_agenda_skip_deadline_if_done = true,
