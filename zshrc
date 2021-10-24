@@ -91,7 +91,7 @@ fi
 export EDITOR=nvim
 export EDITOR_OPTS="-p"
 export TERMCMD=kitty
-export MANPAGER="nvim -c 'set ft=man ts=8 nomod nolist nonu noma' -"
+export MANPAGER='nvim +Man!'
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
 export FZF_DEFAULT_OPTS="-m --reverse"
