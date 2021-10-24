@@ -318,6 +318,13 @@ autocmd TermOpen term://* startinsert
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
+" ledger bindings
+autocmd FileType ledger nnoremap { ?^\d<CR>
+autocmd FileType ledger nnoremap } /^\d<CR>
+autocmd FileType ledger nnoremap <LEADER>s <Cmd>call ledger#transaction_state_toggle(line('.'), ' *!')<CR>
+autocmd FileType ledger vnoremap <silent> <TAB> :LedgerAlign<CR>
+autocmd FileType ledger inoremap <silent> <TAB> <C-r>=ledger#autocomplete_and_align()<CR>
+
 " Plugins
 " -------
 call plug#begin('~/.config/nvim/plugins')
@@ -340,6 +347,7 @@ Plug 'https://github.com/knubie/vim-kitty-navigator.git'
 Plug 'https://github.com/kristijanhusak/orgmode.nvim'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/kyazdani42/nvim-tree.lua'
+Plug 'https://github.com/ledger/vim-ledger.git'
 Plug 'https://github.com/lewis6991/gitsigns.nvim'
 Plug 'https://github.com/liuchengxu/vim-which-key.git'
 Plug 'https://github.com/liuchengxu/vista.vim.git'
@@ -500,6 +508,14 @@ let g:nvim_tree_show_icons = {
     \ 'files': 1,
     \ 'folder_arrows': 1,
     \ }
+
+" vim-ledger
+let g:ledger_extra_options='--pedantic --explicit'
+let g:ledger_default_commodity='USD'
+let g:ledger_commodity_before=0
+let g:ledger_commodity_sep=' '
+let g:ledger_date_format='%Y-%m-%d'
+let g:ledger_align_at=70
 
 " vim-which-key
 let g:which_key_use_floating_win=1
