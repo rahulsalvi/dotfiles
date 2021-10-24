@@ -20,13 +20,15 @@ def main():
         print("!")
         return 0
     count = 0
-    for ext in ["cur", "new"]:
-        full_path = join(argv[1], ext)
-        if exists(full_path):
-            msgs = [
-                f for f in listdir(full_path) if isfile(join(full_path, f))
-            ]
-            count += sum(list(map(msg_is_unread, msgs)))
+    paths = argv[1].split(' ')
+    for path in paths:
+        for ext in ["cur", "new"]:
+            full_path = join(path, ext)
+            if exists(full_path):
+                msgs = [
+                    f for f in listdir(full_path) if isfile(join(full_path, f))
+                ]
+                count += sum(list(map(msg_is_unread, msgs)))
     print(count)
     return 0 if count > 0 else 1
 

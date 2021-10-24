@@ -4,15 +4,15 @@ if [ "$#" -ne 1 ]; then
     exit 0
 fi
 
-maildir="$HOME/Mail/icloud/INBOX"
+maildirs=$(find ${HOME}/Mail -regex ".*/INBOX" | tr '\n' ' ')
 
 case $1 in
 "show")
-    python ~/.config/polybar/count_unread_mail.py $maildir
+    python ~/.config/polybar/count_unread_mail.py $maildirs
     return $?
     ;;
 "text")
-    text=$(python ~/.config/polybar/count_unread_mail.py $maildir)
+    text=$(python ~/.config/polybar/count_unread_mail.py $maildirs)
     echo " $text"
     ;;
 "click")
