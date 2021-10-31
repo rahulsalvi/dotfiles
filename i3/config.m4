@@ -47,9 +47,9 @@ bindsym --release Mod1+o exec scrot -s
 bindsym Mod1+Control+Escape exec LOCKCMD
 
 # handle notifications with dunst
-bindsym Control+space exec dunstctl close
-bindsym Control+Shift+space exec dunstctl close-all
-bindsym Control+Shift+period exec dunstctl context
+bindsym Mod4+space exec dunstctl close
+bindsym Mod4+Shift+space exec dunstctl close-all
+bindsym Mod4+Shift+period exec dunstctl context
 
 # media key bindings
 bindsym XF86AudioPlay exec playerctl play-pause
