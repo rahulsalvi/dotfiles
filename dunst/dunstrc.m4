@@ -2,12 +2,15 @@ define(HOSTNAME, `esyscmd(`printf $HOSTNAME')')dnl
 [global]
     monitor = 0
     follow = keyboard
-    ifelse(HOSTNAME,`kyogre',geometry = "300x5-15+40",
-           HOSTNAME,`darkrai',geometry = "1000x5-15+40")
+    ifelse(HOSTNAME,`kyogre',width = 300,
+           HOSTNAME,`darkrai',width = 1000)
+    height = 5
+    origin = top-right
+    offset = 15x40
+    notification_limit = 5
     indicate_hidden = yes
     shrink = no
     transparency = 15
-    notification_height = 0
     separator_height = 2
     padding = 8
     horizontal_padding = 8
@@ -38,18 +41,11 @@ define(HOSTNAME, `esyscmd(`printf $HOSTNAME')')dnl
     always_run_script = true
     title = Dunst
     class = Dunst
-    startup_notification = false
     force_xinerama = false
     corner_radius = 5
 
 [experimental]
     per_monitor_dpi = false
-
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
 
 [urgency_low]
     background = "#2E2157"
