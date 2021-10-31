@@ -40,8 +40,8 @@ bindsym Mod1+x exec kitty ikhal
 # start todo
 bindsym Mod1+t exec kitty --directory ~/todo nvim todo.org
 
-# take screenshot
-bindsym --release Mod1+o exec scrot -s
+# take screenshot (super+shift+s to match Windows)
+bindsym --release Mod4+Shift+s exec "maim -s | tee /tmp/screenshot-$(date +%F_%T).png | xclip -selection clipboard -t image/png"
 
 # lock
 bindsym Mod1+Control+Escape exec LOCKCMD
