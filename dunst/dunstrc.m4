@@ -4,7 +4,7 @@ define(HOSTNAME, `esyscmd(`printf $HOSTNAME')')dnl
     follow = keyboard
     ifelse(HOSTNAME,`kyogre',width = 300,
            HOSTNAME,`darkrai',width = 1000)
-    height = 5
+    height = 100
     origin = top-right
     offset = 15x40
     notification_limit = 5
