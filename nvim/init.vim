@@ -491,11 +491,9 @@ let g:neoterm_default_mod='botright'
 
 " nvim-tree
 let g:nvim_tree_width = '30%'
-let g:nvim_tree_ignore = [ '.git' ]
 let g:nvim_tree_gitignore = 1
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_indent_markers = 1
-let g:nvim_tree_hide_dotfiles = 1
 let g:nvim_tree_git_hl = 1
 let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_root_folder_modifier = ':~'
@@ -632,6 +630,10 @@ require('nvim-tree').setup {
                 { key = { "<C-s>" }, cb = tree_cb("split") }
             }
         }
+    },
+    filters = {
+        dotfiles = true,
+        custom = { '.git' }
     }
 }
 
