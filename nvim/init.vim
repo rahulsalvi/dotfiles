@@ -355,6 +355,7 @@ Plug 'https://github.com/neovim/nvim-lspconfig'
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
 Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/nvim-lua/plenary.nvim'
+Plug 'https://github.com/nvim-treesitter/nvim-treesitter.git', { 'do': ':TSUpdate' }
 Plug 'https://github.com/rahulsalvi/rahulsalvi-snippets'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/ray-x/lsp_signature.nvim'
@@ -603,6 +604,25 @@ nvim_lsp.bashls.setup{
 nvim_lsp.cmake.setup{
     on_attach = on_attach,
     capabilities = capabilities
+}
+
+-- nvim-treesitter
+local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+parser_config.org = {
+    install_info = {
+        url = 'https://github.com/milisims/tree-sitter-org',
+        revision = 'main',
+        files = {'src/parser.c', 'src/scanner.cc'},
+    },
+    filetype = 'org',
+}
+
+require('nvim-treesitter.configs').setup {
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = {'org'},
+    },
+    ensure_installed = {'org'},
 }
 
 -- orgmode.nvim
