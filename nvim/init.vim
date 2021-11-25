@@ -344,7 +344,6 @@ Plug 'https://github.com/junegunn/goyo.vim.git'
 Plug 'https://github.com/junegunn/vim-easy-align.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/knubie/vim-kitty-navigator.git'
-Plug 'https://github.com/kristijanhusak/orgmode.nvim'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/kyazdani42/nvim-tree.lua'
 Plug 'https://github.com/ledger/vim-ledger.git'
@@ -355,6 +354,7 @@ Plug 'https://github.com/neovim/nvim-lspconfig'
 Plug 'https://github.com/ntpeters/vim-better-whitespace.git'
 Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/nvim-lua/plenary.nvim'
+Plug 'https://github.com/nvim-orgmode/orgmode.git'
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter.git', { 'do': ':TSUpdate' }
 Plug 'https://github.com/rahulsalvi/rahulsalvi-snippets'
 Plug 'https://github.com/Raimondi/delimitMate.git'
@@ -634,6 +634,10 @@ require('orgmode').setup{
     org_agenda_start_on_weekday = 0,
     org_agenda_skip_scheduled_if_done = true,
     org_agenda_skip_deadline_if_done = true,
+    org_blank_before_new_entry = {
+        heading = false,
+        plain_list_item = false,
+    },
     mappings = {
         org = {
             org_toggle_checkbox = '<Space>ob'
