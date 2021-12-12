@@ -492,7 +492,6 @@ let g:neoterm_default_mod='botright'
 
 " nvim-tree
 let g:nvim_tree_width = '30%'
-let g:nvim_tree_gitignore = 1
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_git_hl = 1
@@ -658,6 +657,9 @@ require('nvim-tree').setup {
     filters = {
         dotfiles = true,
         custom = { '.git' }
+    },
+    git =  {
+        ignore = true
     }
 }
 
