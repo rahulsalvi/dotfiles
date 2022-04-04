@@ -70,7 +70,7 @@ picom :
 
 .PHONY: polybar
 polybar :
-	SRC=polybar/config DST=.config/polybar/config ./install.sh
+	SRC=polybar/config.ini DST=.config/polybar/config.ini ./install.sh
 	SRC=polybar/launch.sh DST=.config/polybar/launch.sh ./install.sh
 	SRC=polybar/vpn.sh DST=.config/polybar/vpn.sh ./install.sh
 	SRC=polybar/mail_sync.sh DST=.config/polybar/mail_sync.sh ./install.sh
