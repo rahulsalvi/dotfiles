@@ -191,7 +191,7 @@ function! s:i_cr()
 endfunction
 
 function! LightlineGitInfo()
-    let branch = fugitive#head(8)
+    let branch = FugitiveHead(8)
     let status = get(b:,'gitsigns_status','')
     return status . ' ' . branch
 endfunction
