@@ -4,7 +4,6 @@ clang-format :
 
 .PHONY: dunst
 dunst :
-	m4 dunst/dunstrc.m4 >dunst/dunstrc
 	SRC=dunst/dunstrc DST=.config/dunst/dunstrc ./install.sh
 
 .PHONY: fehbg
