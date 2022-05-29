@@ -624,7 +624,7 @@ require('nvim-treesitter.configs').setup {
 
 -- orgmode.nvim
 require('orgmode').setup{
-    org_agenda_files = {'~/todo/*.org', '~/todo/**/*.org'},
+    org_agenda_files = {'~/todo/*.org', '~/todo/projects/*.org'},
     org_default_notes_file = '~/todo/notes.org',
     org_hide_leading_stars = true,
     org_indent_mode = 'noindent',
