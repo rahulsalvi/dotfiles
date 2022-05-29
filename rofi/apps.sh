@@ -12,9 +12,6 @@ case "$@" in
 "htop")
     app_to_run="SHELL:htop"
     ;;
-"keepassxc")
-    app_to_run="~/.config/lock/start_keepassxc.sh"
-    ;;
 "khal")
     app_to_run="SHELL:ikhal"
     ;;
