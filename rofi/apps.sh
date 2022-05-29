@@ -41,10 +41,6 @@ case "$@" in
 "transmission")
     app_to_run="transmission-qt"
     ;;
-"write")
-    app_to_run="write_stylus"
-    ;;
-"")
     IFS=$'\n' sorted=($(sort <<<"${apps[*]}"))
     unset IFS
     for app in "${sorted[@]}"; do
