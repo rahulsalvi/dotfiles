@@ -24,7 +24,7 @@ bindsym Mod1+c exec firefox
 bindsym Mod1+m exec pgrep Discord && i3-msg '[class="discord"] focus' || discord
 
 # start spotify
-bindsym Mod1+s exec pgrep spotify && i3-msg '[class="Spotify"] focus' || SPOTIFY
+bindsym Mod1+s exec pgrep spotify && i3-msg '[class="Spotify"] focus' || spotify
 
 # start keepassxc
 bindsym Mod1+p exec keepassxc

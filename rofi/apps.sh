@@ -30,10 +30,6 @@ case "$@" in
 "sensors")
     app_to_run="SHELL:watch sensors"
     ;;
-"spotify")
-    app_to_run="spotify"
-    [[ $HOST == "darkrai" ]] && app_to_run="spotify --force-device-scale-factor=2"
-    ;;
 "todo")
     eval kitty --directory ~/todo $EDITOR todo.org >/dev/null 2>&1 &
     exit 0
@@ -41,6 +37,7 @@ case "$@" in
 "transmission")
     app_to_run="transmission-qt"
     ;;
+"")
     IFS=$'\n' sorted=($(sort <<<"${apps[*]}"))
     unset IFS
     for app in "${sorted[@]}"; do

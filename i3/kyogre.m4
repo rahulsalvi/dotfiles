@@ -1,5 +1,4 @@
 define(LOCKCMD, `xset s activate')dnl
-define(SPOTIFY, `spotify')dnl
 define(NUMLOCK,`
 # turn on numlock
 exec_always --no-startup-id numlockx on')dnl
