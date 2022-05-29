@@ -115,11 +115,6 @@ update :
 vdirsyncer :
 	SRC=vdirsyncer/config DST=.config/vdirsyncer/config ./install.sh
 
-.PHONY: xava
-xava :
-	SRC=xava/config DST=.config/xava/config ./install.sh
-	SRC=xava/xava.service DST=.config/systemd/user/xava.service ./install.sh
-
 .PHONY: yapf
 yapf :
 	SRC=yapf/style DST=.config/yapf/style ./install.sh
