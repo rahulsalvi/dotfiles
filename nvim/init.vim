@@ -492,18 +492,6 @@ let g:neoterm_default_mod='botright'
 
 " nvim-tree
 let g:nvim_tree_width = '30%'
-let g:nvim_tree_git_hl = 1
-let g:nvim_tree_highlight_opened_files = 1
-let g:nvim_tree_root_folder_modifier = ':~'
-let g:nvim_tree_add_trailing = 1
-let g:nvim_tree_group_empty = 1
-
-let g:nvim_tree_show_icons = {
-    \ 'git': 1,
-    \ 'folders': 1,
-    \ 'files': 1,
-    \ 'folder_arrows': 1,
-    \ }
 
 " vim-ledger
 let g:ledger_extra_options='--pedantic --explicit'
@@ -654,6 +642,10 @@ require('nvim-tree').setup {
         }
     },
     renderer = {
+        add_trailing = true,
+        group_empty = true,
+        highlight_git = true,
+        highlight_opened_files = "all",
         indent_markers = {
             enable = true,
         },
