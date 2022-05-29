@@ -31,12 +31,6 @@ i3 :
 	SRC=i3/prev_workspace DST=.config/i3/prev_workspace ./install.sh
 	i3-msg 'reload'
 
-.PHONY: jupyter
-jupyter :
-	SRC=jupyter/custom DST=.jupyter/custom ./install.sh
-	SRC=jupyter/jupyter_notebook_config.py DST=.jupyter/jupyter_notebook_config.py ./install.sh
-	SRC=jupyter/nbconfig DST=.jupyter/nbconfig ./install.sh
-
 .PHONY: khal
 khal :
 	SRC=khal/config DST=.config/khal/config ./install.sh
