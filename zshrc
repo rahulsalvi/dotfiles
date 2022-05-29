@@ -196,9 +196,6 @@ alias poweroff='sudo poweroff'
 alias open='rifle'
 alias lg='lazygit'
 
-alias vpnon="nmcli con up id 'US California'"
-alias vpnoff="nmcli con down id 'US California'"
-
 
 # Display a message if system hasn't been updated within a week
 # To reset the counter, run

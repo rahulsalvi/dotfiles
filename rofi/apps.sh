@@ -44,12 +44,6 @@ case "$@" in
 "transmission")
     app_to_run="transmission-qt"
     ;;
-"vpnoff")
-    app_to_run="nmcli con down id 'US California'"
-    ;;
-"vpnon")
-    app_to_run="nmcli con up id 'US California'"
-    ;;
 "write")
     app_to_run="write_stylus"
     ;;
