@@ -85,10 +85,6 @@ ranger :
 	SRC=ranger/rc.conf DST=.config/ranger/rc.conf ./install.sh
 	SRC=ranger/rifle.conf DST=.config/ranger/rifle.conf ./install.sh
 
-.PHONY: redshift
-redshift :
-	SRC=redshift.conf DST=.config/redshift.conf ./install.sh
-
 .PHONY: rofi
 rofi :
 	SRC=rofi/config.rasi DST=.config/rofi/config.rasi ./install.sh
