@@ -65,6 +65,7 @@ picom :
 polybar :
 	SRC=polybar/config.ini DST=.config/polybar/config.ini ./install.sh
 	SRC=polybar/launch.sh DST=.config/polybar/launch.sh ./install.sh
+	SRC=polybar/audio.sh DST=.config/polybar/audio.sh ./install.sh
 	SRC=polybar/vpn.sh DST=.config/polybar/vpn.sh ./install.sh
 	SRC=polybar/mail_sync.sh DST=.config/polybar/mail_sync.sh ./install.sh
 	SRC=polybar/calendar_sync.sh DST=.config/polybar/calendar_sync.sh ./install.sh

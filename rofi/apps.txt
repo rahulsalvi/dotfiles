@@ -6,6 +6,7 @@ firefox
 freecad
 gimp
 glances
+headphones
 htop
 inkscape
 keepassxc
@@ -27,6 +28,7 @@ ranger
 remmina
 seahorse
 sensors
+speakers
 spotify
 steam
 stm32cubemx
