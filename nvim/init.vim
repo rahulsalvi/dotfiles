@@ -529,12 +529,10 @@ lua << EOF
 -- lspsaga
 local saga = require 'lspsaga'
 saga.init_lsp_saga {
-    error_sign = '😡',
-    warn_sign = '🤔',
-    code_action_prompt = {
+    diagnostic_header = { '😡', "🤔" },
+    code_action_lightbulb = {
         enable = false;
-    },
-    rename_prompt_prefix = 'New Name ➤'
+    }
 }
 
 -- nvim-lspconfig
