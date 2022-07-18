@@ -90,7 +90,6 @@ ranger :
 rofi :
 	SRC=rofi/config.rasi DST=.config/rofi/config.rasi ./install.sh
 	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
-	SRC=rofi/apps.txt DST=.config/rofi/apps.txt ./install.sh
 
 .PHONY: tablet
 tablet :
