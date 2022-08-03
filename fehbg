@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 if [[ "$HOST" == "kyogre" ]]; then
-    feh --no-fehbg --bg-fill "$HOME/.config/wallpapers/wallpaper_left" "$HOME/.config/wallpapers/wallpaper_top" "$HOME/.config/wallpapers/wallpaper_right"
+    feh --no-fehbg --bg-fill "$HOME/.config/wallpapers/wallpaper_left" "$HOME/.config/wallpapers/wallpaper_right" "$HOME/.config/wallpapers/wallpaper_top"
 elif [[ "$HOST" == "darkrai" ]]; then
     feh --no-fehbg --bg-fill "$HOME/.config/wallpapers/wallpaper"
 fi

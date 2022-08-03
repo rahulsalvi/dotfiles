@@ -8,7 +8,7 @@ if [[ "$HOST" == "kyogre" ]]; then
     POLYBAR_MONITOR="HDMI-A-0" \
     POLYBAR_TRAY_POS="none" \
     polybar bar0 >/dev/null 2>&1 &
-    POLYBAR_MONITOR="HDMI-A-1" \
+    POLYBAR_MONITOR="DisplayPort-1" \
     POLYBAR_TRAY_POS="none" \
     polybar bar0 >/dev/null 2>&1 &
     POLYBAR_MONITOR="DisplayPort-0" \
