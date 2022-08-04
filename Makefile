@@ -91,6 +91,11 @@ rofi :
 	SRC=rofi/config.rasi DST=.config/rofi/config.rasi ./install.sh
 	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
 
+.PHONY: sway
+sway :
+	SRC=sway/config DST=.config/sway/config ./install.sh
+	SRC=sway/$(shell hostname) DST=.config/sway/config.d/$(shell hostname) ./install.sh
+
 .PHONY: tablet
 tablet :
 	SRC=tablet/init_xsetwacom DST=.config/tablet/init_xsetwacom ./install.sh

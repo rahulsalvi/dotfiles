@@ -1,0 +1,33 @@
+# vim: set filetype=i3config:
+
+# input devices
+input type:keyboard {
+    xkb_options caps:swapescape
+    xkb_numlock enabled
+}
+input type:pointer {
+    accel_profile flat
+}
+
+# output devices
+output * {
+    adaptive_sync on
+    render_bit_depth 10
+}
+output DP-1 {
+    mode 2560x1440@165Hz
+    position 0 1080
+    background ~/.config/wallpapers/wallpaper_left fill
+}
+output DP-2 {
+    mode 2560x1080@75Hz
+    position 0 0
+    background ~/.config/wallpapers/wallpaper_top fill
+}
+output HDMI-A-1 {
+    mode 1920x1080@120Hz
+    position 2560 1080
+    background ~/.config/wallpapers/wallpaper_right fill
+    # adaptive sync makes this monitor flicker
+    adaptive_sync off
+}
