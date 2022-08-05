@@ -6,7 +6,7 @@ fi
 
 case $1 in
 "show")
-    playerctl -p spotify status
+    playerctl -p spotify status >/dev/null 2>&1
     exit $?
     ;;
 "text")
@@ -21,7 +21,7 @@ case $1 in
     playerctl -p spotify play-pause
     ;;
 "click-right")
-    i3-msg '[class="Spotify"] focus'
+    swaymsg '[class="Spotify"] focus'
     ;;
 *)
     exit 0

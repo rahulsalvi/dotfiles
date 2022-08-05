@@ -125,6 +125,14 @@ update :
 vdirsyncer :
 	SRC=vdirsyncer/config DST=.config/vdirsyncer/config ./install.sh
 
+.PHONY: waybar
+waybar :
+	SRC=waybar/config DST=.config/waybar/config ./install.sh
+	SRC=waybar/style.css DST=.config/waybar/style.css ./install.sh
+	SRC=waybar/unread_mail.sh DST=.config/waybar/unread_mail.sh ./install.sh
+	SRC=waybar/count_unread_mail.py DST=.config/waybar/count_unread_mail.py ./install.sh
+	SRC=waybar/spotify.sh DST=.config/waybar/spotify.sh ./install.sh
+
 .PHONY: yapf
 yapf :
 	SRC=yapf/style DST=.config/yapf/style ./install.sh

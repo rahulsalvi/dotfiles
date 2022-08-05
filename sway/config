@@ -204,7 +204,6 @@ gaps outer 0
 
 bar {
     swaybar_command waybar
-    position top
 }
 
 # load gtk settings

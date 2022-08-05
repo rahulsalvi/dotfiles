@@ -8,11 +8,11 @@ maildirs=$(find ${HOME}/Mail -regex ".*/INBOX" | tr '\n' ' ')
 
 case $1 in
 "show")
-    python ~/.config/polybar/count_unread_mail.py $maildirs
+    python ~/.config/waybar/count_unread_mail.py $maildirs >/dev/null 2>&1
     return $?
     ;;
 "text")
-    text=$(python ~/.config/polybar/count_unread_mail.py $maildirs)
+    text=$(python ~/.config/waybar/count_unread_mail.py $maildirs)
     echo " $text"
     ;;
 "click")
