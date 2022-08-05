@@ -1,0 +1,5 @@
+# vim: set filetype=i3config:
+
+exec discord
+exec radeon-profile
+exec jellyfin-mpv-shim

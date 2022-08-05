@@ -1,0 +1,3 @@
+timeout 1800 '~/.config/lock/lock.sh'
+timeout 1860 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+timeout 60 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi'

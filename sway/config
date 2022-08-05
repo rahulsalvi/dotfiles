@@ -19,6 +19,7 @@ bindsym Mod1+Return exec kitty
 bindsym Mod1+c exec firefox
 
 # start discord
+assign [class="discord"] workspace 2
 bindsym Mod1+m exec pgrep Discord && swaymsg '[class="discord"] focus' || discord
 
 # start spotify
@@ -27,7 +28,7 @@ bindsym Mod1+s exec pgrep spotify && swaymsg '[class="Spotify"] focus' || spotif
 # start keepassxc
 bindsym Mod1+p exec keepassxc
 # window rule to make KeepassXC always float
-for_window [class="KeePassXC" instance="keepassxc"] floating enable
+for_window [app_id="org.keepassxc.KeePassXC"] floating enable
 
 # start neomutt
 bindsym Mod1+z exec kitty neomutt
@@ -42,12 +43,12 @@ bindsym Mod1+t exec kitty --directory ~/todo nvim todo.org
 bindsym --release Mod4+Shift+s exec 'grim -g "$(slurp)" - | tee /tmp/screenshot-$(date +%F_%T).png | wl-copy -t image/png'
 
 # lock
-# bindsym Mod1+Control+Escape exec xset s activate
+bindsym Mod1+Control+Escape exec 'pkill -USR1 -n -x swayidle'
 
 # handle notifications with dunst
-# bindsym Mod4+space exec dunstctl close
-# bindsym Mod4+Shift+space exec dunstctl close-all
-# bindsym Mod4+Shift+period exec dunstctl context
+bindsym Mod4+space exec dunstctl close
+bindsym Mod4+Shift+space exec dunstctl close-all
+bindsym Mod4+Shift+period exec dunstctl context
 
 # media key bindings
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -201,9 +202,21 @@ bindsym Mod1+Control+Shift+F10 mode "passthrough"
 gaps inner 5
 gaps outer 0
 
-# lock after 30 mins of inactivity
-#exec_always --no-startup-id xset s 1800 0
-#exec_always --no-startup-id xset dpms 2700 2700 2700
-#exec_always --no-startup-id xss-lock "/home/rahulsalvi/.config/lock/lock.sh"
+bar {
+    swaybar_command waybar
+    position top
+}
+
+# load gtk settings
+# https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland/
+exec_always ~/.config/sway/import-gsettings
+
+exec blueman-applet
+exec dunst
+exec gammastep-indicator
+exec insync start
+exec keepassxc
+exec nm-applet --indicator
+exec swayidle
 
 include ~/.config/sway/config.d/*
