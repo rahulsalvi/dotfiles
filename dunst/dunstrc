@@ -4,7 +4,7 @@
     width = 300
     height = 100
     origin = top-right
-    offset = 15x40
+    offset = 10x10
     notification_limit = 5
     indicate_hidden = yes
     shrink = no
