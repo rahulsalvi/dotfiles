@@ -98,6 +98,7 @@ sway :
 	SRC=sway/$(shell hostname)-io DST=.config/sway/config.d/$(shell hostname)-io ./install.sh
 	SRC=sway/$(shell hostname)-idle DST=.config/swayidle/config ./install.sh
 	SRC=sway/lock DST=.config/swaylock/config ./install.sh
+	SRC=sway/nag DST=.config/swaynag/config ./install.sh
 	SRC=sway/move_to_new_workspace DST=.config/sway/move_to_new_workspace ./install.sh
 	SRC=sway/move_to_next_workspace DST=.config/sway/move_to_next_workspace ./install.sh
 	SRC=sway/move_to_prev_workspace DST=.config/sway/move_to_prev_workspace ./install.sh

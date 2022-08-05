@@ -17,7 +17,7 @@
     },
     "custom/powermenu": {
         "format": "",
-        "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Shutdown'  'shutdown -h now' -b 'Restart' 'reboot'"
+        "on-click": "swaynag -t power -b 'Shutdown' 'shutdown -h now' -b 'Restart' 'reboot'"
     },
     "custom/unread_mail": {
         "exec": "~/.config/waybar/unread_mail.sh text",
