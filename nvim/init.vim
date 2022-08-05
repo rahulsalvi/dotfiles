@@ -290,6 +290,9 @@ endfunction
 
 " Autocommands
 " ------------
+" Fix terminal resizing issue
+autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+
 " Set filetype to text if not already set
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
