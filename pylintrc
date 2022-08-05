@@ -1,2 +1,2 @@
 [MESSAGES CONTROL]
-disable=bad-continuation,bad-whitespace,invalid-name,missing-docstring,too-many-branches
+disable=invalid-name,missing-docstring,too-many-branches
