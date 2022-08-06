@@ -6,7 +6,7 @@
     "spacing": 10,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/spotify"],
-    "modules-right": ["custom/calendar_sync", "custom/mail_sync", "custom/vpn", "custom/unread_mail", "clock", "custom/powermenu", "tray"],
+    "modules-right": ["custom/calendar_sync", "custom/mail_sync", "custom/vpn", "custom/unread_mail", "clock", "tray", "custom/powermenu"],
     "tray": {
         "spacing": 8
     },
