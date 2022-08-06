@@ -60,7 +60,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym Mod1+q kill
 
 # start rofi
-# bindsym Mod1+d exec rofi -show
+bindsym Mod1+d exec rofi -show
 
 # change focus
 bindsym Mod1+$left focus left
