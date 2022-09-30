@@ -228,4 +228,5 @@ exec keepassxc
 exec nm-applet --indicator
 exec swayidle
 
+include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*
