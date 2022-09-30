@@ -43,7 +43,7 @@ bindsym Mod1+t exec kitty --directory ~/todo nvim todo.org
 bindsym --release Mod4+Shift+s exec 'grim -g "$(slurp)" - | tee /tmp/screenshot-$(date +%F_%T).png | wl-copy -t image/png'
 
 # lock
-bindsym Mod1+Control+Escape exec 'pkill -USR1 -n -x swayidle'
+bindsym Mod4+l exec 'pkill -USR1 -n -x swayidle'
 
 # handle notifications with dunst
 bindsym Mod4+space exec dunstctl close
