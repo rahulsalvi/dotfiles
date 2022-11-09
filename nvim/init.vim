@@ -321,6 +321,9 @@ autocmd TermOpen term://* startinsert
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
+" Highlight yanked text
+autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=700 }
+
 " ledger bindings
 autocmd FileType ledger nnoremap { ?^\d<CR>
 autocmd FileType ledger nnoremap } /^\d<CR>
