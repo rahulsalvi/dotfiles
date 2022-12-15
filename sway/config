@@ -215,6 +215,8 @@ gaps outer 0
 bar {
     swaybar_command waybar
 }
+# toggle waybar
+bindsym Mod1+o exec 'pkill -USR1 waybar'
 
 # load gtk settings
 # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland/
