@@ -6,7 +6,7 @@
     "spacing": 10,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/spotify"],
-    "modules-right": ["custom/calendar_sync", "custom/mail_sync", "custom/vpn", "custom/unread_mail", "clock", "tray", "custom/powermenu"],
+    "modules-right": ["custom/calendar_sync", "custom/mail_sync", "custom/vpn", "custom/unread_mail", "custom/audio", "clock", "tray", "custom/powermenu"],
     "tray": {
         "spacing": 8
     },
@@ -23,6 +23,11 @@
         "exec": "~/.config/waybar/unread_mail.sh text",
         "exec-if": "~/.config/waybar/unread_mail.sh show",
         "on-click": "~/.config/waybar/unread_mail.sh click",
+        "interval": 1
+    },
+    "custom/audio": {
+        "exec": "~/.config/waybar/audio.sh text",
+        "on-click": "~/.config/waybar/audio.sh click",
         "interval": 1
     },
     "custom/vpn": {

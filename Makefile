@@ -130,6 +130,7 @@ vdirsyncer :
 waybar :
 	SRC=waybar/config DST=.config/waybar/config ./install.sh
 	SRC=waybar/style.css DST=.config/waybar/style.css ./install.sh
+	SRC=waybar/audio.sh DST=.config/waybar/audio.sh ./install.sh
 	SRC=waybar/unread_mail.sh DST=.config/waybar/unread_mail.sh ./install.sh
 	SRC=waybar/count_unread_mail.py DST=.config/waybar/count_unread_mail.py ./install.sh
 	SRC=waybar/spotify.sh DST=.config/waybar/spotify.sh ./install.sh
