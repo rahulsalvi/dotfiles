@@ -31,3 +31,5 @@ output HDMI-A-1 {
     # adaptive sync makes this monitor flicker
     adaptive_sync off
 }
+
+exec xrandr --output XWAYLAND0 --primary
