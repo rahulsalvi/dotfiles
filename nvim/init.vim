@@ -365,7 +365,6 @@ Plug 'https://github.com/rahulsalvi/rahulsalvi-snippets'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/ray-x/lsp_signature.nvim'
 Plug 'https://github.com/rhysd/clever-f.vim.git'
-Plug 'https://github.com/sirtaj/vim-openscad.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-obsession.git'
@@ -588,17 +587,13 @@ nvim_lsp.cmake.setup{
     capabilities = capabilities
 }
 
--- nvim-treesitter
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-parser_config.org = {
-    install_info = {
-        url = 'https://github.com/milisims/tree-sitter-org',
-        revision = 'main',
-        files = {'src/parser.c', 'src/scanner.cc'},
-    },
-    filetype = 'org',
+nvim_lsp.openscad_lsp.setup{
+    on_attach = on_attach,
+    capabilities = capabilities
 }
 
+-- nvim-treesitter
+require('orgmode').setup_ts_grammar()
 require('nvim-treesitter.configs').setup {
     highlight = {
         enable = true,
@@ -627,7 +622,6 @@ require('orgmode').setup{
         },
     },
 }
-require('orgmode').setup_ts_grammar()
 
 -- nvim-tree.lua
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
