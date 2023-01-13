@@ -338,7 +338,6 @@ call plug#begin('~/.config/nvim/plugins')
 Plug 'https://github.com/akinsho/nvim-toggleterm.lua.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/dense-analysis/ale.git'
-Plug 'https://github.com/glepnir/lspsaga.nvim'
 Plug 'https://github.com/hrsh7th/nvim-compe'
 Plug 'https://github.com/hrsh7th/vim-vsnip'
 Plug 'https://github.com/ishan9299/nvim-solarized-lua'
@@ -532,15 +531,6 @@ let g:clever_f_smart_case=1
 " Lua Configuration
 " -----------------
 lua << EOF
--- lspsaga
-local saga = require 'lspsaga'
-saga.init_lsp_saga {
-    diagnostic_header = { '😡', "🤔" },
-    code_action_lightbulb = {
-        enable = false;
-    }
-}
-
 -- nvim-lspconfig
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -553,8 +543,8 @@ local on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', '<LEADER>d', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<LEADER>r', '<Cmd>lua require("lspsaga.rename").rename()<CR>', opts)
-  buf_set_keymap('n', 'K',         '<Cmd>lua require("lspsaga.hover").render_hover_doc()<CR>', opts)
+  buf_set_keymap('n', '<LEADER>r', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'K',         '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
   lsp_signature_cfg = {
       hint_prefix = ''
