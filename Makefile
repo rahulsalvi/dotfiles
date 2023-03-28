@@ -89,7 +89,7 @@ ranger :
 .PHONY: rofi
 rofi :
 	SRC=rofi/config.rasi DST=.config/rofi/config.rasi ./install.sh
-	SRC=rofi/apps.sh DST=.config/rofi/apps.sh ./install.sh
+	SRC=rofi/apps.py DST=.config/rofi/apps.py ./install.sh
 
 .PHONY: sway
 sway :

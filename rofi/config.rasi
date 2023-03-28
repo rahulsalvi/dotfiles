@@ -1,5 +1,5 @@
 configuration {
-    modi: "apps:~/.config/rofi/apps.sh";
+    modi: "apps:~/.config/rofi/apps.py";
     matching: "fuzzy";
     timeout {
         action: "kb-cancel";
