@@ -335,6 +335,7 @@ autocmd FileType ledger inoremap <silent> <TAB> <C-r>=ledger#autocomplete_and_al
 " -------
 call plug#begin('~/.config/nvim/plugins')
 
+Plug 'https://github.com/akinsho/org-bullets.nvim.git'
 Plug 'https://github.com/akinsho/nvim-toggleterm.lua.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 Plug 'https://github.com/dense-analysis/ale.git'
@@ -621,6 +622,18 @@ require('orgmode').setup{
         org = {
             org_toggle_checkbox = '<Space>ob'
         },
+    },
+}
+
+-- org-bullets.nvim
+require('org-bullets').setup{
+    concealcursor = true,
+    symbols = {
+        headlines = { "○" },
+        checkboxes = {
+            half = { "-", "OrgTSCheckboxHalfChecked" },
+            todo = { " ", "OrgTODO" },
+        }
     },
 }
 
