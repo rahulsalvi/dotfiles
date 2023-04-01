@@ -3,6 +3,8 @@
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set completeopt=menuone,noselect
+set conceallevel=2
+set concealcursor=nc
 set expandtab
 set hidden
 set hlsearch
