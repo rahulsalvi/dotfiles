@@ -10,6 +10,10 @@ dunst :
 fehbg :
 	SRC=fehbg DST=.config/fehbg ./install.sh
 
+.PHONY: foot
+foot :
+	SRC=foot/foot.ini DST=.config/foot/foot.ini ./install.sh
+
 .PHONY: git
 git :
 	SRC=git/ignore DST=.config/git/ignore ./install.sh
@@ -34,10 +38,6 @@ i3 :
 .PHONY: khal
 khal :
 	SRC=khal/config DST=.config/khal/config ./install.sh
-
-.PHONY: kitty
-kitty :
-	SRC=kitty/kitty.conf DST=.config/kitty/kitty.conf ./install.sh
 
 .PHONY: latexmk
 latexmk :

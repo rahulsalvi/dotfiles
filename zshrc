@@ -90,7 +90,7 @@ fi
 # Set environment variables
 export EDITOR=nvim
 export EDITOR_OPTS="-p"
-export TERMCMD=kitty
+export TERMCMD=foot
 export MANPAGER='nvim +Man!'
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=1
@@ -169,6 +169,26 @@ function exit() {
         tmux detach
     fi
 }
+
+# OSC-7 escape sequence for foot
+# see https://codeberg.org/dnkl/foot/wiki#zsh
+function osc7 {
+    local LC_ALL=C
+    export LC_ALL
+
+    setopt localoptions extendedglob
+    input=( ${(s::)PWD} )
+    uri=${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-\/])/%${(l:2::0:)$(([##16]#match))}}
+    print -n "\e]7;file://${HOSTNAME}${uri}\e\\"
+}
+add-zsh-hook -Uz chpwd osc7
+
+# OSC-133;A sequence to enable jumping between prompts
+# see https://codeberg.org/dnkl/foot/wiki#jumping-between-prompts
+function osc133a {
+    print -Pn "\e]133;A\e\\"
+}
+add-zsh-hook -Uz precmd osc133a
 
 # Alias functions
 alias extract='unarchive'

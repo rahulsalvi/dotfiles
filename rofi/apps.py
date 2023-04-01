@@ -5,7 +5,7 @@ import os
 import sys
 
 apps_file = os.path.join(os.getenv("HOME"), ".config/rofi/apps.json")
-default_terminal = "kitty"
+default_terminal = "foot"
 
 def print_apps(apps):
     for app in sorted(apps.keys()):
@@ -21,7 +21,7 @@ def run_app(apps, app):
         termcmd = os.getenv("TERMCMD", default_terminal)
         directory = opts.get("directory")
         if directory:
-            termcmd = termcmd + " --directory " + directory
+            termcmd = termcmd + " --working-directory " + directory
         cmd = termcmd + " " + cmd
     cmd = cmd + " >/dev/null 2>&1 &"
     os.system(cmd)

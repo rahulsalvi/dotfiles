@@ -9,11 +9,13 @@ set $down j
 set $left h
 set $right l
 
+set $term foot
+
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
 
 # start a terminal
-bindsym Mod1+Return exec kitty
+bindsym Mod1+Return exec $term
 
 # start firefox
 bindsym Mod1+c exec firefox
@@ -31,13 +33,13 @@ bindsym Mod1+p exec keepassxc
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable
 
 # start neomutt
-bindsym Mod1+z exec kitty neomutt
+bindsym Mod1+z exec $term neomutt
 
 # start khal
-bindsym Mod1+x exec kitty ikhal
+bindsym Mod1+x exec $term ikhal
 
 # start todo
-bindsym Mod1+t exec kitty --directory ~/todo nvim todo.org
+bindsym Mod1+t exec $term --working-directory ~/todo nvim todo.org
 
 # take screenshot (super+shift+s to match Windows)
 bindsym --release Mod4+Shift+s exec 'grim -g "$(slurp)" - | tee /tmp/screenshot-$(date +%F_%T).png | wl-copy -t image/png'

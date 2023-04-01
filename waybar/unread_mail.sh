@@ -16,7 +16,7 @@ case $1 in
     echo " $text"
     ;;
 "click")
-    kitty neomutt >/dev/null 2>&1 &
+    $TERMCMD neomutt >/dev/null 2>&1 &
     ;;
 *)
     exit 0
