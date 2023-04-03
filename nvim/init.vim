@@ -3,8 +3,6 @@
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set completeopt=menuone,noselect
-set conceallevel=2
-set concealcursor=nc
 set expandtab
 set hidden
 set hlsearch
@@ -311,6 +309,8 @@ augroup END
 
 " Default to showing contents
 autocmd BufWinEnter *.org :lua require('orgmode').action('org_mappings.global_cycle')
+autocmd BufWinEnter *.org set conceallevel=2
+autocmd BufWinEnter *.org set concealcursor=nc
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
