@@ -21,8 +21,8 @@ bindsym Mod1+Return exec $term
 bindsym Mod1+c exec firefox
 
 # start discord
-assign [class="discord"] workspace 2
-bindsym Mod1+m exec pgrep Discord && swaymsg '[class="discord"] focus' || discord
+assign [app_id="discord"] workspace 2
+bindsym Mod1+m exec pgrep Discord && swaymsg '[app_id="discord"] focus' || discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 # start spotify
 bindsym Mod1+s exec pgrep spotify && swaymsg '[class="Spotify"] focus' || spotify
