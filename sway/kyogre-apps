@@ -1,5 +1,4 @@
 # vim: set filetype=i3config:
 
 exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
-exec radeon-profile
 exec jellyfin-mpv-shim
