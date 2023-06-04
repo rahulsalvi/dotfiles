@@ -363,6 +363,7 @@ Plug 'https://github.com/numirias/semshi.git', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/nvim-lua/plenary.nvim'
 Plug 'https://github.com/nvim-orgmode/orgmode.git'
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter.git', { 'do': ':TSUpdate' }
+Plug 'https://github.com/pearofducks/ansible-vim'
 Plug 'https://github.com/rahulsalvi/rahulsalvi-snippets'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/ray-x/lsp_signature.nvim'
@@ -424,6 +425,7 @@ let g:ale_fixers={
     \ 'cmake': ['cmakeformat'],
     \ 'python': ['yapf'],
     \ 'sh': ['shfmt'],
+    \ 'yaml': ['prettier'],
     \ }
 command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
 let g:ale_linters_explicit=1
@@ -595,6 +597,11 @@ nvim_lsp.openscad_lsp.setup{
     capabilities = capabilities
 }
 
+nvim_lsp.ansiblels.setup{
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
 -- nvim-treesitter
 require('orgmode').setup_ts_grammar()
 require('nvim-treesitter.configs').setup {
@@ -602,7 +609,7 @@ require('nvim-treesitter.configs').setup {
         enable = true,
         additional_vim_regex_highlighting = {'org'},
     },
-    ensure_installed = {'org'},
+    ensure_installed = {'org', 'yaml'},
 }
 
 -- orgmode.nvim
