@@ -706,21 +706,27 @@ require('gitsigns').setup{
         topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
         changedelete = {hl = 'GitSignsChange', text = '│_', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
     },
-    keymaps = {
-        noremap = true,
-        ['n <LEADER>j']  = '<cmd>lua require("gitsigns").next_hunk()<CR>',
-        ['n <LEADER>k']  = '<cmd>lua require("gitsigns").prev_hunk()<CR>',
-        ['n <LEADER>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-        ['v <LEADER>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-        ['n <LEADER>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-        ['n <LEADER>gr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-        ['v <LEADER>gr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-        ['n <LEADER>gR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-        ['n <LEADER>gp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-        ['n <LEADER>gb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-        ['o ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
-        ['x ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
-    }
+    on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+        local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+        end
+
+        map('n', '<LEADER>j', gs.next_hunk)
+        map('n', '<LEADER>k', gs.prev_hunk)
+        map('n', '<LEADER>gs', gs.stage_hunk)
+        map('v', '<LEADER>gs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+        map('n', '<LEADER>gu', gs.undo_stage_hunk)
+        map('n', '<LEADER>gr', gs.reset_hunk)
+        map('v', '<LEADER>gr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+        map('n', '<LEADER>gR', gs.reset_buffer)
+        map('n', '<LEADER>gp', gs.preview_hunk)
+        map('n', '<LEADER>gb', function() gs.blame_line{full=true} end)
+
+        map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    end
 }
 
 -- nvim-toggleterm.lua
