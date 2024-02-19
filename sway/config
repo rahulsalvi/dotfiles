@@ -43,7 +43,10 @@ bindsym Mod1+z exec $term neomutt
 bindsym Mod1+x exec $term ikhal
 
 # start todo
-bindsym Mod1+t exec $term --working-directory ~/todo nvim todo.org
+bindsym Mod1+t exec $term ~/.local/bin/todo
+
+# start diary
+bindsym Mod1+Shift+t exec $term --title "float" --override colors.alpha=1.0 ~/.local/bin/diary
 
 # take screenshot (super+shift+s to match Windows)
 bindsym --release Mod4+Shift+s exec 'grim -g "$(slurp)" - | tee /tmp/screenshot-$(date +%F_%T).png | wl-copy -t image/png'
