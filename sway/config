@@ -215,7 +215,7 @@ mode "passthrough" {
 
 bindsym Mod1+Control+Shift+F10 mode "passthrough"
 
-gaps inner 5
+gaps inner 2
 gaps outer 0
 
 bar {
