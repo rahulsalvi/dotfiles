@@ -17,6 +17,10 @@ floating_modifier Mod1
 # start a terminal
 bindsym Mod1+Return exec $term
 
+# start a floating terminal
+bindsym Mod1+Shift+Return exec $term --title "float" --override colors.alpha=1.0
+for_window [app_id="foot" title="float"] floating enable, resize set 1600 900
+
 # start firefox
 bindsym Mod1+c exec firefox
 
