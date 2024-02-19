@@ -323,6 +323,9 @@ autocmd TermOpen term://* startinsert
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
+" vimwiki/taskwiki
+autocmd FileType vimwiki set foldlevel=99
+
 " Highlight yanked text
 autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=700 }
 
@@ -369,11 +372,13 @@ Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/ray-x/lsp_signature.nvim'
 Plug 'https://github.com/rhysd/clever-f.vim.git'
 Plug 'https://github.com/sirtaj/vim-openscad'
+Plug 'https://github.com/tools-life/taskwiki'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-obsession.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/tpope/vim-surround.git'
+Plug 'https://github.com/vimwiki/vimwiki'
 Plug 'https://github.com/wellle/targets.vim.git'
 
 call plug#end()
@@ -531,6 +536,27 @@ let g:better_whitespace_filetypes_blacklist=['diff', 'mail']
 " clever-f
 let g:clever_f_across_no_line=1
 let g:clever_f_smart_case=1
+
+" vimwiki/taskwiki
+let g:taskwiki_taskrc_location='~/.config/task/taskrc'
+let g:taskwiki_dont_preserve_folds=1
+let g:vimwiki_dir_link='index'
+let wiki = {}
+let wiki.syntax = 'markdown'
+let wiki.ext = '.md'
+let wiki.path='~/Documents/taskwarrior/wiki'
+let wiki.diary_index='index'
+let wiki.diary_start_week_day='sunday'
+let wiki.auto_diary_index=1
+let g:vimwiki_list = [wiki]
+highlight VimwikiHeader1 gui=bold guifg=#cb4b16
+highlight VimwikiHeader2 gui=bold guifg=#2aa198
+highlight VimwikiHeader3 gui=bold guifg=#859900
+highlight VimwikiHeader4 gui=bold guifg=#b58900
+highlight VimwikiHeader5 gui=bold guifg=#d33682
+highlight VimwikiHeader6 gui=bold guifg=#dc322f
+highlight VimwikiLink gui=bold,underline guifg=#268bd2
+highlight VimwikiHeaderChar guifg=#839496
 
 " Lua Configuration
 " -----------------
