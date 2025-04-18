@@ -1,6 +1,0 @@
-#!/usr/bin/env zsh
-
-# needed for udev
-sleep 1
-
-xsetwacom set "HID 256c:006d Pen stylus" MapToOutput "DisplayPort-0"

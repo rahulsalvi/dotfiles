@@ -1,7 +1,0 @@
-#!/usr/bin/env python3
-
-import swayutils
-
-next_ws_num = swayutils.next_workspace_for_current_output_num()
-cmd = f"workspace {next_ws_num}"
-swayutils.command(cmd)

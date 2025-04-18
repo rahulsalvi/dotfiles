@@ -1,5 +1,0 @@
-# vim: set filetype=i3config:
-
-exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
-exec jellyfin-mpv-shim
-exec corectrl

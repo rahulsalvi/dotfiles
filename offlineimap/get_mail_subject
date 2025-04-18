@@ -1,9 +1,0 @@
-#!/usr/bin/env python
-
-from sys import argv
-from email.parser import Parser
-from email.policy import default
-
-with open(argv[1], 'r') as msg:
-    headers = Parser(policy=default).parse(msg)
-    print(headers['subject'])

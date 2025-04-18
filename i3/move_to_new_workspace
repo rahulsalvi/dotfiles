@@ -1,6 +1,0 @@
-#!/usr/bin/env python3
-
-import i3utils
-new_ws_num = i3utils.new_workspace_num()
-cmd = f"move container to workspace {new_ws_num}; workspace {new_ws_num}"
-i3utils.command(cmd)
