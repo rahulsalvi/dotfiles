@@ -1,0 +1,19 @@
+icons = true
+human = true
+
+[tree]
+icons = true
+layout = "inverted"
+suppress-size = true
+
+[du]
+disk-usage = "physical"
+human = true
+icons = true
+no-ignore = true
+no-git = true
+level = 1
+prune = true
+sort = "rsize"
+hidden = true
+layout = "flat"

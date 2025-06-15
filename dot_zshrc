@@ -1,0 +1,95 @@
+# Set local variables for config and cache directories
+local CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}
+local CACHE_DIR=${XDG_CACHE_HOME:-$HOME/.cache}
+
+# Set general environment variables
+export EDITOR=nvim
+export FZF_DEFAULT_OPTS="-m --reverse"
+export MANPAGER='nvim +Man!'
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
+export KEYTIMEOUT=1
+export PATH="$HOME/go/bin:$PATH"
+# Environment variables to clean up $HOME
+export PYLINTHOME="$CACHE_DIR/pylint.d"
+export LESSHISTFILE="$CACHE_DIR/lesshst"
+export PYTHON_HISTORY="$CACHE_DIR/python_history"
+export STARSHIP_CACHE="$CACHE_DIR/starship/cache"
+
+# Set up zim
+export ZIM_CONFIG_FILE=$CONFIG_DIR/zsh/zimrc
+export ZIM_HOME=$CACHE_DIR/zim
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+# Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init
+fi
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
+
+# Indicator for normal/insert mode
+# TODO doesn't work on first command?
+function zle-line-init zle-keymap-select {
+  RPROMPT=${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/}
+  zle reset-prompt
+  if [[ $KEYMAP == vicmd ]]; then
+    echo -ne '\e[1 q'
+  else
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+
+# escape sequences for foot
+[[ -f "$CONFIG_DIR/zsh/foot.zsh" ]] && source "$CONFIG_DIR/zsh/foot.zsh"
+
+# catppuccin colorscheme for fzf
+[[ -f "$CONFIG_DIR/zsh/fzf_catppuccin_mocha.zsh" ]] && source "$CONFIG_DIR/zsh/fzf_catppuccin_mocha.zsh"
+
+# yazi change cwd binding
+[[ -f "$CONFIG_DIR/zsh/yazi.zsh" ]] && source "$CONFIG_DIR/zsh/yazi.zsh"
+
+# General aliases
+alias e="$EDITOR"
+alias ls='eza --group-directories-first --icons=auto'
+alias sl='ls'
+alias cd='z'
+alias ip='ip -color=auto'
+alias c='clear'
+alias s='cd ~;clear'
+alias cp='cp -iv --reflink=auto'
+alias mv='mv -iv'
+alias rm='rm -v'
+alias mkdir='mkdir -pv'
+alias lg='lazygit'
+alias tree='erd --config tree'
+alias du='erd --config du'
+
+# keybindings for autosuggestions
+if [[ -n "$key_info" ]]; then
+  bindkey -M viins "$key_info[Control]F" vi-forward-word
+  bindkey -M viins "$key_info[Control]E" vi-add-eol
+fi
+
+# for whatever reason, the cow path is broken on arch
+# fix it by manually setting the cowpath
+export COWPATH=/usr/share/cowsay/cows
+# display a fortune (max once per day, saved in $FORTUNEFILE (default $HOME/.cache/fortune))
+function daily_fortune() {
+  local default_file="$CACHE_DIR/fortune"
+  local fortune_file="${FORTUNEFILE:-$default_file}"
+  if command -v cowfortune 2>&1 >/dev/null; then
+    if [[ ! -f "$fortune_file" || $(find "$fortune_file" -mtime +1) ]]; then
+      cowfortune
+      touch "$fortune_file"
+    fi
+  fi
+}
+daily_fortune
+
+unset CONFIG_DIR
+unset CACHE_DIR

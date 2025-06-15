@@ -1,0 +1,27 @@
+# Modules
+# Sets sane Zsh built-in environment options.
+zmodule environment
+# Applies correct bindkeys for input events.
+zmodule input
+# Utility aliases and functions. Adds colour to ls, grep and less.
+zmodule utility
+
+# Completion
+zmodule /usr/share/zsh/site-functions
+# Enables and configures smart and extensive tab completion.
+# completion must be sourced after all modules that add completion definitions.
+zmodule completion
+
+zmodule catppuccin/zsh-syntax-highlighting --name catppuccin --root themes --source catppuccin_mocha-zsh-syntax-highlighting.zsh
+
+# Modules that must be initialized last
+zmodule /usr/share/zsh/plugins/zsh-syntax-highlighting
+zmodule /usr/share/zsh/plugins/zsh-history-substring-search
+zmodule /usr/share/zsh/plugins/zsh-autosuggestions
+
+zmodule fzf
+zmodule exa
+zmodule direnv
+zmodule archive
+zmodule joke/zim-starship
+zmodule kiesman99/zim-zoxide
