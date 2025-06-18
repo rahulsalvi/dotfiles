@@ -1,6 +1,6 @@
 [user]
   name = Rahul Salvi
-  email = {{ promptStringOnce "." "email" "What is your email?" }}
+  email = {{ .chezmoi.email }}
 [init]
   defaultBranch = main
 [core]
