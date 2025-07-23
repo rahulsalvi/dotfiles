@@ -25,3 +25,4 @@ zmodule direnv
 zmodule archive
 zmodule joke/zim-starship
 zmodule kiesman99/zim-zoxide
+zmodule jeffreytse/zsh-vi-mode

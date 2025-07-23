@@ -8,6 +8,7 @@ export FZF_DEFAULT_OPTS="-m --reverse"
 export MANPAGER='nvim +Man!'
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 export KEYTIMEOUT=1
+export ZVM_KEYTIMEOUT=0.03
 export PATH="$HOME/go/bin:$PATH"
 # Environment variables to clean up $HOME
 export PYLINTHOME="$CACHE_DIR/pylint.d"
