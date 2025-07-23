@@ -19,10 +19,10 @@ zmodule /usr/share/zsh/plugins/zsh-syntax-highlighting
 zmodule /usr/share/zsh/plugins/zsh-history-substring-search
 zmodule /usr/share/zsh/plugins/zsh-autosuggestions
 
-zmodule fzf
 zmodule exa
 zmodule direnv
 zmodule archive
 zmodule joke/zim-starship
 zmodule kiesman99/zim-zoxide
 zmodule jeffreytse/zsh-vi-mode
+zmodule fzf
