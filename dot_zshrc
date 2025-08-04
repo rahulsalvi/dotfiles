@@ -55,6 +55,9 @@ zle -N zle-line-init
 # yazi change cwd binding
 [[ -f "$CONFIG_DIR/zsh/yazi.zsh" ]] && source "$CONFIG_DIR/zsh/yazi.zsh"
 
+# ntfy command alerter
+[[ -f "$CONFIG_DIR/zsh/ntfy-alert.zsh" ]] && source "$CONFIG_DIR/zsh/ntfy-alert.zsh"
+
 # General aliases
 alias e="$EDITOR"
 alias ls='eza --group-directories-first --icons=auto'
