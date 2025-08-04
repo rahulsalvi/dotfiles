@@ -1,8 +1,8 @@
 # https://docs.ntfy.sh/examples/#terminal-notifications-for-long-running-commands
-alert() {
+ntfy_alert() {
     local exit_status=$?
     local status_icon="$([ $exit_status -eq 0 ] && echo magic_wand || echo warning)"
-    local last_command=$(history | tail -n1 | sed -e 's/^[[:space:]]*[0-9]\{1,\}[[:space:]]*//' -e 's/[;&|][[:space:]]*alert$//')
+    local last_command=$(echo $history[$HISTCMD] | sed 's/;.*//')
 
     curl -s -X POST "https://ntfy.ipn.rahulsalvi.com/terminal-alerts" \
         -H "Authorization: Bearer $token" \
@@ -12,3 +12,4 @@ alert() {
         -d "Command: $last_command (Exit: $exit_status)" \
         -o /dev/null
 }
+alias alert='ntfy_alert'
