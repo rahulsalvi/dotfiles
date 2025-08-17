@@ -1,0 +1,10 @@
+sync_address = "https://atuin.ipn.rahulsalvi.com"
+sync_frequency = "10m"
+enter_accept = false
+keymap_mode = "vim-insert"
+
+[sync]
+records = true
+
+[theme]
+name = "catppuccin-mocha-lavender"
