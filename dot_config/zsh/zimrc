@@ -26,3 +26,4 @@ zmodule joke/zim-starship
 zmodule kiesman99/zim-zoxide
 zmodule jeffreytse/zsh-vi-mode
 zmodule fzf
+zmodule atuinsh/atuin
