@@ -73,6 +73,7 @@ alias mkdir='mkdir -pv'
 alias lg='lazygit'
 alias tree='erd --config tree'
 alias du='erd --config du'
+alias ssh-no-check='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
 # keybindings for autosuggestions
 if [[ -n "$key_info" ]]; then
