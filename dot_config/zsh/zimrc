@@ -23,7 +23,7 @@ zmodule exa
 zmodule direnv
 zmodule archive
 zmodule joke/zim-starship
-zmodule kiesman99/zim-zoxide
+zmodule vietz-dev/zim-zoxide
 zmodule jeffreytse/zsh-vi-mode
 zmodule fzf
 zmodule atuinsh/atuin

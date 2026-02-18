@@ -62,7 +62,6 @@ zle -N zle-line-init
 alias e="$EDITOR"
 alias ls='eza --group-directories-first --icons=auto'
 alias sl='ls'
-alias cd='z'
 alias ip='ip -color=auto'
 alias c='clear'
 alias s='cd ~;clear'
