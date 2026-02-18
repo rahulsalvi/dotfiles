@@ -11,6 +11,7 @@ export KEYTIMEOUT=1
 export ZVM_KEYTIMEOUT=0.03
 export ZVM_INIT_MODE=sourcing
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 # Environment variables to clean up $HOME
 export PYLINTHOME="$CACHE_DIR/pylint.d"
 export LESSHISTFILE="$CACHE_DIR/lesshst"
