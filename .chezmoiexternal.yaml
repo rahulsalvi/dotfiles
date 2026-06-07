@@ -1,0 +1,39 @@
+.config/btop/themes/catppuccin_frappe.theme:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/btop/refs/heads/main/themes/catppuccin_frappe.theme
+  refreshPeriod: 168h
+
+.config/btop/themes/catppuccin_latte.theme:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/btop/refs/heads/main/themes/catppuccin_latte.theme
+  refreshPeriod: 168h
+
+.config/btop/themes/catppuccin_macchiato.theme:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/btop/refs/heads/main/themes/catppuccin_macchiato.theme
+  refreshPeriod: 168h
+
+.config/btop/themes/catppuccin_mocha.theme:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/btop/refs/heads/main/themes/catppuccin_mocha.theme
+  refreshPeriod: 168h
+
+.config/bat/themes/Catppuccin Frappe.tmTheme:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/bat/refs/heads/main/themes/Catppuccin%20Frappe.tmTheme
+  refreshPeriod: 168h
+
+.config/bat/themes/Catppuccin Latte.tmTheme:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/bat/refs/heads/main/themes/Catppuccin%20Latte.tmTheme
+  refreshPeriod: 168h
+
+.config/bat/themes/Catppuccin Macchiato.tmTheme:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/bat/refs/heads/main/themes/Catppuccin%20Macchiato.tmTheme
+  refreshPeriod: 168h
+
+.config/bat/themes/Catppuccin Mocha.tmTheme:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/bat/refs/heads/main/themes/Catppuccin%20Mocha.tmTheme
+  refreshPeriod: 168h
