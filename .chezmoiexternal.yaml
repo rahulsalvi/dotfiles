@@ -37,3 +37,8 @@
   type: file
   url: https://raw.githubusercontent.com/catppuccin/bat/refs/heads/main/themes/Catppuccin%20Mocha.tmTheme
   refreshPeriod: 168h
+
+.config/atuin/themes/catppuccin-mocha-lavender.toml:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/atuin/refs/heads/main/themes/mocha/catppuccin-mocha-lavender.toml
+  refreshPeriod: 168h
