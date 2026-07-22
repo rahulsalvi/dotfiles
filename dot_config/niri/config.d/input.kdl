@@ -1,0 +1,22 @@
+input {
+    warp-mouse-to-focus mode="center-xy-always"
+    focus-follows-mouse max-scroll-amount="1%"
+
+    keyboard {
+        xkb {
+            options "caps:swapescape"
+        }
+        numlock
+    }
+
+    touchpad {
+        tap
+        dwt
+        natural-scroll
+        scroll-method "two-finger"
+    }
+
+    mouse {
+        accel-profile "flat"
+    }
+}
